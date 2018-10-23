@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
 
-import Home from "./Home";
+import HomeScreen from "./screens/HomeScreen";
 import RoupaScreen from "./screens/RoupaScreen";
 import SobreScreen from './screens/SobreScreen';
+import UnidadeScreen from './screens/UnidadeScreen';
 
 export default class App extends Component {
   render() {
@@ -15,9 +16,10 @@ export default class App extends Component {
 
 const RootStack = createDrawerNavigator(
   {
-    Home: Home,
-    RoupaScreen: RoupaScreen,
-    SobreScreen: SobreScreen
+    Home: HomeScreen,
+    Roupa: RoupaScreen,
+    Unidade: UnidadeScreen,
+    Sobre: SobreScreen,
   },{
     initialRouteName: 'Home',
   }

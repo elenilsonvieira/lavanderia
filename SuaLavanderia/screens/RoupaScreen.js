@@ -84,8 +84,6 @@ export default class RoupaScreen extends React.Component {
                     </TouchableOpacity>
                 </View>
 
-                <Text>{this.state.roupa.chave}</Text>
-
                 <Roupa roupa={this.state.roupa} />
             </View>
         );
