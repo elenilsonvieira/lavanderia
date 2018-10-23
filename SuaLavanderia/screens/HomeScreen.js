@@ -16,6 +16,7 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Image source={require('../images/logo.png')} />
         <Text style={styles.welcome}>Bem Vindo!</Text>
         <Text style={styles.instructions}>Para abrir o menu, arraste o dedo da direita para a esquerda.</Text>
       </View>
