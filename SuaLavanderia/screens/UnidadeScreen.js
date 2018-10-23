@@ -3,7 +3,7 @@ import {StyleSheet, View, ScrollView, Image } from 'react-native';
 
 import Unidade from "../components/Unidade";
 
-export default class RoupaScreen extends React.Component {
+export default class UnidadeScreen extends React.Component {
 
     static navigationOptions = {
         drawerLabel: 'Unidade',
