@@ -1,15 +1,15 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 
-import Tipo from "../components/Tipo";
+import Cor from "../components/Cor";
 
-export default class TipoScreen extends React.Component {
+export default class CorScreen extends React.Component {
 
     static navigationOptions = {
-        drawerLabel: 'Tipo',
+        drawerLabel: 'Cor',
         drawerIcon: ({ tintColor }) => (
           <Image
-            source={require('../images/tipo-de-roupa_32x32.png')}
+            source={require('../images/cor_32x32.png')}
             style={styles.icon}
           />
         ),
@@ -17,49 +17,49 @@ export default class TipoScreen extends React.Component {
 
     state ={
         nome: '',
-        tipos: [],
+        objetos: [],
     };
 
     buscar = async () => {
-        const call = await fetch('http://painel.sualavanderia.com.br/api/BuscarTipo.aspx');
+        const call = await fetch('http://painel.sualavanderia.com.br/api/BuscarCor.aspx');
         const response = await call.json();
 
-        var tipos = [];
+        var objetos = [];
 
         for(index in response){
-            const tipoResponse = response[index];
+            const objetoResponse = response[index];
 
-            const tipo = {
-                oid: tipoResponse.Oid,
-                nome: tipoResponse.Nome,
-                valor: tipoResponse.Valor,
+            const objeto = {
+                oid: objetoResponse.Oid,
+                nome: objetoResponse.Nome,
+                valor: objetoResponse.Valor,
             };    
 
-            tipos = [...tipos, tipo];
+            objetos = [...objetos, objeto];
         }
 
-        this.setState({tipos});
+        this.setState({objetos});
     };
 
     filtrar =  () => {
         this.buscar();
-        
-        if(this.state.nome.trim() !== '') {
-            var tipos = [];
 
-            this.state.tipos.map(tipo => {
-                if(tipo.nome.toLowerCase().includes(this.state.nome.toLowerCase())){ 
-                    tipos = [...tipos, tipo];
+        if(this.state.nome.trim() !== '') {
+            var objetos = [];
+
+            this.state.objetos.map(objeto => {
+                if(objeto.nome.toLowerCase().includes(this.state.nome.toLowerCase())){ 
+                    objetos = [...objetos, objeto];
                 }
             });
 
-            this.setState({tipos});
+            this.setState({objetos});
         }
     };
 
     async componentDidMount(){
-        const tipos = await this.buscar() || [];
-        this.setState(tipos);
+        const objetos = await this.buscar() || [];
+        this.setState(objetos);
     }
 
     render(){
@@ -79,9 +79,9 @@ export default class TipoScreen extends React.Component {
                     </TouchableOpacity>
                 </View>
 
-                <ScrollView contentContainerStyle={styles.tipoList}>
-                    {this.state.tipos.map(tipo => 
-                        <Tipo key={tipo.oid} tipo={tipo} />
+                <ScrollView contentContainerStyle={styles.objetoList}>
+                    {this.state.objetos.map(objeto => 
+                        <Cor key={objeto.oid} cor={objeto} />
                     )}
                 </ScrollView>
             </View>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create(
             flex: 1,
             backgroundColor: '#333',
           },
-          tipoList: {
+          objetoList: {
               paddingTop: 20,
           },
           header:{
