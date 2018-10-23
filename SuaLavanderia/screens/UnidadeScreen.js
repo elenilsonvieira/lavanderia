@@ -20,16 +20,19 @@ export default class RoupaScreen extends React.Component {
     };
 
     buscar = async () => {
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarUnidade.aspx`);
+        const call = await fetch('http://painel.sualavanderia.com.br/api/BuscarUnidade.aspx');
         const response = await call.json();
 
         var unidades = [];
 
-        for(roupaResponse in response){
+        for(index in response){
+            const unidadeResponse = response[index];
+
             const unidade = {
+                oid: unidadeResponse.Oid,
                 nome: unidadeResponse.Nome,
                 endereco: unidadeResponse.Endereco,
-                celular: unidadeResponse.TelefoneMovel,
+                telefoneCelular: unidadeResponse.TelefoneMovel,
                 telefoneFixo: unidadeResponse.TelefoneConvencional,
             };    
 
@@ -49,7 +52,7 @@ export default class RoupaScreen extends React.Component {
             <View style={styles.container}>
                 <ScrollView contentContainerStyle={styles.unidadeList}>
                     {this.state.unidades.map(unidade => 
-                        <Unidade unidade={unidade} />
+                        <Unidade key={unidade.oid} unidade={unidade} />
                     )}
                 </ScrollView>
             </View>
