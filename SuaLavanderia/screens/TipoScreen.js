@@ -42,27 +42,31 @@ export default class TipoScreen extends React.Component {
     };
 
     filtrar =  () => {
-        var tipos = [];
+        if(this.state.nome.trim() !== '') {
+            var tipos = [];
 
-        this.state.tipos.map(tipo => {
-            if(tipo.nome.includes(this.state.nome)){ 
+            this.state.tipos.map(tipo => {
+                if(tipo.nome.includes(this.state.nome)){ 
+                    tipos = [...tipos, tipo];
+                }
+            });
+
+            for(index in this.sta){
+                const tipoResponse = response[index];
+
+                const tipo = {
+                    oid: tipoResponse.Oid,
+                    nome: tipoResponse.Nome,
+                    valor: tipoResponse.Valor,
+                };    
+
                 tipos = [...tipos, tipo];
             }
-        });
 
-        for(index in this.sta){
-            const tipoResponse = response[index];
-
-            const tipo = {
-                oid: tipoResponse.Oid,
-                nome: tipoResponse.Nome,
-                valor: tipoResponse.Valor,
-            };    
-
-            tipos = [...tipos, tipo];
+            this.setState({tipos});
+        }else{
+            this.buscar();
         }
-
-        this.setState({tipos});
     };
 
     async componentDidMount(){
