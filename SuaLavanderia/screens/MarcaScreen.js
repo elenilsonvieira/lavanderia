@@ -1,15 +1,15 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 
-import Tamanho from "../components/Tamanho";
+import Marca from "../components/Marca";
 
 export default class objetoscreen extends React.Component {
 
     static navigationOptions = {
-        drawerLabel: 'Tamanho',
+        drawerLabel: 'Marca',
         drawerIcon: ({ tintColor }) => (
           <Image
-            source={require('../images/tamanho_32x32.png')}
+            source={require('../images/marca_32x32.png')}
             style={styles.icon}
           />
         ),
@@ -21,7 +21,7 @@ export default class objetoscreen extends React.Component {
     };
 
     buscar = async () => {
-        const call = await fetch('http://painel.sualavanderia.com.br/api/BuscarTamanho.aspx');
+        const call = await fetch('http://painel.sualavanderia.com.br/api/BuscarMarca.aspx');
         const response = await call.json();
 
         var objetos = [];
@@ -80,7 +80,7 @@ export default class objetoscreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <Tamanho key={objeto.oid} tamanho={objeto} />
+                        <Marca key={objeto.oid} marca={objeto} />
                     )}
                 </ScrollView>
             </View>
