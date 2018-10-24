@@ -13,7 +13,7 @@ export default class Lavagem extends React.Component {
 
                     <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Unidade: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.lavagem.unidade}</Text>
+                        <Text style={styles.lavagemInfo}>{this.props.lavagem.unidadeDeRecebimento}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
@@ -29,6 +29,11 @@ export default class Lavagem extends React.Component {
                     <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Data de Entrega: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.lavagem.dataDeEntrega}</Text>
+                    </View>
+
+                    <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Status: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.lavagem.status}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>

@@ -3,7 +3,7 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity }
 
 import Tecido from "../components/Tecido";
 
-export default class objetoscreen extends React.Component {
+export default class TecidoScreen extends React.Component {
 
     static navigationOptions = {
         drawerLabel: 'Tecido',

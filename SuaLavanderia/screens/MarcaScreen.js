@@ -3,7 +3,7 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity }
 
 import Marca from "../components/Marca";
 
-export default class objetoscreen extends React.Component {
+export default class MarcaScreen extends React.Component {
 
     static navigationOptions = {
         drawerLabel: 'Marca',

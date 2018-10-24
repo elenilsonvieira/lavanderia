@@ -3,7 +3,7 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity }
 
 import Tamanho from "../components/Tamanho";
 
-export default class objetoscreen extends React.Component {
+export default class TamanhoScreen extends React.Component {
 
     static navigationOptions = {
         drawerLabel: 'Tamanho',
