@@ -7,9 +7,8 @@ export default class Unidade extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.unidadeContainer}>
-                    <View style={styles.unidadeInfoContainer}>
-                        <Text style={styles.unidadeInfoTitle}>Nome: </Text>
-                        <Text style={styles.unidadeInfo}>{this.props.unidade.nome}</Text>
+                    <View style={styles.unidadeInfoContainerNome}>
+                        <Text style={styles.unidadeInfoNome}>{this.props.unidade.nome}</Text>
                     </View>
 
                     <View style={styles.unidadeInfoContainer}>
@@ -71,10 +70,17 @@ const styles = StyleSheet.create(
         unidadeInfoContainer: {
             flexDirection: 'row',
         },
+        unidadeInfoContainerNome: {
+            alignItems: 'center',
+        },
         unidadeInfoTitle: {
             fontWeight: 'bold',
         },
         unidadeInfo: {
+        },
+        unidadeInfoNome: {
+            fontWeight: 'bold',
+            fontSize: 25,
         },
         button:{
             alignItems: 'center',
