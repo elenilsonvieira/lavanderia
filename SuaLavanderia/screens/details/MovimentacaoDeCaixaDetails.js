@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity } from 'react-native';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 export default class MovimentacaoDeCaixaDetails extends React.Component {
 
@@ -10,6 +11,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         capital: 'Dinheiro',
         data: '',
         modo: 'Saida',
+        dataTimePickerVisible: false,
     };
 
     componentDidMount(){
@@ -69,6 +71,13 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         
     }
 
+    dataEscolhida = (dataEscolhida) => {
+        this.setState({ 
+            dataTimePickerVisible: false,
+            data: dataEscolhida.toString(),
+        });
+    }
+
     render(){
         return(
             <View style={styles.container}>
@@ -85,10 +94,13 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                     <Text style={styles.valorInfoTitle}>Oid: {this.state.oid}</Text>
 
                     <Text style={styles.infoTitle}>Data: </Text>
-                    <TextInput
-                        style={styles.boxInput}
-                        value={this.state.data}
-                        onChangeText={data => this.setState({data})}
+                    <TouchableOpacity onPress={() => this.setState({dataTimePickerVisible: true})}>
+                        <Text style={styles.boxDate}>{this.state.data}</Text>
+                    </TouchableOpacity>
+                    <DateTimePicker 
+                        isVisible={this.state.dataTimePickerVisible}
+                        onConfirm={this.dataEscolhida}
+                        onCancel={() => this.setState({dataTimePickerVisible: false})}
                     />
 
                     <Text style={styles.infoTitle}>Modo: </Text>
@@ -159,6 +171,16 @@ const styles = StyleSheet.create(
             borderRadius: 5,
             alignSelf: 'stretch',
             padding: 5,
+        },
+        boxDate:{
+            backgroundColor: "#DDD",
+            height: 40,
+            borderRadius: 5,
+            alignSelf: 'stretch',
+            padding: 5,
+            justifyContent: 'center',
+            fontSize: 15,
+            fontWeight: 'bold',
         },
         buttonText: {
             fontWeight: 'bold',
