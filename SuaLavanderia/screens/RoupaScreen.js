@@ -80,7 +80,7 @@ export default class RoupaScreen extends React.Component {
                     />
 
                     <TouchableOpacity onPress={this.buscar} style={styles.button}>
-                        <Text style={styles.buttonText}>Buscar</Text>
+                        <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
                     </TouchableOpacity>
                 </View>
 
