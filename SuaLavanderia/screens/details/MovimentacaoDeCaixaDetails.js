@@ -52,7 +52,12 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             default: ;
         }
 
-        argumentos += '&data=' + this.state.data + '&capital=' + capital + '&valor=' + this.state.valor + '&observacoes=' + this.state.observacoes + '&responsavelOid=' + responsavelOid + '&modo=' + this.state.modo;
+        var dataArray = this.state.data.split('/');
+        const data = dataArray[2] + '-'+ dataArray[1] + '-' + dataArray[0];
+
+        alert(data);
+
+        argumentos += '&data=' + data + '&capital=' + capital + '&valor=' + this.state.valor + '&observacoes=' + this.state.observacoes + '&responsavelOid=' + responsavelOid + '&modo=' + this.state.modo;
 
         if(movimentacao != null){
             argumentos += '&oid=' + movimentacao.oid;
@@ -72,9 +77,15 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
     }
 
     dataEscolhida = (dataEscolhida) => {
+        var mes = dataEscolhida.getMonth() + 1;
+
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+
         this.setState({ 
             dataTimePickerVisible: false,
-            data: dataEscolhida.toString(),
+            data: dataEscolhida.getDate() + '/' + mes + '/' + dataEscolhida.getFullYear(),
         });
     }
 
