@@ -84,6 +84,10 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
                     <TouchableOpacity onPress={this.filtrar} style={styles.button}>
                         <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
                     </TouchableOpacity>
+
+                    <TouchableOpacity onPress={this.filtrar} style={styles.button}>
+                        <Image style={styles.icon} source={require('../images/novo_32x32.png')} />
+                    </TouchableOpacity>
                 </View>
 
                 <ScrollView contentContainerStyle={styles.objetoList}>

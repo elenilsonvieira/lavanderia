@@ -15,11 +15,11 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         const movimentacao = this.props.navigation.getParam('movimentacao');
 
         if(movimentacao !== null){
-            const oid = '1243242342142';//movimentacao.oid;
+            const oid = movimentacao.oid;
             const valor = movimentacao.valor.toString();
             const observacoes = movimentacao.observacoes;
             const capital = movimentacao.capital;
-            const data = movimentacao.Data;
+            const data = movimentacao.data;
 
             this.setState({oid, valor, observacoes, capital, data});
         }
