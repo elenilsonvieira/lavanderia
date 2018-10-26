@@ -94,7 +94,7 @@ const styles = StyleSheet.create(
         lavagemInfo: {
         },
         lavagemInfoCliente: {
-            fontSize: 25,
+            fontSize: 20,
             fontWeight: 'bold',
         },
         button:{

@@ -39,9 +39,9 @@ export default class LavagemScreen extends React.Component {
                 valor: objetoResponse.Valor,
                 paga: objetoResponse.Paga,
                 unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
-                unidadeDeRecebimento: '',//objetoResponse.UnidadeDeRecebimento,
+                unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
                 roupas: objetoResponse.Roupas,
-                status: '',//objetoResponse.Status,
+                status: objetoResponse.Status,
             };    
 
             objetos = [...objetos, objeto];
