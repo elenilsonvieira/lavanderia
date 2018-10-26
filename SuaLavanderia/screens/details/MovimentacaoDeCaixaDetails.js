@@ -96,8 +96,8 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         style={styles.boxInput}
                         selectedValue={this.state.modo}
                         onValueChange={(itemValue, itemIndex) => this.setState({modo: itemValue})}>
-                        <Picker.Item label='Entrada' value='Entrada' />
                         <Picker.Item label='Saída' value='Saida' />
+                        <Picker.Item label='Entrada' value='Entrada' />
                     </Picker>
 
                     <Text style={styles.infoTitle}>Valor: </Text>
@@ -108,11 +108,18 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                     />
 
                     <Text style={styles.infoTitle}>Capital: </Text>
-                    <TextInput
+                    <Picker
                         style={styles.boxInput}
-                        value={this.state.capital}
-                        onChangeText={capital => this.setState({capital})}
-                    />
+                        selectedValue={this.state.capital}
+                        onValueChange={(itemValue, itemIndex) => this.setState({capital: itemValue})}>
+                        <Picker.Item label='Dinheiro' value='Dinheiro' />
+                        <Picker.Item label='Cheque' value='Cheque' />
+                        <Picker.Item label='Boleto' value='Boleto' />
+                        <Picker.Item label='PagSeguro Débito' value='PagSeguroDebito' />
+                        <Picker.Item label='PagSeguro Crédito' value='PagSeguroCredito' />
+                        <Picker.Item label='Transferência de/para BB' value='TransferenciaBB' />
+                        <Picker.Item label='Transferência de/para Caixa' value='TransferenciaCaixa' />
+                    </Picker>
 
                     <Text style={styles.infoTitle}>Observações: </Text>
                     <TextInput
