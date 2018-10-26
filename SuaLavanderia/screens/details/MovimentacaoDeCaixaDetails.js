@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 
 export default class MovimentacaoDeCaixaDetails extends React.Component {
 
@@ -92,11 +92,13 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                     />
 
                     <Text style={styles.infoTitle}>Modo: </Text>
-                    <TextInput
+                    <Picker
                         style={styles.boxInput}
-                        value={this.state.modo}
-                        onChangeText={modo => this.setState({modo})}
-                    />
+                        selectedValue={this.state.modo}
+                        onValueChange={(itemValue, itemIndex) => this.setState({modo: itemValue})}>
+                        <Picker.Item label='Entrada' value='Entrada' />
+                        <Picker.Item label='Saída' value='Saida' />
+                    </Picker>
 
                     <Text style={styles.infoTitle}>Valor: </Text>
                     <TextInput
