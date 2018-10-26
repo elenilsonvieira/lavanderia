@@ -41,9 +41,7 @@ export default class TipoScreen extends React.Component {
         this.setState({tipos});
     };
 
-    filtrar =  () => {
-        this.buscar();
-        
+    filtrar =  () => {        
         if(this.state.nome.trim() !== '') {
             var tipos = [];
 

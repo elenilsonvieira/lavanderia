@@ -50,9 +50,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
         this.setState({objetos});
     };
 
-    filtrar =  () => {
-        this.buscar();
-        
+    filtrar =  () => {        
         if(this.state.valor.trim() !== '') {
             var objetos = [];
 

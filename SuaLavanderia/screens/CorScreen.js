@@ -42,8 +42,6 @@ export default class CorScreen extends React.Component {
     };
 
     filtrar =  () => {
-        this.buscar();
-
         if(this.state.nome.trim() !== '') {
             var objetos = [];
 

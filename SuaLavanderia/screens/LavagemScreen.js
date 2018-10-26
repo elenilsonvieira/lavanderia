@@ -50,9 +50,7 @@ export default class LavagemScreen extends React.Component {
         this.setState({objetos});
     };
 
-    filtrar =  () => {
-        this.buscar();
-        
+    filtrar =  () => {        
         if(this.state.nome.trim() !== '') {
             var objetos = [];
 

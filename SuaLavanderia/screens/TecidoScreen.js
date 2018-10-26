@@ -40,9 +40,7 @@ export default class TecidoScreen extends React.Component {
         this.setState({objetos});
     };
 
-    filtrar =  () => {
-        this.buscar();
-        
+    filtrar =  () => {        
         if(this.state.nome.trim() !== '') {
             var objetos = [];
 
