@@ -85,7 +85,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
                         <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={this.filtrar} style={styles.button}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('MovimentacaoDeCaixaDetails')} style={styles.button}>
                         <Image style={styles.icon} source={require('../images/novo_32x32.png')} />
                     </TouchableOpacity>
                 </View>

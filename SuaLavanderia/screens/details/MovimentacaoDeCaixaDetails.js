@@ -14,7 +14,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
     componentDidMount(){
         const movimentacao = this.props.navigation.getParam('movimentacao');
 
-        if(movimentacao !== null){
+        if(movimentacao != null){
             const oid = movimentacao.oid;
             const valor = movimentacao.valor.toString();
             const observacoes = movimentacao.observacoes;
