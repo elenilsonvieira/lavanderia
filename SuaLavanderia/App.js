@@ -11,6 +11,7 @@ import TecidoScreen from './screens/TecidoScreen';
 import TamanhoScreen from './screens/TamanhoScreen';
 import MarcaScreen from './screens/MarcaScreen';
 import LavagemScreen from './screens/LavagemScreen';
+import MovimentacaoDeCaixaScreen from './screens/MovimentacaoDeCaixaScreen';
 
 export default class App extends Component {
   render() {
@@ -25,6 +26,7 @@ const RootStack = createDrawerNavigator(
     Home: HomeScreen,
     Lavagem: LavagemScreen,
     Roupa: RoupaScreen,
+    MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
     Tipo: TipoScreen,
     Tamanho: TamanhoScreen,
     Tecido: TecidoScreen,
