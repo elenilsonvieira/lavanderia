@@ -4,6 +4,7 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity }
 export default class MovimentacaoDeCaixaDetails extends React.Component {
 
     state ={
+        oid: 'novo pagamento',
         valor: '',
         observacoes: '',
         capital: '',
@@ -13,11 +14,12 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         const movimentacao = this.props.navigation.getParam('movimentacao');
 
         if(movimentacao !== null){
+            const oid = '1243242342142';//movimentacao.oid;
             const valor = movimentacao.valor.toString();
             const observacoes = movimentacao.observacoes;
             const capital = movimentacao.capital;
 
-            this.setState({valor, observacoes, capital});
+            this.setState({oid, valor, observacoes, capital});
         }
     }
 
@@ -26,15 +28,17 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <TouchableOpacity onPress={this.salvar} style={styles.button}>
-                        <Text style={styles.buttonText}>Salvar</Text>
+                        <Image style={styles.icon} source={require('../../images/salvar_32x32.png')} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.button}>
-                        <Text style={styles.buttonText}>Cancelar</Text>
+                        <Image style={styles.icon} source={require('../../images/cancelar_32x32.png')} />
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.movimentacaoContainer}>
-                    <Text style={styles.valorInfoTitle}>Valor: </Text>
+                    <Text style={styles.valorInfoTitle}>Oid: {this.state.oid}</Text>
+
+                    <Text style={styles.infoTitle}>Valor: </Text>
                     <TextInput
                         style={styles.boxInput}
                         value={this.state.valor}
@@ -127,12 +131,11 @@ const styles = StyleSheet.create(
         movimentacaoInfo: {
         },
         button:{
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 20,
-            margin: 10,
             padding: 10,
-            backgroundColor: '#DDD',
+        },
+        icon: {
+            width: 24,
+            height: 24,
         },
     }
 );
