@@ -57,7 +57,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
             var objetos = [];
 
             this.state.objetos.map(objeto => {
-                if(objeto.valor.toLowerCase().includes(this.state.valor.toLowerCase())){ 
+                if(objeto.valor.toString().includes(this.state.valor)){ 
                     objetos = [...objetos, objeto];
                 }
             });
