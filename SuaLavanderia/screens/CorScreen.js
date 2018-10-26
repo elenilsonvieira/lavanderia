@@ -73,7 +73,7 @@ export default class CorScreen extends React.Component {
                     />
 
                     <TouchableOpacity onPress={this.filtrar} style={styles.button}>
-                        <Text style={styles.buttonText}>Filtrar</Text>
+                        <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
                     </TouchableOpacity>
                 </View>
 
@@ -120,12 +120,11 @@ const styles = StyleSheet.create(
             fontWeight: 'bold',
         },
         button:{
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 20,
-            margin: 10,
             padding: 10,
-            backgroundColor: '#DDD',
         },
+        icon: {
+            width: 24,
+            height: 24,
+        }
     }
 );

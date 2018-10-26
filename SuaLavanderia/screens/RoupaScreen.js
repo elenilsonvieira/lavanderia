@@ -135,12 +135,11 @@ const styles = StyleSheet.create(
         roupaInfo: {
         },
         button:{
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 20,
-            margin: 10,
             padding: 10,
-            backgroundColor: '#DDD',
         },
+        icon: {
+            width: 24,
+            height: 24,
+        }
     }
 );
