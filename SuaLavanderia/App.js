@@ -12,6 +12,7 @@ import TamanhoScreen from './screens/TamanhoScreen';
 import MarcaScreen from './screens/MarcaScreen';
 import LavagemScreen from './screens/LavagemScreen';
 import MovimentacaoDeCaixaScreen from './screens/MovimentacaoDeCaixaScreen';
+import MovimentacaoDeCaixaDetails from './screens/details/MovimentacaoDeCaixaDetails';
 
 export default class App extends Component {
   render() {
@@ -34,6 +35,8 @@ const RootStack = createDrawerNavigator(
     Marca: MarcaScreen,
     Unidade: UnidadeScreen,
     Sobre: SobreScreen,
+    MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+
   },{
     initialRouteName: 'Home',
   }

@@ -21,7 +21,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
     };
 
     buscar = async () => {
-        const call = await fetch('http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?dataInicial=2018-08-11&dataFinal=2018-10-25&modo=saida');
+        const call = await fetch('http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?dataInicial=2018-10-24&dataFinal=2018-10-24&modo=saida');
         const response = await call.json();
 
         var objetos = [];
@@ -88,7 +88,9 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <MovimentacaoDeCaixa key={objeto.oid} movimentacao={objeto} />
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('MovimentacaoDeCaixaDetails', {movimentacao: objeto})}>
+                            <MovimentacaoDeCaixa key={objeto.oid} movimentacao={objeto} />
+                        </TouchableOpacity>
                     )}
                 </ScrollView>
             </View>
