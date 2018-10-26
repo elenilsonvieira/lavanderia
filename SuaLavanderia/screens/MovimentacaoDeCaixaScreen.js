@@ -21,7 +21,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
     };
 
     buscar = async () => {
-        const call = await fetch('http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?dataInicial=2018-10-24&dataFinal=2018-10-24&modo=saida');
+        const call = await fetch('http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?dataInicial=2018-10-26&dataFinal=2018-10-26&modo=saida');
         const response = await call.json();
 
         var objetos = [];

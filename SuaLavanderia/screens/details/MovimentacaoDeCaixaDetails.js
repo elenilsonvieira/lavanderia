@@ -7,8 +7,9 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         oid: 'novo pagamento',
         valor: '',
         observacoes: '',
-        capital: '',
+        capital: 'Dinheiro',
         data: '',
+        modo: 'Saida',
     };
 
     componentDidMount(){
@@ -20,9 +21,52 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             const observacoes = movimentacao.observacoes;
             const capital = movimentacao.capital;
             const data = movimentacao.data;
+            const modo = movimentacao.modo;
 
-            this.setState({oid, valor, observacoes, capital, data});
+            this.setState({oid, valor, observacoes, capital, data, modo});
         }
+    }
+
+    salvar = async () => {
+        const movimentacao = this.props.navigation.getParam('movimentacao');
+        const responsavelOid = 'elenilsonvieira@gmail.com';
+
+        var argumentos = '';
+
+        if(movimentacao != null){
+            argumentos += 'responsavelOid=' + movimentacao.responsavelOid;
+        }
+
+        var capital = '0';
+
+        switch(this.state.capital){
+            case 'Dinheiro': capital = 0; break;
+            case 'Cheque': capital = 3; break;
+            case 'Boleto': capital = 4; break;
+            case 'PagSeguroDebito': capital = 6; break;
+            case 'PagSeguroCredito': capital = 7; break;
+            case 'TransferenciaBB': capital = 8; break;
+            case 'TransferenciaCaixa': capital = 9; break;
+            default: ;
+        }
+
+        argumentos += '&data=' + this.state.data + '&capital=' + capital + '&valor=' + this.state.valor + '&observacoes=' + this.state.observacoes + '&responsavelOid=' + responsavelOid + '&modo=' + this.state.modo;
+
+        if(movimentacao != null){
+            argumentos += '&oid=' + movimentacao.oid;
+        }
+
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeCaixa.aspx?${argumentos}`, 
+            { 
+                method: 'post' 
+            }).then(function(response){
+                alert(movimentacao == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
+                //this.props.navigation.goBack();
+            }
+            ).catch(function(error){
+                alert('Erro adicionando a movimentação de caixa.' + error);    
+            });
+        
     }
 
     render(){
@@ -45,6 +89,13 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         style={styles.boxInput}
                         value={this.state.data}
                         onChangeText={data => this.setState({data})}
+                    />
+
+                    <Text style={styles.infoTitle}>Modo: </Text>
+                    <TextInput
+                        style={styles.boxInput}
+                        value={this.state.modo}
+                        onChangeText={modo => this.setState({modo})}
                     />
 
                     <Text style={styles.infoTitle}>Valor: </Text>
