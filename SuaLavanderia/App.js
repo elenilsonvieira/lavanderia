@@ -22,7 +22,7 @@ export default class App extends Component {
   }
 }
 
-const RootStack = createDrawerNavigator(
+const RootDrawer = createDrawerNavigator(
   {
     Home: HomeScreen,
     Lavagem: LavagemScreen,
@@ -35,9 +35,16 @@ const RootStack = createDrawerNavigator(
     Marca: MarcaScreen,
     Unidade: UnidadeScreen,
     Sobre: SobreScreen,
-    MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
-
   },{
     initialRouteName: 'Home',
+  }
+);
+
+const RootStack = createStackNavigator(
+  {
+    MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+    RootDrawer: RootDrawer,
+  },{
+    initialRouteName: 'RootDrawer',
   }
 );

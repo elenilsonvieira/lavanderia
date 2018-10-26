@@ -8,6 +8,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         valor: '',
         observacoes: '',
         capital: '',
+        data: '',
     };
 
     componentDidMount(){
@@ -18,8 +19,9 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             const valor = movimentacao.valor.toString();
             const observacoes = movimentacao.observacoes;
             const capital = movimentacao.capital;
+            const data = movimentacao.Data;
 
-            this.setState({oid, valor, observacoes, capital});
+            this.setState({oid, valor, observacoes, capital, data});
         }
     }
 
@@ -37,6 +39,13 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
                 <View style={styles.movimentacaoContainer}>
                     <Text style={styles.valorInfoTitle}>Oid: {this.state.oid}</Text>
+
+                    <Text style={styles.infoTitle}>Data: </Text>
+                    <TextInput
+                        style={styles.boxInput}
+                        value={this.state.data}
+                        onChangeText={data => this.setState({data})}
+                    />
 
                     <Text style={styles.infoTitle}>Valor: </Text>
                     <TextInput

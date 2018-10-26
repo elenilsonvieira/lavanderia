@@ -30,7 +30,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
             const objetoResponse = response[index];
 
             const objeto = {
-                oid: '',//objetoResponse.Oid,
+                oid: objetoResponse.Oid,
                 dataDaUltimaAlteracao: objetoResponse.DataDaUltimaAlteracao,
                 data: objetoResponse.Data,
                 modo: objetoResponse.Modo,
