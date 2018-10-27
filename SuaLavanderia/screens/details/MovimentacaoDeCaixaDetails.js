@@ -31,7 +31,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         }
     }
 
-    salvar = async () => {
+    async salvar(props) {
         const movimentacao = this.props.navigation.getParam('movimentacao');
         //const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : 'elenilsonvieira@gmail.com';
         const responsavelOid = 'elenilsonvieira@gmail.com';
@@ -63,8 +63,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                 method: 'post' 
             }).then(function(response){
                 alert(movimentacao == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
-                alert(this.props);
-                //this.props.navigation.goBack();
+                props.navigation.goBack();
             }
             ).catch(function(error){
                 alert('Erro adicionando a movimentação de caixa.' + error);    
@@ -94,7 +93,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={() => this.salvar()} style={styles.button}>
+                    <TouchableOpacity onPress={() => this.salvar(this.props)} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/salvar_32x32.png')} />
                     </TouchableOpacity>
                 </View>
