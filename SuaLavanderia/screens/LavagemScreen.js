@@ -88,7 +88,9 @@ export default class LavagemScreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <Lavagem key={objeto.oid} lavagem={objeto} />
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('LavagemDetails', { lavagem: objeto })}>
+                            <Lavagem key={objeto.oid} lavagem={objeto} />
+                        </TouchableOpacity>
                     )}
                 </ScrollView>
             </View>

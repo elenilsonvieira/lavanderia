@@ -13,6 +13,7 @@ import MarcaScreen from './screens/MarcaScreen';
 import LavagemScreen from './screens/LavagemScreen';
 import MovimentacaoDeCaixaScreen from './screens/MovimentacaoDeCaixaScreen';
 import MovimentacaoDeCaixaDetails from './screens/details/MovimentacaoDeCaixaDetails';
+import LavagemDetails from './screens/details/LavagemDetails';
 
 export default class App extends Component {
   render() {
@@ -43,6 +44,7 @@ const RootDrawer = createDrawerNavigator(
 const RootStack = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+    LavagemDetails: LavagemDetails,
     RootDrawer: RootDrawer,
   },{
     initialRouteName: 'RootDrawer',

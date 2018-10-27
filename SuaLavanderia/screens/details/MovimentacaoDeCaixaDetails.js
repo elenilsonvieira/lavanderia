@@ -93,7 +93,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={this.salvar} style={styles.button}>
+                    <TouchableOpacity onPress={() => this.salvar()} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/salvar_32x32.png')} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.button}>
