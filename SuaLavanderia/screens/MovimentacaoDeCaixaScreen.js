@@ -25,8 +25,44 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
         dataFinal: '',
     };
 
+    dataString = (data) => {
+        var dia = data.getDate();
+        var mes = data.getMonth() + 1;
+
+        if(dia < 10){
+            dia = '0' + dia;
+        }
+
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+
+        return dia + '/' + mes + '/' + data.getFullYear();
+    }
+
     buscar = async () => {
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?dataInicial=2018-10-26&dataFinal=2018-10-26&modo=${this.state.modo}`);
+        const data = new Date();
+        var dia = data.getDate();
+        var mes = data.getMonth() + 1;
+
+        if(dia < 10){
+            dia = '0' + dia;
+        }
+
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+
+        var dataInicial = this.state.dataInicial != '' ? this.state.dataInicial : (dia + '/' + mes + '/' + data.getFullYear());
+        var dataFinal = this.state.dataFinal != '' ? this.state.dataFinal : (dia + '/' + mes + '/' + data.getFullYear());
+
+        var dataInicialArray = dataInicial.split('/');
+        dataInicial = dataInicialArray[2] + '-'+ dataInicialArray[1] + '-' + dataInicialArray[0];
+
+        var dataFinalArray = dataFinal.split('/');
+        dataFinal = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
+
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?dataInicial=${dataInicial}&dataFinal=${dataFinal}&modo=${this.state.modo}`);
         const response = await call.json();
 
         var objetos = [];
@@ -82,33 +118,54 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
 
         this.setState({dataInicial, dataFinal});
 
+        //this.dataInicialEscolhida(new Date());
+        //this.dataFinalEscolhida(new Date());
+
         const objetos = await this.buscar() || [];
         this.setState(objetos);
     }
 
     dataInicialEscolhida = (dataEscolhida) => {
+        //var dataEscolhidaString = dataString(dataEscolhida);
+
+        var dia = dataEscolhida.getDate();
         var mes = dataEscolhida.getMonth() + 1;
+
+        if(dia < 10){
+            dia = '0' + dia;
+        }
 
         if(mes < 10){
             mes = '0' + mes;
         }
 
+        var dataEscolhidaString = dia + '/' + mes + '/' + dataEscolhida.getFullYear();
+
         this.setState({ 
             dataInicialPickerVisible: false,
-            dataInicial: dataEscolhida.getDate() + '/' + mes + '/' + dataEscolhida.getFullYear(),
+            dataInicial: dataEscolhidaString,
         });
     }
 
     dataFinalEscolhida = (dataEscolhida) => {
+        //var dataEscolhidaString = dataString(dataEscolhida);
+
+        var dia = dataEscolhida.getDate();
         var mes = dataEscolhida.getMonth() + 1;
+
+        if(dia < 10){
+            dia = '0' + dia;
+        }
 
         if(mes < 10){
             mes = '0' + mes;
         }
 
+        var dataEscolhidaString = dia + '/' + mes + '/' + dataEscolhida.getFullYear();
+
         this.setState({ 
             dataFinalPickerVisible: false,
-            dataFinal: dataEscolhida.getDate() + '/' + mes + '/' + dataEscolhida.getFullYear(),
+            dataFinal: dataEscolhidaString,
         });
     }
 
@@ -118,18 +175,8 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
                 <View style={styles.header}>
                     <View>
                         <View style={styles.viewHeader}>
-                            <Text style={styles.infoTitle}>Modo: </Text>
-                            <Picker
-                                style={styles.picker} 
-                                selectedValue={this.state.modo}
-                                onValueChange={(itemValue, itemIndex) => this.setState({modo: itemValue})} >
-                                <Picker.Item label='Saída' value='Saida' />
-                                <Picker.Item label='Entrada' value='Entrada' />
-                            </Picker>
-                        </View>
-                        <View style={styles.viewHeader}>
                             <Text style={styles.infoTitle}>Início: </Text>
-                            <TouchableOpacity onPress={() => this.setState({dataTimePickerDataInicialVisible: true})}>
+                            <TouchableOpacity onPress={() => this.setState({dataInicialPickerVisible: true})}>
                                 <Text style={styles.boxDate}>{this.state.dataInicial}</Text>
                             </TouchableOpacity>
                             <DateTimePicker 
@@ -139,7 +186,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
                             />
 
                             <Text style={styles.infoTitle}>Fim: </Text>
-                            <TouchableOpacity onPress={() => this.setState({dataTimePickerDataFinalVisible: true})}>
+                            <TouchableOpacity onPress={() => this.setState({dataFinalPickerVisible: true})}>
                                 <Text style={styles.boxDate}>{this.state.dataFinal}</Text>
                             </TouchableOpacity>
                             <DateTimePicker 
@@ -148,16 +195,28 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
                                 onCancel={() => this.setState({dataFinalPickerVisible: false})}
                             />
                         </View>
-                    </View>
+                        <View style={styles.viewHeaderSegundaLinha}>
+                            <View style={styles.viewHeader}>
+                                <Text style={styles.infoTitle}>Modo: </Text>
+                                <Picker
+                                    style={styles.picker} 
+                                    selectedValue={this.state.modo}
+                                    onValueChange={(itemValue, itemIndex) => this.setState({modo: itemValue})} >
+                                    <Picker.Item label='Saída' value='Saida' />
+                                    <Picker.Item label='Entrada' value='Entrada' />
+                                </Picker>
+                            </View>
 
-                    <View style={styles.viewHeader}>
-                        <TouchableOpacity onPress={this.buscar} style={styles.button}>
-                            <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
-                        </TouchableOpacity>
+                            <View style={styles.viewHeader}>
+                                <TouchableOpacity onPress={this.buscar} style={styles.button}>
+                                    <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
+                                </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('MovimentacaoDeCaixaDetails')} style={styles.button}>
-                            <Image style={styles.icon} source={require('../images/novo_32x32.png')} />
-                        </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('MovimentacaoDeCaixaDetails')} style={styles.button}>
+                                    <Image style={styles.icon} source={require('../images/novo_32x32.png')} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
                     </View>
                 </View>
 
@@ -224,6 +283,10 @@ const styles = StyleSheet.create(
         },
         viewHeader: {
             flexDirection: 'row',
+        },
+        viewHeaderSegundaLinha: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
         },
         boxDate:{
             height: 40,

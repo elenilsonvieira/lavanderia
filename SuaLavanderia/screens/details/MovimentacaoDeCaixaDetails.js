@@ -75,7 +75,12 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
     }
 
     dataEscolhida = (dataEscolhida) => {
+        var dia = dataEscolhida.getDate();
         var mes = dataEscolhida.getMonth() + 1;
+
+        if(dia < 10){
+            dia = '0' + dia;
+        }
 
         if(mes < 10){
             mes = '0' + mes;
@@ -83,7 +88,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
         this.setState({ 
             dataTimePickerVisible: false,
-            data: dataEscolhida.getDate() + '/' + mes + '/' + dataEscolhida.getFullYear(),
+            data: dia + '/' + mes + '/' + dataEscolhida.getFullYear(),
         });
     }
 
