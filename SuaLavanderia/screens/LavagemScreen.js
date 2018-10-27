@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity } from 'react-native';
-
+import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker } from 'react-native';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 import Lavagem from "../components/Lavagem";
 
 export default class LavagemScreen extends React.Component {
@@ -90,21 +90,112 @@ export default class LavagemScreen extends React.Component {
         this.setState(objetos);
     }
 
+    dataInicialEscolhida = (dataEscolhida) => {
+        //var dataEscolhidaString = dataString(dataEscolhida);
+
+        var dia = dataEscolhida.getDate();
+        var mes = dataEscolhida.getMonth() + 1;
+
+        if(dia < 10){
+            dia = '0' + dia;
+        }
+
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+
+        var dataEscolhidaString = dia + '/' + mes + '/' + dataEscolhida.getFullYear();
+
+        this.setState({ 
+            dataInicialPickerVisible: false,
+            dataInicial: dataEscolhidaString,
+        });
+    }
+
+    dataFinalEscolhida = (dataEscolhida) => {
+        //var dataEscolhidaString = dataString(dataEscolhida);
+
+        var dia = dataEscolhida.getDate();
+        var mes = dataEscolhida.getMonth() + 1;
+
+        if(dia < 10){
+            dia = '0' + dia;
+        }
+
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+
+        var dataEscolhidaString = dia + '/' + mes + '/' + dataEscolhida.getFullYear();
+
+        this.setState({ 
+            dataFinalPickerVisible: false,
+            dataFinal: dataEscolhidaString,
+        });
+    }
+
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <TextInput
-                        style={styles.boxInput} 
-                        placeholder='Nome'
-                        value={this.state.nome}
-                        autoFocus
-                        onChangeText={nome => this.setState({nome})} 
-                    />
+                    <View>
+                        <View style={styles.viewHeader}>
+                            <Text style={styles.infoTitle}>Início: </Text>
+                            <TouchableOpacity onPress={() => this.setState({dataInicialPickerVisible: true})}>
+                                <Text style={styles.boxDate}>{this.state.dataInicial}</Text>
+                            </TouchableOpacity>
+                            <DateTimePicker 
+                                isVisible={this.state.dataInicialPickerVisible}
+                                onConfirm={this.dataInicialEscolhida}
+                                onCancel={() => this.setState({dataInicialPickerVisible: false})}
+                            />
 
-                    <TouchableOpacity onPress={this.filtrar} style={styles.button}>
-                        <Text style={styles.buttonText}>Filtrar</Text>
-                    </TouchableOpacity>
+                            <Text style={styles.infoTitle}>Fim: </Text>
+                            <TouchableOpacity onPress={() => this.setState({dataFinalPickerVisible: true})}>
+                                <Text style={styles.boxDate}>{this.state.dataFinal}</Text>
+                            </TouchableOpacity>
+                            <DateTimePicker 
+                                isVisible={this.state.dataFinalPickerVisible}
+                                onConfirm={this.dataFinalEscolhida}
+                                onCancel={() => this.setState({dataFinalPickerVisible: false})}
+                            />
+                        </View>
+                        <View style={styles.viewHeaderSegundaLinha}>
+                            <View style={styles.viewHeader}>
+                                <Text style={styles.infoTitle}>Nome: </Text>
+                                <TextInput
+                                    style={styles.boxInput} 
+                                    placeholder='Nome'
+                                    value={this.state.nome}
+                                    autoFocus
+                                    onChangeText={nome => this.setState({nome})} 
+                                />
+                            </View>
+                        </View>
+                        <View style={styles.viewHeaderSegundaLinha}>
+                            <View style={styles.viewHeader}>
+                                <Text style={styles.infoTitle}>Status: </Text>
+                                <Picker
+                                    style={styles.picker} 
+                                    selectedValue={this.state.status}
+                                    onValueChange={(itemValue, itemIndex) => this.setState({status: itemValue})} >
+                                    <Picker.Item label='Anotada' value='0' />
+                                    <Picker.Item label='Lavando' value='1' />
+                                    <Picker.Item label='Passando' value='2' />
+                                    <Picker.Item label='Em Deslocamento' value='3' />
+                                    <Picker.Item label='Pronta' value='4' />
+                                    <Picker.Item label='Entregue' value='5' />
+                                    <Picker.Item label='Tudo' value='' />
+                                </Picker>
+                            </View>
+
+                            <View style={styles.viewHeader}>
+                                <TouchableOpacity onPress={this.buscar} style={styles.button}>
+                                    <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
                 </View>
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
@@ -132,7 +223,7 @@ const styles = StyleSheet.create(
           header:{
             alignItems: 'center',
             justifyContent: 'space-between',
-            height: 40,
+            height: 130,
             backgroundColor: '#FFF',
             flexDirection: 'row',
           },
@@ -152,12 +243,33 @@ const styles = StyleSheet.create(
             fontWeight: 'bold',
         },
         button:{
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 20,
             margin: 10,
-            padding: 10,
-            backgroundColor: '#DDD',
+        },
+        viewHeader: {
+            flexDirection: 'row',
+        },
+        viewHeaderSegundaLinha: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+        },
+        boxDate:{
+            height: 40,
+            borderRadius: 5,
+            padding: 5,
+            paddingTop: 10,
+            justifyContent: 'center',
+            fontSize: 15,
+            fontWeight: 'bold',
+        },
+        picker:{
+            height: 40,
+            width: 100,
+            borderRadius: 15,
+            padding: 5,
+        },
+        infoTitle: {
+            fontWeight: 'bold',
+            margin: 10,
         },
     }
 );
