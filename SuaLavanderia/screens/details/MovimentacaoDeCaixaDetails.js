@@ -160,14 +160,14 @@ const styles = StyleSheet.create(
             flex: 1,
             backgroundColor: '#333',
           },
-          objetoList: {
-              paddingTop: 20,
-          },
           header:{
-            alignItems: 'center',
+            justifyContent: 'flex-end',
             height: 40,
             backgroundColor: '#FFF',
             flexDirection: 'row',
+          },
+          objetoList: {
+              paddingTop: 20,
           },
           headerText: {
               fontSize: 22,
