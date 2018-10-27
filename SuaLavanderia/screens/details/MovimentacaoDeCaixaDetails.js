@@ -55,8 +55,6 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         var dataArray = this.state.data.split('/');
         const data = dataArray[2] + '-'+ dataArray[1] + '-' + dataArray[0];
 
-        alert(data);
-
         argumentos += '&data=' + data + '&capital=' + capital + '&valor=' + this.state.valor + '&observacoes=' + this.state.observacoes + '&responsavelOid=' + responsavelOid + '&modo=' + this.state.modo;
 
         if(movimentacao != null){
@@ -189,6 +187,7 @@ const styles = StyleSheet.create(
             borderRadius: 5,
             alignSelf: 'stretch',
             padding: 5,
+            paddingTop: 10,
             justifyContent: 'center',
             fontSize: 15,
             fontWeight: 'bold',

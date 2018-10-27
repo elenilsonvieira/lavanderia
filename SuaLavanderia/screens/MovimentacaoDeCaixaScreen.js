@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity } from 'react-native';
-
+import {StyleSheet, View, ScrollView, Image, Picker, Text, TouchableOpacity } from 'react-native';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 import MovimentacaoDeCaixa from "../components/MovimentacaoDeCaixa";
 
 export default class MovimentacaoDeCaixaScreen extends React.Component {
@@ -16,12 +16,17 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
       };
 
     state ={
+        modo: 'Saida',
         valor: '',
         objetos: [],
+        dataInicialPickerVisible: false,
+        dataFinalPickerVisible: false,
+        dataInicial: '',
+        dataFinal: '',
     };
 
     buscar = async () => {
-        const call = await fetch('http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?dataInicial=2018-10-26&dataFinal=2018-10-26&modo=saida');
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?dataInicial=2018-10-26&dataFinal=2018-10-26&modo=${this.state.modo}`);
         const response = await call.json();
 
         var objetos = [];
@@ -65,29 +70,95 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
     };
 
     async componentDidMount(){
+        var hoje = new Date();
+        var mes = hoje.getMonth() + 1;
+
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+
+        const dataInicial = hoje.getDate() + '/' + mes + '/' + hoje.getFullYear();
+        const dataFinal = hoje.getDate() + '/' + mes + '/' + hoje.getFullYear();
+
+        this.setState({dataInicial, dataFinal});
+
         const objetos = await this.buscar() || [];
         this.setState(objetos);
+    }
+
+    dataInicialEscolhida = (dataEscolhida) => {
+        var mes = dataEscolhida.getMonth() + 1;
+
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+
+        this.setState({ 
+            dataInicialPickerVisible: false,
+            dataInicial: dataEscolhida.getDate() + '/' + mes + '/' + dataEscolhida.getFullYear(),
+        });
+    }
+
+    dataFinalEscolhida = (dataEscolhida) => {
+        var mes = dataEscolhida.getMonth() + 1;
+
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+
+        this.setState({ 
+            dataFinalPickerVisible: false,
+            dataFinal: dataEscolhida.getDate() + '/' + mes + '/' + dataEscolhida.getFullYear(),
+        });
     }
 
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <TextInput
-                        style={styles.boxInput} 
-                        placeholder='Valor'
-                        value={this.state.valor}
-                        autoFocus
-                        onChangeText={valor => this.setState({valor})} 
-                    />
+                    <View>
+                        <View style={styles.viewHeader}>
+                            <Text style={styles.infoTitle}>Modo: </Text>
+                            <Picker
+                                style={styles.picker} 
+                                selectedValue={this.state.modo}
+                                onValueChange={(itemValue, itemIndex) => this.setState({modo: itemValue})} >
+                                <Picker.Item label='Saída' value='Saida' />
+                                <Picker.Item label='Entrada' value='Entrada' />
+                            </Picker>
+                        </View>
+                        <View style={styles.viewHeader}>
+                            <Text style={styles.infoTitle}>Início: </Text>
+                            <TouchableOpacity onPress={() => this.setState({dataTimePickerDataInicialVisible: true})}>
+                                <Text style={styles.boxDate}>{this.state.dataInicial}</Text>
+                            </TouchableOpacity>
+                            <DateTimePicker 
+                                isVisible={this.state.dataInicialPickerVisible}
+                                onConfirm={this.dataInicialEscolhida}
+                                onCancel={() => this.setState({dataInicialPickerVisible: false})}
+                            />
 
-                    <TouchableOpacity onPress={this.filtrar} style={styles.button}>
-                        <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
-                    </TouchableOpacity>
+                            <Text style={styles.infoTitle}>Fim: </Text>
+                            <TouchableOpacity onPress={() => this.setState({dataTimePickerDataFinalVisible: true})}>
+                                <Text style={styles.boxDate}>{this.state.dataFinal}</Text>
+                            </TouchableOpacity>
+                            <DateTimePicker 
+                                isVisible={this.state.dataFinalPickerVisible}
+                                onConfirm={this.dataFinalEscolhida}
+                                onCancel={() => this.setState({dataFinalPickerVisible: false})}
+                            />
+                        </View>
+                    </View>
 
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('MovimentacaoDeCaixaDetails')} style={styles.button}>
-                        <Image style={styles.icon} source={require('../images/novo_32x32.png')} />
-                    </TouchableOpacity>
+                    <View style={styles.viewHeader}>
+                        <TouchableOpacity onPress={this.buscar} style={styles.button}>
+                            <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('MovimentacaoDeCaixaDetails')} style={styles.button}>
+                            <Image style={styles.icon} source={require('../images/novo_32x32.png')} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
@@ -115,7 +186,7 @@ const styles = StyleSheet.create(
           header:{
             alignItems: 'center',
             justifyContent: 'space-between',
-            height: 40,
+            height: 80,
             backgroundColor: '#FFF',
             flexDirection: 'row',
           },
@@ -131,15 +202,37 @@ const styles = StyleSheet.create(
             width: 250,
             padding: 5,
         },
+        picker:{
+            height: 40,
+            width: 100,
+            borderRadius: 15,
+            padding: 5,
+        },
         buttonText: {
             fontWeight: 'bold',
         },
         button:{
-            padding: 10,
+            margin: 10,
         },
         icon: {
             width: 24,
             height: 24,
-        }
+        },
+        infoTitle: {
+            fontWeight: 'bold',
+            margin: 10,
+        },
+        viewHeader: {
+            flexDirection: 'row',
+        },
+        boxDate:{
+            height: 40,
+            borderRadius: 5,
+            padding: 5,
+            paddingTop: 10,
+            justifyContent: 'center',
+            fontSize: 15,
+            fontWeight: 'bold',
+        },
     }
 );
