@@ -5,15 +5,11 @@ export default class LavagemDetails extends React.Component {
 
     state ={
         nome: '',
-        lavagem: {},
     };
 
-    async componentDidMount(){
-        const lavagem = this.props.navigation.getParam('lavagem');
-        this.setState(lavagem);
-    }
-
     render(){
+        const lavagem = this.props.navigation.getParam('lavagem');
+
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -23,42 +19,42 @@ export default class LavagemDetails extends React.Component {
                 </View>
                 <View style={styles.unidadeContainer}>
                     <View style={styles.lavagemInfoContainerCliente}>
-                        <Text style={styles.lavagemInfoCliente}>{this.state.lavagem.cliente}</Text>
+                        <Text style={styles.lavagemInfoCliente}>{lavagem.cliente}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Oid: </Text>
-                        <Text style={styles.lavagemInfo}>{this.state.lavagem.oid}</Text>
+                        <Text style={styles.lavagemInfo}>{lavagem.oid}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Unidade: </Text>
-                        <Text style={styles.lavagemInfo}>{this.state.lavagem.unidadeDeRecebimento}</Text>
+                        <Text style={styles.lavagemInfo}>{lavagem.unidadeDeRecebimento}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Data de Recebimento: </Text>
-                        <Text style={styles.lavagemInfo}>{this.state.lavagem.dataDeRecebimento}</Text>
+                        <Text style={styles.lavagemInfo}>{lavagem.dataDeRecebimento}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Data Preferível para Entrega: </Text>
-                        <Text style={styles.lavagemInfo}>{this.state.lavagem.dataPreferivelParaEntrega}</Text>
+                        <Text style={styles.lavagemInfo}>{lavagem.dataPreferivelParaEntrega}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Data de Entrega: </Text>
-                        <Text style={styles.lavagemInfo}>{this.state.lavagem.dataDeEntrega}</Text>
+                        <Text style={styles.lavagemInfo}>{lavagem.dataDeEntrega}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Status: </Text>
-                        <Text style={styles.lavagemInfo}>{this.state.lavagem.status}</Text>
+                        <Text style={styles.lavagemInfo}>{lavagem.status}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Paga: </Text>
-                        <Text style={styles.lavagemInfo}>{this.state.lavagem.paga}</Text>
+                        <Text style={styles.lavagemInfo}>{lavagem.paga}</Text>
                     </View>
                 </View>
             </View>
