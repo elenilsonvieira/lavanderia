@@ -63,6 +63,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                 method: 'post' 
             }).then(function(response){
                 alert(movimentacao == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
+                alert(this.props);
                 //this.props.navigation.goBack();
             }
             ).catch(function(error){

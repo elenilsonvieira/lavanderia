@@ -38,7 +38,7 @@ export default class LavagemScreen extends React.Component {
 
         var argumentos = `status=${this.state.status}&dataInicial=${dataInicial}&dataFinal=${dataFinal}`;
 
-        if(nome != ''){
+        if(this.state.nome != ''){
             argumentos += '&nome=' + this.state.nome;
         }
 
