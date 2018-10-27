@@ -16,12 +16,33 @@ export default class LavagemScreen extends React.Component {
       };
 
     state ={
+        dataInicial: '',
+        dataFinal: '',
         nome: '',
+        status: '0',
         objetos: [],
     };
 
     buscar = async () => {
-        const call = await fetch('http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?status=0');
+        var hoje = new Date();
+        var mes = hoje.getMonth() + 1;
+
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+
+        const dataInicial = hoje.getDate() + '/' + mes + '/' + hoje.getFullYear();
+        const dataFinal = hoje.getDate() + '/' + mes + '/' + hoje.getFullYear();
+
+        this.setState({dataInicial, dataFinal});
+
+        var argumentos = `status=${this.state.status}&dataInicial=${dataInicial}&dataFinal=${dataFinal}`;
+
+        if(nome != ''){
+            argumentos += '&nome=' + this.state.nome;
+        }
+
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}`);
         const response = await call.json();
 
         var objetos = [];
