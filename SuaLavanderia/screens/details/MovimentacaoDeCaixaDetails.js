@@ -5,8 +5,8 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 export default class MovimentacaoDeCaixaDetails extends React.Component {
 
     state ={
-        oid: 'novo pagamento',
-        valor: '',
+        oid: '',
+        valor: '0',
         observacoes: '',
         capital: 'Dinheiro',
         data: '',
@@ -26,6 +26,8 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             const modo = movimentacao.modo;
 
             this.setState({oid, valor, observacoes, capital, data, modo});
+        }else{
+            this.dataEscolhida(new Date());
         }
     }
 
