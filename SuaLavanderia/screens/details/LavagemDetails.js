@@ -16,6 +16,11 @@ export default class LavagemDetails extends React.Component {
     render(){
         return(
             <View style={styles.container}>
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.button}>
+                        <Image style={styles.icon} source={require('../../images/salvar_32x32.png')} />
+                    </TouchableOpacity>
+                </View>
                 <View style={styles.unidadeContainer}>
                     <View style={styles.lavagemInfoContainerCliente}>
                         <Text style={styles.lavagemInfoCliente}>{this.state.lavagem.cliente}</Text>
@@ -113,12 +118,11 @@ const styles = StyleSheet.create(
             fontWeight: 'bold',
         },
         button:{
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 20,
             margin: 10,
-            padding: 10,
-            backgroundColor: '#DDD',
+        },
+        icon: {
+            width: 24,
+            height: 24,
         },
     }
 );
