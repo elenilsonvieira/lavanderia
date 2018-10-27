@@ -38,6 +38,9 @@ const RootDrawer = createDrawerNavigator(
     Sobre: SobreScreen,
   },{
     initialRouteName: 'Home',
+    navigationOptions: {
+      headerTransparent: true,
+    },
   }
 );
 
@@ -48,5 +51,8 @@ const RootStack = createStackNavigator(
     RootDrawer: RootDrawer,
   },{
     initialRouteName: 'RootDrawer',
+    navigationOptions: {
+      headerTransparent: true,
+    },
   }
 );
