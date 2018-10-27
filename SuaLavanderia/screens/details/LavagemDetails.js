@@ -71,7 +71,7 @@ const styles = StyleSheet.create(
           },
           header:{
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'flex-end',
             height: 40,
             backgroundColor: '#FFF',
             flexDirection: 'row',
