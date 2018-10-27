@@ -33,13 +33,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
     salvar = async () => {
         const movimentacao = this.props.navigation.getParam('movimentacao');
-        const responsavelOid = 'elenilsonvieira@gmail.com';
-
-        var argumentos = '';
-
-        if(movimentacao != null){
-            argumentos += 'responsavelOid=' + movimentacao.responsavelOid;
-        }
+        const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : 'elenilsonvieira@gmail.com';
 
         var capital = '0';
 
@@ -57,7 +51,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         var dataArray = this.state.data.split('/');
         const data = dataArray[2] + '-'+ dataArray[1] + '-' + dataArray[0];
 
-        argumentos += '&data=' + data + '&capital=' + capital + '&valor=' + this.state.valor + '&observacoes=' + this.state.observacoes + '&responsavelOid=' + responsavelOid + '&modo=' + this.state.modo;
+        var argumentos = 'data=' + data + '&capital=' + capital + '&valor=' + this.state.valor + '&observacoes=' + this.state.observacoes + '&responsavelOid=' + responsavelOid + '&modo=' + this.state.modo;
 
         if(movimentacao != null){
             argumentos += '&oid=' + movimentacao.oid;
@@ -69,6 +63,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             }).then(function(response){
                 alert(movimentacao == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
                 //this.props.navigation.goBack();
+                alert(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeCaixa.aspx?${argumentos}`);
             }
             ).catch(function(error){
                 alert('Erro adicionando a movimentação de caixa.' + error);    

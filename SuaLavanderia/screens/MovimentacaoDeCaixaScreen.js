@@ -87,6 +87,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
                 observacoes: objetoResponse.Observacoes,
                 status: objetoResponse.Status,
                 responsavel: objetoResponse.Responsavel,
+                responsavelOid: objetoResponse.ResponsavelOid,
                 conferidor: objetoResponse.Conferidor,
                 lavagem: objetoResponse.Lavagem,
             };    
