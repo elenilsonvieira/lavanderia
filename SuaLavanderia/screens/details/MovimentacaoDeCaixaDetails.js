@@ -33,7 +33,8 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
     salvar = async () => {
         const movimentacao = this.props.navigation.getParam('movimentacao');
-        const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : 'elenilsonvieira@gmail.com';
+        //const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : 'elenilsonvieira@gmail.com';
+        const responsavelOid = 'elenilsonvieira@gmail.com';
 
         var capital = '0';
 
@@ -63,7 +64,6 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             }).then(function(response){
                 alert(movimentacao == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
                 //this.props.navigation.goBack();
-                alert(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeCaixa.aspx?${argumentos}`);
             }
             ).catch(function(error){
                 alert('Erro adicionando a movimentação de caixa.' + error);    
