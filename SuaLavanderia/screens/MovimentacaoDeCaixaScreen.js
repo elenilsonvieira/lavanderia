@@ -62,7 +62,13 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         dataFinal = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?dataInicial=${dataInicial}&dataFinal=${dataFinal}&modo=${this.state.modo}`);
+        var argumentos = `dataInicial=${dataInicial}&dataFinal=${dataFinal}`;
+
+        if(this.state.modo != ''){
+            argumentos += `&modo=${this.state.modo}`;
+        }
+
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?${argumentos}`);
         const response = await call.json();
 
         var objetos = [];
@@ -204,6 +210,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
                                     onValueChange={(itemValue, itemIndex) => this.setState({modo: itemValue})} >
                                     <Picker.Item label='Saída' value='Saida' />
                                     <Picker.Item label='Entrada' value='Entrada' />
+                                    <Picker.Item label='Tudo' value='' />
                                 </Picker>
                             </View>
 
