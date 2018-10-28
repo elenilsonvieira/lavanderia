@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Roupa from './Roupa';
 
 export default class RoupaEmLavagem extends React.Component {
 
