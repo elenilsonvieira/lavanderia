@@ -63,8 +63,8 @@ export default class LavagemDetails extends React.Component {
                     <Text style={styles.roupasTitle}>Roupas</Text>
                 </View>
                 
-                { lavagem.roupas.map(roupa => 
-                    <RoupaEmLavagem key={roupa.chave} roupaEmLavagem={roupa} />
+                { lavagem.roupas.map(roupaEmLavagem => 
+                    <RoupaEmLavagem key={roupaEmLavagem.roupa.chave} roupaEmLavagem={roupaEmLavagem} />
                 )}
             </View>
         );
@@ -131,9 +131,9 @@ const styles = StyleSheet.create(
         },
         roupasContainer: {
             alignItems: 'center',
-            backgroundColor: '#FFF',
+            backgroundColor: '#F8F8F8',
             borderRadius: 5,
-            padding: 20, 
+            padding: 5, 
             marginLeft: 20,
             marginRight: 20,
         },
