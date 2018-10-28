@@ -10,6 +10,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
         observacoes: '',
         chave: '',
         roupa: {},
+        clienteOid: '',
     };
 
     componentDidMount(){
@@ -24,7 +25,35 @@ export default class RoupaEmLavagemDetails extends React.Component {
 
             this.setState({quantidade, soPassar, observacoes, chave, roupa});
         }
+
+        const clienteOid = this.props.navigation.getParam('clienteOid');
+        this.setState({clienteOid});
     }
+
+    buscar = async () => {
+        const roupaCall = await fetch(`http://painel.sualavanderia.com.br/api/BuscarRoupa.aspx?oid=${this.state.chave}`);
+
+        const response = await roupaCall.json();
+        var roupaResponse = response[0];
+
+        const roupa = {
+            tipo: roupaResponse.Tipo,
+            tecido: roupaResponse.Tecido,
+            tamanho: roupaResponse.Tamanho,
+            marca: roupaResponse.Marca,
+            observacao: roupaResponse.Observacao,
+            codigo: roupaResponse.Codigo,
+            chave: roupaResponse.Chave,
+            cliente: roupaResponse.Cliente,
+            clienteOid: roupaResponse.ClienteOid,
+        };
+
+        if(clienteOid == roupa.clienteOid){
+            this.setState({roupa});
+        }else{
+            alert('Essa roupa não pertece ao dono da Lavagem');
+        }
+    };
 
     render(){
         return(

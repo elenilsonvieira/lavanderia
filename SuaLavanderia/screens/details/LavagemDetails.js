@@ -9,6 +9,16 @@ export default class LavagemDetails extends React.Component {
         modalVisible: false,
     };
 
+    navegarParaDetalhes(props, roupaEmLavagem){
+        const lavagem = this.props.navigation.getParam('lavagem');
+
+        if(lavagem.status == 'Anotada'){
+            props.navigation.navigate('RoupaEmLavagemDetails', {roupaEmLavagem: roupaEmLavagem});
+        }else {
+            alert('Essa lavagem já está anotada.');
+        }
+    }
+
     render(){
         const lavagem = this.props.navigation.getParam('lavagem');
 
@@ -70,7 +80,7 @@ export default class LavagemDetails extends React.Component {
                     </View>
                     
                     { lavagem.roupas.map(roupaEmLavagem => 
-                        <TouchableOpacity key={roupaEmLavagem.roupa.oid} onPress={() => this.props.navigation.navigate('RoupaEmLavagemDetails', {roupaEmLavagem: roupaEmLavagem})}>
+                        <TouchableOpacity key={roupaEmLavagem.roupa.oid} onPress={() => this.navegarParaDetalhes(this.props, roupaEmLavagem)}>
                             <RoupaEmLavagem roupaEmLavagem={roupaEmLavagem} />
                         </TouchableOpacity>
                     )}

@@ -170,7 +170,7 @@ export default class LavagemScreen extends React.Component {
             dataFinal: dataEscolhidaString,
         });
     }
-
+    
     render(){
         return(
             <View style={styles.container}>
