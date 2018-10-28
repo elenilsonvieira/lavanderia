@@ -24,13 +24,13 @@ export default class RoupaEmLavagemDetails extends React.Component {
                             <TextInput
                                 style={styles.boxInput}
                                 autoFocus
-                                value={this.state.title}
+                                value={this.state.quantidade}
                                 onChangeText={quantidade => this.setState({quantidade})}
                             />
                     </View>
 
                     <View style={styles.infoContainer}>
-                        <Text style={styles.infoTitle}>Só Passar?: </Text>
+                        <Text style={styles.infoTitlePicker}>Só Passar?: </Text>
                         <Picker
                             style={styles.picker}
                             selectecValue={this.state.soPassar}
@@ -44,7 +44,6 @@ export default class RoupaEmLavagemDetails extends React.Component {
                         <Text style={styles.infoTitle}>Observações: </Text>
                         <TextInput
                             style={styles.boxInput}
-                            placeholder="Observações"
                             value={this.state.observacoes}
                             onChangeText={observacoes => this.setState({observacoes})}
                         />
@@ -78,8 +77,8 @@ const styles = StyleSheet.create(
             height: 40,
             borderRadius: 5,
             alignSelf: 'stretch',
-            width: 200,
             padding: 5,
+            width: 170,
         },
         buttonText: {
             fontWeight: 'bold',
@@ -100,6 +99,11 @@ const styles = StyleSheet.create(
         infoTitle: {
             fontWeight: 'bold',
             margin: 10,
+        },
+        infoTitlePicker: {
+            fontWeight: 'bold',
+            margin: 10,
+            paddingTop: 10,
         },
         lavagemInfo: {
         },
@@ -130,6 +134,7 @@ const styles = StyleSheet.create(
             width: 100,
             borderRadius: 15,
             padding: 5,
+            margin: 10,
         },
     }
 );
