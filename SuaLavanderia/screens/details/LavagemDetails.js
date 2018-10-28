@@ -12,7 +12,7 @@ export default class LavagemDetails extends React.Component {
         const lavagem = this.props.navigation.getParam('lavagem');
 
         return(
-            <ScrollView contentContainerStyle={styles.container}>
+            <View style={styles.container}>
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => {}} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/adicionar_32x32.png')} />
@@ -63,14 +63,16 @@ export default class LavagemDetails extends React.Component {
                     </View>
                 </View>
 
-                <View style={styles.roupasContainer}>
-                    <Text style={styles.roupasTitle}>Roupas</Text>
-                </View>
-                
-                { lavagem.roupas.map(roupaEmLavagem => 
-                    <RoupaEmLavagem key={roupaEmLavagem.roupa.chave} roupaEmLavagem={roupaEmLavagem} />
-                )}
-            </ScrollView>
+                <ScrollView>
+                    <View style={styles.roupasContainer}>
+                        <Text style={styles.roupasTitle}>Roupas</Text>
+                    </View>
+                    
+                    { lavagem.roupas.map(roupaEmLavagem => 
+                        <RoupaEmLavagem key={roupaEmLavagem.roupa.chave} roupaEmLavagem={roupaEmLavagem} />
+                    )}
+                </ScrollView>
+            </View>
         );
     }
 
