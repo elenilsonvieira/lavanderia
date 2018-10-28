@@ -48,7 +48,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
             clienteOid: roupaResponse.ClienteOid,
         };
 
-        if(clienteOid == roupa.clienteOid){
+        if(this.state.clienteOid == roupa.clienteOid){
             this.setState({roupa});
         }else{
             alert('Essa roupa não pertece ao dono da Lavagem');
@@ -108,7 +108,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
                             placeholder='Chave'
                             onChangeText={chave => this.setState({chave})}
                         />
-                        <TouchableOpacity onPress={() => {}} style={styles.button}>
+                        <TouchableOpacity onPress={this.buscar} style={styles.button}>
                             <Image style={styles.icon} source={require('../../images/pesquisar_32x32.png')} />
                         </TouchableOpacity>
                     </View>

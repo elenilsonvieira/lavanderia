@@ -11,9 +11,10 @@ export default class LavagemDetails extends React.Component {
 
     navegarParaDetalhes(props, roupaEmLavagem){
         const lavagem = this.props.navigation.getParam('lavagem');
+        const clienteOid = lavagem.clienteOid;
 
         if(lavagem.status == 'Anotada'){
-            props.navigation.navigate('RoupaEmLavagemDetails', {roupaEmLavagem: roupaEmLavagem});
+            props.navigation.navigate('RoupaEmLavagemDetails', {roupaEmLavagem: roupaEmLavagem, clienteOid: clienteOid});
         }else {
             alert('Essa lavagem já está anotada.');
         }
