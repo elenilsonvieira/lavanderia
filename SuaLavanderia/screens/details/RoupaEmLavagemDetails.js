@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity } from 'react-native';
-import Roupa from '../../components/Roupa';
 
 export default class RoupaEmLavagemDetails extends React.Component {
 
@@ -11,6 +10,8 @@ export default class RoupaEmLavagemDetails extends React.Component {
         chave: '',
         roupa: {},
         clienteOid: '',
+        lavagemOid: '',
+        oid: '',
     };
 
     componentDidMount(){
@@ -22,12 +23,36 @@ export default class RoupaEmLavagemDetails extends React.Component {
             const observacoes = roupaEmLavagem.observacoes;
             const chave = roupaEmLavagem.roupa.chave;
             const roupa = roupaEmLavagem.roupa;
+            const oid = roupaEmLavagem.Oid;
 
-            this.setState({quantidade, soPassar, observacoes, chave, roupa});
+            this.setState({quantidade, soPassar, observacoes, chave, roupa, oid});
         }
 
         const clienteOid = this.props.navigation.getParam('clienteOid');
-        this.setState({clienteOid});
+        const lavagemOid = this.props.navigation.getParam('lavagemOid');
+
+        this.setState({lavagemOid, clienteOid});
+    }
+
+    async salvar(props) {
+        const soPassar = this.state.soPassar == '1' ? true : false;
+        var argumentos = `oid-roupa=${this.state.roupa.oid}&oid-lavagem=${this.state.lavagemOid}&quantidade=${this.state.quantidade}&so-passar=${soPassar}`;
+        const novo = this.state.oid == '';
+
+        if(novo){
+            argumentos += `&oid=${this.state.oid}`;
+        }
+
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarRoupaEmLavagem.aspx?${argumentos}`, 
+            { 
+                method: 'post' 
+            }).then(function(response){
+                alert(novo ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
+                props.navigation.goBack();
+            }
+            ).catch(function(error){
+                alert('Erro adicionando/alterando roupa em lavagem.' + error);    
+            });
     }
 
     buscar = async () => {
@@ -59,7 +84,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.button}>
+                    <TouchableOpacity onPress={() => this.salvar(this.props)} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/salvar_32x32.png')} />
                     </TouchableOpacity>
                 </View>
