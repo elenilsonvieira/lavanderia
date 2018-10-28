@@ -27,7 +27,7 @@ export default class LavagemDetails extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('RoupaEmLavagemDetails')} style={styles.button}>
+                    <TouchableOpacity onPress={() => this.navegarParaDetalhes(this.props, null)} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/adicionar_32x32.png')} />
                     </TouchableOpacity>
 
