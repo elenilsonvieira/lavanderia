@@ -33,8 +33,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
     async salvar(props) {
         const movimentacao = this.props.navigation.getParam('movimentacao');
-        //const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : 'elenilsonvieira@gmail.com';
-        const responsavelOid = 'elenilsonvieira@gmail.com';
+        const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : 'elenilsonvieira@gmail.com';
 
         var capital = '0';
 

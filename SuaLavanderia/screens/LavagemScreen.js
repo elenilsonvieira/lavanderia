@@ -59,6 +59,7 @@ export default class LavagemScreen extends React.Component {
                     observacoes: roupaResponse.Observacoes,
                     soPassar: roupaResponse.SoPassar,
                     roupa: {
+                        oid: roupaResponse.Roupa.Oid,
                         tipo: roupaResponse.Roupa.Tipo,
                         tecido: roupaResponse.Roupa.Tecido,
                         tamanho: roupaResponse.Roupa.Tamanho,
