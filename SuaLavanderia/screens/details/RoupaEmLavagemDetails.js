@@ -37,7 +37,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
 
                 <View style={styles.unidadeContainer}>
                     <View style={styles.infoContainer}>
-                        <Text style={styles.infoTitle}>Quantidade: </Text>
+                        <Text style={styles.infoTitle}>Quantidade:  </Text>
                             <TextInput
                                 style={styles.boxInput}
                                 autoFocus
@@ -65,14 +65,16 @@ export default class RoupaEmLavagemDetails extends React.Component {
                             onChangeText={observacoes => this.setState({observacoes})}
                         />
                     </View>
+                </View>
 
-                    <View style={styles.roupasContainer}>
+                <View style={styles.unidadeContainerRoupa}>
+                    <View style={styles.roupaContainer}>
                         <Text style={styles.roupasTitle}>Roupa</Text>
                     </View>
 
                     <View style={styles.infoContainer}>
                         <TextInput
-                            style={styles.boxInput}
+                            style={styles.boxInputChave}
                             value={this.state.chave}
                             placeholder='Chave'
                             onChangeText={chave => this.setState({chave})}
@@ -82,7 +84,50 @@ export default class RoupaEmLavagemDetails extends React.Component {
                         </TouchableOpacity>
                     </View>
 
-                    <Roupa roupa={this.state.roupa} />
+                    <View style={styles.roupaInfoContainer}>
+                        <Text style={styles.roupaInfoTitle}>Chave: </Text>
+                        <Text style={styles.roupaInfo}>{this.state.roupa.chave}</Text>
+                    </View>
+
+                    <View style={styles.roupaInfoContainer}>
+                        <Text style={styles.roupaInfoTitle}>Cliente: </Text>
+                        <Text style={styles.roupaInfo}>{this.state.roupa.cliente}</Text>
+                    </View>
+
+                    <View style={styles.roupaInfoContainer}>
+                        <Text style={styles.roupaInfoTitle}>Tipo: </Text>
+                        <Text style={styles.roupaInfo}>{this.state.roupa.tipo}</Text>
+                    </View>
+
+                    <View style={styles.roupaInfoContainer}>
+                        <Text style={styles.roupaInfoTitle}>Tecido: </Text>
+                        <Text style={styles.roupaInfo}>{this.state.roupa.tecido}</Text>
+                    </View>
+
+                    <View style={styles.roupaInfoContainer}>
+                        <Text style={styles.roupaInfoTitle}>Tamanho: </Text>
+                        <Text style={styles.roupaInfo}>{this.state.roupa.tamanho}</Text>
+                    </View>
+
+                    <View style={styles.roupaInfoContainer}>
+                        <Text style={styles.roupaInfoTitle}>Marca: </Text>
+                        <Text style={styles.roupaInfo}>{this.state.roupa.marca}</Text>
+                    </View>
+
+                    <View style={styles.roupaInfoContainer}>
+                        <Text style={styles.roupaInfoTitle}>Cores: </Text>
+                        <Text style={styles.roupaInfo}>{this.state.roupa.cores}</Text>
+                    </View>
+
+                    <View style={styles.roupaInfoContainer}>
+                        <Text style={styles.roupaInfoTitle}>Código: </Text>
+                        <Text style={styles.roupaInfo}>{this.state.roupa.codigo}</Text>
+                    </View>
+
+                    <View style={styles.roupaInfoContainer}>
+                        <Text style={styles.roupaInfoTitle}>Observação: </Text>
+                        <Text style={styles.roupaInfo}>{this.state.roupa.observacao}</Text>
+                    </View>
                 </View>
             </View>
         );
@@ -153,12 +198,10 @@ const styles = StyleSheet.create(
             width: 24,
             height: 24,
         },
-        roupasContainer: {
+        roupaContainer: {
             alignItems: 'center',
-            backgroundColor: '#F8F8F8',
             borderRadius: 5, 
-            marginLeft: 20,
-            marginRight: 20,
+            margin: 10,
         },
         roupasTitle: {
             fontSize: 18,
@@ -178,9 +221,29 @@ const styles = StyleSheet.create(
             marginLeft: 20,
             marginRight: 20,
         },
-        roupasTitle: {
-            fontSize: 18,
+        roupaInfoContainer: {
+            flexDirection: 'row',
+        },
+        roupaInfoTitle: {
             fontWeight: 'bold',
+        },
+        roupaInfo: {
+        },
+        boxInputChave:{
+            backgroundColor: "#DDD",
+            height: 40,
+            borderRadius: 5,
+            alignSelf: 'stretch',
+            padding: 5,
+            width: 250,
+        },
+        unidadeContainerRoupa: {
+            borderRadius: 5,
+            backgroundColor: '#FFF',
+            padding: 10,
+            marginLeft: 20,
+            marginRight: 20,
+            justifyContent: 'center',
         },
     }
 );
