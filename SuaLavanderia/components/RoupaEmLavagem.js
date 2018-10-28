@@ -141,8 +141,7 @@ const styles = StyleSheet.create(
         roupaContainer: {
             borderRadius: 15,
             backgroundColor: '#F8F8F8',
-            padding: 20,
-            margin: 20,
+            padding: 5,
             justifyContent: 'center',
             borderColor: 'black',
         },

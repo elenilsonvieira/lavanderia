@@ -68,7 +68,7 @@ export default class LavagemScreen extends React.Component {
                         observacao: roupaResponse.Roupa.Observacao,
                         codigo: roupaResponse.Roupa.Codigo,
                         chave: roupaResponse.Roupa.Chave,
-                        coresString: roupaResponse.Roupa.CoresString,
+                        cores: roupaResponse.Roupa.Cores,
                     },
                 };
 
