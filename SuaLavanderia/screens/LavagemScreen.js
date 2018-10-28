@@ -66,6 +66,7 @@ export default class LavagemScreen extends React.Component {
                 const roupaResponse = objetoResponse.Roupas[indexRoupa];
 
                 const roupaEmLavagem = {
+                    oid: roupaResponse.Oid,
                     quantidade: roupaResponse.Quantidade,
                     observacoes: roupaResponse.Observacoes,
                     soPassar: roupaResponse.SoPassar,
@@ -170,7 +171,7 @@ export default class LavagemScreen extends React.Component {
             dataFinal: dataEscolhidaString,
         });
     }
-    
+
     render(){
         return(
             <View style={styles.container}>
