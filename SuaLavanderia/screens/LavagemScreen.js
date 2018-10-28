@@ -49,6 +49,31 @@ export default class LavagemScreen extends React.Component {
 
         for(index in response){
             const objetoResponse = response[index];
+            var roupas = [];
+
+            for(indexRoupa in objetoResponse.Roupas){
+                const roupaResponse = objetoResponse.Roupas[indexRoupa];
+
+                const roupaEmLavagem = {
+                    quantidade: roupaResponse.Quantidade,
+                    observacoes: roupaResponse.Observacoes,
+                    soPassar: roupaResponse.SoPassar,
+                    roupa: {
+                        tipo: roupaResponse.Roupa.Tipo,
+                        tecido: roupaResponse.Roupa.Tecido,
+                        tamanho: roupaResponse.Roupa.Tamanho,
+                        marca: roupaResponse.Roupa.Marca,
+                        cliente: roupaResponse.Roupa.Cliente,
+                        clienteOid: roupaResponse.Roupa.ClienteOid,
+                        observacao: roupaResponse.Roupa.Observacao,
+                        codigo: roupaResponse.Roupa.Codigo,
+                        chave: roupaResponse.Roupa.Chave,
+                        coresString: roupaResponse.Roupa.CoresString,
+                    },
+                };
+
+                roupas = [...roupas, roupaEmLavagem];
+            }
 
             const objeto = {
                 oid: objetoResponse.Oid,
@@ -61,7 +86,7 @@ export default class LavagemScreen extends React.Component {
                 paga: objetoResponse.Paga,
                 unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
                 unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
-                roupas: objetoResponse.Roupas,
+                roupas: roupas,
                 status: objetoResponse.Status,
             };    
 
@@ -167,7 +192,6 @@ export default class LavagemScreen extends React.Component {
                                     style={styles.boxInput} 
                                     placeholder='Nome'
                                     value={this.state.nome}
-                                    autoFocus
                                     onChangeText={nome => this.setState({nome})} 
                                 />
                             </View>
@@ -247,6 +271,7 @@ const styles = StyleSheet.create(
         },
         viewHeader: {
             flexDirection: 'row',
+            justifyContent: 'flex-end',
         },
         viewHeaderSegundaLinha: {
             flexDirection: 'row',

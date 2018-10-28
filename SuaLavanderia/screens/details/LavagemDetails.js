@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity } from 'react-native';
+import RoupaEmLavagem from '../../components/RoupaEmLavagem';
 
 export default class LavagemDetails extends React.Component {
 
@@ -57,6 +58,10 @@ export default class LavagemDetails extends React.Component {
                         <Text style={styles.lavagemInfo}>{lavagem.paga}</Text>
                     </View>
                 </View>
+
+                { lavagem.roupas.map(roupa => 
+                    <RoupaEmLavagem key={roupa.chave} roupaEmLavagem={roupa} />
+                )}
             </View>
         );
     }

@@ -38,6 +38,11 @@ export default class Roupa extends React.Component {
                     </View>
 
                     <View style={styles.roupaInfoContainer}>
+                        <Text style={styles.roupaInfoTitle}>Cores: </Text>
+                        <Text style={styles.roupaInfo}>{this.props.roupa.cores}</Text>
+                    </View>
+
+                    <View style={styles.roupaInfoContainer}>
                         <Text style={styles.roupaInfoTitle}>Código: </Text>
                         <Text style={styles.roupaInfo}>{this.props.roupa.codigo}</Text>
                     </View>
