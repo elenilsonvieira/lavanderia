@@ -28,7 +28,50 @@ export default class RoupaEmLavagem extends React.Component {
                     </View>
 
                     <View style={styles.roupaContainer}>
-                        <Roupa roupa={this.props.roupaEmLavagem.roupa}/>
+                        <View style={styles.roupaInfoContainer}>
+                            <Text style={styles.roupaInfoTitle}>Chave: </Text>
+                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.chave}</Text>
+                        </View>
+
+                        <View style={styles.roupaInfoContainer}>
+                            <Text style={styles.roupaInfoTitle}>Cliente: </Text>
+                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.cliente}</Text>
+                        </View>
+
+                        <View style={styles.roupaInfoContainer}>
+                            <Text style={styles.roupaInfoTitle}>Tipo: </Text>
+                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.tipo}</Text>
+                        </View>
+
+                        <View style={styles.roupaInfoContainer}>
+                            <Text style={styles.roupaInfoTitle}>Tecido: </Text>
+                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.tecido}</Text>
+                        </View>
+
+                        <View style={styles.roupaInfoContainer}>
+                            <Text style={styles.roupaInfoTitle}>Tamanho: </Text>
+                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.tamanho}</Text>
+                        </View>
+
+                        <View style={styles.roupaInfoContainer}>
+                            <Text style={styles.roupaInfoTitle}>Marca: </Text>
+                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.marca}</Text>
+                        </View>
+
+                        <View style={styles.roupaInfoContainer}>
+                            <Text style={styles.roupaInfoTitle}>Cores: </Text>
+                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.cores}</Text>
+                        </View>
+
+                        <View style={styles.roupaInfoContainer}>
+                            <Text style={styles.roupaInfoTitle}>Código: </Text>
+                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.codigo}</Text>
+                        </View>
+
+                        <View style={styles.roupaInfoContainer}>
+                            <Text style={styles.roupaInfoTitle}>Observação: </Text>
+                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.observacao}</Text>
+                        </View>
                     </View>
                 </View>
             </View>
@@ -102,6 +145,14 @@ const styles = StyleSheet.create(
             margin: 20,
             justifyContent: 'center',
             borderColor: 'black',
+        },
+        roupaInfoContainer: {
+            flexDirection: 'row',
+        },
+        roupaInfoTitle: {
+            fontWeight: 'bold',
+        },
+        roupaInfo: {
         },
     }
 );

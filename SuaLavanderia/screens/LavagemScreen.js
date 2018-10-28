@@ -213,7 +213,7 @@ export default class LavagemScreen extends React.Component {
                                 </Picker>
                             </View>
 
-                            <View style={styles.viewHeader}>
+                            <View style={styles.viewBotao}>
                                 <TouchableOpacity onPress={this.buscar} style={styles.button}>
                                     <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
                                 </TouchableOpacity>
@@ -271,7 +271,6 @@ const styles = StyleSheet.create(
         },
         viewHeader: {
             flexDirection: 'row',
-            justifyContent: 'flex-end',
         },
         viewHeaderSegundaLinha: {
             flexDirection: 'row',
@@ -295,6 +294,10 @@ const styles = StyleSheet.create(
         infoTitle: {
             fontWeight: 'bold',
             margin: 10,
+        },
+        viewBotao: {
+            flexDirection: 'row',
+            justifyContent: 'flex-end'
         },
     }
 );

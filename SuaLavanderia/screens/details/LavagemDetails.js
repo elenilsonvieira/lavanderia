@@ -12,8 +12,12 @@ export default class LavagemDetails extends React.Component {
         const lavagem = this.props.navigation.getParam('lavagem');
 
         return(
-            <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.container}>
                 <View style={styles.header}>
+                    <TouchableOpacity onPress={() => {}} style={styles.button}>
+                        <Image style={styles.icon} source={require('../../images/adicionar_32x32.png')} />
+                    </TouchableOpacity>
+
                     <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/salvar_32x32.png')} />
                     </TouchableOpacity>
@@ -66,7 +70,7 @@ export default class LavagemDetails extends React.Component {
                 { lavagem.roupas.map(roupaEmLavagem => 
                     <RoupaEmLavagem key={roupaEmLavagem.roupa.chave} roupaEmLavagem={roupaEmLavagem} />
                 )}
-            </View>
+            </ScrollView>
         );
     }
 
@@ -103,7 +107,7 @@ const styles = StyleSheet.create(
         unidadeContainer: {
             borderRadius: 5,
             backgroundColor: '#FFF',
-            padding: 20,
+            padding: 10,
             margin: 20,
             justifyContent: 'center',
         },
@@ -132,13 +136,12 @@ const styles = StyleSheet.create(
         roupasContainer: {
             alignItems: 'center',
             backgroundColor: '#F8F8F8',
-            borderRadius: 5,
-            padding: 5, 
+            borderRadius: 5, 
             marginLeft: 20,
             marginRight: 20,
         },
         roupasTitle: {
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: 'bold',
         },
     }
