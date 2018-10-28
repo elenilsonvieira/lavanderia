@@ -1,13 +1,30 @@
 import React from 'react';
 import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity } from 'react-native';
+import Roupa from '../../components/Roupa';
 
 export default class RoupaEmLavagemDetails extends React.Component {
 
     state ={
         quantidade: '1',
-        soPassar:  false,
+        soPassar:  '0',
         observacoes: '',
+        chave: '',
+        roupa: {},
     };
+
+    componentDidMount(){
+        var roupaEmLavagem = this.props.navigation.getParam('roupaEmLavagem');
+
+        if(roupaEmLavagem != null){
+            const quantidade = roupaEmLavagem.quantidade.toString();
+            const soPassar = roupaEmLavagem.soPassar ? '1' : '0';
+            const observacoes = roupaEmLavagem.observacoes;
+            const chave = roupaEmLavagem.roupa.chave;
+            const roupa = roupaEmLavagem.roupa;
+
+            this.setState({quantidade, soPassar, observacoes, chave, roupa});
+        }
+    }
 
     render(){
         return(
@@ -35,8 +52,8 @@ export default class RoupaEmLavagemDetails extends React.Component {
                             style={styles.picker}
                             selectecValue={this.state.soPassar}
                             onValueChange={(itemValue, itemIndex) => this.setState({soPassar: itemValue})}>
-                            <Picker.Item label='Não' value={false} />
-                            <Picker.Item label='Sim' value={true} />
+                            <Picker.Item label='Não' value='0' />
+                            <Picker.Item label='Sim' value='1' />
                         </Picker>
                     </View>
 
@@ -48,6 +65,24 @@ export default class RoupaEmLavagemDetails extends React.Component {
                             onChangeText={observacoes => this.setState({observacoes})}
                         />
                     </View>
+
+                    <View style={styles.roupasContainer}>
+                        <Text style={styles.roupasTitle}>Roupa</Text>
+                    </View>
+
+                    <View style={styles.infoContainer}>
+                        <TextInput
+                            style={styles.boxInput}
+                            value={this.state.chave}
+                            placeholder='Chave'
+                            onChangeText={chave => this.setState({chave})}
+                        />
+                        <TouchableOpacity onPress={() => {}} style={styles.button}>
+                            <Image style={styles.icon} source={require('../../images/pesquisar_32x32.png')} />
+                        </TouchableOpacity>
+                    </View>
+
+                    <Roupa roupa={this.state.roupa} />
                 </View>
             </View>
         );
@@ -135,6 +170,17 @@ const styles = StyleSheet.create(
             borderRadius: 15,
             padding: 5,
             margin: 10,
+        },
+        roupasContainer: {
+            alignItems: 'center',
+            backgroundColor: '#F8F8F8',
+            borderRadius: 5, 
+            marginLeft: 20,
+            marginRight: 20,
+        },
+        roupasTitle: {
+            fontSize: 18,
+            fontWeight: 'bold',
         },
     }
 );

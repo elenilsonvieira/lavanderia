@@ -31,12 +31,23 @@ export default class LavagemScreen extends React.Component {
             mes = '0' + mes;
         }
 
-        const dataInicial = hoje.getDate() + '/' + mes + '/' + hoje.getFullYear();
-        const dataFinal = hoje.getDate() + '/' + mes + '/' + hoje.getFullYear();
+        var dataInicial = this.state.dataInicial;
+        var dataFinal = this.state.dataFinal;
 
-        this.setState({dataInicial, dataFinal});
+        if(dataInicial == '' || dataFinal == ''){
+            dataInicial = hoje.getDate() + '/' + mes + '/' + hoje.getFullYear();
+             dataFinal = hoje.getDate() + '/' + mes + '/' + hoje.getFullYear();
 
-        var argumentos = `status=${this.state.status}&dataInicial=${dataInicial}&dataFinal=${dataFinal}`;
+            this.setState({dataInicial, dataFinal});
+        }
+
+        var dataInicialArray = dataInicial.split('/');
+        var dataInicialParameter = dataInicialArray[2] + '-'+ dataInicialArray[1] + '-' + dataInicialArray[0];
+
+        var dataFinalArray = dataFinal.split('/');
+        var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
+
+        var argumentos = `status=${this.state.status}&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}`;
 
         if(this.state.nome != ''){
             argumentos += '&nome=' + this.state.nome;
@@ -190,8 +201,7 @@ export default class LavagemScreen extends React.Component {
                             <View style={styles.viewHeader}>
                                 <Text style={styles.infoTitle}>Nome: </Text>
                                 <TextInput
-                                    style={styles.boxInput} 
-                                    placeholder='Nome'
+                                    style={styles.boxInput}
                                     value={this.state.nome}
                                     onChangeText={nome => this.setState({nome})} 
                                 />
