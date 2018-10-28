@@ -14,6 +14,7 @@ import LavagemScreen from './screens/LavagemScreen';
 import MovimentacaoDeCaixaScreen from './screens/MovimentacaoDeCaixaScreen';
 import MovimentacaoDeCaixaDetails from './screens/details/MovimentacaoDeCaixaDetails';
 import LavagemDetails from './screens/details/LavagemDetails';
+import RoupaEmLavagemDetails from './screens/details/RoupaEmLavagemDetails';
 
 export default class App extends Component {
   render() {
@@ -48,6 +49,7 @@ const RootStack = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
     LavagemDetails: LavagemDetails,
+    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RootDrawer: RootDrawer,
   },{
     initialRouteName: 'RootDrawer',

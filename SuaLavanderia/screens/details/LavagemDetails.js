@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity } from 'react-native';
 import RoupaEmLavagem from '../../components/RoupaEmLavagem';
-import RoupaEmLavagemModal from '../../components/modals/RoupaEmLavagemModal';
 
 export default class LavagemDetails extends React.Component {
 
@@ -16,7 +15,7 @@ export default class LavagemDetails extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={() => this.setState({modalVisible: true})} style={styles.button}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('RoupaEmLavagemDetails')} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/adicionar_32x32.png')} />
                     </TouchableOpacity>
 
@@ -71,14 +70,11 @@ export default class LavagemDetails extends React.Component {
                     </View>
                     
                     { lavagem.roupas.map(roupaEmLavagem => 
-                        <RoupaEmLavagem key={roupaEmLavagem.roupa.chave} roupaEmLavagem={roupaEmLavagem} />
+                        <TouchableOpacity key={roupaEmLavagem.roupa.oid} onPress={() => this.props.navigation.navigate('RoupaEmLavagemDetails', {roupaEmLavagem: roupaEmLavagem})}>
+                            <RoupaEmLavagem roupaEmLavagem={roupaEmLavagem} />
+                        </TouchableOpacity>
                     )}
                 </ScrollView>
-
-                <RoupaEmLavagemModal visible={this.state.modalVisible} 
-                    onCancel={() => this.setState({modalVisible: false})} 
-                    onAdd={() => {}}
-                />
             </View>
         );
     }
