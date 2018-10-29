@@ -47,7 +47,6 @@ export default class RoupaEmLavagemDetails extends React.Component {
                 method: 'post' 
             }).then(function(response){
                 alert(novo ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
-                alert(argumentos);
                 props.navigation.goBack();
             }
             ).catch(function(error){
@@ -96,6 +95,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
                             <TextInput
                                 style={styles.boxInput}
                                 autoFocus
+                                keyboardType='numeric'
                                 value={this.state.quantidade}
                                 onChangeText={quantidade => this.setState({quantidade})}
                             />
