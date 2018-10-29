@@ -47,6 +47,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
                 method: 'post' 
             }).then(function(response){
                 alert(novo ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
+                alert(argumentos);
                 props.navigation.goBack();
             }
             ).catch(function(error){
@@ -70,6 +71,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
             chave: roupaResponse.Chave,
             cliente: roupaResponse.Cliente,
             clienteOid: roupaResponse.ClienteOid,
+            oid: roupaResponse.Oid,
         };
 
         if(this.state.clienteOid == roupa.clienteOid){
