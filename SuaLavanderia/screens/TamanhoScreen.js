@@ -67,7 +67,6 @@ export default class TamanhoScreen extends React.Component {
                         style={styles.boxInput} 
                         placeholder='Nome'
                         value={this.state.nome}
-                        autoFocus
                         onChangeText={nome => this.setState({nome})} 
                     />
 
