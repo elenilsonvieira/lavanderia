@@ -5,7 +5,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
 
     state ={
         quantidade: '1',
-        soPassar:  '0',
+        soPassar:  false,
         observacoes: '',
         chave: '',
         roupa: {},
@@ -19,11 +19,11 @@ export default class RoupaEmLavagemDetails extends React.Component {
 
         if(roupaEmLavagem != null){
             const quantidade = roupaEmLavagem.quantidade.toString();
-            const soPassar = roupaEmLavagem.soPassar ? '1' : '0';
+            const soPassar = roupaEmLavagem.soPassar;
             const observacoes = roupaEmLavagem.observacoes;
             const chave = roupaEmLavagem.roupa.chave;
             const roupa = roupaEmLavagem.roupa;
-            const oid = roupaEmLavagem.Oid;
+            const oid = roupaEmLavagem.oid;
 
             this.setState({quantidade, soPassar, observacoes, chave, roupa, oid});
         }
@@ -35,11 +35,10 @@ export default class RoupaEmLavagemDetails extends React.Component {
     }
 
     async salvar(props) {
-        const soPassar = this.state.soPassar == '1' ? true : false;
-        var argumentos = `oid-roupa=${this.state.roupa.oid}&oid-lavagem=${this.state.lavagemOid}&quantidade=${this.state.quantidade}&so-passar=${soPassar}`;
+        var argumentos = `roupaOid=${this.state.roupa.oid}&lavagemOid=${this.state.lavagemOid}&quantidade=${this.state.quantidade}&soPassar=${this.state.soPassar}&observacoes=${this.state.observacoes}`;
         const novo = this.state.oid == '';
 
-        if(novo){
+        if(!novo){
             argumentos += `&oid=${this.state.oid}`;
         }
 
@@ -104,10 +103,10 @@ export default class RoupaEmLavagemDetails extends React.Component {
                         <Text style={styles.infoTitlePicker}>Só Passar?: </Text>
                         <Picker
                             style={styles.picker}
-                            selectecValue={this.state.soPassar}
+                            selectedValue={this.state.soPassar}
                             onValueChange={(itemValue, itemIndex) => this.setState({soPassar: itemValue})}>
-                            <Picker.Item label='Não' value='0' />
-                            <Picker.Item label='Sim' value='1' />
+                            <Picker.Item label='Não' value={false} />
+                            <Picker.Item label='Sim' value={true} />
                         </Picker>
                     </View>
 
