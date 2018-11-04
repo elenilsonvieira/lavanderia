@@ -24,7 +24,9 @@ export default class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image source={require('../images/logo.png')} />
+        <View style={styles.imagemContainer}>
+          <Image source={require('../images/logo.png')} />
+        </View>
 
         <View style={styles.boxContainer}>
           <TextInput
@@ -34,6 +36,7 @@ export default class LoginScreen extends Component {
               value={this.state.email}
               onChangeText={email => this.setState({email})}
           />
+          
           <TextInput
               style={styles.boxInput}
               autoFocus
@@ -41,10 +44,11 @@ export default class LoginScreen extends Component {
               value={this.state.senha}
               onChangeText={senha => this.setState({senha})}
           />
+
           <TouchableOpacity 
-              onPress={() => this.login} 
-              style={styles.button}>
-              <Text style={styles.buttonText}>Login</Text>
+            onPress={() => this.login} 
+            style={styles.button}>
+            <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -55,19 +59,13 @@ export default class LoginScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#F5FCFF',
+    justifyContent: 'center',
+  },
+  imagemContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
   icon: {
     width: 24,
@@ -82,6 +80,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     height: 40,
     margin: 5,
+    width: '100%',
     borderRadius: 5,
   },
   button:{
@@ -92,6 +91,7 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 20,
     backgroundColor: 'green',
+    height: 40,
   },
   buttonText: {
       fontWeight: 'bold',
@@ -99,9 +99,8 @@ const styles = StyleSheet.create({
   },
   boxContainer: {
     borderRadius: 10,
-    backgroundColor: "#FFF",
-    alignItems: 'center',
     justifyContent: 'center',
     margin: 20,
+    alignItems: 'center',
   },
 });
