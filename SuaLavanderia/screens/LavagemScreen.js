@@ -26,17 +26,21 @@ export default class LavagemScreen extends React.Component {
     buscar = async () => {
         var hoje = new Date();
         var mes = hoje.getMonth() + 1;
-
         if(mes < 10){
             mes = '0' + mes;
+        }
+
+        var dia = hoje.getDate();
+        if(dia < 10){
+            dia = '0' + dia;
         }
 
         var dataInicial = this.state.dataInicial;
         var dataFinal = this.state.dataFinal;
 
         if(dataInicial == '' || dataFinal == ''){
-            dataInicial = hoje.getDate() + '/' + mes + '/' + hoje.getFullYear();
-             dataFinal = hoje.getDate() + '/' + mes + '/' + hoje.getFullYear();
+            dataInicial = dia + '/' + mes + '/' + hoje.getFullYear();
+            dataFinal = dia + '/' + mes + '/' + hoje.getFullYear();
 
             this.setState({dataInicial, dataFinal});
         }

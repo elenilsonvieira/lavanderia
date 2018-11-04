@@ -17,11 +17,67 @@ export default class LoginScreen extends Component {
   };
 
   login = async () => {
-    await AsyncStorage.setItem('SuaLavanderia@email', this.state.email);
-    await AsyncStorage.setItem('SuaLavanderia@senha', this.state.senha);
+    if(this.state.email.trim().length == 0 || this.state.senha.trim().length == 0){
+      alert('Preencha o email e senha');
+    }else{
+      var dataString = this.dataString();
+      var md5 = require('md5');
 
-    this.props.navigation.navigate('RootStack');
+      var hashDaSenha = md5(this.state.senha);
+      var hashDaData = md5(dataString);
+
+      var hash = md5(hashDaSenha + ':' + hashDaData);
+      var usuario = '';
+
+      var props = this.props;
+      var email = this.state.email;
+
+      const call = await fetch(`http://painel.sualavanderia.com.br/api/Login.aspx?login=${email}&senha=${hash}`, 
+            { 
+                method: 'post' 
+            }).then(async function(response){
+              if(response.status == 200){
+                usuario = await response.json()[0];
+
+                alert(usuario);
+
+                await AsyncStorage.setItem('SuaLavanderia@email', email);
+                await AsyncStorage.setItem('SuaLavanderia@hashDaSenha', hashDaSenha);
+                await AsyncStorage.setItem('SuaLavanderia@usuario', usuario);
+          
+                props.navigation.navigate('RootStack');
+              }else{
+                var mensagem = 'Erro ao tentar fazer o login!';
+
+                if(response.statusText){
+                  mensagem += ' ' + response.statusText;
+                }
+
+                alert(mensagem);
+              }
+            }
+            ).catch(function(error){
+                alert('Erro tentando fazer o login: ' + error);
+            });
+    }
   };
+
+  dataString = () => {
+    var data = new Date();
+    
+    var dia = data.getDate();
+    var mes = data.getMonth() + 1;
+
+    if(dia < 10){
+        dia = '0' + dia;
+    }
+
+    if(mes < 10){
+        mes = '0' + mes;
+    }
+
+    return data.getFullYear() + '' + mes + '' + dia;
+  }
 
   render() {
     return (
@@ -34,6 +90,7 @@ export default class LoginScreen extends Component {
                 style={styles.boxInput}
                 autoFocus
                 placeholder="Email"
+                autoCapitalize='none'
                 value={this.state.email}
                 onChangeText={email => this.setState({email})}
             />
@@ -41,6 +98,7 @@ export default class LoginScreen extends Component {
             <TextInput
                 style={styles.boxInput}
                 placeholder="Senha"
+                autoCapitalize='none'
                 value={this.state.senha}
                 onChangeText={senha => this.setState({senha})}
             />
