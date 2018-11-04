@@ -1,7 +1,17 @@
 import React from 'react';
-import {View, StatusBar, ActivityIndicator, AsyncStorage, StyleSheet} from 'react-native';
+import {View, StatusBar, ActivityIndicator, AsyncStorage, StyleSheet, Image} from 'react-native';
 
 export default class LogoutScreen extends React.Component {
+    static navigationOptions = {
+      drawerLabel: 'Sair',
+      drawerIcon: ({ tintColor }) => (
+        <Image
+          source={require('../images/logout_32x32.png')}
+          style={styles.icon}
+        />
+      ),
+    };
+
     constructor(props) {
       super(props);
       this.init();
@@ -29,5 +39,9 @@ export default class LogoutScreen extends React.Component {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    icon: {
+      width: 24,
+      height: 24,
     },
   });

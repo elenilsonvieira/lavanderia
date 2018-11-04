@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
+import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation';
 
 import HomeScreen from "./screens/HomeScreen";
 import RoupaScreen from "./screens/RoupaScreen";
@@ -40,6 +40,7 @@ const RootDrawer = createDrawerNavigator(
     Marca: MarcaScreen,
     Unidade: UnidadeScreen,
     Sobre: SobreScreen,
+    Logout: LogoutScreen,
   },{
     initialRouteName: 'Home',
     navigationOptions: {
@@ -54,7 +55,6 @@ const RootStack = createStackNavigator(
     LavagemDetails: LavagemDetails,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RootDrawer: RootDrawer,
-    Logout: LogoutScreen,
   },{
     initialRouteName: 'RootDrawer',
     navigationOptions: {
@@ -63,7 +63,7 @@ const RootStack = createStackNavigator(
   }
 );
 
-const LoginStack = createStackNavigator(
+const LoginStack = createSwitchNavigator(
   {
     LoadingLogin: LoadingLoginScreen, 
     Login: LoginScreen,

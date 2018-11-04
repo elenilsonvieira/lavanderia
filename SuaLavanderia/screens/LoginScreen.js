@@ -19,6 +19,8 @@ export default class LoginScreen extends Component {
   login = async () => {
     await AsyncStorage.setItem('SuaLavanderia@email', this.state.email);
     await AsyncStorage.setItem('SuaLavanderia@senha', this.state.senha);
+
+    this.props.navigation.navigate('RootStack');
   };
 
   render() {
@@ -39,14 +41,13 @@ export default class LoginScreen extends Component {
           
           <TextInput
               style={styles.boxInput}
-              autoFocus
               placeholder="Senha"
               value={this.state.senha}
               onChangeText={senha => this.setState({senha})}
           />
 
           <TouchableOpacity 
-            onPress={() => this.login} 
+            onPress={() => this.login()} 
             style={styles.button}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
