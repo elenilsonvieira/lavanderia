@@ -15,11 +15,14 @@ import MovimentacaoDeCaixaScreen from './screens/MovimentacaoDeCaixaScreen';
 import MovimentacaoDeCaixaDetails from './screens/details/MovimentacaoDeCaixaDetails';
 import LavagemDetails from './screens/details/LavagemDetails';
 import RoupaEmLavagemDetails from './screens/details/RoupaEmLavagemDetails';
+import LoginScreen from './screens/LoginScreen';
+import LogoutScreen from './screens/LogoutScreen';
+import LoadingLoginScreen from './screens/LoadingLoginScreen';
 
 export default class App extends Component {
   render() {
     return (
-      <RootStack />
+      <LoginStack />
     );
   }
 }
@@ -51,8 +54,22 @@ const RootStack = createStackNavigator(
     LavagemDetails: LavagemDetails,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RootDrawer: RootDrawer,
+    Logout: LogoutScreen,
   },{
     initialRouteName: 'RootDrawer',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
+const LoginStack = createStackNavigator(
+  {
+    LoadingLogin: LoadingLoginScreen, 
+    Login: LoginScreen,
+    RootStack: RootStack,
+  },{
+    initialRouteName: 'LoadingLogin',
     navigationOptions: {
       headerTransparent: true,
     },
