@@ -27,7 +27,6 @@ export default class LoginScreen extends Component {
       var hashDaData = md5(dataString);
 
       var hash = md5(hashDaSenha + ':' + hashDaData);
-      var usuario = '';
 
       var props = this.props;
       var email = this.state.email;
@@ -37,7 +36,8 @@ export default class LoginScreen extends Component {
                 method: 'post' 
             }).then(async function(response){
               if(response.status == 200){
-                usuario = await response.json()[0];
+                var resposta = await response.json();
+                var usuario = resposta[0];
 
                 alert(usuario);
 
