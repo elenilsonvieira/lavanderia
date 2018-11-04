@@ -26,31 +26,31 @@ export default class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.imagemContainer}>
-          <Image source={require('../images/logo.png')} />
-        </View>
+        <View>          
+          <View style={styles.boxContainer}>
+            <Image style={styles.imagem} source={require('../images/logo.png')} />
 
-        <View style={styles.boxContainer}>
-          <TextInput
-              style={styles.boxInput}
-              autoFocus
-              placeholder="Email"
-              value={this.state.email}
-              onChangeText={email => this.setState({email})}
-          />
-          
-          <TextInput
-              style={styles.boxInput}
-              placeholder="Senha"
-              value={this.state.senha}
-              onChangeText={senha => this.setState({senha})}
-          />
+            <TextInput
+                style={styles.boxInput}
+                autoFocus
+                placeholder="Email"
+                value={this.state.email}
+                onChangeText={email => this.setState({email})}
+            />
+            
+            <TextInput
+                style={styles.boxInput}
+                placeholder="Senha"
+                value={this.state.senha}
+                onChangeText={senha => this.setState({senha})}
+            />
 
-          <TouchableOpacity 
-            onPress={() => this.login()} 
-            style={styles.button}>
-            <Text style={styles.buttonText}>Login</Text>
-          </TouchableOpacity>
+            <TouchableOpacity 
+              onPress={() => this.login()} 
+              style={styles.button}>
+              <Text style={styles.buttonText}>Login</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
@@ -103,5 +103,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     margin: 20,
     alignItems: 'center',
+  },
+  imagem: {
+    margin: 20,
   },
 });
