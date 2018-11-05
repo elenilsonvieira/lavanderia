@@ -9,19 +9,22 @@ export default class LoadingLoginScreen extends React.Component {
   
     init = async () => {
 
-
-      alert(await AsyncStorage.getAllKeys());
-
       var usuario;
       try{
-        usuario = JSON.parse(await AsyncStorage.getItem("SuaLavanderia@usuario"));
+        usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
       }catch(exception){}
       
       var resultado = false;
 
       if(usuario){
         const email = usuario.email;
-        const hash = usuario.hashDaSenha;
+        const hashDaSenha = usuario.hashDaSenha;
+
+        var dataString = this.dataString();
+        var md5 = require('md5');
+        var hashDaData = md5(dataString);
+
+        var hash = md5(hashDaSenha + ':' + hashDaData);
 
         const call = await fetch(`http://painel.sualavanderia.com.br/api/Login.aspx?login=${email}&senha=${hash}`, 
               { 
@@ -30,7 +33,7 @@ export default class LoadingLoginScreen extends React.Component {
                 if(response.status == 200){          
                   resultado = true;
                 }else{
-                  await AsyncStorage.removeItem("SuaLavanderia@usuario"); 
+                  await AsyncStorage.removeItem("@SuaLavanderia:usuario"); 
                 }
               }
               ).catch(function(error){
@@ -39,6 +42,23 @@ export default class LoadingLoginScreen extends React.Component {
 
       this.props.navigation.navigate(resultado ? 'RootStack' : 'Login');
     };
+
+    dataString = () => {
+      var data = new Date();
+      
+      var dia = data.getDate();
+      var mes = data.getMonth() + 1;
+  
+      if(dia < 10){
+          dia = '0' + dia;
+      }
+  
+      if(mes < 10){
+          mes = '0' + mes;
+      }
+  
+      return data.getFullYear() + '' + mes + '' + dia;
+    }
   
     render() {
       return (
