@@ -61,7 +61,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             argumentos += '&oid=' + movimentacao.oid;
         }
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeCaixa.aspx?${argumentos}&${argumentos}&login=${email}&senha=${hash}`, 
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             }).then(function(response){
@@ -165,6 +165,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                     <TextInput
                         style={styles.boxInput}
                         value={this.state.valor}
+                        keyboardType='numeric'
                         onChangeText={valor => this.setState({valor})}
                     />
 
