@@ -2,12 +2,13 @@ import React from 'react';
 import {View, StatusBar, ActivityIndicator, AsyncStorage, StyleSheet} from 'react-native';
 
 export default class LoadingLoginScreen extends React.Component {
+
     async componentDidMount() {
       this.init();
     }
   
     init = async () => {
-      const usuario = JSON.parse(await AsyncStorage.getItem('SuaLavanderia@usuario'));
+      const usuario = JSON.parse(await AsyncStorage.getItem("SuaLavanderia@usuario"));
       var resultado = false;
 
       if(usuario){
@@ -21,7 +22,7 @@ export default class LoadingLoginScreen extends React.Component {
                 if(response.status == 200){          
                   resultado = true;
                 }else{
-                  await AsyncStorage.removeItem('SuaLavanderia@usuario'); 
+                  await AsyncStorage.removeItem("SuaLavanderia@usuario"); 
                 }
               }
               ).catch(function(error){

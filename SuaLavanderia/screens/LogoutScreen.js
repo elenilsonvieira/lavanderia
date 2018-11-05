@@ -18,7 +18,7 @@ export default class LogoutScreen extends React.Component {
     }
   
     init = async () => {
-      await AsyncStorage.removeItem('SuaLavanderia@usuario');
+      await AsyncStorage.removeItem("SuaLavanderia@usuario");
       this.props.navigation.navigate('Login');
     };
   

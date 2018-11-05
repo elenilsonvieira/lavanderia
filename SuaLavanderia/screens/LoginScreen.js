@@ -46,7 +46,7 @@ export default class LoginScreen extends Component {
                   hashDaSenha: hashDaSenha,
                 };
 
-                await AsyncStorage.setItem('SuaLavanderia@usuario', JSON.stringify(usuario));
+                await AsyncStorage.setItem("SuaLavanderia@usuario", JSON.stringify(usuario));
           
                 props.navigation.navigate('RootStack');
               }else{
