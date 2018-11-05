@@ -111,6 +111,8 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
             argumentos += `&modo=${this.state.modo}`;
         }
 
+        //alert(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`);
+
         const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
         { 
             method: 'post' 
@@ -160,14 +162,19 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
 
     async componentDidMount(){
         var hoje = new Date();
+        var dia = hoje.getDate();
         var mes = hoje.getMonth() + 1;
+
+        if(dia < 10){
+            dia = '0' + dia;
+        }
 
         if(mes < 10){
             mes = '0' + mes;
         }
 
-        const dataInicial = hoje.getDate() + '/' + mes + '/' + hoje.getFullYear();
-        const dataFinal = hoje.getDate() + '/' + mes + '/' + hoje.getFullYear();
+        const dataInicial = dia + '/' + mes + '/' + hoje.getFullYear();
+        const dataFinal = dia + '/' + mes + '/' + hoje.getFullYear();
 
         this.setState({dataInicial, dataFinal});
 
