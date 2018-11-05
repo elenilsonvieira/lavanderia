@@ -8,7 +8,15 @@ export default class LoadingLoginScreen extends React.Component {
     }
   
     init = async () => {
-      const usuario = JSON.parse(await AsyncStorage.getItem("SuaLavanderia@usuario"));
+
+
+      alert(await AsyncStorage.getAllKeys());
+
+      var usuario;
+      try{
+        usuario = JSON.parse(await AsyncStorage.getItem("SuaLavanderia@usuario"));
+      }catch(exception){}
+      
       var resultado = false;
 
       if(usuario){
