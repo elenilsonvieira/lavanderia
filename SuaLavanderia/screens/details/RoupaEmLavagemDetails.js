@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 
 export default class RoupaEmLavagemDetails extends React.Component {
 
@@ -34,7 +34,50 @@ export default class RoupaEmLavagemDetails extends React.Component {
         this.setState({lavagemOid, clienteOid});
     }
 
+    dataString = () => {
+        var data = new Date();
+        
+        var dia = data.getDate();
+        var mes = data.getMonth() + 1;
+    
+        if(dia < 10){
+            dia = '0' + dia;
+        }
+    
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+    
+        return data.getFullYear() + '' + mes + '' + dia;
+    };
+    
+    hash = (usuario) => {        
+        var dataString = this.dataString();
+        var md5 = require('md5');
+    
+        var hashDaSenha = usuario.hashDaSenha;
+        var hashDaData = md5(dataString);
+    
+        var hash = md5(hashDaSenha + ':' + hashDaData);
+    
+        return hash;
+    };
+    
+    getUser = async () => {
+        var usuario;
+    
+        try{
+          usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
+        }catch(exception){}
+    
+        return usuario;
+    };
+
     async salvar(props) {
+        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
+        var hash = this.hash(usuario);
+        var email = usuario.email;
+
         var argumentos = `roupaOid=${this.state.roupa.oid}&lavagemOid=${this.state.lavagemOid}&quantidade=${this.state.quantidade}&soPassar=${this.state.soPassar}&observacoes=${this.state.observacoes}`;
         const novo = this.state.oid == '';
 
@@ -42,7 +85,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
             argumentos += `&oid=${this.state.oid}`;
         }
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarRoupaEmLavagem.aspx?${argumentos}`, 
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarRoupaEmLavagem.aspx?${argumentos}&${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             }).then(function(response){
@@ -55,7 +98,14 @@ export default class RoupaEmLavagemDetails extends React.Component {
     }
 
     buscar = async () => {
-        const roupaCall = await fetch(`http://painel.sualavanderia.com.br/api/BuscarRoupa.aspx?oid=${this.state.chave}`);
+        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
+        var hash = this.hash(usuario);
+        var email = usuario.email;
+
+        const roupaCall = await fetch(`http://painel.sualavanderia.com.br/api/BuscarRoupa.aspx?oid=${this.state.chave}&login=${email}&senha=${hash}`, 
+            { 
+                method: 'post' 
+            });
 
         const response = await roupaCall.json();
         var roupaResponse = response[0];

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
 export default class MovimentacaoDeCaixaDetails extends React.Component {
@@ -32,6 +32,10 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
     }
 
     async salvar(props) {
+        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
+        var hash = this.hash(usuario);
+        var email = usuario.email;
+
         const movimentacao = this.props.navigation.getParam('movimentacao');
         const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : 'elenilsonvieira@gmail.com';
 
@@ -57,7 +61,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             argumentos += '&oid=' + movimentacao.oid;
         }
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeCaixa.aspx?${argumentos}`, 
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeCaixa.aspx?${argumentos}&${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             }).then(function(response){
@@ -66,8 +70,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             }
             ).catch(function(error){
                 alert('Erro adicionando a movimentação de caixa.' + error);    
-            });
-        
+            });        
     }
 
     dataEscolhida = (dataEscolhida) => {
@@ -87,6 +90,45 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             data: dia + '/' + mes + '/' + dataEscolhida.getFullYear(),
         });
     }
+
+    dataString = () => {
+        var data = new Date();
+        
+        var dia = data.getDate();
+        var mes = data.getMonth() + 1;
+    
+        if(dia < 10){
+            dia = '0' + dia;
+        }
+    
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+    
+        return data.getFullYear() + '' + mes + '' + dia;
+    };
+    
+    hash = (usuario) => {        
+        var dataString = this.dataString();
+        var md5 = require('md5');
+    
+        var hashDaSenha = usuario.hashDaSenha;
+        var hashDaData = md5(dataString);
+    
+        var hash = md5(hashDaSenha + ':' + hashDaData);
+    
+        return hash;
+    };
+    
+    getUser = async () => {
+        var usuario;
+    
+        try{
+          usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
+        }catch(exception){}
+    
+        return usuario;
+    };
 
     render(){
         return(
