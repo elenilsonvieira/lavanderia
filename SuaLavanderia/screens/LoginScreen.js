@@ -37,13 +37,16 @@ export default class LoginScreen extends Component {
             }).then(async function(response){
               if(response.status == 200){
                 var resposta = await response.json();
-                var usuario = resposta[0];
+                var usuarioResponse = resposta[0];
 
-                alert(usuario);
+                const usuario = {
+                  nome: usuarioResponse.Nome,
+                  email: usuarioResponse.Email,
+                  papel: usuarioResponse.Papel,
+                  hashDaSenha: hashDaSenha,
+                };
 
-                await AsyncStorage.setItem('SuaLavanderia@email', email);
-                await AsyncStorage.setItem('SuaLavanderia@hashDaSenha', hashDaSenha);
-                await AsyncStorage.setItem('SuaLavanderia@usuario', usuario);
+                await AsyncStorage.setItem('SuaLavanderia@usuario', JSON.stringify(usuario));
           
                 props.navigation.navigate('RootStack');
               }else{
