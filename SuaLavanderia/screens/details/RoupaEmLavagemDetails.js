@@ -85,12 +85,16 @@ export default class RoupaEmLavagemDetails extends React.Component {
             argumentos += `&oid=${this.state.oid}`;
         }
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarRoupaEmLavagem.aspx?${argumentos}&${argumentos}&login=${email}&senha=${hash}`, 
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarRoupaEmLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             }).then(function(response){
-                alert(novo ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
-                props.navigation.goBack();
+                if(response.status == 200){
+                    alert(novo ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
+                    props.navigation.goBack();
+                }else{
+                    alert('Erro adicionando/alterando roupa em lavagem.');    
+                }
             }
             ).catch(function(error){
                 alert('Erro adicionando/alterando roupa em lavagem.' + error);    
