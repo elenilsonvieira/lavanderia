@@ -27,6 +27,7 @@ export default class RoupaScreen extends React.Component {
             cliente: '',
             clienteOid: '',
             chave: '',
+            cores: '',
         },
     };
 
@@ -41,6 +42,7 @@ export default class RoupaScreen extends React.Component {
             cliente: '',
             clienteOid: '',
             chave: '',
+            cores: '',
         };
 
         return roupa;
@@ -108,6 +110,7 @@ export default class RoupaScreen extends React.Component {
             chave: roupaResponse.Chave,
             cliente: roupaResponse.Cliente,
             clienteOid: roupaResponse.ClienteOid,
+            cores: roupaResponse.Cores,
         };
 
         this.setState({roupa});

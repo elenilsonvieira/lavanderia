@@ -121,6 +121,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
             cliente: roupaResponse.Cliente,
             clienteOid: roupaResponse.ClienteOid,
             oid: roupaResponse.Oid,
+            cores: roupaResponse.Cores,
         };
 
         if(this.state.clienteOid == roupa.clienteOid){
