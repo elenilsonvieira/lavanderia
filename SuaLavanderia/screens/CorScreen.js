@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, AsyncStorage, TextInput, TouchableOpacity } from 'react-native';
 
 import Cor from "../components/Cor";
 
@@ -20,8 +20,56 @@ export default class CorScreen extends React.Component {
         objetos: [],
     };
 
+    dataString = () => {
+        var data = new Date();
+        
+        var dia = data.getDate();
+        var mes = data.getMonth() + 1;
+    
+        if(dia < 10){
+            dia = '0' + dia;
+        }
+    
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+    
+        return data.getFullYear() + '' + mes + '' + dia;
+    };
+    
+    hash = (usuario) => {        
+        var dataString = this.dataString();
+        var md5 = require('md5');
+    
+        var hashDaSenha = usuario.hashDaSenha;
+        var hashDaData = md5(dataString);
+    
+        var hash = md5(hashDaSenha + ':' + hashDaData);
+    
+        return hash;
+    };
+    
+    getUser = async () => {
+        var usuario;
+    
+        try{
+          usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
+        }catch(exception){}
+    
+        return usuario;
+    };
+
     buscar = async () => {
-        const call = await fetch('http://painel.sualavanderia.com.br/api/BuscarCor.aspx');
+        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
+        var hash = this.hash(usuario);
+        var email = usuario.email;
+        var response;
+
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarCor.aspx?login=${email}&senha=${hash}`, 
+            { 
+                method: 'post' 
+            });
+
         const response = await call.json();
 
         var objetos = [];
