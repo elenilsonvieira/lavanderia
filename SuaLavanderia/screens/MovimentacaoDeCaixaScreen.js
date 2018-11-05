@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Picker, Text, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Picker, Text, TouchableOpacity, AsyncStorage } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import MovimentacaoDeCaixa from "../components/MovimentacaoDeCaixa";
 
@@ -25,7 +25,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
         dataFinal: '',
     };
 
-    dataString = (data) => {
+    dataToString = (data) => {
         var dia = data.getDate();
         var mes = data.getMonth() + 1;
 
@@ -40,7 +40,50 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
         return dia + '/' + mes + '/' + data.getFullYear();
     }
 
+    dataString = () => {
+        var data = new Date();
+        
+        var dia = data.getDate();
+        var mes = data.getMonth() + 1;
+    
+        if(dia < 10){
+            dia = '0' + dia;
+        }
+    
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+    
+        return data.getFullYear() + '' + mes + '' + dia;
+    };
+    
+    hash = (usuario) => {        
+        var dataString = this.dataString();
+        var md5 = require('md5');
+    
+        var hashDaSenha = usuario.hashDaSenha;
+        var hashDaData = md5(dataString);
+    
+        var hash = md5(hashDaSenha + ':' + hashDaData);
+    
+        return hash;
+    };
+    
+    getUser = async () => {
+        var usuario;
+    
+        try{
+          usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
+        }catch(exception){}
+    
+        return usuario;
+    };
+
     buscar = async () => {
+        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
+        var hash = this.hash(usuario);
+        var email = usuario.email;
+
         const data = new Date();
         var dia = data.getDate();
         var mes = data.getMonth() + 1;
@@ -68,7 +111,10 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
             argumentos += `&modo=${this.state.modo}`;
         }
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?${argumentos}`);
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+        { 
+            method: 'post' 
+        });
         const response = await call.json();
 
         var objetos = [];

@@ -63,7 +63,6 @@ export default class CorScreen extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
-        var response;
 
         const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarCor.aspx?login=${email}&senha=${hash}`, 
             { 
