@@ -21,8 +21,13 @@ export default class LavagemDetails extends React.Component {
         }
     }
 
-    render(){
+    async componentWillMount(){
         const lavagem = this.props.navigation.getParam('lavagem');
+        this.setState({lavagem});
+    }
+
+    render(){
+        const lavagem = this.state.lavagem;
 
         return(
             <View style={styles.container}>
