@@ -94,6 +94,7 @@ export default class LoginScreen extends Component {
                 autoFocus
                 placeholder="Email"
                 autoCapitalize='none'
+                keyboardType='email-address'
                 value={this.state.email}
                 onChangeText={email => this.setState({email})}
             />
@@ -102,6 +103,7 @@ export default class LoginScreen extends Component {
                 style={styles.boxInput}
                 placeholder="Senha"
                 autoCapitalize='none'
+                secureTextEntry={true}
                 value={this.state.senha}
                 onChangeText={senha => this.setState({senha})}
             />
