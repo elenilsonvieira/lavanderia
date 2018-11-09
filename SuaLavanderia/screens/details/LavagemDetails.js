@@ -19,7 +19,7 @@ export default class LavagemDetails extends React.Component {
         const lavagemOid = lavagem.oid;
 
         if(lavagem.status == 'Anotada'){
-            props.navigation.navigate('RoupaEmLavagemDetails', {roupaEmLavagem: roupaEmLavagem, clienteOid: clienteOid, lavagemOid: lavagemOid, reload: this.buscar});
+            props.navigation.navigate('RoupaEmLavagemDetails', {roupaEmLavagem: roupaEmLavagem, clienteOid: clienteOid, lavagemOid: lavagemOid, reload: this.buscar.bind(this)});
         }else {
             alert('Essa lavagem já está anotada.');
         }
@@ -27,7 +27,7 @@ export default class LavagemDetails extends React.Component {
 
     async componentWillMount(){
         const lavagem = this.props.navigation.getParam('lavagem');
-        const reload = this.props.navigation.getParam('reload');
+        const reload = true;//this.props.navigation.getParam('reload');
         this.setState({lavagem});
 
         if(reload){
