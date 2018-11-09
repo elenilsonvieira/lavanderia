@@ -9,13 +9,17 @@ export default class LavagemDetails extends React.Component {
         modalVisible: false,
     };
 
+    LavagemDetails(){
+        this.buscar = this.buscar.bind(this);
+    }
+
     navegarParaDetalhes(props, roupaEmLavagem){
         const lavagem = this.props.navigation.getParam('lavagem');
         const clienteOid = lavagem.clienteOid;
         const lavagemOid = lavagem.oid;
 
         if(lavagem.status == 'Anotada'){
-            props.navigation.navigate('RoupaEmLavagemDetails', {roupaEmLavagem: roupaEmLavagem, clienteOid: clienteOid, lavagemOid: lavagemOid});
+            props.navigation.navigate('RoupaEmLavagemDetails', {roupaEmLavagem: roupaEmLavagem, clienteOid: clienteOid, lavagemOid: lavagemOid, reload: this.buscar});
         }else {
             alert('Essa lavagem já está anotada.');
         }
@@ -23,8 +27,105 @@ export default class LavagemDetails extends React.Component {
 
     async componentWillMount(){
         const lavagem = this.props.navigation.getParam('lavagem');
+        const reload = this.props.navigation.getParam('reload');
         this.setState({lavagem});
+
+        if(reload){
+            this.buscar();
+        }
     }
+
+    dataString = () => {
+        var data = new Date();
+        
+        var dia = data.getDate();
+        var mes = data.getMonth() + 1;
+    
+        if(dia < 10){
+            dia = '0' + dia;
+        }
+    
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+    
+        return data.getFullYear() + '' + mes + '' + dia;
+    };
+    
+    hash(usuario) {        
+        var dataString = this.dataString();
+        var md5 = require('md5');
+    
+        var hashDaSenha = usuario.hashDaSenha;
+        var hashDaData = md5(dataString);
+    
+        var hash = md5(hashDaSenha + ':' + hashDaData);
+    
+        return hash;
+    };
+
+    async buscar() {
+        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
+        var hash = this.hash(usuario);
+        var email = usuario.email;
+        var oid = this.state.lavagem.oid;
+
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
+            { 
+                method: 'post' 
+            });
+        const response = await call.json();
+
+        var objetos = [];
+
+        for(index in response){
+            const objetoResponse = response[index];
+            var roupas = [];
+
+            for(indexRoupa in objetoResponse.Roupas){
+                const roupaResponse = objetoResponse.Roupas[indexRoupa];
+
+                const roupaEmLavagem = {
+                    oid: roupaResponse.Oid,
+                    quantidade: roupaResponse.Quantidade,
+                    observacoes: roupaResponse.Observacoes,
+                    soPassar: roupaResponse.SoPassar,
+                    roupa: {
+                        oid: roupaResponse.Roupa.Oid,
+                        tipo: roupaResponse.Roupa.Tipo,
+                        tecido: roupaResponse.Roupa.Tecido,
+                        tamanho: roupaResponse.Roupa.Tamanho,
+                        marca: roupaResponse.Roupa.Marca,
+                        cliente: roupaResponse.Roupa.Cliente,
+                        clienteOid: roupaResponse.Roupa.ClienteOid,
+                        observacao: roupaResponse.Roupa.Observacao,
+                        codigo: roupaResponse.Roupa.Codigo,
+                        chave: roupaResponse.Roupa.Chave,
+                        cores: roupaResponse.Roupa.Cores,
+                    },
+                };
+
+                roupas = [...roupas, roupaEmLavagem];
+            }
+
+            const lavagem = {
+                oid: objetoResponse.Oid,
+                cliente: objetoResponse.Cliente,
+                clienteOid: objetoResponse.ClienteOid,
+                dataDeRecebimento: objetoResponse.DataDeRecebimento,
+                dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
+                dataDeEntrega: objetoResponse.DataDeEntrega,
+                valor: objetoResponse.Valor,
+                paga: objetoResponse.Paga,
+                unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
+                unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
+                roupas: roupas,
+                status: objetoResponse.Status,
+            };    
+
+            this.setState({lavagem});
+        }
+    };
 
     render(){
         const lavagem = this.state.lavagem;

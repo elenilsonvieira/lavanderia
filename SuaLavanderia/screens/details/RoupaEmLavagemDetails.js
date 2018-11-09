@@ -91,6 +91,8 @@ export default class RoupaEmLavagemDetails extends React.Component {
             }).then(function(response){
                 if(response.status == 200){
                     alert(novo ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
+                    var reload = props.navigation.getParam('reload');
+                    //reload();
                     props.navigation.goBack();
                 }else{
                     alert('Erro adicionando/alterando roupa em lavagem.');    
