@@ -157,8 +157,8 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         style={styles.boxInput}
                         selectedValue={this.state.tecido}
                         onValueChange={(itemValue, itemIndex) => this.setState({tecido: itemValue})}>
-                        {this.state.tecidosArray.map(tecido => 
-                            <Picker.Item label={tecido.nome} value={tecido.nome} />    
+                        {this.state.tecidosArray.map(objeto => 
+                            <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto.nome} />    
                         )}
                     </Picker>
 
