@@ -84,6 +84,7 @@ export default class TamanhoScreen extends React.Component {
         }
 
         this.setState({objetos});
+        await AsyncStorage.setItem("@SuaLavanderia:tamanhos", JSON.stringify(objetos));
     };
 
     filtrar =  () => {        

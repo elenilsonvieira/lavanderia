@@ -85,6 +85,7 @@ export default class TipoScreen extends React.Component {
         }
 
         this.setState({tipos});
+        await AsyncStorage.setItem("@SuaLavanderia:tipos", JSON.stringify(tipos));
     };
 
     filtrar =  () => {        

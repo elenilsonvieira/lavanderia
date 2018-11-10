@@ -84,6 +84,7 @@ export default class MarcaScreen extends React.Component {
         }
 
         this.setState({objetos});
+        await AsyncStorage.setItem("@SuaLavanderia:marcas", JSON.stringify(objetos));
     };
 
     filtrar =  () => {        

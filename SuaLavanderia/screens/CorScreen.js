@@ -86,6 +86,7 @@ export default class CorScreen extends React.Component {
         }
 
         this.setState({objetos});
+        await AsyncStorage.setItem("@SuaLavanderia:cores", JSON.stringify(objetos));
     };
 
     filtrar =  () => {

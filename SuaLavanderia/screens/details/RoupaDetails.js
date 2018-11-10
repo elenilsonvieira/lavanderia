@@ -143,13 +143,9 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         style={styles.boxInput}
                         selectedValue={this.state.tipo}
                         onValueChange={(itemValue, itemIndex) => this.setState({tipo: itemValue})}>
-                        <Picker.Item label='Dinheiro' value='Dinheiro' />
-                        <Picker.Item label='Cheque' value='Cheque' />
-                        <Picker.Item label='Boleto' value='Boleto' />
-                        <Picker.Item label='PagSeguro Débito' value='PagSeguroDebito' />
-                        <Picker.Item label='PagSeguro Crédito' value='PagSeguroCredito' />
-                        <Picker.Item label='Transferência de/para BB' value='TransferenciaBB' />
-                        <Picker.Item label='Transferência de/para Caixa' value='TransferenciaCaixa' />
+                        {this.state.tiposArray.map(objeto => 
+                            <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto.nome} />    
+                        )}
                     </Picker>
 
                     <Text style={styles.infoTitle}>Tecido: </Text>
