@@ -112,48 +112,50 @@ export default class LavagemScreen extends React.Component {
             const objetoResponse = response[index];
             var roupas = [];
 
-            for(indexRoupa in objetoResponse.Roupas){
-                const roupaResponse = objetoResponse.Roupas[indexRoupa];
+            if(this.state.nome == '' || objetoResponse.Cliente.toLowerCase().includes(this.state.nome.trim().toLowerCase())){
+                for(indexRoupa in objetoResponse.Roupas){
+                    const roupaResponse = objetoResponse.Roupas[indexRoupa];
 
-                const roupaEmLavagem = {
-                    oid: roupaResponse.Oid,
-                    quantidade: roupaResponse.Quantidade,
-                    observacoes: roupaResponse.Observacoes,
-                    soPassar: roupaResponse.SoPassar,
-                    roupa: {
-                        oid: roupaResponse.Roupa.Oid,
-                        tipo: roupaResponse.Roupa.Tipo,
-                        tecido: roupaResponse.Roupa.Tecido,
-                        tamanho: roupaResponse.Roupa.Tamanho,
-                        marca: roupaResponse.Roupa.Marca,
-                        cliente: roupaResponse.Roupa.Cliente,
-                        clienteOid: roupaResponse.Roupa.ClienteOid,
-                        observacao: roupaResponse.Roupa.Observacao,
-                        codigo: roupaResponse.Roupa.Codigo,
-                        chave: roupaResponse.Roupa.Chave,
-                        cores: roupaResponse.Roupa.Cores,
-                    },
-                };
+                    const roupaEmLavagem = {
+                        oid: roupaResponse.Oid,
+                        quantidade: roupaResponse.Quantidade,
+                        observacoes: roupaResponse.Observacoes,
+                        soPassar: roupaResponse.SoPassar,
+                        roupa: {
+                            oid: roupaResponse.Roupa.Oid,
+                            tipo: roupaResponse.Roupa.Tipo,
+                            tecido: roupaResponse.Roupa.Tecido,
+                            tamanho: roupaResponse.Roupa.Tamanho,
+                            marca: roupaResponse.Roupa.Marca,
+                            cliente: roupaResponse.Roupa.Cliente,
+                            clienteOid: roupaResponse.Roupa.ClienteOid,
+                            observacao: roupaResponse.Roupa.Observacao,
+                            codigo: roupaResponse.Roupa.Codigo,
+                            chave: roupaResponse.Roupa.Chave,
+                            cores: roupaResponse.Roupa.Cores,
+                        },
+                    };
 
-                roupas = [...roupas, roupaEmLavagem];
+                    roupas = [...roupas, roupaEmLavagem];
+                }
+
+                const objeto = {
+                    oid: objetoResponse.Oid,
+                    cliente: objetoResponse.Cliente,
+                    clienteOid: objetoResponse.ClienteOid,
+                    dataDeRecebimento: objetoResponse.DataDeRecebimento,
+                    dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
+                    dataDeEntrega: objetoResponse.DataDeEntrega,
+                    valor: objetoResponse.Valor,
+                    paga: objetoResponse.Paga,
+                    unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
+                    unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
+                    roupas: roupas,
+                    status: objetoResponse.Status,
+                };    
+
+                objetos = [...objetos, objeto];
             }
-
-            const objeto = {
-                oid: objetoResponse.Oid,
-                cliente: objetoResponse.Cliente,
-                clienteOid: objetoResponse.ClienteOid,
-                dataDeRecebimento: objetoResponse.DataDeRecebimento,
-                dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
-                dataDeEntrega: objetoResponse.DataDeEntrega,
-                valor: objetoResponse.Valor,
-                paga: objetoResponse.Paga,
-                unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
-                unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
-                roupas: roupas,
-                status: objetoResponse.Status,
-            };    
-
-            objetos = [...objetos, objeto];
         }
 
         this.setState({objetos});
