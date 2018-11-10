@@ -193,6 +193,10 @@ export default class RoupaEmLavagemDetails extends React.Component {
                         <TouchableOpacity onPress={this.buscar} style={styles.button}>
                             <Image style={styles.icon} source={require('../../images/pesquisar_32x32.png')} />
                         </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() => {}} style={styles.button}>
+                            <Image style={styles.icon} source={require('../../images/adicionar_32x32.png')} />
+                        </TouchableOpacity>
                     </View>
 
                     <View style={styles.roupaInfoContainer}>
@@ -346,7 +350,7 @@ const styles = StyleSheet.create(
             borderRadius: 5,
             alignSelf: 'stretch',
             padding: 5,
-            width: 250,
+            width: 200,
         },
         unidadeContainerRoupa: {
             borderRadius: 5,
