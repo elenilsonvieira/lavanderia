@@ -103,6 +103,8 @@ export default class TecidoScreen extends React.Component {
     async componentDidMount(){
         const objetos = await this.buscar() || [];
         this.setState(objetos);
+
+        await AsyncStorage.setItem("@SuaLavanderia:tecidos", JSON.stringify(objetos));
     }
 
     render(){

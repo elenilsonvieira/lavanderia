@@ -18,6 +18,7 @@ import RoupaEmLavagemDetails from './screens/details/RoupaEmLavagemDetails';
 import LoginScreen from './screens/LoginScreen';
 import LogoutScreen from './screens/LogoutScreen';
 import LoadingLoginScreen from './screens/LoadingLoginScreen';
+import RoupaDetails from './screens/details/RoupaDetails';
 
 export default class App extends Component {
   render() {
@@ -54,6 +55,7 @@ const RootStack = createStackNavigator(
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
     LavagemDetails: LavagemDetails,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+    RoupaDetails: RoupaDetails,
     RootDrawer: RootDrawer,
   },{
     initialRouteName: 'RootDrawer',

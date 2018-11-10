@@ -102,6 +102,11 @@ export default class RoupaEmLavagemDetails extends React.Component {
             });
     }
 
+    reload = async (chave) => {
+        this.setState({chave});
+        this.buscar();
+    };
+
     buscar = async () => {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
@@ -135,6 +140,13 @@ export default class RoupaEmLavagemDetails extends React.Component {
             alert('Essa roupa não pertece ao dono da Lavagem');
         }
     };
+
+    navegarParaDetalhes(props, roupa){
+        const clienteOid = this.state.clienteOid;
+        const lavagemOid = this.state.lavagemOid;;
+
+        props.navigation.navigate('RoupaDetails', {roupa: roupa, clienteOid: clienteOid, lavagemOid: lavagemOid, reload: this.reload.bind(this)});
+    }
 
     render(){
         return(
@@ -194,7 +206,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
                             <Image style={styles.icon} source={require('../../images/pesquisar_32x32.png')} />
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => {}} style={styles.button}>
+                        <TouchableOpacity onPress={() => this.navegarParaDetalhes(this.props, null)} style={styles.button}>
                             <Image style={styles.icon} source={require('../../images/adicionar_32x32.png')} />
                         </TouchableOpacity>
                     </View>
