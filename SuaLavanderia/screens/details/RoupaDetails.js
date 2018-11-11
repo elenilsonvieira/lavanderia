@@ -39,6 +39,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         var tecido = '';
         var tamanho = '';
         var marca = '';
+        var cores = '';
 
         if(roupa != null){
             const oid = roupa.oid;
@@ -71,7 +72,11 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                 marca = marcasArray[0].nome;
             }
 
-            this.setState({tipo, tecido, tamanho, marca})
+            if(coresArray.length > 0){
+                cores = coresArray[0].nome;
+            }
+
+            this.setState({tipo, tecido, tamanho, marca, cores})
         }
 
         this.setState({tiposArray, tecidosArray, tamanhosArray, marcasArray, coresArray, cliente, clienteOid, lavagemOid});
@@ -204,6 +209,16 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         selectedValue={this.state.marca}
                         onValueChange={(itemValue, itemIndex) => this.setState({marca: itemValue})}>
                         {this.state.marcasArray.map(objeto => 
+                            <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto.nome} />    
+                        )}
+                    </Picker>
+
+                    <Text style={styles.infoTitle}>Cores: </Text>
+                    <Picker
+                        style={styles.boxInput}
+                        selectedValue={this.state.cores}
+                        onValueChange={(itemValue, itemIndex) => this.setState({cores: itemValue})}>
+                        {this.state.coresArray.map(objeto => 
                             <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto.nome} />    
                         )}
                     </Picker>
