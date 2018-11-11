@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, AsyncStorage, TextInput, TouchableOpacity } from 'react-native';
-
+import LoadingModal from '../components/modals/LoadingModal';
 import Tecido from "../components/Tecido";
 
 export default class TecidoScreen extends React.Component {
@@ -18,6 +18,7 @@ export default class TecidoScreen extends React.Component {
     state ={
         nome: '',
         objetos: [],
+        modalVisible: false,
     };
 
     dataString = () => {
@@ -60,31 +61,39 @@ export default class TecidoScreen extends React.Component {
     };
 
     buscar = async () => {
+        this.setState({modalVisible: true});
+
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarTecido.aspx?login=${email}&senha=${hash}`, 
-            { 
-                method: 'post' 
-            });
-        const response = await call.json();
+        try{
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarTecido.aspx?login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                });
+            const response = await call.json();
 
-        var objetos = [];
+            var objetos = [];
 
-        for(index in response){
-            const objetoResponse = response[index];
+            for(index in response){
+                const objetoResponse = response[index];
 
-            const objeto = {
-                oid: objetoResponse.Oid,
-                nome: objetoResponse.Nome,
-            };    
+                const objeto = {
+                    oid: objetoResponse.Oid,
+                    nome: objetoResponse.Nome,
+                };    
 
-            objetos = [...objetos, objeto];
+                objetos = [...objetos, objeto];
+            }
+
+            this.setState({objetos});
+            await AsyncStorage.setItem("@SuaLavanderia:tecidos", JSON.stringify(objetos));
+        }catch(erro){
+            alert('Erro.' + erro);
         }
 
-        this.setState({objetos});
-        await AsyncStorage.setItem("@SuaLavanderia:tecidos", JSON.stringify(objetos));
+        this.setState({modalVisible: false});
     };
 
     filtrar =  () => {        
@@ -126,6 +135,8 @@ export default class TecidoScreen extends React.Component {
                         <Tecido key={objeto.oid} tecido={objeto} />
                     )}
                 </ScrollView>
+
+                <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );
     }

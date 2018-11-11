@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Picker, Text, TouchableOpacity, AsyncStorage } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import MovimentacaoDeCaixa from "../components/MovimentacaoDeCaixa";
+import LoadingModal from '../components/modals/LoadingModal';
 
 export default class MovimentacaoDeCaixaScreen extends React.Component {
 
@@ -23,6 +24,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
         dataFinalPickerVisible: false,
         dataInicial: '',
         dataFinal: '',
+        modalVisible: false,
     };
 
     dataToString = (data) => {
@@ -80,6 +82,8 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
     };
 
     buscar = async () => {
+        this.setState({modalVisible: true});
+
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
@@ -113,37 +117,43 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
 
         //alert(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`);
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
-        { 
-            method: 'post' 
-        });
-        const response = await call.json();
+        try{
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            { 
+                method: 'post' 
+            });
+            const response = await call.json();
 
-        var objetos = [];
+            var objetos = [];
 
-        for(index in response){
-            const objetoResponse = response[index];
+            for(index in response){
+                const objetoResponse = response[index];
 
-            const objeto = {
-                oid: objetoResponse.Oid,
-                dataDaUltimaAlteracao: objetoResponse.DataDaUltimaAlteracao,
-                data: objetoResponse.Data,
-                modo: objetoResponse.Modo,
-                capital: objetoResponse.Capital,
-                tipo: objetoResponse.Tipo,
-                valor: objetoResponse.Valor,
-                observacoes: objetoResponse.Observacoes,
-                status: objetoResponse.Status,
-                responsavel: objetoResponse.Responsavel,
-                responsavelOid: objetoResponse.ResponsavelOid,
-                conferidor: objetoResponse.Conferidor,
-                lavagem: objetoResponse.Lavagem,
-            };    
+                const objeto = {
+                    oid: objetoResponse.Oid,
+                    dataDaUltimaAlteracao: objetoResponse.DataDaUltimaAlteracao,
+                    data: objetoResponse.Data,
+                    modo: objetoResponse.Modo,
+                    capital: objetoResponse.Capital,
+                    tipo: objetoResponse.Tipo,
+                    valor: objetoResponse.Valor,
+                    observacoes: objetoResponse.Observacoes,
+                    status: objetoResponse.Status,
+                    responsavel: objetoResponse.Responsavel,
+                    responsavelOid: objetoResponse.ResponsavelOid,
+                    conferidor: objetoResponse.Conferidor,
+                    lavagem: objetoResponse.Lavagem,
+                };    
 
-            objetos = [...objetos, objeto];
+                objetos = [...objetos, objeto];
+            }
+
+            this.setState({objetos});
+        }catch(erro){
+            alert('Erro.' + erro);
         }
 
-        this.setState({objetos});
+        this.setState({modalVisible: false});
     };
 
     filtrar =  () => {        
@@ -288,6 +298,8 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
                         </TouchableOpacity>
                     )}
                 </ScrollView>
+
+                <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Lavagem from "../components/Lavagem";
+import LoadingModal from '../components/modals/LoadingModal';
 
 export default class LavagemScreen extends React.Component {
 
@@ -21,6 +22,7 @@ export default class LavagemScreen extends React.Component {
         nome: '',
         status: '0',
         objetos: [],
+        modalVisible: false,
     };
 
     dataString = () => {
@@ -63,6 +65,8 @@ export default class LavagemScreen extends React.Component {
     };
 
     buscar = async () => {
+        this.setState({modalVisible: true});
+
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
@@ -100,65 +104,71 @@ export default class LavagemScreen extends React.Component {
             argumentos += '&nome=' + this.state.nome;
         }
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
-            { 
-                method: 'post' 
-            });
-        const response = await call.json();
+        try{
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                });
+            const response = await call.json();
 
-        var objetos = [];
+            var objetos = [];
 
-        for(index in response){
-            const objetoResponse = response[index];
-            var roupas = [];
+            for(index in response){
+                const objetoResponse = response[index];
+                var roupas = [];
 
-            if(this.state.nome == '' || objetoResponse.Cliente.toLowerCase().includes(this.state.nome.trim().toLowerCase())){
-                for(indexRoupa in objetoResponse.Roupas){
-                    const roupaResponse = objetoResponse.Roupas[indexRoupa];
+                if(this.state.nome == '' || objetoResponse.Cliente.toLowerCase().includes(this.state.nome.trim().toLowerCase())){
+                    for(indexRoupa in objetoResponse.Roupas){
+                        const roupaResponse = objetoResponse.Roupas[indexRoupa];
 
-                    const roupaEmLavagem = {
-                        oid: roupaResponse.Oid,
-                        quantidade: roupaResponse.Quantidade,
-                        observacoes: roupaResponse.Observacoes,
-                        soPassar: roupaResponse.SoPassar,
-                        roupa: {
-                            oid: roupaResponse.Roupa.Oid,
-                            tipo: roupaResponse.Roupa.Tipo,
-                            tecido: roupaResponse.Roupa.Tecido,
-                            tamanho: roupaResponse.Roupa.Tamanho,
-                            marca: roupaResponse.Roupa.Marca,
-                            cliente: roupaResponse.Roupa.Cliente,
-                            clienteOid: roupaResponse.Roupa.ClienteOid,
-                            observacao: roupaResponse.Roupa.Observacao,
-                            codigo: roupaResponse.Roupa.Codigo,
-                            chave: roupaResponse.Roupa.Chave,
-                            cores: roupaResponse.Roupa.Cores,
-                        },
-                    };
+                        const roupaEmLavagem = {
+                            oid: roupaResponse.Oid,
+                            quantidade: roupaResponse.Quantidade,
+                            observacoes: roupaResponse.Observacoes,
+                            soPassar: roupaResponse.SoPassar,
+                            roupa: {
+                                oid: roupaResponse.Roupa.Oid,
+                                tipo: roupaResponse.Roupa.Tipo,
+                                tecido: roupaResponse.Roupa.Tecido,
+                                tamanho: roupaResponse.Roupa.Tamanho,
+                                marca: roupaResponse.Roupa.Marca,
+                                cliente: roupaResponse.Roupa.Cliente,
+                                clienteOid: roupaResponse.Roupa.ClienteOid,
+                                observacao: roupaResponse.Roupa.Observacao,
+                                codigo: roupaResponse.Roupa.Codigo,
+                                chave: roupaResponse.Roupa.Chave,
+                                cores: roupaResponse.Roupa.Cores,
+                            },
+                        };
 
-                    roupas = [...roupas, roupaEmLavagem];
+                        roupas = [...roupas, roupaEmLavagem];
+                    }
+
+                    const objeto = {
+                        oid: objetoResponse.Oid,
+                        cliente: objetoResponse.Cliente,
+                        clienteOid: objetoResponse.ClienteOid,
+                        dataDeRecebimento: objetoResponse.DataDeRecebimento,
+                        dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
+                        dataDeEntrega: objetoResponse.DataDeEntrega,
+                        valor: objetoResponse.Valor,
+                        paga: objetoResponse.Paga,
+                        unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
+                        unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
+                        roupas: roupas,
+                        status: objetoResponse.Status,
+                    };    
+
+                    objetos = [...objetos, objeto];
                 }
-
-                const objeto = {
-                    oid: objetoResponse.Oid,
-                    cliente: objetoResponse.Cliente,
-                    clienteOid: objetoResponse.ClienteOid,
-                    dataDeRecebimento: objetoResponse.DataDeRecebimento,
-                    dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
-                    dataDeEntrega: objetoResponse.DataDeEntrega,
-                    valor: objetoResponse.Valor,
-                    paga: objetoResponse.Paga,
-                    unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
-                    unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
-                    roupas: roupas,
-                    status: objetoResponse.Status,
-                };    
-
-                objetos = [...objetos, objeto];
             }
+
+            this.setState({objetos});
+        }catch(erro){
+            alert('Erro.' + erro);
         }
 
-        this.setState({objetos});
+        this.setState({modalVisible: false});
     };
 
     filtrar =  () => {        
@@ -293,6 +303,8 @@ export default class LavagemScreen extends React.Component {
                         </TouchableOpacity>
                     )}
                 </ScrollView>
+
+                <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );
     }

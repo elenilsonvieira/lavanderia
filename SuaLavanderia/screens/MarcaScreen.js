@@ -62,31 +62,39 @@ export default class MarcaScreen extends React.Component {
     };
 
     buscar = async () => {
+        this.setState({modalVisible: true});
+
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMarca.aspx?login=${email}&senha=${hash}`, 
-            { 
-                method: 'post' 
-            });
-        const response = await call.json();
+        try{
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMarca.aspx?login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                });
+            const response = await call.json();
 
-        var objetos = [];
+            var objetos = [];
 
-        for(index in response){
-            const objetoResponse = response[index];
+            for(index in response){
+                const objetoResponse = response[index];
 
-            const objeto = {
-                oid: objetoResponse.Oid,
-                nome: objetoResponse.Nome,
-            };    
+                const objeto = {
+                    oid: objetoResponse.Oid,
+                    nome: objetoResponse.Nome,
+                };    
 
-            objetos = [...objetos, objeto];
+                objetos = [...objetos, objeto];
+            }
+
+            this.setState({objetos});
+            await AsyncStorage.setItem("@SuaLavanderia:marcas", JSON.stringify(objetos));
+        }catch(erro){
+            alert('Erro.' + erro);
         }
 
-        this.setState({objetos});
-        await AsyncStorage.setItem("@SuaLavanderia:marcas", JSON.stringify(objetos));
+        this.setState({modalVisible: false});;
     };
 
     filtrar =  () => {        
@@ -104,9 +112,7 @@ export default class MarcaScreen extends React.Component {
     };
 
     async componentDidMount(){
-        this.setState({modalVisible: true});
         await this.buscar();
-        this.setState({modalVisible: false});
     }
 
     render(){
@@ -130,6 +136,7 @@ export default class MarcaScreen extends React.Component {
                         <Marca key={objeto.oid} marca={objeto} />
                     )}
                 </ScrollView>
+
                 <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );

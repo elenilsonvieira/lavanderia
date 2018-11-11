@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, AsyncStorage } from 'react-native';
-
+import LoadingModal from '../components/modals/LoadingModal';
 import Unidade from "../components/Unidade";
 
 export default class UnidadeScreen extends React.Component {
@@ -17,6 +17,7 @@ export default class UnidadeScreen extends React.Component {
 
     state ={
         unidades: [],
+        modalVisible: false,
     };
 
     dataString = () => {
@@ -59,33 +60,41 @@ export default class UnidadeScreen extends React.Component {
     };
 
     buscar = async () => {
+        this.setState({modalVisible: true});
+
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarUnidade.aspx?login=${email}&senha=${hash}`, 
-            { 
-                method: 'post' 
-            });
-        const response = await call.json();
+        try{
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarUnidade.aspx?login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                });
+            const response = await call.json();
 
-        var unidades = [];
+            var unidades = [];
 
-        for(index in response){
-            const unidadeResponse = response[index];
+            for(index in response){
+                const unidadeResponse = response[index];
 
-            const unidade = {
-                oid: unidadeResponse.Oid,
-                nome: unidadeResponse.Nome,
-                endereco: unidadeResponse.Endereco,
-                telefoneCelular: unidadeResponse.TelefoneMovel,
-                telefoneFixo: unidadeResponse.TelefoneConvencional,
-            };    
+                const unidade = {
+                    oid: unidadeResponse.Oid,
+                    nome: unidadeResponse.Nome,
+                    endereco: unidadeResponse.Endereco,
+                    telefoneCelular: unidadeResponse.TelefoneMovel,
+                    telefoneFixo: unidadeResponse.TelefoneConvencional,
+                };    
 
-            unidades = [...unidades, unidade];
+                unidades = [...unidades, unidade];
+            }
+
+            this.setState({unidades});
+        }catch(erro){
+            alert('Erro.' + erro);
         }
 
-        this.setState({unidades});
+        this.setState({modalVisible: false});
     };
 
     async componentDidMount(){
@@ -101,6 +110,8 @@ export default class UnidadeScreen extends React.Component {
                         <Unidade key={unidade.oid} unidade={unidade} />
                     )}
                 </ScrollView>
+
+                <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );
     }

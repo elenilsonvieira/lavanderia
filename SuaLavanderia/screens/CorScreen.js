@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, AsyncStorage, TextInput, TouchableOpacity } from 'react-native';
-
+import LoadingModal from '../components/modals/LoadingModal';
 import Cor from "../components/Cor";
 
 export default class CorScreen extends React.Component {
@@ -18,6 +18,7 @@ export default class CorScreen extends React.Component {
     state ={
         nome: '',
         objetos: [],
+        modalVisible: false,
     };
 
     dataString = () => {
@@ -48,45 +49,43 @@ export default class CorScreen extends React.Component {
     
         return hash;
     };
-    
-    getUser = async () => {
-        var usuario;
-    
-        try{
-          usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
-        }catch(exception){}
-    
-        return usuario;
-    };
 
     buscar = async () => {
+        this.setState({modalVisible: true});
+
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarCor.aspx?login=${email}&senha=${hash}`, 
-            { 
-                method: 'post' 
-            });
+        try{
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarCor.aspx?login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                });
 
-        const response = await call.json();
+            const response = await call.json();
 
-        var objetos = [];
+            var objetos = [];
 
-        for(index in response){
-            const objetoResponse = response[index];
+            for(index in response){
+                const objetoResponse = response[index];
 
-            const objeto = {
-                oid: objetoResponse.Oid,
-                nome: objetoResponse.Nome,
-                valor: objetoResponse.Valor,
-            };    
+                const objeto = {
+                    oid: objetoResponse.Oid,
+                    nome: objetoResponse.Nome,
+                    valor: objetoResponse.Valor,
+                };    
 
-            objetos = [...objetos, objeto];
+                objetos = [...objetos, objeto];
+            }
+
+            this.setState({objetos});
+            await AsyncStorage.setItem("@SuaLavanderia:cores", JSON.stringify(objetos));
+        }catch(erro){
+            alert('Erro.' + erro);
         }
 
-        this.setState({objetos});
-        await AsyncStorage.setItem("@SuaLavanderia:cores", JSON.stringify(objetos));
+        this.setState({modalVisible: false});
     };
 
     filtrar =  () => {
@@ -129,6 +128,8 @@ export default class CorScreen extends React.Component {
                         <Cor key={objeto.oid} cor={objeto} />
                     )}
                 </ScrollView>
+
+                <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );
     }

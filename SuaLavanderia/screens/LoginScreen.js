@@ -8,12 +8,14 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image, AsyncStorage, TextInput} from 'react-native';
+import LoadingModal from '../components/modals/LoadingModal';
 
 export default class LoginScreen extends Component {
 
   state = {
     email: '',
     senha: '',
+    modalVisible: false,
   };
 
   login = async () => {
@@ -62,7 +64,7 @@ export default class LoginScreen extends Component {
             ).catch(function(error){
                 alert('Erro tentando fazer o login: ' + error);
             });
-    }
+      }
   };
 
   dataString = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, AsyncStorage, TextInput, TouchableOpacity } from 'react-native';
-
+import LoadingModal from '../components/modals/LoadingModal';
 import Tipo from "../components/Tipo";
 
 export default class TipoScreen extends React.Component {
@@ -18,6 +18,7 @@ export default class TipoScreen extends React.Component {
     state ={
         nome: '',
         tipos: [],
+        modalVisible: false,
     };
 
     dataString = () => {
@@ -60,32 +61,40 @@ export default class TipoScreen extends React.Component {
     };
 
     buscar = async () => {
+        this.setState({modalVisible: true});
+
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarTipo.aspx?login=${email}&senha=${hash}`, 
-            { 
-                method: 'post' 
-            });
-        const response = await call.json();
+        try{
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarTipo.aspx?login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                });
+            const response = await call.json();
 
-        var tipos = [];
+            var tipos = [];
 
-        for(index in response){
-            const tipoResponse = response[index];
+            for(index in response){
+                const tipoResponse = response[index];
 
-            const tipo = {
-                oid: tipoResponse.Oid,
-                nome: tipoResponse.Nome,
-                valor: tipoResponse.Valor,
-            };    
+                const tipo = {
+                    oid: tipoResponse.Oid,
+                    nome: tipoResponse.Nome,
+                    valor: tipoResponse.Valor,
+                };    
 
-            tipos = [...tipos, tipo];
+                tipos = [...tipos, tipo];
+            }
+
+            this.setState({tipos});
+            await AsyncStorage.setItem("@SuaLavanderia:tipos", JSON.stringify(tipos));
+        }catch(erro){
+            alert('Erro.' + erro);
         }
 
-        this.setState({tipos});
-        await AsyncStorage.setItem("@SuaLavanderia:tipos", JSON.stringify(tipos));
+        this.setState({modalVisible: false});
     };
 
     filtrar =  () => {        
@@ -128,6 +137,8 @@ export default class TipoScreen extends React.Component {
                         <Tipo key={tipo.oid} tipo={tipo} />
                     )}
                 </ScrollView>
+
+                <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );
     }

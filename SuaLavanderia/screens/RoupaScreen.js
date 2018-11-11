@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, AsyncStorage, View, TouchableOpacity, TextInput, Image } from 'react-native';
-
+import LoadingModal from '../components/modals/LoadingModal';
 import Roupa from "../components/Roupa";
 
 export default class RoupaScreen extends React.Component {
@@ -29,6 +29,7 @@ export default class RoupaScreen extends React.Component {
             chave: '',
             cores: '',
         },
+        modalVisible: false,
     };
 
     novaRoupa = () => {
@@ -88,32 +89,39 @@ export default class RoupaScreen extends React.Component {
     };
 
     buscar = async () => {
+        this.setState({modalVisible: true});
+
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const roupaCall = await fetch(`http://painel.sualavanderia.com.br/api/BuscarRoupa.aspx?oid=${this.state.chave}&login=${email}&senha=${hash}`, 
-            { 
-                method: 'post' 
-            });
+        try{
+            const roupaCall = await fetch(`http://painel.sualavanderia.com.br/api/BuscarRoupa.aspx?oid=${this.state.chave}&login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                });
 
-        const response = await roupaCall.json();
-        var roupaResponse = response[0];
+            const response = await roupaCall.json();
+            var roupaResponse = response[0];
 
-        const roupa = {
-            tipo: roupaResponse.Tipo,
-            tecido: roupaResponse.Tecido,
-            tamanho: roupaResponse.Tamanho,
-            marca: roupaResponse.Marca,
-            observacao: roupaResponse.Observacao,
-            codigo: roupaResponse.Codigo,
-            chave: roupaResponse.Chave,
-            cliente: roupaResponse.Cliente,
-            clienteOid: roupaResponse.ClienteOid,
-            cores: roupaResponse.Cores,
-        };
+            const roupa = {
+                tipo: roupaResponse.Tipo,
+                tecido: roupaResponse.Tecido,
+                tamanho: roupaResponse.Tamanho,
+                marca: roupaResponse.Marca,
+                observacao: roupaResponse.Observacao,
+                codigo: roupaResponse.Codigo,
+                chave: roupaResponse.Chave,
+                cliente: roupaResponse.Cliente,
+                clienteOid: roupaResponse.ClienteOid,
+                cores: roupaResponse.Cores,
+            };
 
-        this.setState({roupa});
+            this.setState({roupa, modalVisible: false});
+        }catch(erro){
+            alert('Erro. ' + erro);
+            this.setState({modalVisible: false});
+        }
     };
 
     render(){
@@ -134,6 +142,8 @@ export default class RoupaScreen extends React.Component {
                 </View>
 
                 <Roupa roupa={this.state.roupa} />
+
+                <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );
     }
