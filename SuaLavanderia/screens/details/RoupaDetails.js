@@ -29,6 +29,9 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         var email = usuario.email;
 
         const roupa = this.props.navigation.getParam('roupa');
+        const cliente = this.props.navigation.getParam('cliente');
+        const clienteOid = this.props.navigation.getParam('clienteOid');
+        const lavagemOid = this.props.navigation.getParam('lavagemOid');
 
         if(roupa != null){
             const oid = roupa.oid;
@@ -52,7 +55,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         var marcasArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:marcas")) || [];
         var coresArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:cores")) || [];
 
-        this.setState({tiposArray, tecidosArray, tamanhosArray, marcasArray, coresArray});
+        this.setState({tiposArray, tecidosArray, tamanhosArray, marcasArray, coresArray, cliente, clienteOid, lavagemOid});
     }
 
     async salvar(props) {
@@ -137,6 +140,8 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
                 <View style={styles.objetoContainer}>
                     <Text style={styles.valorInfoTitle}>Oid: {this.state.oid}</Text>
+
+                    <Text style={styles.valorInfoTitleCliente}>Cliente: {this.state.cliente}</Text>
 
                     <Text style={styles.infoTitle}>Tipo: </Text>
                     <Picker
@@ -267,6 +272,10 @@ const styles = StyleSheet.create(
         },
         valorInfoTitle: {
             fontWeight: 'bold',
+        },
+        valorInfoTitleCliente: {
+            fontWeight: 'bold',
+            paddingTop: 10,
         },
         infoTitle: {
             fontWeight: 'bold',

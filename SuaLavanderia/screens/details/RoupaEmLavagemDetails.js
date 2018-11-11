@@ -28,10 +28,11 @@ export default class RoupaEmLavagemDetails extends React.Component {
             this.setState({quantidade, soPassar, observacoes, chave, roupa, oid});
         }
 
+        const cliente = this.props.navigation.getParam('cliente');
         const clienteOid = this.props.navigation.getParam('clienteOid');
         const lavagemOid = this.props.navigation.getParam('lavagemOid');
 
-        this.setState({lavagemOid, clienteOid});
+        this.setState({lavagemOid, clienteOid, cliente});
     }
 
     dataString = () => {
@@ -143,9 +144,10 @@ export default class RoupaEmLavagemDetails extends React.Component {
 
     navegarParaDetalhes(props, roupa){
         const clienteOid = this.state.clienteOid;
-        const lavagemOid = this.state.lavagemOid;;
+        const cliente = this.state.cliente;
+        const lavagemOid = this.state.lavagemOid;
 
-        props.navigation.navigate('RoupaDetails', {roupa: roupa, clienteOid: clienteOid, lavagemOid: lavagemOid, reload: this.reload.bind(this)});
+        props.navigation.navigate('RoupaDetails', {roupa: roupa, cliente: cliente, clienteOid: clienteOid, lavagemOid: lavagemOid, reload: this.reload.bind(this)});
     }
 
     render(){
