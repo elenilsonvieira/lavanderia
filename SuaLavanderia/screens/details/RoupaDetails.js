@@ -158,6 +158,26 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         )}
                     </Picker>
 
+                    <Text style={styles.infoTitle}>Tamanho: </Text>
+                    <Picker
+                        style={styles.boxInput}
+                        selectedValue={this.state.tamanho}
+                        onValueChange={(itemValue, itemIndex) => this.setState({tamanho: itemValue})}>
+                        {this.state.tamanhosArray.map(objeto => 
+                            <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto.nome} />    
+                        )}
+                    </Picker>
+
+                    <Text style={styles.infoTitle}>Marca: </Text>
+                    <Picker
+                        style={styles.boxInput}
+                        selectedValue={this.state.marca}
+                        onValueChange={(itemValue, itemIndex) => this.setState({marca: itemValue})}>
+                        {this.state.marcasArray.map(objeto => 
+                            <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto.nome} />    
+                        )}
+                    </Picker>
+
                     <Text style={styles.infoTitle}>Código: </Text>
                     <TextInput
                         style={styles.boxInput}
