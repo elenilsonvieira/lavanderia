@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
+import { reload } from '../utils/StorageUtils';
 
 export default class HomeScreen extends Component {
 
@@ -12,6 +13,10 @@ export default class HomeScreen extends Component {
       />
     ),
   };
+
+  async componentDidMount(){
+    reload();
+  }
 
   render() {
     return (
