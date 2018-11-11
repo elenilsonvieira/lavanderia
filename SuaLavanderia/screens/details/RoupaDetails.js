@@ -24,10 +24,6 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
     };
 
     async componentDidMount(){
-        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
-        var hash = this.hash(usuario);
-        var email = usuario.email;
-
         var tiposArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:tipos")) || [];
         var tecidosArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:tecidos")) || [];
         var tamanhosArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:tamanhos")) || [];
