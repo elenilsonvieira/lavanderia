@@ -28,10 +28,21 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
+        var tiposArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:tipos")) || [];
+        var tecidosArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:tecidos")) || [];
+        var tamanhosArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:tamanhos")) || [];
+        var marcasArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:marcas")) || [];
+        var coresArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:cores")) || [];
+
         const roupa = this.props.navigation.getParam('roupa');
         const cliente = this.props.navigation.getParam('cliente');
         const clienteOid = this.props.navigation.getParam('clienteOid');
         const lavagemOid = this.props.navigation.getParam('lavagemOid');
+
+        var tipo = '';
+        var tecido = '';
+        var tamanho = '';
+        var marca = '';
 
         if(roupa != null){
             const oid = roupa.oid;
@@ -47,13 +58,25 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             const cores = roupa.cores;
 
             this.setState({roupa, oid, tipo, tecido, tamanho, marca, observacao, codigo, chave, cliente, clienteOid, cores});
-        }
+        }else{
+            if(tamanhosArray.length > 0){
+                tamanho = tamanhosArray[0].nome;
+            }
 
-        var tiposArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:tipos")) || [];
-        var tecidosArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:tecidos")) || [];
-        var tamanhosArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:tamanhos")) || [];
-        var marcasArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:marcas")) || [];
-        var coresArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:cores")) || [];
+            if(tiposArray.length > 0){
+                tipo = tiposArray[0].nome;
+            }
+
+            if(tecidosArray.length > 0){
+                tecido = tecidosArray[0].nome;
+            }
+
+            if(marcasArray.length > 0){
+                marca = marcasArray[0].nome;
+            }
+
+            this.setState({tipo, tecido, tamanho, marca})
+        }
 
         this.setState({tiposArray, tecidosArray, tamanhosArray, marcasArray, coresArray, cliente, clienteOid, lavagemOid});
     }
@@ -65,7 +88,15 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
         const roupa = this.props.navigation.getParam('roupa');
 
-        var argumentos = 'clienteOid=' + this.state.clienteOid + '&tipoOid=' + this.state.tipo + '&tecidoOid=' + this.state.tecido + '&tamanhoOid=' + this.state.tamanho + '&marcaOid=' + this.state.marca + '&observacoes=' + this.state.observacao + '&codigo=' + this.state.codigo;
+        var argumentos = 'clienteOid=' + this.state.clienteOid + '&tipoOid=' + this.state.tipo + '&tecidoOid=' + this.state.tecido + '&tamanhoOid=' + this.state.tamanho + '&marcaOid=' + this.state.marca;
+
+        if(this.state.observacao != ''){
+            argumentos += '&observacoes=' + this.state.observacao;
+        }
+
+        if(this.state.codigo != ''){
+            argumentos += '&codigo=' + this.state.codigo;
+        }
 
         if(roupa != null){
             argumentos += '&oid=' + roupa.oid;
@@ -78,14 +109,19 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
-            }).then(function(response){
-                alert(roupa == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
-                props.navigation.state.params.reload();
-                props.navigation.goBack();
-            }
-            ).catch(function(error){
-                alert('Erro adicionando a roupa.' + error);    
-            });        
+            });
+
+        try{
+            const response = await call.json();
+            const roupaResponse = response[0];
+            const chave = roupaResponse.Chave;
+
+            alert(roupa == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
+            props.navigation.state.params.reload(chave);
+            props.navigation.goBack();
+        }catch(erro){
+            alert('Erro adicionando/alterando roupa. ' + erro);
+        }
     }
     
     dataString = () => {
