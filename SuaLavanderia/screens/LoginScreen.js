@@ -22,6 +22,8 @@ export default class LoginScreen extends Component {
     if(this.state.email.trim().length == 0 || this.state.senha.trim().length == 0){
       alert('Preencha o email e senha');
     }else{
+      this.setState({modalVisible: true});
+
       var dataString = this.dataString();
       var md5 = require('md5');
 
@@ -29,42 +31,43 @@ export default class LoginScreen extends Component {
       var hashDaData = md5(dataString);
 
       var hash = md5(hashDaSenha + ':' + hashDaData);
-
-      var props = this.props;
       var email = this.state.email;
 
-      const call = await fetch(`http://painel.sualavanderia.com.br/api/Login.aspx?login=${email}&senha=${hash}`, 
-            { 
-                method: 'post' 
-            }).then(async function(response){
-              if(response.status == 200){
-                var resposta = await response.json();
-                var usuarioResponse = resposta[0];
+      try{
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/Login.aspx?login=${email}&senha=${hash}`, 
+              { 
+                  method: 'post' 
+              });
+        
+        if(call.status == 200){
+            var resposta = await call.json();
+            var usuarioResponse = resposta[0];
 
-                const usuario = {
-                  nome: usuarioResponse.Nome,
-                  email: usuarioResponse.Email,
-                  papel: usuarioResponse.Papel,
-                  hashDaSenha: hashDaSenha,
-                };
+            const usuario = {
+              nome: usuarioResponse.Nome,
+              email: usuarioResponse.Email,
+              papel: usuarioResponse.Papel,
+              hashDaSenha: hashDaSenha,
+            };
 
-                await AsyncStorage.setItem("@SuaLavanderia:usuario", JSON.stringify(usuario));
-          
-                props.navigation.navigate('RootStack');
-              }else{
-                var mensagem = 'Erro ao tentar fazer o login!';
+            await AsyncStorage.setItem("@SuaLavanderia:usuario", JSON.stringify(usuario));
+            this.setState({modalVisible: false});
+            this.props.navigation.navigate('RootStack');
+        }else{
+          var mensagem = 'Erro ao tentar fazer o login!';
 
-                if(response.statusText){
-                  mensagem += ' ' + response.statusText;
-                }
+          if(call.statusText){
+            mensagem += ' ' + response.statusText;
+          }
 
-                alert(mensagem);
-              }
-            }
-            ).catch(function(error){
-                alert('Erro tentando fazer o login: ' + error);
-            });
+          this.setState({modalVisible: false});
+          alert(mensagem);
+        }
+      }catch(erro){
+        this.setState({modalVisible: false});
+        alert('Erro tentando fazer o login: ' + erro);
       }
+    }
   };
 
   dataString = () => {
@@ -117,6 +120,8 @@ export default class LoginScreen extends Component {
             </TouchableOpacity>
           </View>
         </View>
+
+        <LoadingModal modalVisible={this.state.modalVisible} />
       </View>
     );
   }
