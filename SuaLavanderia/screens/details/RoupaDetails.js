@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
+import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
 export default class MovimentacaoDeCaixaDetails extends React.Component {
@@ -7,15 +7,20 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
     state ={
         oid: '',
         tipo: '',
+        tipoOid: '',
         tecido: '',
+        tecidoOid: '',
         tamanho: '',
+        tamanhoOid: '',
         marca: '',
+        marcaOid: '',
+        cores: '',
+        coresOid: '',
         observacao: '',
         codigo: '',
         cliente: '',
         clienteOid: '',
         chave: '',
-        cores: '',
         tiposArray: [], 
         tecidosArray: [], 
         tamanhosArray: [], 
@@ -36,10 +41,6 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         const lavagemOid = this.props.navigation.getParam('lavagemOid');
 
         var tipo = '';
-        var tecido = '';
-        var tamanho = '';
-        var marca = '';
-        var cores = '';
 
         if(roupa != null){
             const oid = roupa.oid;
@@ -56,27 +57,27 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
             this.setState({roupa, oid, tipo, tecido, tamanho, marca, observacao, codigo, chave, cliente, clienteOid, cores});
         }else{
-            if(tamanhosArray.length > 0){
-                tamanho = tamanhosArray[0].nome;
-            }
-
             if(tiposArray.length > 0){
                 tipo = tiposArray[0].nome;
             }
 
+            if(tamanhosArray.length > 0){
+                tamanhosArray = [{oid: 1, nome: ''}, ...tamanhosArray];
+            }
+
             if(tecidosArray.length > 0){
-                tecido = tecidosArray[0].nome;
+                tecidosArray = [{oid: 1, nome: ''}, ...tecidosArray];
             }
 
             if(marcasArray.length > 0){
-                marca = marcasArray[0].nome;
+                marcasArray = [{oid: 1, nome: ''}, ...marcasArray];
             }
 
             if(coresArray.length > 0){
-                cores = coresArray[0].nome;
+                coresArray = [{oid: 1, nome: ''}, ...coresArray];
             }
 
-            this.setState({tipo, tecido, tamanho, marca, cores})
+            this.setState({tipo})
         }
 
         this.setState({tiposArray, tecidosArray, tamanhosArray, marcasArray, coresArray, cliente, clienteOid, lavagemOid});
@@ -94,7 +95,23 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
         const roupa = this.props.navigation.getParam('roupa');
 
-        var argumentos = 'clienteOid=' + this.state.clienteOid + '&tipoOid=' + this.state.tipo + '&tecidoOid=' + this.state.tecido + '&tamanhoOid=' + this.state.tamanho + '&marcaOid=' + this.state.marca;
+        var argumentos = 'clienteOid=' + this.state.clienteOid + '&tipoOid=' + this.state.tipoOid;
+
+        if(this.tecido != ''){
+            argumentos += '&tecidoOid=' + this.state.tecidoOid;
+        }
+
+        if(this.tamanho != ''){
+            argumentos += '&tamanhoOid=' + this.state.tamanhoOid;
+        }
+
+        if(this.marca != ''){
+            argumentos += '&marcaOid=' + this.state.marcaOid;
+        }
+
+        if(this.cores != ''){
+            argumentos += '&coresOid=' + this.state.coresOid;
+        }
 
         if(this.state.observacao != ''){
             argumentos += '&observacoes=' + this.state.observacao;
@@ -106,10 +123,6 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
         if(roupa != null){
             argumentos += '&oid=' + roupa.oid;
-        }
-
-        if(this.cores != ''){
-            //argumentos += '&coresOid=' + roupa.oid;
         }
 
         const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -168,75 +181,77 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                     </TouchableOpacity>
                 </View>
 
-                <View style={styles.objetoContainer}>
-                    <Text style={styles.valorInfoTitle}>Oid: {this.state.oid}</Text>
+                <ScrollView>
+                    <View style={styles.objetoContainer}>
+                        <Text style={styles.valorInfoTitle}>Oid: {this.state.oid}</Text>
 
-                    <Text style={styles.valorInfoTitleCliente}>Cliente: {this.state.cliente}</Text>
+                        <Text style={styles.valorInfoTitleCliente}>Cliente: {this.state.cliente}</Text>
 
-                    <Text style={styles.infoTitle}>Tipo: </Text>
-                    <Picker
-                        style={styles.boxInput}
-                        selectedValue={this.state.tipo}
-                        onValueChange={(itemValue, itemIndex) => this.setState({tipo: itemValue})}>
-                        {this.state.tiposArray.map(objeto => 
-                            <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto.nome} />    
-                        )}
-                    </Picker>
+                        <Text style={styles.infoTitle}>Tipo: </Text>
+                        <Picker
+                            style={styles.boxInput}
+                            selectedValue={this.state.tipo}
+                            onValueChange={(itemValue, itemIndex) => this.setState({tipo: itemValue.nome, tipoOid: itemValue.oid})}>
+                            {this.state.tiposArray.map(objeto => 
+                                <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
+                            )}
+                        </Picker>
 
-                    <Text style={styles.infoTitle}>Tecido: </Text>
-                    <Picker
-                        style={styles.boxInput}
-                        selectedValue={this.state.tecido}
-                        onValueChange={(itemValue, itemIndex) => this.setState({tecido: itemValue})}>
-                        {this.state.tecidosArray.map(objeto => 
-                            <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto.nome} />    
-                        )}
-                    </Picker>
+                        <Text style={styles.infoTitle}>Tecido: </Text>
+                        <Picker
+                            style={styles.boxInput}
+                            selectedValue={this.state.tecido}
+                            onValueChange={(itemValue, itemIndex) => this.setState({tecido: itemValue.nome, tecidoOid: itemValue.oid})}>
+                            {this.state.tecidosArray.map(objeto => 
+                                <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
+                            )}
+                        </Picker>
 
-                    <Text style={styles.infoTitle}>Tamanho: </Text>
-                    <Picker
-                        style={styles.boxInput}
-                        selectedValue={this.state.tamanho}
-                        onValueChange={(itemValue, itemIndex) => this.setState({tamanho: itemValue})}>
-                        {this.state.tamanhosArray.map(objeto => 
-                            <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto.nome} />    
-                        )}
-                    </Picker>
+                        <Text style={styles.infoTitle}>Tamanho: </Text>
+                        <Picker
+                            style={styles.boxInput}
+                            selectedValue={this.state.tamanho}
+                            onValueChange={(itemValue, itemIndex) => this.setState({tamanho: itemValue.nome, tamanhoOid: itemValue.oid})}>
+                            {this.state.tamanhosArray.map(objeto => 
+                                <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
+                            )}
+                        </Picker>
 
-                    <Text style={styles.infoTitle}>Marca: </Text>
-                    <Picker
-                        style={styles.boxInput}
-                        selectedValue={this.state.marca}
-                        onValueChange={(itemValue, itemIndex) => this.setState({marca: itemValue})}>
-                        {this.state.marcasArray.map(objeto => 
-                            <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto.nome} />    
-                        )}
-                    </Picker>
+                        <Text style={styles.infoTitle}>Marca: </Text>
+                        <Picker
+                            style={styles.boxInput}
+                            selectedValue={this.state.marca}
+                            onValueChange={(itemValue, itemIndex) => this.setState({marca: itemValue.nome, marcaOid: itemValue.oid})}>
+                            {this.state.marcasArray.map(objeto => 
+                                <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
+                            )}
+                        </Picker>
 
-                    <Text style={styles.infoTitle}>Cores: </Text>
-                    <Picker
-                        style={styles.boxInput}
-                        selectedValue={this.state.cores}
-                        onValueChange={(itemValue, itemIndex) => this.setState({cores: itemValue})}>
-                        {this.state.coresArray.map(objeto => 
-                            <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto.nome} />    
-                        )}
-                    </Picker>
+                        <Text style={styles.infoTitle}>Cores: </Text>
+                        <Picker
+                            style={styles.boxInput}
+                            selectedValue={this.state.cores}
+                            onValueChange={(itemValue, itemIndex) => this.setState({cores: itemValue.nome, coresOid: itemValue.oid})}>
+                            {this.state.coresArray.map(objeto => 
+                                <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
+                            )}
+                        </Picker>
 
-                    <Text style={styles.infoTitle}>Código: </Text>
-                    <TextInput
-                        style={styles.boxInput}
-                        value={this.state.codigo}
-                        onChangeText={codigo => this.setState({codigo})}
-                    />
+                        <Text style={styles.infoTitle}>Código: </Text>
+                        <TextInput
+                            style={styles.boxInput}
+                            value={this.state.codigo}
+                            onChangeText={codigo => this.setState({codigo})}
+                        />
 
-                    <Text style={styles.infoTitle}>Observação: </Text>
-                    <TextInput
-                        style={styles.boxInput}
-                        value={this.state.observacao}
-                        onChangeText={observacao => this.setState({observacao})}
-                    />
-                </View>
+                        <Text style={styles.infoTitle}>Observação: </Text>
+                        <TextInput
+                            style={styles.boxInput}
+                            value={this.state.observacao}
+                            onChangeText={observacao => this.setState({observacao})}
+                        />
+                    </View>
+                </ScrollView>
             </View>
         );
     }
