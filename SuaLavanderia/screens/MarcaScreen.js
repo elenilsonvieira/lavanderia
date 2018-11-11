@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, ScrollView, Image, AsyncStorage, TextInput, TouchableOpacity } from 'react-native';
 
 import Marca from "../components/Marca";
+import LoadingModal from '../components/modals/LoadingModal';
 
 export default class MarcaScreen extends React.Component {
 
@@ -18,6 +19,7 @@ export default class MarcaScreen extends React.Component {
     state ={
         nome: '',
         objetos: [],
+        modalVisible: false,
     };
 
     dataString = () => {
@@ -102,8 +104,9 @@ export default class MarcaScreen extends React.Component {
     };
 
     async componentDidMount(){
-        const objetos = await this.buscar() || [];
-        this.setState(objetos);
+        this.setState({modalVisible: true});
+        await this.buscar();
+        this.setState({modalVisible: false});
     }
 
     render(){
@@ -127,6 +130,7 @@ export default class MarcaScreen extends React.Component {
                         <Marca key={objeto.oid} marca={objeto} />
                     )}
                 </ScrollView>
+                <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );
     }

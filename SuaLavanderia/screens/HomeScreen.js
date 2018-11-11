@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import { reload } from '../utils/StorageUtils';
+import LoadingModal from '../components/modals/LoadingModal';
 
 export default class HomeScreen extends Component {
 
@@ -14,8 +15,14 @@ export default class HomeScreen extends Component {
     ),
   };
 
+  state = {
+    loadingVisible: false,
+  };
+
   async componentDidMount(){
+    this.setState({modalVisible: true});
     reload();
+    this.setState({modalVisible: false});
   }
 
   render() {
@@ -24,6 +31,7 @@ export default class HomeScreen extends Component {
         <Image source={require('../images/logo.png')} />
         <Text style={styles.welcome}>Bem Vindo!</Text>
         <Text style={styles.instructions}>Para abrir o menu, arraste o dedo da direita para a esquerda.</Text>
+        <LoadingModal modalVisible={this.state.modalVisible} text="Carregando Informações. Aguarde!" />
       </View>
     );
   }
