@@ -63,40 +63,28 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const movimentacao = this.props.navigation.getParam('movimentacao');
-        const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : 'elenilsonvieira@gmail.com';
+        const roupa = this.props.navigation.getParam('roupa');
 
-        var capital = '0';
+        var argumentos = 'clienteOid=' + this.state.clienteOid + '&tipoOid=' + this.state.tipo + '&tecidoOid=' + this.state.tecido + '&tamanhoOid=' + this.state.tamanho + '&marcaOid=' + this.state.marca + '&observacoes=' + this.state.observacao + '&codigo=' + this.state.codigo;
 
-        switch(this.state.capital){
-            case 'Dinheiro': capital = 0; break;
-            case 'Cheque': capital = 3; break;
-            case 'Boleto': capital = 4; break;
-            case 'PagSeguroDebito': capital = 6; break;
-            case 'PagSeguroCredito': capital = 7; break;
-            case 'TransferenciaBB': capital = 8; break;
-            case 'TransferenciaCaixa': capital = 9; break;
-            default: ;
+        if(roupa != null){
+            argumentos += '&oid=' + roupa.oid;
         }
 
-        var dataArray = this.state.data.split('/');
-        const data = dataArray[2] + '-'+ dataArray[1] + '-' + dataArray[0];
-
-        var argumentos = 'data=' + data + '&capital=' + capital + '&valor=' + this.state.valor + '&observacoes=' + this.state.observacoes + '&responsavelOid=' + responsavelOid + '&modo=' + this.state.modo;
-
-        if(movimentacao != null){
-            argumentos += '&oid=' + movimentacao.oid;
+        if(this.cores != ''){
+            //argumentos += '&coresOid=' + roupa.oid;
         }
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             }).then(function(response){
-                alert(movimentacao == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
+                alert(roupa == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
+                props.navigation.state.params.reload();
                 props.navigation.goBack();
             }
             ).catch(function(error){
-                alert('Erro adicionando a movimentação de caixa.' + error);    
+                alert('Erro adicionando a roupa.' + error);    
             });        
     }
     

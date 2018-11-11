@@ -37,7 +37,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         var email = usuario.email;
 
         const movimentacao = this.props.navigation.getParam('movimentacao');
-        const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : 'elenilsonvieira@gmail.com';
+        const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : email;
 
         var capital = '0';
 
