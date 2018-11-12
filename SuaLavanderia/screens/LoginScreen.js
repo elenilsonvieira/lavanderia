@@ -18,6 +18,13 @@ export default class LoginScreen extends Component {
     modalVisible: false,
   };
 
+  async componentDidMount(){
+    const email = await AsyncStorage.getItem("@SuaLavanderia:ultimoEmail");
+    if(email){
+      this.setState({email});
+    }
+  }
+
   login = async () => {
     if(this.state.email.trim().length == 0 || this.state.senha.trim().length == 0){
       alert('Preencha o email e senha');
@@ -51,6 +58,7 @@ export default class LoginScreen extends Component {
             };
 
             await AsyncStorage.setItem("@SuaLavanderia:usuario", JSON.stringify(usuario));
+            await AsyncStorage.setItem("@SuaLavanderia:ultimoEmail", usuario.email);
             this.setState({modalVisible: false});
             this.props.navigation.navigate('RootStack');
         }else{
