@@ -62,6 +62,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         }else{
             if(tiposArray.length > 0){
                 tipo = tiposArray[0].nome;
+                tipoOid = tiposArray[0].oid;
             }
 
             if(tamanhosArray.length > 0){
@@ -80,7 +81,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                 coresArray = [{oid: 1, nome: ''}, ...coresArray];
             }
 
-            this.setState({tipo})
+            this.setState({tipo, tipoOid})
         }
 
         this.setState({tiposArray, tecidosArray, tamanhosArray, marcasArray, coresArray, cliente, clienteOid, lavagemOid, modalVisible: false});
@@ -102,19 +103,19 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
         var argumentos = 'clienteOid=' + this.state.clienteOid + '&tipoOid=' + this.state.tipoOid;
 
-        if(this.tecido != ''){
+        if(this.state.tecido != ''){
             argumentos += '&tecidoOid=' + this.state.tecidoOid;
         }
 
-        if(this.tamanho != ''){
+        if(this.state.tamanho != ''){
             argumentos += '&tamanhoOid=' + this.state.tamanhoOid;
         }
 
-        if(this.marca != ''){
+        if(this.state.marca != ''){
             argumentos += '&marcaOid=' + this.state.marcaOid;
         }
 
-        if(this.cores != ''){
+        if(this.state.cores != ''){
             argumentos += '&coresOid=' + this.state.coresOid;
         }
 
