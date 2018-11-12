@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native';
-import DateTimePicker from 'react-native-modal-datetime-picker';
+import LoadingModal from '../../components/modals/LoadingModal';
 
 export default class MovimentacaoDeCaixaDetails extends React.Component {
 
@@ -26,9 +26,12 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         tamanhosArray: [], 
         marcasArray: [], 
         coresArray: [],
+        modalVisible: false,
     };
 
     async componentDidMount(){
+        this.setState({modalVisible: true});
+        
         var tiposArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:tipos")) || [];
         var tecidosArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:tecidos")) || [];
         var tamanhosArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:tamanhos")) || [];
@@ -80,7 +83,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             this.setState({tipo})
         }
 
-        this.setState({tiposArray, tecidosArray, tamanhosArray, marcasArray, coresArray, cliente, clienteOid, lavagemOid});
+        this.setState({tiposArray, tecidosArray, tamanhosArray, marcasArray, coresArray, cliente, clienteOid, lavagemOid, modalVisible: false});
     }
 
     async salvar(props) {
@@ -88,6 +91,8 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             alert('Escolha o tipo.');
             return;
         }
+
+        this.setState({modalVisible: true});
 
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
@@ -137,8 +142,10 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
             alert(roupa == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
             props.navigation.state.params.reload(chave);
+            this.setState({modalVisible: false});
             props.navigation.goBack();
         }catch(erro){
+            this.setState({modalVisible: false});
             alert('Erro adicionando/alterando roupa. ' + erro);
         }
     }
@@ -252,6 +259,8 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         />
                     </View>
                 </ScrollView>
+
+                <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );
     }
