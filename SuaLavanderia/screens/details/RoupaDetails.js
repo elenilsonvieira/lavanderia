@@ -65,29 +65,6 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             const cores = roupa.cores;
 
             this.setState({roupa, oid, tipo, tecido, tamanho, marca, observacao, codigo, chave, cliente, clienteOid, cores});
-        }else{
-            if(tiposArray.length > 0){
-                tipo = tiposArray[0].nome;
-                tipoOid = tiposArray[0].oid;
-            }
-
-            if(tamanhosArray.length > 0){
-                tamanhosArray = [{oid: 1, nome: ''}, ...tamanhosArray];
-            }
-
-            if(tecidosArray.length > 0){
-                tecidosArray = [{oid: 1, nome: ''}, ...tecidosArray];
-            }
-
-            if(marcasArray.length > 0){
-                marcasArray = [{oid: 1, nome: ''}, ...marcasArray];
-            }
-
-            if(coresArray.length > 0){
-                coresArray = [{oid: 1, nome: ''}, ...coresArray];
-            }
-
-            this.setState({tipo, tipoOid})
         }
 
         this.setState({tiposArray, tecidosArray, tamanhosArray, marcasArray, coresArray, cliente, clienteOid, lavagemOid, modalVisible: false});
@@ -95,7 +72,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
     async salvar(props) {
         if(this.state.tipo == ''){
-            alert('Escolha o tipo.');
+            alert('Escolha ao menos o tipo.');
             return;
         }
 
