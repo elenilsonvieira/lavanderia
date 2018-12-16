@@ -246,7 +246,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                             <SectionedMultiSelect
                                 items={this.state.coresArray} 
                                 uniqueKey='oid'
-                                selectText='Selecione'
+                                selectText=''
                                 confirmText='Confirmar'
                                 searchPlaceholderText='Pesquisar'
                                 single={true}
