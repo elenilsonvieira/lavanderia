@@ -199,7 +199,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         <Picker
                             style={styles.boxInput}
                             selectedValue={this.state.tipo}
-                            onValueChange={(itemValue, itemIndex) => this.setState({tipo: itemValue.nome, tipoOid: itemValue.oid})}>
+                            onValueChange={(itemValue, itemIndex) => this.setState({tipo: itemValue, tipoOid: itemValue.oid})}>
                             {this.state.tiposArray.map(objeto => 
                                 <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
                             )}
@@ -209,7 +209,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         <Picker
                             style={styles.boxInput}
                             selectedValue={this.state.tecido}
-                            onValueChange={(itemValue, itemIndex) => this.setState({tecido: itemValue.nome, tecidoOid: itemValue.oid})}>
+                            onValueChange={(itemValue, itemIndex) => this.setState({tecido: itemValue, tecidoOid: itemValue.oid})}>
                             {this.state.tecidosArray.map(objeto => 
                                 <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
                             )}
@@ -219,7 +219,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         <Picker
                             style={styles.boxInput}
                             selectedValue={this.state.tamanho}
-                            onValueChange={(itemValue, itemIndex) => this.setState({tamanho: itemValue.nome, tamanhoOid: itemValue.oid})}>
+                            onValueChange={(itemValue, itemIndex) => this.setState({tamanho: itemValue, tamanhoOid: itemValue.oid})}>
                             {this.state.tamanhosArray.map(objeto => 
                                 <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
                             )}
@@ -229,7 +229,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         <Picker
                             style={styles.boxInput}
                             selectedValue={this.state.marca}
-                            onValueChange={(itemValue, itemIndex) => this.setState({marca: itemValue.nome, marcaOid: itemValue.oid})}>
+                            onValueChange={(itemValue, itemIndex) => this.setState({marca: itemValue, marcaOid: itemValue.oid})}>
                             {this.state.marcasArray.map(objeto => 
                                 <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
                             )}
@@ -239,7 +239,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         <Picker
                             style={styles.boxInput}
                             selectedValue={this.state.cores}
-                            onValueChange={(itemValue, itemIndex) => this.setState({cores: itemValue.nome, coresOid: itemValue.oid})}>
+                            onValueChange={(itemValue, itemIndex) => this.setState({cores: itemValue, coresOid: itemValue.oid})}>
                             {this.state.coresArray.map(objeto => 
                                 <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
                             )}
