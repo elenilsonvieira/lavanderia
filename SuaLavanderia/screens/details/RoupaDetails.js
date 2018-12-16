@@ -242,19 +242,21 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         </Picker>
 
                         <Text style={styles.infoTitle}>Cores: </Text>
-                        <SectionedMultiSelect
-                            items={this.state.coresArray} 
-                            uniqueKey='oid'
-                            selectText='Selecione'
-                            confirmText='Confirmar'
-                            searchPlaceholderText='Pesquisar'
-                            single={true}
-                            selectedText='Selecionados'
-                            onSelectedItemsChange={this.onCoresChange}
-                            selectedItems={this.state.coresSelecionadas}
-                            displayKey='nome'
-                            colors={{primary: '#333'}}
-                        />
+                        <View style={styles.multiSelect}>
+                            <SectionedMultiSelect
+                                items={this.state.coresArray} 
+                                uniqueKey='oid'
+                                selectText='Selecione'
+                                confirmText='Confirmar'
+                                searchPlaceholderText='Pesquisar'
+                                single={true}
+                                selectedText='Selecionados'
+                                onSelectedItemsChange={this.onCoresChange}
+                                selectedItems={this.state.coresSelecionadas}
+                                displayKey='nome'
+                                colors={{primary: '#333'}}
+                            />
+                        </View>
 
                         <Text style={styles.infoTitle}>Código: </Text>
                         <TextInput
@@ -365,6 +367,11 @@ const styles = StyleSheet.create(
         icon: {
             width: 24,
             height: 24,
+        },
+        multiSelect: {
+            backgroundColor: "#DDD",
+            height: 40,
+            alignSelf: 'stretch',
         },
     }
 );
