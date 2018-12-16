@@ -30,7 +30,7 @@ export default class HomeScreen extends Component {
       <View style={styles.container}>
         <Image source={require('../images/logo.png')} />
         <Text style={styles.welcome}>Bem Vindo!</Text>
-        <Text style={styles.instructions}>Para abrir o menu, arraste o dedo da direita para a esquerda.</Text>
+        <Text style={styles.instructions}>Para abrir o menu, arraste o dedo do canto da tela da esquerda para a direita.</Text>
         <LoadingModal modalVisible={this.state.modalVisible} text="Carregando Informações. Aguarde!" />
       </View>
     );
