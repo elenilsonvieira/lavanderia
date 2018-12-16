@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native';
 import LoadingModal from '../../components/modals/LoadingModal';
-import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import MultiPicker from '../../components/MultiPicker';
 
 export default class MovimentacaoDeCaixaDetails extends React.Component {
 
@@ -242,21 +242,11 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         </Picker>
 
                         <Text style={styles.infoTitle}>Cores: </Text>
-                        <View style={styles.multiSelect}>
-                            <SectionedMultiSelect
-                                items={this.state.coresArray} 
-                                uniqueKey='oid'
-                                selectText=''
-                                confirmText='Confirmar'
-                                searchPlaceholderText='Pesquisar'
-                                single={true}
-                                selectedText='Selecionados'
-                                onSelectedItemsChange={this.onCoresChange}
-                                selectedItems={this.state.coresSelecionadas}
-                                displayKey='nome'
-                                colors={{primary: '#333'}}
-                            />
-                        </View>
+                        <MultiPicker 
+                            objetos={this.state.coresArray}
+                            onSelectedItemsChange={this.onCoresChange}
+                            objetosSelecionados={this.state.coresSelecionadas}
+                        />
 
                         <Text style={styles.infoTitle}>Código: </Text>
                         <TextInput
