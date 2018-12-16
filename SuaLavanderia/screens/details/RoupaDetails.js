@@ -29,6 +29,10 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         coresArray: [],
         modalVisible: false,
         coresSelecionadas: [],
+        tiposSelecionados: [],
+        tecidosSelecionados: [],
+        tamanhosSelecionados: [],
+        marcasSelecionadas: [],
     };
 
     async componentDidMount(){
@@ -186,6 +190,26 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         this.setState({ coresSelecionadas });
     }
 
+    onTiposChange = (tiposSelecionados) => {
+        var tipoOid = tiposSelecionados ? tiposSelecionados : '';
+        this.setState({ tipoOid, tiposSelecionados });
+    }
+
+    onTecidosChange = (tecidosSelecionados) => {
+        var tecidoOid = tecidosSelecionados ? tecidosSelecionados : '';
+        this.setState({ tecidoOid, tecidosSelecionados });
+    }
+
+    onTamanhosChange = (tamanhosSelecionados) => {
+        var tamanhoOid = tamanhosSelecionados ? tamanhosSelecionados : '';
+        this.setState({ tamanhoOid, tamanhosSelecionados });
+    }
+
+    onMarcasChange = (marcasSelecionadas) => {
+        var marcaOid = marcasSelecionadas ? marcasSelecionadas : '';
+        this.setState({ marcaOid, marcasSelecionadas });
+    }
+
     render(){
         return(
             <View style={styles.container}>
@@ -202,50 +226,31 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         <Text style={styles.valorInfoTitleCliente}>Cliente: {this.state.cliente}</Text>
 
                         <Text style={styles.infoTitle}>Tipo: </Text>
-                        <Picker
-                            style={styles.boxInput}
-                            selectedValue={this.state.tipo}
-                            onValueChange={(itemValue, itemIndex) => this.setState({tipo: itemValue, tipoOid: itemValue.oid})}>
-                            {this.state.tiposArray.map(objeto => 
-                                <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
-                            )}
-                        </Picker>
+                        <MultiPicker 
+                            objetos={this.state.tiposArray}
+                            onSelectedItemsChange={this.onTiposChange}
+                            objetosSelecionados={this.state.tiposSelecionados}
+                        />
 
                         <Text style={styles.infoTitle}>Tecido: </Text>
-                        <Picker
-                            style={styles.boxInput}
-                            selectedValue={this.state.tecido}
-                            onValueChange={(itemValue, itemIndex) => this.setState({tecido: itemValue, tecidoOid: itemValue.oid})}>
-                            {this.state.tecidosArray.map(objeto => 
-                                <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
-                            )}
-                        </Picker>
+                        <MultiPicker 
+                            objetos={this.state.tecidosArray}
+                            onSelectedItemsChange={this.onTecidosChange}
+                            objetosSelecionados={this.state.tecidosSelecionados}
+                        />
 
                         <Text style={styles.infoTitle}>Tamanho: </Text>
-                        <Picker
-                            style={styles.boxInput}
-                            selectedValue={this.state.tamanho}
-                            onValueChange={(itemValue, itemIndex) => this.setState({tamanho: itemValue, tamanhoOid: itemValue.oid})}>
-                            {this.state.tamanhosArray.map(objeto => 
-                                <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
-                            )}
-                        </Picker>
+                        <MultiPicker 
+                            objetos={this.state.tamanhosArray}
+                            onSelectedItemsChange={this.onTamanhosChange}
+                            objetosSelecionados={this.state.tamanhosSelecionados}
+                        />
 
                         <Text style={styles.infoTitle}>Marca: </Text>
-                        <Picker
-                            style={styles.boxInput}
-                            selectedValue={this.state.marca}
-                            onValueChange={(itemValue, itemIndex) => this.setState({marca: itemValue, marcaOid: itemValue.oid})}>
-                            {this.state.marcasArray.map(objeto => 
-                                <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
-                            )}
-                        </Picker>
-
-                        <Text style={styles.infoTitle}>Cores: </Text>
                         <MultiPicker 
-                            objetos={this.state.coresArray}
-                            onSelectedItemsChange={this.onCoresChange}
-                            objetosSelecionados={this.state.coresSelecionadas}
+                            objetos={this.state.marcasArray}
+                            onSelectedItemsChange={this.onMarcasChange}
+                            objetosSelecionados={this.state.marcasSelecionadas}
                         />
 
                         <Text style={styles.infoTitle}>Código: </Text>
@@ -260,6 +265,14 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                             style={styles.boxInput}
                             value={this.state.observacao}
                             onChangeText={observacao => this.setState({observacao})}
+                        />
+
+                        <Text style={styles.infoTitle}>Cores: </Text>
+                        <MultiPicker 
+                            objetos={this.state.coresArray}
+                            multiplaEscolha={true}
+                            onSelectedItemsChange={this.onCoresChange}
+                            objetosSelecionados={this.state.coresSelecionadas}
                         />
                     </View>
                 </ScrollView>

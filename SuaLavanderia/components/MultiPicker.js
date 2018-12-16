@@ -6,14 +6,14 @@ export default class MultiPicker extends React.Component {
 
     render(){
         return(
-            <View style={styles.multiSelect}>
+            <View style={this.props.multiplaEscolha ? styles.multiSelectMultiple : styles.multiSelectSingle}>
                 <SectionedMultiSelect
                     items={this.props.objetos} 
                     uniqueKey='oid'
                     selectText=''
                     confirmText='Confirmar'
                     searchPlaceholderText='Pesquisar'
-                    single={this.props.single ? this.props.single : true}
+                    single={this.props.multiplaEscolha ? !this.props.multiplaEscolha : true}
                     selectedText='Selecionados'
                     onSelectedItemsChange={this.props.onSelectedItemsChange}
                     selectedItems={this.props.objetosSelecionados}
@@ -28,9 +28,14 @@ export default class MultiPicker extends React.Component {
 
 const styles = StyleSheet.create(
     {
-        multiSelect: {
+        multiSelectSingle: {
             backgroundColor: "#DDD",
             height: 40,
+            alignSelf: 'stretch',
+        },
+        multiSelectMultiple: {
+            backgroundColor: "#DDD",
+            minHeight: 40,
             alignSelf: 'stretch',
         },
     }
