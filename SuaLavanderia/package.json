@@ -12,6 +12,8 @@
     "react": "16.5.0",
     "react-native": "0.57.1",
     "react-native-modal-datetime-picker": "^6.0.0",
+    "react-native-sectioned-multi-select": "^0.6.3",
+    "react-native-vector-icons": "^6.1.0",
     "react-navigation": "^2.18.0"
   },
   "devDependencies": {

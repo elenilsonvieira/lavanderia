@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native';
 import LoadingModal from '../../components/modals/LoadingModal';
+import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 
 export default class MovimentacaoDeCaixaDetails extends React.Component {
 
@@ -27,6 +28,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         marcasArray: [], 
         coresArray: [],
         modalVisible: false,
+        coresSelecionadas: [],
     };
 
     async componentDidMount(){
@@ -180,6 +182,10 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         return hash;
     };
 
+    onCoresChange = (coresSelecionadas) => {
+        this.setState({ coresSelecionadas });
+    }
+
     render(){
         return(
             <View style={styles.container}>
@@ -236,14 +242,19 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         </Picker>
 
                         <Text style={styles.infoTitle}>Cores: </Text>
-                        <Picker
-                            style={styles.boxInput}
-                            selectedValue={this.state.cores}
-                            onValueChange={(itemValue, itemIndex) => this.setState({cores: itemValue, coresOid: itemValue.oid})}>
-                            {this.state.coresArray.map(objeto => 
-                                <Picker.Item key={objeto.oid} label={objeto.nome} value={objeto} />    
-                            )}
-                        </Picker>
+                        <SectionedMultiSelect
+                            items={this.state.coresArray} 
+                            uniqueKey='oid'
+                            selectText='Selecione'
+                            confirmText='Confirmar'
+                            searchPlaceholderText='Pesquisar'
+                            single={true}
+                            selectedText='Selecionados'
+                            onSelectedItemsChange={this.onCoresChange}
+                            selectedItems={this.state.coresSelecionadas}
+                            displayKey='nome'
+                            colors={{primary: '#333'}}
+                        />
 
                         <Text style={styles.infoTitle}>Código: </Text>
                         <TextInput
