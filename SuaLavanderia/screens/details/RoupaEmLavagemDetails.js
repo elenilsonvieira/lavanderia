@@ -201,6 +201,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
                         <TextInput
                             style={styles.boxInputChave}
                             value={this.state.chave}
+                            keyboardType={this.state.chave.length < 3 ? 'default' : 'numeric'}
                             placeholder='Chave'
                             onChangeText={chave => this.setState({chave})}
                         />

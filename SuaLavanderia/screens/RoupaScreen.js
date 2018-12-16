@@ -131,6 +131,7 @@ export default class RoupaScreen extends React.Component {
                     <TextInput
                         style={styles.boxInput} 
                         placeholder='Chave'
+                        keyboardType={this.state.chave.length < 3 ? 'default' : 'numeric'}
                         value={this.state.chave}
                         autoFocus
                         onChangeText={chave => this.setState({chave})} 
