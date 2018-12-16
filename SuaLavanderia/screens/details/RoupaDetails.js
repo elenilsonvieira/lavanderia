@@ -109,19 +109,19 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
         var argumentos = 'clienteOid=' + this.state.clienteOid + '&tipoOid=' + this.state.tipoOid;
 
-        if(this.state.tecido != ''){
+        if(this.state.tecidoOid != ''){
             argumentos += '&tecidoOid=' + this.state.tecidoOid;
         }
 
-        if(this.state.tamanho != ''){
+        if(this.state.tamanhoOid != ''){
             argumentos += '&tamanhoOid=' + this.state.tamanhoOid;
         }
 
-        if(this.state.marca != ''){
+        if(this.state.marcaOid != ''){
             argumentos += '&marcaOid=' + this.state.marcaOid;
         }
 
-        if(this.state.cores != ''){
+        if(this.state.coresOid != ''){
             argumentos += '&coresOid=' + this.state.coresOid;
         }
 
@@ -187,7 +187,17 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
     };
 
     onCoresChange = (coresSelecionadas) => {
-        this.setState({ coresSelecionadas });
+        var coresOid = '';
+
+        for(index in coresSelecionadas){
+            if(coresOid == ''){
+                coresOid = coresSelecionadas[index];
+            }else{
+                coresOid += ';' + coresSelecionadas[index];
+            }
+        }
+
+        this.setState({ coresOid, coresSelecionadas });
     }
 
     onTiposChange = (tiposSelecionados) => {
