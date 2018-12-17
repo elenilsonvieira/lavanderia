@@ -26,6 +26,16 @@ export default class LavagemDetails extends React.Component {
         }
     }
 
+    pagar(){
+        const lavagem = this.props.navigation.getParam('lavagem');
+        
+        if(lavagem.paga != 'Não/Parcialmente'){
+            alert("Essa lavagem já está paga!");
+        }else{
+            this.props.navigation.navigate('MovimentacaoDeCaixaDetails', {lavagem: lavagem, reload: this.buscar.bind(this)});
+        }
+    }
+
     async componentWillMount(){
         const lavagem = this.props.navigation.getParam('lavagem');
         const reload = true;//this.props.navigation.getParam('reload');
@@ -134,6 +144,10 @@ export default class LavagemDetails extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
+                    <TouchableOpacity onPress={() => this.pagar()} style={styles.button}>
+                        <Image style={styles.icon} source={require('../../images/movimentacao-de-caixa_32x32.png')} />
+                    </TouchableOpacity>
+
                     <TouchableOpacity onPress={() => this.navegarParaDetalhes(this.props, null)} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/adicionar_32x32.png')} />
                     </TouchableOpacity>
@@ -176,6 +190,11 @@ export default class LavagemDetails extends React.Component {
                         <View style={styles.lavagemInfoContainer}>
                             <Text style={styles.lavagemInfoTitle}>Status: </Text>
                             <Text style={styles.lavagemInfo}>{lavagem.status}</Text>
+                        </View>
+
+                        <View style={styles.lavagemInfoContainer}>
+                            <Text style={styles.lavagemInfoTitle}>Valor: </Text>
+                            <Text style={styles.lavagemInfo}>{lavagem.valor}</Text>
                         </View>
 
                         <View style={styles.lavagemInfoContainer}>

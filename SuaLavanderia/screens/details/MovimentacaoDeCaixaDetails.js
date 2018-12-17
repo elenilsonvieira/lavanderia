@@ -16,6 +16,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
 
     componentDidMount(){
         const movimentacao = this.props.navigation.getParam('movimentacao');
+        const lavagem = this.props.navigation.getParam('lavagem');
 
         if(movimentacao != null){
             const oid = movimentacao.oid;
@@ -28,6 +29,13 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             this.setState({oid, valor, observacoes, capital, data, modo});
         }else{
             this.dataEscolhida(new Date());
+
+            if(lavagem != null){
+                const valor = lavagem.valor.toString();
+                const modo = 'Entrada';
+
+                this.setState({valor, modo});
+            }
         }
     }
 
@@ -37,6 +45,8 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         var email = usuario.email;
 
         const movimentacao = this.props.navigation.getParam('movimentacao');
+        const lavagem = this.props.navigation.getParam('lavagem');
+
         const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : email;
 
         var capital = '0';
@@ -61,11 +71,20 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             argumentos += '&oid=' + movimentacao.oid;
         }
 
+        if(lavagem != null){
+            argumentos += '&lavagemOid=' + lavagem.oid;
+        }
+
         const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             }).then(function(response){
                 alert(movimentacao == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
+
+                if(lavagem != null){
+                    props.navigation.state.params.reload();
+                }
+
                 props.navigation.goBack();
             }
             ).catch(function(error){
