@@ -11,6 +11,7 @@ import TecidoScreen from './screens/TecidoScreen';
 import TamanhoScreen from './screens/TamanhoScreen';
 import MarcaScreen from './screens/MarcaScreen';
 import LavagemScreen from './screens/LavagemScreen';
+import LavagemScreenCliente from './screens/LavagemScreenCliente';
 import MovimentacaoDeCaixaScreen from './screens/MovimentacaoDeCaixaScreen';
 import MovimentacaoDeCaixaDetails from './screens/details/MovimentacaoDeCaixaDetails';
 import LavagemDetails from './screens/details/LavagemDetails';
@@ -140,7 +141,7 @@ const DrawerAtendente = createDrawerNavigator(
 const DrawerCliente = createDrawerNavigator(
   {
     Home: HomeScreen,
-    Lavagem: LavagemScreen,
+    Lavagem: LavagemScreenCliente,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
