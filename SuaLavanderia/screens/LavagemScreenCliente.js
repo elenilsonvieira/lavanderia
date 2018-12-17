@@ -72,21 +72,39 @@ export default class LavagemScreen extends React.Component {
         var email = usuario.email;
 
         var hoje = new Date();
-        var mes = hoje.getMonth() + 1;
-        if(mes < 10){
-            mes = '0' + mes;
-        }
-
-        var dia = hoje.getDate();
-        if(dia < 10){
-            dia = '0' + dia;
-        }
+        var mesAnterior = new Date();
+        mesAnterior.setMonth(mesAnterior.getMonth() -1);
 
         var dataInicial = this.state.dataInicial;
         var dataFinal = this.state.dataFinal;
 
-        if(dataInicial == '' || dataFinal == ''){
-            dataInicial = dia + '/' + mes + '/' + hoje.getFullYear();
+        if(dataInicial == ''){
+            var mes = mesAnterior.getMonth() + 1;
+            if(mes < 10){
+                mes = '0' + mes;
+            }
+
+            var dia = hoje.getDate();
+            if(dia < 10){
+                dia = '0' + dia;
+            }
+
+            dataInicial = dia + '/' + mes + '/' + mesAnterior.getFullYear();
+
+            this.setState({dataInicial});
+        }
+
+        if(dataFinal == ''){
+            var mes = hoje.getMonth() + 1;
+            if(mes < 10){
+                mes = '0' + mes;
+            }
+
+            var dia = hoje.getDate();
+            if(dia < 10){
+                dia = '0' + dia;
+            }
+
             dataFinal = dia + '/' + mes + '/' + hoje.getFullYear();
 
             this.setState({dataInicial, dataFinal});
