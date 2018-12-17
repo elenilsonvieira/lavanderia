@@ -14,6 +14,7 @@ import LavagemScreen from './screens/LavagemScreen';
 import MovimentacaoDeCaixaScreen from './screens/MovimentacaoDeCaixaScreen';
 import MovimentacaoDeCaixaDetails from './screens/details/MovimentacaoDeCaixaDetails';
 import LavagemDetails from './screens/details/LavagemDetails';
+import LavagemDetailsCliente from './screens/details/LavagemDetailsCliente';
 import RoupaEmLavagemDetails from './screens/details/RoupaEmLavagemDetails';
 import LoginScreen from './screens/LoginScreen';
 import LogoutScreen from './screens/LogoutScreen';
@@ -225,9 +226,7 @@ const StackAtendente = createStackNavigator(
 
 const StackCliente = createStackNavigator(
   {
-    LavagemDetails: LavagemDetails,
-    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
-    RoupaDetails: RoupaDetails,
+    LavagemDetails: LavagemDetailsCliente,
     Drawer: DrawerCliente,
   },{
     initialRouteName: 'Drawer',
