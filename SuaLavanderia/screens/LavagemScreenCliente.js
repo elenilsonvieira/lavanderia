@@ -313,7 +313,7 @@ const styles = StyleSheet.create(
           header:{
             alignItems: 'center',
             justifyContent: 'space-between',
-            height: 100,
+            height: 90,
             backgroundColor: '#FFF',
             flexDirection: 'row',
           },
