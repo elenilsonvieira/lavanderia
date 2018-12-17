@@ -28,7 +28,7 @@ export default class App extends Component {
   }
 }
 
-const RootDrawer = createDrawerNavigator(
+const DrawerAdministrador = createDrawerNavigator(
   {
     Home: HomeScreen,
     Lavagem: LavagemScreen,
@@ -50,15 +50,187 @@ const RootDrawer = createDrawerNavigator(
   }
 );
 
-const RootStack = createStackNavigator(
+const DrawerGerenteGeral = createDrawerNavigator(
+  {
+    Home: HomeScreen,
+    Lavagem: LavagemScreen,
+    Roupa: RoupaScreen,
+    MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
+    Tipo: TipoScreen,
+    Tamanho: TamanhoScreen,
+    Tecido: TecidoScreen,
+    Cor: CorScreen,
+    Marca: MarcaScreen,
+    Unidade: UnidadeScreen,
+    Sobre: SobreScreen,
+    Logout: LogoutScreen,
+  },{
+    initialRouteName: 'Home',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
+const DrawerSubGerenteGeral = createDrawerNavigator(
+  {
+    Home: HomeScreen,
+    Lavagem: LavagemScreen,
+    Roupa: RoupaScreen,
+    MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
+    Tipo: TipoScreen,
+    Tamanho: TamanhoScreen,
+    Tecido: TecidoScreen,
+    Cor: CorScreen,
+    Marca: MarcaScreen,
+    Unidade: UnidadeScreen,
+    Sobre: SobreScreen,
+    Logout: LogoutScreen,
+  },{
+    initialRouteName: 'Home',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
+const DrawerGerenteDeOperacoes = createDrawerNavigator(
+  {
+    Home: HomeScreen,
+    Lavagem: LavagemScreen,
+    Roupa: RoupaScreen,
+    Tipo: TipoScreen,
+    Tamanho: TamanhoScreen,
+    Tecido: TecidoScreen,
+    Cor: CorScreen,
+    Marca: MarcaScreen,
+    Unidade: UnidadeScreen,
+    Sobre: SobreScreen,
+    Logout: LogoutScreen,
+  },{
+    initialRouteName: 'Home',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
+const DrawerAtendente = createDrawerNavigator(
+  {
+    Home: HomeScreen,
+    Lavagem: LavagemScreen,
+    Roupa: RoupaScreen,
+    Tipo: TipoScreen,
+    Tamanho: TamanhoScreen,
+    Tecido: TecidoScreen,
+    Cor: CorScreen,
+    Marca: MarcaScreen,
+    Unidade: UnidadeScreen,
+    Sobre: SobreScreen,
+    Logout: LogoutScreen,
+  },{
+    initialRouteName: 'Home',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
+const DrawerCliente = createDrawerNavigator(
+  {
+    Home: HomeScreen,
+    Lavagem: LavagemScreen,
+    Sobre: SobreScreen,
+    Logout: LogoutScreen,
+  },{
+    initialRouteName: 'Home',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
+const StackAdministrador = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
     LavagemDetails: LavagemDetails,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupaDetails: RoupaDetails,
-    RootDrawer: RootDrawer,
+    Drawer: DrawerAdministrador,
   },{
-    initialRouteName: 'RootDrawer',
+    initialRouteName: 'Drawer',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
+const StackGerenteGeral = createStackNavigator(
+  {
+    MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+    LavagemDetails: LavagemDetails,
+    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+    RoupaDetails: RoupaDetails,
+    Drawer: DrawerGerenteGeral,
+  },{
+    initialRouteName: 'Drawer',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
+const StackSubGerenteGeral = createStackNavigator(
+  {
+    MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+    LavagemDetails: LavagemDetails,
+    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+    RoupaDetails: RoupaDetails,
+    Drawer: DrawerSubGerenteGeral,
+  },{
+    initialRouteName: 'Drawer',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
+const StackGerenteDeOperacoes = createStackNavigator(
+  {
+    LavagemDetails: LavagemDetails,
+    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+    RoupaDetails: RoupaDetails,
+    Drawer: DrawerGerenteDeOperacoes,
+  },{
+    initialRouteName: 'Drawer',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
+const StackAtendente = createStackNavigator(
+  {
+    LavagemDetails: LavagemDetails,
+    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+    RoupaDetails: RoupaDetails,
+    Drawer: DrawerAtendente,
+  },{
+    initialRouteName: 'Drawer',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
+const StackCliente = createStackNavigator(
+  {
+    LavagemDetails: LavagemDetails,
+    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+    RoupaDetails: RoupaDetails,
+    Drawer: DrawerCliente,
+  },{
+    initialRouteName: 'Drawer',
     navigationOptions: {
       headerTransparent: true,
     },
@@ -69,7 +241,12 @@ const LoginStack = createSwitchNavigator(
   {
     LoadingLogin: LoadingLoginScreen, 
     Login: LoginScreen,
-    RootStack: RootStack,
+    StackAdministrador: StackAdministrador,
+    StackGerenteGeral: StackGerenteGeral,
+    StackSubGerenteGeral: StackSubGerenteGeral,
+    StackGerenteDeOperacoes: StackGerenteDeOperacoes,
+    StackAtendente: StackAtendente,
+    StackCliente: StackCliente,
   },{
     initialRouteName: 'LoadingLogin',
     navigationOptions: {

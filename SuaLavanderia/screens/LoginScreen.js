@@ -60,7 +60,17 @@ export default class LoginScreen extends Component {
             await AsyncStorage.setItem("@SuaLavanderia:usuario", JSON.stringify(usuario));
             await AsyncStorage.setItem("@SuaLavanderia:ultimoEmail", usuario.email);
             this.setState({modalVisible: false});
-            this.props.navigation.navigate('RootStack');
+
+            try{
+              this.props.navigation.navigate('Stack' + usuario.papel);
+            }catch(erro){
+              alert('Você não tem permissão para usar o aplicativo!');
+
+              await AsyncStorage.removeItem("@SuaLavanderia:usuario");
+              await AsyncStorage.removeItem("@SuaLavanderia:ultimoEmail");
+
+              this.props.navigation.navigate('Login');
+            }
         }else{
           var mensagem = 'Erro ao tentar fazer o login!';
 

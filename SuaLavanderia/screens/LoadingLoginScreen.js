@@ -40,7 +40,7 @@ export default class LoadingLoginScreen extends React.Component {
               });
         }
 
-      this.props.navigation.navigate(resultado ? 'RootStack' : 'Login');
+      this.props.navigation.navigate(resultado ? ('Stack' + usuario.papel) : 'Login');
     };
 
     dataString = () => {
