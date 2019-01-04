@@ -91,7 +91,10 @@ export default class RoupaEmLavagemDetails extends React.Component {
                 method: 'post' 
             }).then(function(response){
                 if(response.status == 200){
-                    alert(novo ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
+                    if(!novo){
+                        alert('Alterado com sucesso!');
+                    }
+                    
                     props.navigation.state.params.reload();
                     props.navigation.goBack();
                 }else{

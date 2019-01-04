@@ -17,7 +17,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
       };
 
     state ={
-        modo: 'Saida',
+        modo: '',
         valor: '',
         objetos: [],
         dataInicialPickerVisible: false,
