@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Text, AsyncStorage } from 'react-native';
+import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage } from 'react-native';
 import RoupaEmLavagem from '../../components/RoupaEmLavagem';
 
 export default class LavagemDetails extends React.Component {
@@ -43,6 +43,17 @@ export default class LavagemDetails extends React.Component {
 
         if(reload){
             this.buscar();
+        }
+    }
+
+    avaliar(){
+        const lavagem = this.props.navigation.getParam('lavagem');
+        
+        if(lavagem.status != 'Entregue'){
+            alert("Essa lavagem ainda não foi entregue para poder ser avaliada!");
+        }else{
+            var tela = lavagem.avaliacao == null ? 'AvaliacaoDetails' : 'AvaliacaoDetailsSoLeitura';
+            this.props.navigation.navigate(tela, {lavagem: lavagem, reload: this.buscar.bind(this)});
         }
     }
 
@@ -144,6 +155,9 @@ export default class LavagemDetails extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
+                    <TouchableOpacity onPress={() => this.avaliar()} style={styles.button}>
+                        <Image style={styles.icon} source={require('../../images/avaliacao_32x32.png')} />
+                    </TouchableOpacity>
                 </View>
                 <ScrollView>
                     <View style={styles.unidadeContainer}>
