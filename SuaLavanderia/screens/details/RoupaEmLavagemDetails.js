@@ -147,8 +147,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
 
     navegarParaRoupasDoCliente(props, roupa){
         const clienteOid = this.state.clienteOid;
-        const cliente = this.state.cliente;
-        const lavagemOid = this.state.lavagemOid;
+        const cliente = this.props.navigation.getParam('cliente');
 
         props.navigation.navigate('RoupasDoCliente', {clienteOid: clienteOid, cliente: cliente, reload: this.reload.bind(this)});
     }

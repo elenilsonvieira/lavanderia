@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity } from 'react-native';
 import Roupa from '../components/Roupa';
+import LoadingModal from '../components/modals/LoadingModal';
 
 export default class RoupasDoClienteScreen extends React.Component {
 
@@ -10,6 +11,7 @@ export default class RoupasDoClienteScreen extends React.Component {
         cliente: '',
         clienteOid: '',
         objetos: [],
+        modalVisible: false,
     };
 
     RoupasDoClienteScreen(){
@@ -57,6 +59,8 @@ export default class RoupasDoClienteScreen extends React.Component {
     };
 
     async buscar() {
+        this.setState({modalVisible: true});
+
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
@@ -91,7 +95,7 @@ export default class RoupasDoClienteScreen extends React.Component {
             objetos = [...objetos, roupa];    
         }
 
-        this.setState({objetos})
+        this.setState({objetos, modalVisible: false})
     };
 
     async escolherRoupa(props, roupa) {
@@ -103,7 +107,7 @@ export default class RoupasDoClienteScreen extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.infoTitle}>Roupas do Cliente: {this.state.cliente.nome}</Text>
+                    <Text style={styles.infoTitle}>Roupas do Cliente: {this.state.cliente}</Text>
                 </View>
                 <ScrollView>                    
                     { this.state.objetos.map(roupa => 
@@ -112,6 +116,8 @@ export default class RoupasDoClienteScreen extends React.Component {
                         </TouchableOpacity>
                     )}
                 </ScrollView>
+
+                <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );
     }
