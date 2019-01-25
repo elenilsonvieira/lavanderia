@@ -32,6 +32,20 @@ export default class AvaliacaoDetails extends React.Component {
     }
 
     async salvar(props) {
+        if(isNaN(this.state.notaDoAtendimento) || isNaN(this.state.notaDaLavagem) 
+            || isNaN(this.state.notaDaPassagem) || isNaN(this.state.notaDaEntrega)){
+            alert('Preencha as notas com apenas números');
+            return;
+        }
+
+        if(this.state.notaDoAtendimento < 1 || this.state.notaDoAtendimento > 10
+            || this.state.notaDaLavagem < 1 || this.state.notaDaLavagem > 10
+            || this.state.notaDaPassagem < 1 || this.state.notaDaPassagem > 10
+            || this.state.notaDaEntrega < 1 || this.state.notaDaEntrega > 10){
+            alert('Preencha as notas com valores de 1 a 10');
+            return;
+        }
+
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
