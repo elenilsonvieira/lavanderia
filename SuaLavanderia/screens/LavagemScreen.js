@@ -152,11 +152,13 @@ export default class LavagemScreen extends React.Component {
                         dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
                         dataDeEntrega: objetoResponse.DataDeEntrega,
                         valor: objetoResponse.Valor,
+                        saldoDevedor: objetoResponse.SaldoDevedor,
                         paga: objetoResponse.Paga,
                         unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
                         unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
                         roupas: roupas,
                         status: objetoResponse.Status,
+                        avaliacao: objetoResponse.Avaliacao,
                     };    
 
                     objetos = [...objetos, objeto];
