@@ -130,6 +130,20 @@ export default class LavagemDetails extends React.Component {
                 roupas = [...roupas, roupaEmLavagem];
             }
 
+            var avaliacao = null;
+
+            if(objetoResponse.Avaliacao){
+                avaliacao = {
+                    data: objetoResponse.Avaliacao.Data,
+                    notaDoAtendimento: objetoResponse.Avaliacao.NotaDoAtendimento,
+                    notaDaLavagem: objetoResponse.Avaliacao.NotaDaLavagem,
+                    notaDaPassagem: objetoResponse.Avaliacao.NotaDaPassagem,
+                    notaDaEntrega: objetoResponse.Avaliacao.NotaDaEntrega,
+                    comentarios: objetoResponse.Avaliacao.Comentarios,
+                    media: (parseInt(objetoResponse.Avaliacao.NotaDoAtendimento) + parseInt(objetoResponse.Avaliacao.NotaDaLavagem) + parseInt(objetoResponse.Avaliacao.NotaDaPassagem) + parseInt(objetoResponse.Avaliacao.NotaDaEntrega)) / 4,//objetoResponse.Media,
+                };
+            }
+
             const lavagem = {
                 oid: objetoResponse.Oid,
                 cliente: objetoResponse.Cliente,
@@ -144,7 +158,7 @@ export default class LavagemDetails extends React.Component {
                 unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
                 roupas: roupas,
                 status: objetoResponse.Status,
-                avaliacao: objetoResponse.Avaliacao,
+                avaliacao: avaliacao,
             };    
 
             this.setState({lavagem});
@@ -166,7 +180,7 @@ export default class LavagemDetails extends React.Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => this.navegarParaDetalhes(this.props, null)} style={styles.button}>
-                        <Image style={styles.icon} source={require('../../images/adicionar_32x32.png')} />
+                        <Image style={styles.icon} source={require('../../images/roupa-dobrada_32x32.png')} />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.button}>
