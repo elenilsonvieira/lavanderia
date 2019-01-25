@@ -196,7 +196,7 @@ export default class LavagemDetails extends React.Component {
 
                         <View style={styles.lavagemInfoContainer}>
                             <Text style={styles.lavagemInfoTitle}>Valor: </Text>
-                            <Text style={styles.lavagemInfo}>{lavagem.valor}</Text>
+                            <Text style={styles.lavagemInfo}>R$ {lavagem.valor}</Text>
                         </View>
 
                         <View style={styles.lavagemInfoContainer}>
@@ -206,7 +206,7 @@ export default class LavagemDetails extends React.Component {
 
                         <View style={styles.lavagemInfoContainer}>
                             <Text style={styles.lavagemInfoTitle}>Saldo Devedor: </Text>
-                            <Text style={styles.lavagemInfo}>{lavagem.saldoDevedor}</Text>
+                            <Text style={styles.lavagemInfo}>R$ {lavagem.saldoDevedor}</Text>
                         </View>
                     </View>
 
