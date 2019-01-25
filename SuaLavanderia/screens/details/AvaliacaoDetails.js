@@ -5,38 +5,31 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 export default class MovimentacaoDeCaixaDetails extends React.Component {
 
     state ={
-        oid: '',
-        valor: '0',
-        observacoes: '',
-        capital: 'Dinheiro',
         data: '',
-        modo: 'Saida',
-        dataTimePickerVisible: false,
+        notaDoAtendimento: '10',
+        notaDaLavagem: '10',
+        notaDaPassagem: '10',
+        notaDaEntrega: '10',
+        comentarios: '',
+        media: '10',
     };
 
     componentDidMount(){
-        const movimentacao = this.props.navigation.getParam('movimentacao');
         const lavagem = this.props.navigation.getParam('lavagem');
 
-        if(movimentacao != null){
-            const oid = movimentacao.oid;
-            const valor = movimentacao.valor.toString();
-            const observacoes = movimentacao.observacoes;
-            const capital = movimentacao.capital;
-            const data = movimentacao.data;
-            const modo = movimentacao.modo;
+        if(lavagem.avaliacao != null){
+            const data = lavagem.avaliacao.data;
+            const notaDoAtendimento = lavagem.avaliacao.notaDoAtendimento.toString();
+            const notaDaLavagem = lavagem.avaliacao.notaDaLavagem.toString();
+            const notaDaPassagem = lavagem.avaliacao.notaDaPassagem.toString();
+            const notaDaEntrega = lavagem.avaliacao.notaDaEntrega.toString();
+            const comentarios = lavagem.avaliacao.comentarios;
+            const media = lavagem.avaliacao.media.toString();
 
-            this.setState({oid, valor, observacoes, capital, data, modo});
-        }else{
-            this.dataEscolhida(new Date());
-
-            if(lavagem != null){
-                const valor = lavagem.valor.toString();
-                const modo = 'Entrada';
-
-                this.setState({valor, modo});
-            }
+            this.setState({data, notaDoAtendimento, notaDaLavagem, notaDaPassagem, notaDaEntrega, comentarios, media});
         }
+
+        this.setState({lavagem});
     }
 
     async salvar(props) {
@@ -44,47 +37,17 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const movimentacao = this.props.navigation.getParam('movimentacao');
         const lavagem = this.props.navigation.getParam('lavagem');
 
-        const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : email;
+        var argumentos = 'lavagemOid=' + lavagem.oid + '&notaDoAtendimento=' + this.state.notaDoAtendimento + '&notaDaLavagem=' + this.state.notaDaLavagem + '&notaDaPassagem=' + this.state.notaDaPassagem + '&notaDaEntrega=' + this.state.notaDaEntrega + '&comentarios=' + this.state.comentarios;
 
-        var capital = '0';
-
-        switch(this.state.capital){
-            case 'Dinheiro': capital = 0; break;
-            case 'Cheque': capital = 3; break;
-            case 'Boleto': capital = 4; break;
-            case 'PagSeguroDebito': capital = 6; break;
-            case 'PagSeguroCredito': capital = 7; break;
-            case 'TransferenciaBB': capital = 8; break;
-            case 'TransferenciaCaixa': capital = 9; break;
-            default: ;
-        }
-
-        var dataArray = this.state.data.split('/');
-        const data = dataArray[2] + '-'+ dataArray[1] + '-' + dataArray[0];
-
-        var argumentos = 'data=' + data + '&capital=' + capital + '&valor=' + this.state.valor + '&observacoes=' + this.state.observacoes + '&responsavelOid=' + responsavelOid + '&modo=' + this.state.modo;
-
-        if(movimentacao != null){
-            argumentos += '&oid=' + movimentacao.oid;
-        }
-
-        if(lavagem != null){
-            argumentos += '&lavagemOid=' + lavagem.oid;
-        }
-
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarAvaliacao.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             }).then(function(response){
-                alert(movimentacao == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
+                alert(lavagem.avaliacao == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
 
-                if(lavagem != null){
-                    props.navigation.state.params.reload();
-                }
-
+                props.navigation.state.params.reload();
                 props.navigation.goBack();
             }
             ).catch(function(error){
@@ -159,54 +122,46 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                 </View>
 
                 <View style={styles.movimentacaoContainer}>
-                    <Text style={styles.valorInfoTitle}>Oid: {this.state.oid}</Text>
+                    <Text style={styles.valorInfoTitle}>Data: {this.state.data}</Text>
+                    <Text style={styles.valorInfoTitle}>Média: {this.state.media}</Text>
 
-                    <Text style={styles.infoTitle}>Data: </Text>
-                    <TouchableOpacity onPress={() => this.setState({dataTimePickerVisible: true})}>
-                        <Text style={styles.boxDate}>{this.state.data}</Text>
-                    </TouchableOpacity>
-                    <DateTimePicker 
-                        isVisible={this.state.dataTimePickerVisible}
-                        onConfirm={this.dataEscolhida}
-                        onCancel={() => this.setState({dataTimePickerVisible: false})}
-                    />
-
-                    <Text style={styles.infoTitle}>Modo: </Text>
-                    <Picker
-                        style={styles.boxInput}
-                        selectedValue={this.state.modo}
-                        onValueChange={(itemValue, itemIndex) => this.setState({modo: itemValue})}>
-                        <Picker.Item label='Saída' value='Saida' />
-                        <Picker.Item label='Entrada' value='Entrada' />
-                    </Picker>
-
-                    <Text style={styles.infoTitle}>Valor: </Text>
+                    <Text style={styles.infoTitle}>Nota do Atendimento: </Text>
                     <TextInput
                         style={styles.boxInput}
-                        value={this.state.valor}
+                        value={this.state.notaDoAtendimento}
                         keyboardType='numeric'
-                        onChangeText={valor => this.setState({valor})}
+                        onChangeText={notaDoAtendimento => this.setState({notaDoAtendimento})}
                     />
 
-                    <Text style={styles.infoTitle}>Capital: </Text>
-                    <Picker
-                        style={styles.boxInput}
-                        selectedValue={this.state.capital}
-                        onValueChange={(itemValue, itemIndex) => this.setState({capital: itemValue})}>
-                        <Picker.Item label='Dinheiro' value='Dinheiro' />
-                        <Picker.Item label='Cheque' value='Cheque' />
-                        <Picker.Item label='Boleto' value='Boleto' />
-                        <Picker.Item label='PagSeguro Débito' value='PagSeguroDebito' />
-                        <Picker.Item label='PagSeguro Crédito' value='PagSeguroCredito' />
-                        <Picker.Item label='Transferência de/para BB' value='TransferenciaBB' />
-                        <Picker.Item label='Transferência de/para Caixa' value='TransferenciaCaixa' />
-                    </Picker>
-
-                    <Text style={styles.infoTitle}>Observações: </Text>
+                    <Text style={styles.infoTitle}>Nota da Lavagem: </Text>
                     <TextInput
                         style={styles.boxInput}
-                        value={this.state.observacoes}
-                        onChangeText={observacoes => this.setState({observacoes})}
+                        value={this.state.notaDaLavagem}
+                        keyboardType='numeric'
+                        onChangeText={notaDaLavagem => this.setState({notaDaLavagem})}
+                    />
+
+                    <Text style={styles.infoTitle}>Nota da Passagem: </Text>
+                    <TextInput
+                        style={styles.boxInput}
+                        value={this.state.notaDaPassagem}
+                        keyboardType='numeric'
+                        onChangeText={notaDaPassagem => this.setState({notaDaPassagem})}
+                    />
+
+                    <Text style={styles.infoTitle}>Nota da Entrega: </Text>
+                    <TextInput
+                        style={styles.boxInput}
+                        value={this.state.notaDaEntrega}
+                        keyboardType='numeric'
+                        onChangeText={notaDaEntrega => this.setState({notaDaEntrega})}
+                    />
+
+                    <Text style={styles.infoTitle}>Comentários: </Text>
+                    <TextInput
+                        style={styles.boxInput}
+                        value={this.state.comentarios}
+                        onChangeText={comentarios => this.setState({comentarios})}
                     />
                 </View>
             </View>
