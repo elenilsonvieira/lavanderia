@@ -33,7 +33,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
     }
 
     async salvar(props) {
-        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
+        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
 
@@ -51,7 +51,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                 props.navigation.goBack();
             }
             ).catch(function(error){
-                alert('Erro adicionando a movimentação de caixa.' + error);    
+                alert('Erro adicionando a avaliação.' + error);    
             });        
     }
 
