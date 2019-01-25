@@ -20,7 +20,7 @@ export default class LavagemScreen extends React.Component {
         dataInicial: '',
         dataFinal: '',
         nome: '',
-        status: '0',
+        status: '',
         objetos: [],
         modalVisible: false,
     };
