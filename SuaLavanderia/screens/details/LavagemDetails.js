@@ -36,6 +36,18 @@ export default class LavagemDetails extends React.Component {
         }
     }
 
+    avaliar(){
+        const lavagem = this.props.navigation.getParam('lavagem');
+        
+        if(lavagem.avaliacao){
+            alert("Essa lavagem já foi avaliada!");
+        }else if(lavagem.status != 'Entregue'){
+            alert("Essa lavagem ainda não foi entregue para poder ser avaliada!");
+        }else{
+            this.props.navigation.navigate('AvaliacaoDetails', {lavagem: lavagem, reload: this.buscar.bind(this)});
+        }
+    }
+
     async componentWillMount(){
         const lavagem = this.props.navigation.getParam('lavagem');
         const reload = true;//this.props.navigation.getParam('reload');
@@ -148,6 +160,10 @@ export default class LavagemDetails extends React.Component {
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => this.pagar()} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/movimentacao-de-caixa_32x32.png')} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => this.avaliar()} style={styles.button}>
+                        <Image style={styles.icon} source={require('../../images/avaliacao_32x32.png')} />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => this.navegarParaDetalhes(this.props, null)} style={styles.button}>

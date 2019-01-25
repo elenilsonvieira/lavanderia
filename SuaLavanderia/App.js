@@ -14,6 +14,7 @@ import LavagemScreen from './screens/LavagemScreen';
 import LavagemScreenCliente from './screens/LavagemScreenCliente';
 import MovimentacaoDeCaixaScreen from './screens/MovimentacaoDeCaixaScreen';
 import MovimentacaoDeCaixaDetails from './screens/details/MovimentacaoDeCaixaDetails';
+import AvaliacaoDetails from './screens/details/AvaliacaoDetails';
 import LavagemDetails from './screens/details/LavagemDetails';
 import LavagemDetailsCliente from './screens/details/LavagemDetailsCliente';
 import RoupaEmLavagemDetails from './screens/details/RoupaEmLavagemDetails';
@@ -155,6 +156,7 @@ const DrawerCliente = createDrawerNavigator(
 const StackAdministrador = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+    AvaliacaoDetails: AvaliacaoDetails,
     LavagemDetails: LavagemDetails,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupaDetails: RoupaDetails,
@@ -170,6 +172,7 @@ const StackAdministrador = createStackNavigator(
 const StackGerenteGeral = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+    AvaliacaoDetails: AvaliacaoDetails,
     LavagemDetails: LavagemDetails,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupaDetails: RoupaDetails,
@@ -185,6 +188,7 @@ const StackGerenteGeral = createStackNavigator(
 const StackSubGerenteGeral = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+    AvaliacaoDetails: AvaliacaoDetails,
     LavagemDetails: LavagemDetails,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupaDetails: RoupaDetails,
@@ -214,6 +218,7 @@ const StackGerenteDeOperacoes = createStackNavigator(
 const StackAtendente = createStackNavigator(
   {
     LavagemDetails: LavagemDetails,
+    AvaliacaoDetails: AvaliacaoDetails,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupaDetails: RoupaDetails,
     Drawer: DrawerAtendente,
@@ -228,6 +233,7 @@ const StackAtendente = createStackNavigator(
 const StackCliente = createStackNavigator(
   {
     LavagemDetails: LavagemDetailsCliente,
+    AvaliacaoDetails: AvaliacaoDetails,
     Drawer: DrawerCliente,
   },{
     initialRouteName: 'Drawer',
