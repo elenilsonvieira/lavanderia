@@ -23,6 +23,7 @@ import LoginScreen from './screens/LoginScreen';
 import LogoutScreen from './screens/LogoutScreen';
 import LoadingLoginScreen from './screens/LoadingLoginScreen';
 import RoupaDetails from './screens/details/RoupaDetails';
+import RoupasDoClienteScreen from './screens/RoupasDoClienteScreen';
 
 export default class App extends Component {
   render() {
@@ -162,6 +163,7 @@ const StackAdministrador = createStackNavigator(
     LavagemDetails: LavagemDetails,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupaDetails: RoupaDetails,
+    RoupasDoCliente: RoupasDoClienteScreen,
     Drawer: DrawerAdministrador,
   },{
     initialRouteName: 'Drawer',
@@ -178,6 +180,7 @@ const StackGerenteGeral = createStackNavigator(
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     LavagemDetails: LavagemDetails,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+    RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
     Drawer: DrawerGerenteGeral,
   },{
@@ -195,6 +198,7 @@ const StackSubGerenteGeral = createStackNavigator(
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     LavagemDetails: LavagemDetails,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+    RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
     Drawer: DrawerSubGerenteGeral,
   },{
@@ -211,6 +215,7 @@ const StackGerenteDeOperacoes = createStackNavigator(
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+    RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
     Drawer: DrawerGerenteDeOperacoes,
   },{
@@ -227,6 +232,7 @@ const StackAtendente = createStackNavigator(
     AvaliacaoDetails: AvaliacaoDetails,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+    RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
     Drawer: DrawerAtendente,
   },{

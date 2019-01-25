@@ -145,6 +145,14 @@ export default class RoupaEmLavagemDetails extends React.Component {
         }
     };
 
+    navegarParaRoupasDoCliente(props, roupa){
+        const clienteOid = this.state.clienteOid;
+        const cliente = this.state.cliente;
+        const lavagemOid = this.state.lavagemOid;
+
+        props.navigation.navigate('RoupasDoCliente', {clienteOid: clienteOid, cliente: cliente, reload: this.reload.bind(this)});
+    }
+
     navegarParaDetalhes(props, roupa){
         const clienteOid = this.state.clienteOid;
         const cliente = this.state.cliente;
@@ -158,6 +166,10 @@ export default class RoupaEmLavagemDetails extends React.Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.infoTitle}>Roupa em Lavagem</Text>
+
+                    <TouchableOpacity onPress={() => this.navegarParaRoupasDoCliente(this.props)} style={styles.button}>
+                        <Image style={styles.icon} source={require('../../images/guarda-roupa_32x32.png')} />
+                    </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => this.salvar(this.props)} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/salvar_32x32.png')} />
