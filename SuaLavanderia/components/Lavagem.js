@@ -40,6 +40,11 @@ export default class Lavagem extends React.Component {
                         <Text style={styles.lavagemInfoTitle}>Paga: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.lavagem.paga}</Text>
                     </View>
+
+                    <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Avaliação: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.lavagem.avaliacao != null ? this.props.lavagem.avaliacao.media : null}</Text>
+                    </View>
                 </View>
             </View>
         );
