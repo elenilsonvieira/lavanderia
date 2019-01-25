@@ -107,7 +107,8 @@ export default class RoupasDoClienteScreen extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.infoTitle}>Roupas do Cliente: {this.state.cliente}</Text>
+                    <Text style={styles.infoTitle}>Roupas do Cliente: </Text>
+                    <Text style={styles.infoTitleCliente}>{this.state.cliente}</Text>
                 </View>
                 <ScrollView>                    
                     { this.state.objetos.map(roupa => 
@@ -165,8 +166,11 @@ const styles = StyleSheet.create(
         lavagemInfoContainerCliente: {
             alignItems: 'center',
         },
-        lavagemInfoTitle: {
+        infoTitle: {
             fontWeight: 'bold',
+        },
+        infoTitleCliente: {
+            marginRight: 20,
         },
         lavagemInfo: {
         },
