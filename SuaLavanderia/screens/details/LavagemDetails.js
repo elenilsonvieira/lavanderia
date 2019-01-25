@@ -222,6 +222,11 @@ export default class LavagemDetails extends React.Component {
                             <Text style={styles.lavagemInfoTitle}>Saldo Devedor: </Text>
                             <Text style={styles.lavagemInfo}>R$ {lavagem.saldoDevedor}</Text>
                         </View>
+
+                        <View style={styles.lavagemInfoContainer}>
+                            <Text style={styles.lavagemInfoTitle}>Avaliação: </Text>
+                            <Text style={styles.lavagemInfo}>{lavagem.avaliacao != null ? lavagem.avaliacao.media : null}</Text>
+                        </View>
                     </View>
 
                     <View style={styles.roupasContainer}>
