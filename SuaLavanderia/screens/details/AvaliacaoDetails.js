@@ -1,8 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
-import DateTimePicker from 'react-native-modal-datetime-picker';
 
-export default class MovimentacaoDeCaixaDetails extends React.Component {
+export default class AvaliacaoDetails extends React.Component {
 
     state ={
         data: '',
@@ -122,9 +121,6 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                 </View>
 
                 <View style={styles.movimentacaoContainer}>
-                    <Text style={styles.valorInfoTitle}>Data: {this.state.data}</Text>
-                    <Text style={styles.valorInfoTitle}>Média: {this.state.media}</Text>
-
                     <Text style={styles.infoTitle}>Nota do Atendimento: </Text>
                     <TextInput
                         style={styles.boxInput}

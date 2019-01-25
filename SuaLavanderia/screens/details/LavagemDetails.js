@@ -42,7 +42,8 @@ export default class LavagemDetails extends React.Component {
         if(lavagem.status != 'Entregue'){
             alert("Essa lavagem ainda não foi entregue para poder ser avaliada!");
         }else{
-            this.props.navigation.navigate('AvaliacaoDetails', {lavagem: lavagem, reload: this.buscar.bind(this)});
+            var tela = lavagem.avaliacao == null ? 'AvaliacaoDetails' : 'AvaliacaoDetailsSoLeitura';
+            this.props.navigation.navigate(tela, {lavagem: lavagem, reload: this.buscar.bind(this)});
         }
     }
 
