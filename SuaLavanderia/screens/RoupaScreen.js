@@ -115,7 +115,7 @@ export default class RoupaScreen extends React.Component {
                 cliente: roupaResponse.Cliente,
                 clienteOid: roupaResponse.ClienteOid,
                 cores: roupaResponse.Cores,
-                ultimaLavagem: '',//roupaResponse.UltimaLavagem,
+                ultimaLavagem: roupaResponse.UltimaLavagem,
             };
 
             this.setState({roupa, modalVisible: false});
