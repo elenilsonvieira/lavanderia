@@ -34,7 +34,9 @@ export default class AvaliacaoDetailsSoLeitura extends React.Component {
     render(){
         return(
             <View style={styles.container}>
-                <View style={styles.header}></View>
+                <View style={styles.header}>
+                <Text style={styles.infoTitle}>Avaliação de Lavagem</Text>
+                </View>
 
                 <View style={styles.movimentacaoContainer}>
                     <Text style={styles.valorInfoTitle}>Data: </Text>

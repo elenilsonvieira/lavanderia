@@ -171,6 +171,8 @@ export default class LavagemDetails extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
+                    <Text style={styles.infoTitle}>Lavagem</Text>
+
                     <TouchableOpacity onPress={() => this.pagar()} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/movimentacao-de-caixa_32x32.png')} />
                     </TouchableOpacity>

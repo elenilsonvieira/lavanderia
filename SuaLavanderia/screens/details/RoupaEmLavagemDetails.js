@@ -157,6 +157,8 @@ export default class RoupaEmLavagemDetails extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
+                    <Text style={styles.infoTitle}>Roupa em Lavagem</Text>
+
                     <TouchableOpacity onPress={() => this.salvar(this.props)} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/salvar_32x32.png')} />
                     </TouchableOpacity>
