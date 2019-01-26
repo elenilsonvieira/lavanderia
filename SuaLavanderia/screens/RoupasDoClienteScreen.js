@@ -109,11 +109,11 @@ export default class RoupasDoClienteScreen extends React.Component {
             var objetosFiltrados = [];
 
             this.state.objetos.map(objeto => {
-                if(objeto.tipo.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase()) ||
-                    objeto.marca.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase() ||
-                    objeto.chave.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase())) ||
-                    objeto.observacao.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase()) ||
-                    objeto.cores.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase())){ 
+                if((objeto.tipo != null && objeto.tipo.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase())) ||
+                    (objeto.marca != null && objeto.marca.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase()) ||
+                    (objeto.chave != null && objeto.chave.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase()))) ||
+                    (objeto.observacao != null && objeto.observacao.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase())) ||
+                    (objeto.cores != null && objeto.cores.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase()))){ 
                     
                         objetosFiltrados = [...objetosFiltrados, objeto];
                 }
@@ -147,7 +147,7 @@ export default class RoupasDoClienteScreen extends React.Component {
                     </View>
                 </View>
                 <ScrollView>                    
-                    { this.state.objetos.map(roupa => 
+                    { this.state.objetosFiltrados.map(roupa => 
                         <TouchableOpacity key={roupa.oid} onPress={() => this.escolherRoupa(this.props, roupa)}>
                             <Roupa roupa={roupa} />
                         </TouchableOpacity>
