@@ -58,10 +58,14 @@ export default class AvaliacaoDetails extends React.Component {
             { 
                 method: 'post' 
             }).then(function(response){
-                alert(lavagem.avaliacao == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
+                if(response.status == 200){
+                    alert(lavagem.avaliacao == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
 
-                props.navigation.state.params.reload();
-                props.navigation.goBack();
+                    props.navigation.state.params.reload();
+                    props.navigation.goBack();
+                }else{
+                    alert('Erro adicionando/alterando avaliação.');    
+                }
             }
             ).catch(function(error){
                 alert('Erro adicionando a avaliação.' + error);    

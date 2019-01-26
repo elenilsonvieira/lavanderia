@@ -17,6 +17,7 @@ import MovimentacaoDeCaixaDetails from './screens/details/MovimentacaoDeCaixaDet
 import AvaliacaoDetails from './screens/details/AvaliacaoDetails';
 import AvaliacaoDetailsSoLeitura from './screens/details/AvaliacaoDetailsSoLeitura';
 import LavagemDetails from './screens/details/LavagemDetails';
+import LavagemDetailsEdit from './screens/details/LavagemDetailsEdit';
 import LavagemDetailsCliente from './screens/details/LavagemDetailsCliente';
 import RoupaEmLavagemDetails from './screens/details/RoupaEmLavagemDetails';
 import LoginScreen from './screens/LoginScreen';
@@ -161,6 +162,7 @@ const StackAdministrador = createStackNavigator(
     AvaliacaoDetails: AvaliacaoDetails,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     LavagemDetails: LavagemDetails,
+    LavagemDetailsEdit: LavagemDetailsEdit,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupaDetails: RoupaDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
@@ -179,6 +181,7 @@ const StackGerenteGeral = createStackNavigator(
     AvaliacaoDetails: AvaliacaoDetails,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     LavagemDetails: LavagemDetails,
+    LavagemDetailsEdit: LavagemDetailsEdit,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
@@ -197,6 +200,7 @@ const StackSubGerenteGeral = createStackNavigator(
     AvaliacaoDetails: AvaliacaoDetails,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     LavagemDetails: LavagemDetails,
+    LavagemDetailsEdit: LavagemDetailsEdit,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
@@ -212,6 +216,7 @@ const StackSubGerenteGeral = createStackNavigator(
 const StackGerenteDeOperacoes = createStackNavigator(
   {
     LavagemDetails: LavagemDetails,
+    LavagemDetailsEdit: LavagemDetailsEdit,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
@@ -229,6 +234,7 @@ const StackGerenteDeOperacoes = createStackNavigator(
 const StackAtendente = createStackNavigator(
   {
     LavagemDetails: LavagemDetails,
+    LavagemDetailsEdit: LavagemDetailsEdit,
     AvaliacaoDetails: AvaliacaoDetails,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
