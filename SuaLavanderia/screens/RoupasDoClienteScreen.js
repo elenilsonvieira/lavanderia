@@ -1,16 +1,17 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity, TextInput } from 'react-native';
 import Roupa from '../components/Roupa';
 import LoadingModal from '../components/modals/LoadingModal';
 
 export default class RoupasDoClienteScreen extends React.Component {
 
     state ={
-        nome: '',
+        textoDaPesquisa: '',
         modalVisible: false,
         cliente: '',
         clienteOid: '',
         objetos: [],
+        objetosFiltrados: [],
         modalVisible: false,
     };
 
@@ -95,7 +96,7 @@ export default class RoupasDoClienteScreen extends React.Component {
             objetos = [...objetos, roupa];    
         }
 
-        this.setState({objetos, modalVisible: false})
+        this.setState({objetos, modalVisible: false, objetosFiltrados: objetos});
     };
 
     async escolherRoupa(props, roupa) {
@@ -103,12 +104,47 @@ export default class RoupasDoClienteScreen extends React.Component {
         props.navigation.goBack();
     }
 
+    filtrar =  () => {        
+        if(this.state.textoDaPesquisa.trim() !== '') {
+            var objetosFiltrados = [];
+
+            this.state.objetos.map(objeto => {
+                if(objeto.tipo.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase()) ||
+                    objeto.marca.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase() ||
+                    objeto.chave.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase())) ||
+                    objeto.observacao.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase()) ||
+                    objeto.cores.toLowerCase().includes(this.state.textoDaPesquisa.toLowerCase())){ 
+                    
+                        objetosFiltrados = [...objetosFiltrados, objeto];
+                }
+            });
+
+            this.setState({objetosFiltrados});
+        }else{
+            var objetosFiltrados = [...this.state.objetos];
+            this.setState({objetosFiltrados});
+        }
+    };
+
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.infoTitle}>Roupas do Cliente: </Text>
-                    <Text style={styles.infoTitleCliente}>{this.state.cliente}</Text>
+                    <View style={styles.viewHeader}>
+                        <View style={styles.viewHeader}>
+                            <TextInput
+                                placeholder='Pesquisar'
+                                style={styles.boxInput}
+                                value={this.state.textoDaPesquisa}
+                                onChangeText={textoDaPesquisa => this.setState({textoDaPesquisa})} 
+                            />
+                        </View>
+                        <View style={styles.viewBotao}>
+                            <TouchableOpacity onPress={this.filtrar} style={styles.button}>
+                                <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
                 </View>
                 <ScrollView>                    
                     { this.state.objetos.map(roupa => 
@@ -132,11 +168,18 @@ const styles = StyleSheet.create(
             backgroundColor: '#333',
           },
           header:{
-            alignItems: 'center',
             justifyContent: 'flex-end',
             height: 40,
             backgroundColor: '#FFF',
+          },
+          viewHeader:{
             flexDirection: 'row',
+            justifyContent: 'flex-end',
+            marginTop: 5,
+          },
+          viewHeaderSegundaLinha: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
           },
           headerText: {
               fontSize: 22,

@@ -341,7 +341,6 @@ const styles = StyleSheet.create(
             justifyContent: 'space-between',
             height: 130,
             backgroundColor: '#FFF',
-            flexDirection: 'row',
           },
           headerText: {
               fontSize: 22,
