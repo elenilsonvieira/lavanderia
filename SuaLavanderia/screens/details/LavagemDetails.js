@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity } from 'react-native';
 import RoupaEmLavagem from '../../components/RoupaEmLavagem';
+import LoadingModal from '../../components/modals/LoadingModal';
 
 export default class LavagemDetails extends React.Component {
 
@@ -97,76 +98,85 @@ export default class LavagemDetails extends React.Component {
         var email = usuario.email;
         var oid = this.state.lavagem.oid;
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
-            { 
-                method: 'post' 
-            });
-        const response = await call.json();
+        this.setState({modalVisible: true});
 
-        var objetos = [];
+        try{
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                });
+            const response = await call.json();
 
-        for(index in response){
-            const objetoResponse = response[index];
-            var roupas = [];
+            var objetos = [];
 
-            for(indexRoupa in objetoResponse.Roupas){
-                const roupaResponse = objetoResponse.Roupas[indexRoupa];
+            for(index in response){
+                const objetoResponse = response[index];
+                var roupas = [];
 
-                const roupaEmLavagem = {
-                    oid: roupaResponse.Oid,
-                    quantidade: roupaResponse.Quantidade,
-                    observacoes: roupaResponse.Observacoes,
-                    soPassar: roupaResponse.SoPassar,
-                    roupa: {
-                        oid: roupaResponse.Roupa.Oid,
-                        tipo: roupaResponse.Roupa.Tipo,
-                        tecido: roupaResponse.Roupa.Tecido,
-                        tamanho: roupaResponse.Roupa.Tamanho,
-                        marca: roupaResponse.Roupa.Marca,
-                        cliente: roupaResponse.Roupa.Cliente,
-                        clienteOid: roupaResponse.Roupa.ClienteOid,
-                        observacao: roupaResponse.Roupa.Observacao,
-                        codigo: roupaResponse.Roupa.Codigo,
-                        chave: roupaResponse.Roupa.Chave,
-                        cores: roupaResponse.Roupa.Cores,
-                    },
-                };
+                for(indexRoupa in objetoResponse.Roupas){
+                    const roupaResponse = objetoResponse.Roupas[indexRoupa];
 
-                roupas = [...roupas, roupaEmLavagem];
+                    const roupaEmLavagem = {
+                        oid: roupaResponse.Oid,
+                        quantidade: roupaResponse.Quantidade,
+                        observacoes: roupaResponse.Observacoes,
+                        soPassar: roupaResponse.SoPassar,
+                        roupa: {
+                            oid: roupaResponse.Roupa.Oid,
+                            tipo: roupaResponse.Roupa.Tipo,
+                            tecido: roupaResponse.Roupa.Tecido,
+                            tamanho: roupaResponse.Roupa.Tamanho,
+                            marca: roupaResponse.Roupa.Marca,
+                            cliente: roupaResponse.Roupa.Cliente,
+                            clienteOid: roupaResponse.Roupa.ClienteOid,
+                            observacao: roupaResponse.Roupa.Observacao,
+                            codigo: roupaResponse.Roupa.Codigo,
+                            chave: roupaResponse.Roupa.Chave,
+                            cores: roupaResponse.Roupa.Cores,
+                        },
+                    };
+
+                    roupas = [...roupas, roupaEmLavagem];
+                }
+
+                var avaliacao = null;
+
+                if(objetoResponse.Avaliacao){
+                    avaliacao = {
+                        data: objetoResponse.Avaliacao.Data,
+                        notaDoAtendimento: objetoResponse.Avaliacao.NotaDoAtendimento,
+                        notaDaLavagem: objetoResponse.Avaliacao.NotaDaLavagem,
+                        notaDaPassagem: objetoResponse.Avaliacao.NotaDaPassagem,
+                        notaDaEntrega: objetoResponse.Avaliacao.NotaDaEntrega,
+                        comentarios: objetoResponse.Avaliacao.Comentarios,
+                        media: (parseInt(objetoResponse.Avaliacao.NotaDoAtendimento) + parseInt(objetoResponse.Avaliacao.NotaDaLavagem) + parseInt(objetoResponse.Avaliacao.NotaDaPassagem) + parseInt(objetoResponse.Avaliacao.NotaDaEntrega)) / 4,//objetoResponse.Media,
+                    };
+                }
+
+                const lavagem = {
+                    oid: objetoResponse.Oid,
+                    cliente: objetoResponse.Cliente,
+                    clienteOid: objetoResponse.ClienteOid,
+                    dataDeRecebimento: objetoResponse.DataDeRecebimento,
+                    dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
+                    dataDeEntrega: objetoResponse.DataDeEntrega,
+                    valor: objetoResponse.Valor,
+                    saldoDevedor: objetoResponse.SaldoDevedor,
+                    paga: objetoResponse.Paga,
+                    unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
+                    unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
+                    roupas: roupas,
+                    status: objetoResponse.Status,
+                    avaliacao: avaliacao,
+                };    
+
+                this.setState({lavagem});
             }
 
-            var avaliacao = null;
-
-            if(objetoResponse.Avaliacao){
-                avaliacao = {
-                    data: objetoResponse.Avaliacao.Data,
-                    notaDoAtendimento: objetoResponse.Avaliacao.NotaDoAtendimento,
-                    notaDaLavagem: objetoResponse.Avaliacao.NotaDaLavagem,
-                    notaDaPassagem: objetoResponse.Avaliacao.NotaDaPassagem,
-                    notaDaEntrega: objetoResponse.Avaliacao.NotaDaEntrega,
-                    comentarios: objetoResponse.Avaliacao.Comentarios,
-                    media: (parseInt(objetoResponse.Avaliacao.NotaDoAtendimento) + parseInt(objetoResponse.Avaliacao.NotaDaLavagem) + parseInt(objetoResponse.Avaliacao.NotaDaPassagem) + parseInt(objetoResponse.Avaliacao.NotaDaEntrega)) / 4,//objetoResponse.Media,
-                };
-            }
-
-            const lavagem = {
-                oid: objetoResponse.Oid,
-                cliente: objetoResponse.Cliente,
-                clienteOid: objetoResponse.ClienteOid,
-                dataDeRecebimento: objetoResponse.DataDeRecebimento,
-                dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
-                dataDeEntrega: objetoResponse.DataDeEntrega,
-                valor: objetoResponse.Valor,
-                saldoDevedor: objetoResponse.SaldoDevedor,
-                paga: objetoResponse.Paga,
-                unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
-                unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
-                roupas: roupas,
-                status: objetoResponse.Status,
-                avaliacao: avaliacao,
-            };    
-
-            this.setState({lavagem});
+            this.setState({modalVisible: false});
+        }catch{
+            this.setState({modalVisible: false});
+            alert('Erro buscando lavagem');
         }
     };
 
@@ -259,6 +269,8 @@ export default class LavagemDetails extends React.Component {
                         </TouchableOpacity>
                     )}
                 </ScrollView>
+
+                <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );
     }
