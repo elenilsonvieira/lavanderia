@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
+import LoadingModal from '../../components/modals/LoadingModal';
 
 export default class RoupaEmLavagemDetails extends React.Component {
 
@@ -12,6 +13,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
         clienteOid: '',
         lavagemOid: '',
         oid: '',
+        modalVisible: false,
     };
 
     componentDidMount(){
@@ -112,6 +114,8 @@ export default class RoupaEmLavagemDetails extends React.Component {
     };
 
     buscar = async () => {
+        this.setState({modalVisible: true});
+
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
@@ -137,6 +141,8 @@ export default class RoupaEmLavagemDetails extends React.Component {
             oid: roupaResponse.Oid,
             cores: roupaResponse.Cores,
         };
+
+        this.setState({modalVisible: false});
 
         if(this.state.clienteOid == roupa.clienteOid){
             this.setState({roupa});
@@ -275,6 +281,8 @@ export default class RoupaEmLavagemDetails extends React.Component {
                         <Text style={styles.roupaInfo}>{this.state.roupa.observacao}</Text>
                     </View>
                 </View>
+
+                <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );
     }
