@@ -71,7 +71,7 @@ export default class LavagemDetailsEdit extends React.Component {
             default: ;
         }
 
-        var argumentos = 'status=' + status + '&valor=' & this.state.valor + '&lavagemOid=' + lavagem.oid;
+        var argumentos = 'status=' + status + '&valor=' + this.state.valor + '&oid=' + lavagem.oid;
 
         const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
