@@ -145,7 +145,7 @@ export default class RoupasDoClienteScreen extends React.Component {
                                 placeholder='Pesquisar'
                                 style={styles.boxInput}
                                 value={this.state.textoDaPesquisa}
-                                onChangeText={textoDaPesquisa => this.filtrarPorLetra(textoDaPesquisa)} 
+                                onChangeText={textoDaPesquisa => this.setState({textoDaPesquisa})} 
                             />
                         </View>
                         <View style={styles.viewBotao}>
