@@ -104,7 +104,9 @@ export default class RoupasDoClienteScreen extends React.Component {
         props.navigation.goBack();
     }
 
-    filtrar =  () => {        
+    filtrar =  () => {    
+        this.setState({modalVisible: true});
+
         if(this.state.textoDaPesquisa.trim() !== '') {
             var objetosFiltrados = [];
 
@@ -124,6 +126,8 @@ export default class RoupasDoClienteScreen extends React.Component {
             var objetosFiltrados = [...this.state.objetos];
             this.setState({objetosFiltrados});
         }
+
+        this.setState({modalVisible: false});
     };
 
     render(){

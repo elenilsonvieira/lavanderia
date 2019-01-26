@@ -120,34 +120,39 @@ export default class RoupaEmLavagemDetails extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const roupaCall = await fetch(`http://painel.sualavanderia.com.br/api/BuscarRoupa.aspx?oid=${this.state.chave}&login=${email}&senha=${hash}`, 
-            { 
-                method: 'post' 
-            });
+        try{
+            const roupaCall = await fetch(`http://painel.sualavanderia.com.br/api/BuscarRoupa.aspx?oid=${this.state.chave}&login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                });
 
-        const response = await roupaCall.json();
-        var roupaResponse = response[0];
+            const response = await roupaCall.json();
+            var roupaResponse = response[0];
 
-        const roupa = {
-            tipo: roupaResponse.Tipo,
-            tecido: roupaResponse.Tecido,
-            tamanho: roupaResponse.Tamanho,
-            marca: roupaResponse.Marca,
-            observacao: roupaResponse.Observacao,
-            codigo: roupaResponse.Codigo,
-            chave: roupaResponse.Chave,
-            cliente: roupaResponse.Cliente,
-            clienteOid: roupaResponse.ClienteOid,
-            oid: roupaResponse.Oid,
-            cores: roupaResponse.Cores,
-        };
+            const roupa = {
+                tipo: roupaResponse.Tipo,
+                tecido: roupaResponse.Tecido,
+                tamanho: roupaResponse.Tamanho,
+                marca: roupaResponse.Marca,
+                observacao: roupaResponse.Observacao,
+                codigo: roupaResponse.Codigo,
+                chave: roupaResponse.Chave,
+                cliente: roupaResponse.Cliente,
+                clienteOid: roupaResponse.ClienteOid,
+                oid: roupaResponse.Oid,
+                cores: roupaResponse.Cores,
+            };
 
-        this.setState({modalVisible: false});
+            this.setState({modalVisible: false});
 
-        if(this.state.clienteOid == roupa.clienteOid){
-            this.setState({roupa});
-        }else{
-            alert('Essa roupa não pertece ao dono da Lavagem');
+            if(this.state.clienteOid == roupa.clienteOid){
+                this.setState({roupa});
+            }else{
+                alert('Essa roupa não pertece ao dono da Lavagem');
+            }
+        }catch{
+            this.setState({modalVisible: false});
+            alert('Erro buscando roupa');
         }
     };
 
