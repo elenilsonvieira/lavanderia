@@ -130,6 +130,11 @@ export default class RoupasDoClienteScreen extends React.Component {
         this.setState({modalVisible: false});
     };
 
+    filtrarPorLetra = (textoDaPesquisa) => {
+        this.setState({textoDaPesquisa});
+        this.filtrar();
+    };
+
     render(){
         return(
             <View style={styles.container}>
@@ -140,7 +145,7 @@ export default class RoupasDoClienteScreen extends React.Component {
                                 placeholder='Pesquisar'
                                 style={styles.boxInput}
                                 value={this.state.textoDaPesquisa}
-                                onChangeText={textoDaPesquisa => this.setState({textoDaPesquisa})} 
+                                onChangeText={textoDaPesquisa => this.filtrarPorLetra(textoDaPesquisa)} 
                             />
                         </View>
                         <View style={styles.viewBotao}>
