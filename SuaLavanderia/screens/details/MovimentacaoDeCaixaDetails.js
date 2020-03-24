@@ -11,6 +11,8 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         capital: 'Dinheiro',
         data: '',
         modo: 'Saida',
+        contaDeEntrada: '',
+        contaDeSaida: '',
         dataTimePickerVisible: false,
     };
 
@@ -25,8 +27,10 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             const capital = movimentacao.capital;
             const data = movimentacao.data;
             const modo = movimentacao.modo;
+            const contaDeEntrada = movimentacao.contaDeEntrada;
+            const contaDeSaida = movimentacao.contaDeSaida;
 
-            this.setState({oid, valor, observacoes, capital, data, modo});
+            this.setState({oid, valor, observacoes, capital, data, modo, contaDeEntrada, contaDeSaida});
         }else{
             this.dataEscolhida(new Date());
 
@@ -59,13 +63,14 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             case 'PagSeguroCredito': capital = 7; break;
             case 'TransferenciaBB': capital = 8; break;
             case 'TransferenciaCaixa': capital = 9; break;
+            case 'PicPay': capital = 10; break;
             default: ;
         }
 
         var dataArray = this.state.data.split('/');
         const data = dataArray[2] + '-'+ dataArray[1] + '-' + dataArray[0];
 
-        var argumentos = 'data=' + data + '&capital=' + capital + '&valor=' + this.state.valor + '&observacoes=' + this.state.observacoes + '&responsavelOid=' + responsavelOid + '&modo=' + this.state.modo;
+        var argumentos = 'data=' + data + '&capital=' + capital + '&valor=' + this.state.valor + '&observacoes=' + this.state.observacoes + '&responsavelOid=' + responsavelOid + '&modo=' + this.state.modo + '&contaDeEntrada=' + this.state.contaDeEntrada + '&contaDeSaida=' + this.state.contaDeSaida;
 
         if(movimentacao != null){
             argumentos += '&oid=' + movimentacao.oid;
