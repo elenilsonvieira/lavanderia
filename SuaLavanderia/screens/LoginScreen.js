@@ -56,7 +56,7 @@ export default class LoginScreen extends Component {
               papel: usuarioResponse.Papel,
               hashDaSenha: hashDaSenha,
             };
-
+ 
             await AsyncStorage.setItem("@SuaLavanderia:usuario", JSON.stringify(usuario));
             await AsyncStorage.setItem("@SuaLavanderia:ultimoEmail", usuario.email);
             this.setState({modalVisible: false});

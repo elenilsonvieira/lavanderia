@@ -121,6 +121,21 @@ const DrawerGerenteDeOperacoes = createDrawerNavigator(
   }
 );
 
+const DrawerSupervisorDeOperacoes = createDrawerNavigator(
+  {
+    Home: HomeScreen,
+    Lavagem: LavagemScreen,
+    Roupa: RoupaScreen,
+    Sobre: SobreScreen,
+    Logout: LogoutScreen,
+  },{
+    initialRouteName: 'Home',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
 const DrawerAtendente = createDrawerNavigator(
   {
     Home: HomeScreen,
@@ -239,6 +254,24 @@ const StackGerenteDeOperacoes = createStackNavigator(
   }
 );
 
+const StackSupervisorDeOperacoes = createStackNavigator(
+  {
+    LavagemDetails: LavagemDetails,
+    LavagemDetailsEdit: LavagemDetailsEdit,
+    AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
+    AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
+    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+    RoupasDoCliente: RoupasDoClienteScreen,
+    RoupaDetails: RoupaDetails,
+    Drawer: DrawerSupervisorDeOperacoes,
+  },{
+    initialRouteName: 'Drawer',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
 const StackAtendente = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
@@ -282,6 +315,7 @@ const LoginStack = createSwitchNavigator(
     StackGerenteGeral: StackGerenteGeral,
     StackSubGerenteGeral: StackSubGerenteGeral,
     StackGerenteDeOperacoes: StackGerenteDeOperacoes,
+    StackSupervisorDeOperacoes: StackSupervisorDeOperacoes,
     StackAtendente: StackAtendente,
     StackCliente: StackCliente,
   },{
