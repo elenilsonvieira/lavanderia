@@ -115,7 +115,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
             argumentos += `&modo=${this.state.modo}`;
         }
 
-        alert(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`);
+        // alert(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`);
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -143,8 +143,8 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
                     responsavelOid: objetoResponse.ResponsavelOid,
                     conferidor: objetoResponse.Conferidor,
                     lavagem: objetoResponse.Lavagem,
-                    contaDeEntrada: objetoResponse.contaDeEntrada,
-                    contaDeSaida: objetoResponse.contaDeSaida,
+                    contaDeEntrada: objetoResponse.ContaDeEntrada,
+                    contaDeSaida: objetoResponse.ContaDeSaida,
                 };    
 
                 objetos = [...objetos, objeto];
