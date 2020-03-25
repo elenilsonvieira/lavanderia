@@ -16,6 +16,7 @@ import MovimentacaoDeCaixaScreen from './screens/MovimentacaoDeCaixaScreen';
 import CaixaScreen from './screens/CaixaScreen';
 import MovimentacaoDeCaixaDetails from './screens/details/MovimentacaoDeCaixaDetails';
 import CaixaDetails from './screens/details/CaixaDetails';
+import CaixaDetailsSoLeitura from './screens/details/CaixaDetailsSoLeitura';
 import AvaliacaoDetails from './screens/details/AvaliacaoDetails';
 import AvaliacaoDetailsSoLeitura from './screens/details/AvaliacaoDetailsSoLeitura';
 import LavagemDetails from './screens/details/LavagemDetails';
@@ -161,6 +162,7 @@ const StackAdministrador = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
     CaixaDetails: CaixaDetails,
+    CaixaDetailsSoLeitura: CaixaDetailsSoLeitura,
     AvaliacaoDetails: AvaliacaoDetails,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     LavagemDetails: LavagemDetails,
@@ -181,6 +183,7 @@ const StackGerenteGeral = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
     CaixaDetails: CaixaDetails,
+    CaixaDetailsSoLeitura: CaixaDetailsSoLeitura,
     AvaliacaoDetails: AvaliacaoDetails,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     LavagemDetails: LavagemDetails,
@@ -201,6 +204,7 @@ const StackSubGerenteGeral = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
     CaixaDetails: CaixaDetails,
+    CaixaDetailsSoLeitura: CaixaDetailsSoLeitura,
     AvaliacaoDetails: AvaliacaoDetails,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     LavagemDetails: LavagemDetails,
@@ -239,6 +243,7 @@ const StackAtendente = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
     CaixaDetails: CaixaDetails,
+    CaixaDetailsSoLeitura: CaixaDetailsSoLeitura,
     LavagemDetails: LavagemDetails,
     LavagemDetailsEdit: LavagemDetailsEdit,
     AvaliacaoDetails: AvaliacaoDetails,

@@ -310,7 +310,7 @@ export default class CaixaScreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('CaixaDetails', {objeto: objeto})}>
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('CaixaDetailsSoLeitura', {objeto: objeto})}>
                             <Caixa key={objeto.oid} objeto={objeto} />
                         </TouchableOpacity>
                     )}
