@@ -13,7 +13,9 @@ import MarcaScreen from './screens/MarcaScreen';
 import LavagemScreen from './screens/LavagemScreen';
 import LavagemScreenCliente from './screens/LavagemScreenCliente';
 import MovimentacaoDeCaixaScreen from './screens/MovimentacaoDeCaixaScreen';
+import CaixaScreen from './screens/CaixaScreen';
 import MovimentacaoDeCaixaDetails from './screens/details/MovimentacaoDeCaixaDetails';
+import CaixaDetails from './screens/details/CaixaDetails';
 import AvaliacaoDetails from './screens/details/AvaliacaoDetails';
 import AvaliacaoDetailsSoLeitura from './screens/details/AvaliacaoDetailsSoLeitura';
 import LavagemDetails from './screens/details/LavagemDetails';
@@ -40,6 +42,7 @@ const DrawerAdministrador = createDrawerNavigator(
     Lavagem: LavagemScreen,
     Roupa: RoupaScreen,
     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
+    Caixa: CaixaScreen,
     Tipo: TipoScreen,
     Tamanho: TamanhoScreen,
     Tecido: TecidoScreen,
@@ -62,6 +65,7 @@ const DrawerGerenteGeral = createDrawerNavigator(
     Lavagem: LavagemScreen,
     Roupa: RoupaScreen,
     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
+    Caixa: CaixaScreen,
     Tipo: TipoScreen,
     Tamanho: TamanhoScreen,
     Tecido: TecidoScreen,
@@ -84,6 +88,7 @@ const DrawerSubGerenteGeral = createDrawerNavigator(
     Lavagem: LavagemScreen,
     Roupa: RoupaScreen,
     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
+    Caixa: CaixaScreen,
     Tipo: TipoScreen,
     Tamanho: TamanhoScreen,
     Tecido: TecidoScreen,
@@ -105,12 +110,6 @@ const DrawerGerenteDeOperacoes = createDrawerNavigator(
     Home: HomeScreen,
     Lavagem: LavagemScreen,
     Roupa: RoupaScreen,
-    Tipo: TipoScreen,
-    Tamanho: TamanhoScreen,
-    Tecido: TecidoScreen,
-    Cor: CorScreen,
-    Marca: MarcaScreen,
-    Unidade: UnidadeScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -126,6 +125,8 @@ const DrawerAtendente = createDrawerNavigator(
     Home: HomeScreen,
     Lavagem: LavagemScreen,
     Roupa: RoupaScreen,
+    MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
+    Caixa: CaixaScreen,
     Tipo: TipoScreen,
     Tamanho: TamanhoScreen,
     Tecido: TecidoScreen,
@@ -159,6 +160,7 @@ const DrawerCliente = createDrawerNavigator(
 const StackAdministrador = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+    CaixaDetails: CaixaDetails,
     AvaliacaoDetails: AvaliacaoDetails,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     LavagemDetails: LavagemDetails,
@@ -178,6 +180,7 @@ const StackAdministrador = createStackNavigator(
 const StackGerenteGeral = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+    CaixaDetails: CaixaDetails,
     AvaliacaoDetails: AvaliacaoDetails,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     LavagemDetails: LavagemDetails,
@@ -197,6 +200,7 @@ const StackGerenteGeral = createStackNavigator(
 const StackSubGerenteGeral = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+    CaixaDetails: CaixaDetails,
     AvaliacaoDetails: AvaliacaoDetails,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     LavagemDetails: LavagemDetails,
@@ -233,6 +237,8 @@ const StackGerenteDeOperacoes = createStackNavigator(
 
 const StackAtendente = createStackNavigator(
   {
+    MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+    CaixaDetails: CaixaDetails,
     LavagemDetails: LavagemDetails,
     LavagemDetailsEdit: LavagemDetailsEdit,
     AvaliacaoDetails: AvaliacaoDetails,
