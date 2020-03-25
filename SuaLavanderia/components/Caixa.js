@@ -8,27 +8,22 @@ export default class Caixa extends React.Component {
             <View style={styles.container}>
                 <View style={styles.movimentacaoContainer}>
                     <View style={styles.movimentacaoInfoContainerTitle}>
-                        <Text style={styles.movimentacaoInfoTitle}>{this.props.objeto.conta}</Text>
+                        <Text style={styles.movimentacaoInfoTitle}>{this.props.objeto.conta} ({this.props.objeto.data})</Text>
                     </View>
 
                     <View style={styles.movimentacaoInfoContainer}>
                         <View style={styles.valorInfoContainer}>
-                            <Text style={styles.valorInfoTitle}>Data: </Text>
-                            <Text style={styles.movimentacaoInfo}>{this.props.objeto.data}</Text>
-                        </View>
-
-                        <View style={styles.valorInfoContainer}>
                             <Text style={styles.valorInfoTitle}>Saldo Inicial: </Text>
-                            <Text style={styles.movimentacaoInfo}>{this.props.objeto.saldoInicial}</Text>
+                            <Text style={styles.movimentacaoInfo}>{this.props.objeto.saldoInicial.toFixed(2)}</Text>
                         </View>
 
                         <View style={styles.valorInfoContainer}>
                             <Text style={styles.valorInfoTitle}>Saldo Atual: </Text>
-                            <Text style={styles.movimentacaoInfo}>{this.props.objeto.saldoAtual}</Text>
+                            <Text style={styles.movimentacaoInfo}>{this.props.objeto.saldoAtual.toFixed(2)}</Text>
                         </View>
 
                         <View style={styles.valorInfoContainer}>
-                            <Text style={styles.valorInfoTitle}>Fechado?: </Text>
+                            <Text style={styles.valorInfoTitle}>Fechado? </Text>
                             <Text style={styles.movimentacaoInfo}>{this.props.objeto.fechado ? "Sim" : "Não"}</Text>
                         </View>
                     </View>
