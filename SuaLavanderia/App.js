@@ -30,6 +30,7 @@ import LogoutScreen from './screens/LogoutScreen';
 import LoadingLoginScreen from './screens/LoadingLoginScreen';
 import RoupaDetails from './screens/details/RoupaDetails';
 import RoupasDoClienteScreen from './screens/RoupasDoClienteScreen';
+import ContatoScreen from './screens/ContatoScreen';
 
 export default class App extends Component {
   render() {
@@ -165,6 +166,7 @@ const DrawerCliente = createDrawerNavigator(
   {
     Home: HomeScreen,
     Lavagem: LavagemScreenCliente,
+    Contato: ContatoScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
