@@ -24,6 +24,7 @@ export default class CaixaScreen extends React.Component {
         dataInicial: '',
         dataFinal: '',
         modalVisible: false,
+        conta: '',
     };
 
     dataToString = (data) => {
@@ -109,6 +110,10 @@ export default class CaixaScreen extends React.Component {
         dataFinal = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
         var argumentos = `dataInicial=${dataInicial}&dataFinal=${dataFinal}`;
+
+        if(this.state.conta != ''){
+            argumentos += `&conta=${this.state.conta}`;
+        }
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -277,6 +282,19 @@ export default class CaixaScreen extends React.Component {
                             />
                         </View>
                         <View style={styles.viewHeaderSegundaLinha}>
+                            <View style={styles.viewHeader}>
+                                <Text style={styles.infoTitle}>Conta: </Text>
+                                <Picker
+                                    style={styles.picker} 
+                                    selectedValue={this.state.conta}
+                                    onValueChange={(itemValue, itemIndex) => this.setState({conta: itemValue})} >
+                                    <Picker.Item label='Geral' value='Geral' />
+                                    <Picker.Item label='Manaíra' value='Manaíra' />
+                                    <Picker.Item label='Bessa' value='Bessa' />
+                                    <Picker.Item label='Tudo' value='' />
+                                </Picker>
+                            </View>
+
                             <View style={styles.viewHeader}>
                                 <TouchableOpacity onPress={this.buscar} style={styles.button}>
                                     <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
