@@ -138,6 +138,7 @@ export default class LavagemDetailsCliente extends React.Component {
                 dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
                 dataDeEntrega: objetoResponse.DataDeEntrega,
                 valor: objetoResponse.Valor,
+                saldoDevedor: objetoResponse.SaldoDevedor,
                 paga: objetoResponse.Paga,
                 unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
                 unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
@@ -205,6 +206,11 @@ export default class LavagemDetailsCliente extends React.Component {
                         <View style={styles.lavagemInfoContainer}>
                             <Text style={styles.lavagemInfoTitle}>Paga: </Text>
                             <Text style={styles.lavagemInfo}>{lavagem.paga}</Text>
+                        </View>
+
+                        <View style={styles.lavagemInfoContainer}>
+                            <Text style={styles.lavagemInfoTitle}>Saldo Devedor: </Text>
+                            <Text style={styles.lavagemInfo}>{lavagem.saldoDevedor}</Text>
                         </View>
                     </View>
 

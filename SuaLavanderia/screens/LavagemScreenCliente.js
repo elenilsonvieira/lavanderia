@@ -23,6 +23,7 @@ export default class LavagemScreenCliente extends React.Component {
         status: '',
         objetos: [],
         modalVisible: false,
+        todas: true,
     };
 
     dataString = () => {
@@ -116,7 +117,7 @@ export default class LavagemScreenCliente extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var argumentos = `status=${this.state.status}&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}`;
+        var argumentos = `status=${this.state.status}&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&todas=${this.state.todas}`;
 
         if(this.state.nome != ''){
             argumentos += '&nome=' + this.state.nome;
@@ -170,6 +171,7 @@ export default class LavagemScreenCliente extends React.Component {
                         dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
                         dataDeEntrega: objetoResponse.DataDeEntrega,
                         valor: objetoResponse.Valor,
+                        saldoDevedor: objetoResponse.SaldoDevedor,
                         paga: objetoResponse.Paga,
                         unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
                         unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
@@ -205,7 +207,7 @@ export default class LavagemScreenCliente extends React.Component {
 
     async componentDidMount(){
         const objetos = await this.buscar() || [];
-        this.setState(objetos);
+        this.setState({objetos, todas: false});
     }
 
     dataInicialEscolhida = (dataEscolhida) => {
