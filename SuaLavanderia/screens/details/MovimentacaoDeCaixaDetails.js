@@ -216,6 +216,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         style={styles.boxInput}
                         selectedValue={this.state.contaDeEntrada}
                         onValueChange={(itemValue, itemIndex) => this.setState({contaDeEntrada: itemValue})}>
+                        <Picker.Item label='' value='' />
                         <Picker.Item label='Geral' value='Geral' />
                         <Picker.Item label='Manaíra' value='Manaíra' />
                         <Picker.Item label='Bessa' value='Bessa' />
@@ -226,6 +227,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         style={styles.boxInput}
                         selectedValue={this.state.contaDeSaida}
                         onValueChange={(itemValue, itemIndex) => this.setState({contaDeSaida: itemValue})}>
+                        <Picker.Item label='' value='' />
                         <Picker.Item label='Geral' value='Geral' />
                         <Picker.Item label='Manaíra' value='Manaíra' />
                         <Picker.Item label='Bessa' value='Bessa' />
