@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, Linking, TouchableOpacity} from 'react-native';
 
 export default class LogoutScreen extends React.Component {
     static navigationOptions = {
@@ -14,19 +14,45 @@ export default class LogoutScreen extends React.Component {
 
     open = (redeSocial) => {
       switch(redeSocial){
-        case 1:  ; break;
+        case 1: Linking.openURL("https://wa.me/558332684285") ; break;
+        case 2: Linking.openURL("https://instagram.com/sualavanderia") ; break;
+        case 3: Linking.openURL("https://facebook.com/sualavanderia.com.br") ; break;
+        case 4: Linking.openURL("https://www.sualavanderia.com.br") ; break;
       }
     };
   
     render() {
       return (
         <View style={styles.container}>
-          <Text style={styles.info}>Deseja entrar em contato conosco? É só clicar em uma das opções abaixo!</Text>
+          <Image source={require('../images/atendente_128x128.png')} style={styles.image} />
+          <Text style={styles.title}>Deseja entrar em contato conosco?</Text>
+          <Text style={styles.title2}>É só clicar em uma das opções abaixo!</Text>
 
           <TouchableOpacity onPress={() => this.open(1)}>
             <View style={styles.infoContainer}>
-                <Image source={require('../images/whatsapp_32x32.png')} style={styles.icon} />
+                <Image source={require('../images/whatsapp_64x64.png')} style={styles.logo} />
                 <Text style={styles.info}>Whatsapp</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.open(2)}>
+            <View style={styles.infoContainer}>
+                <Image source={require('../images/instagram_64x64.png')} style={styles.logo} />
+                <Text style={styles.info}>Instagram</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.open(3)}>
+            <View style={styles.infoContainer}>
+                <Image source={require('../images/facebook_64x64.png')} style={styles.logo} />
+                <Text style={styles.info}>Facebook</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.open(4)}>
+            <View style={styles.infoContainer}>
+                <Image source={require('../images/mundo_64x64.png')} style={styles.logo} />
+                <Text style={styles.info}>Site</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -44,12 +70,31 @@ export default class LogoutScreen extends React.Component {
       width: 24,
       height: 24,
     },
+    image: {
+      width: 64,
+      height: 64,
+    },
+    logo: {
+      width: 32,
+      height: 32,
+    },
     infoContainer: {
-      flexDirection: 'row',
+      margin: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     infoTitle: {
         fontWeight: 'bold',
     },
     info: {
+    },
+    title: {
+      fontSize: 15,
+      textAlign: 'center',
+    },
+    title2: {
+      fontSize: 15,
+      textAlign: 'center',
+      marginBottom: 30,
     },
   });
