@@ -115,7 +115,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
             argumentos += `&modo=${this.state.modo}`;
         }
 
-        //alert(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`);
+        alert(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`);
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -143,6 +143,8 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
                     responsavelOid: objetoResponse.ResponsavelOid,
                     conferidor: objetoResponse.Conferidor,
                     lavagem: objetoResponse.Lavagem,
+                    contaDeEntrada: objetoResponse.contaDeEntrada,
+                    contaDeSaida: objetoResponse.contaDeSaida,
                 };    
 
                 objetos = [...objetos, objeto];
@@ -274,6 +276,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
                                     onValueChange={(itemValue, itemIndex) => this.setState({modo: itemValue})} >
                                     <Picker.Item label='Saída' value='Saida' />
                                     <Picker.Item label='Entrada' value='Entrada' />
+                                    <Picker.Item label='Transferência' value='Transferencia' />
                                     <Picker.Item label='Tudo' value='' />
                                 </Picker>
                             </View>

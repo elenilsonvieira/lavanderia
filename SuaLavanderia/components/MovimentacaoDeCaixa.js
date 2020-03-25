@@ -33,6 +33,16 @@ export default class MovimentacaoDeCaixa extends React.Component {
                         </View>
 
                         <View style={styles.valorInfoContainer}>
+                            <Text style={styles.valorInfoTitle}>Conta de Entrada: </Text>
+                            <Text style={styles.movimentacaoInfo}>{this.props.movimentacao.contaDeEntrada}</Text>
+                        </View>
+
+                        <View style={styles.valorInfoContainer}>
+                            <Text style={styles.valorInfoTitle}>Conta de Saída: </Text>
+                            <Text style={styles.movimentacaoInfo}>{this.props.movimentacao.contaDeSaida}</Text>
+                        </View>
+
+                        <View style={styles.valorInfoContainer}>
                             <Text style={styles.valorInfoTitle}>Responsável: </Text>
                             <Text style={styles.movimentacaoInfo}>{this.props.movimentacao.responsavel}</Text>
                         </View>

@@ -185,6 +185,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         onValueChange={(itemValue, itemIndex) => this.setState({modo: itemValue})}>
                         <Picker.Item label='Saída' value='Saida' />
                         <Picker.Item label='Entrada' value='Entrada' />
+                        <Picker.Item label='Transferência' value='Transferencia' />
                     </Picker>
 
                     <Text style={styles.infoTitle}>Valor: </Text>
@@ -207,6 +208,27 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                         <Picker.Item label='PagSeguro Crédito' value='PagSeguroCredito' />
                         <Picker.Item label='Transferência de/para BB' value='TransferenciaBB' />
                         <Picker.Item label='Transferência de/para Caixa' value='TransferenciaCaixa' />
+                        <Picker.Item label='Pic Pay' value='PicPay' />
+                    </Picker>
+
+                    <Text style={styles.infoTitle}>Conta de Entrada: </Text>
+                    <Picker
+                        style={styles.boxInput}
+                        selectedValue={this.state.contaDeEntrada}
+                        onValueChange={(itemValue, itemIndex) => this.setState({contaDeEntrada: itemValue})}>
+                        <Picker.Item label='Geral' value='Geral' />
+                        <Picker.Item label='Manaíra' value='Manaíra' />
+                        <Picker.Item label='Bessa' value='Bessa' />
+                    </Picker>
+
+                    <Text style={styles.infoTitle}>Conta de Saída: </Text>
+                    <Picker
+                        style={styles.boxInput}
+                        selectedValue={this.state.contaDeSaida}
+                        onValueChange={(itemValue, itemIndex) => this.setState({contaDeSaida: itemValue})}>
+                        <Picker.Item label='Geral' value='Geral' />
+                        <Picker.Item label='Manaíra' value='Manaíra' />
+                        <Picker.Item label='Bessa' value='Bessa' />
                     </Picker>
 
                     <Text style={styles.infoTitle}>Observações: </Text>
