@@ -2,7 +2,7 @@ import React from 'react';
 import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage } from 'react-native';
 import RoupaEmLavagem from '../../components/RoupaEmLavagem';
 
-export default class LavagemDetailsCliente extends React.Component {
+export default class LavagemDetailsOperacoes extends React.Component {
 
     state ={
         nome: '',
@@ -156,10 +156,6 @@ export default class LavagemDetailsCliente extends React.Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.infoTitle}>Lavagem</Text>
-
-                    <TouchableOpacity onPress={() => this.avaliar()} style={styles.button}>
-                        <Image style={styles.icon} source={require('../../images/avaliacao_32x32.png')} />
-                    </TouchableOpacity>
                 </View>
                 <ScrollView>
                     <View style={styles.unidadeContainer}>
@@ -196,16 +192,6 @@ export default class LavagemDetailsCliente extends React.Component {
                             <Text style={styles.lavagemInfoTitle}>Status: </Text>
                             <Text style={styles.lavagemInfo}>{lavagem.status}</Text>
                         </View>
-
-                        <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Valor: </Text>
-                            <Text style={styles.lavagemInfo}>{lavagem.valor}</Text>
-                        </View>
-
-                        <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Paga: </Text>
-                            <Text style={styles.lavagemInfo}>{lavagem.paga}</Text>
-                        </View>
                     </View>
 
                     <View style={styles.roupasContainer}>
@@ -230,7 +216,7 @@ const styles = StyleSheet.create(
           },
           header:{
             alignItems: 'center',
-            justifyContent: 'flex-end',
+            justifyContent: 'center',
             height: 40,
             backgroundColor: '#FFF',
             flexDirection: 'row',

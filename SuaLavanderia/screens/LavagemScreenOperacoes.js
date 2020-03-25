@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import Lavagem from "../components/Lavagem";
+import LavagemOperacoes from "../components/LavagemOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
 
-export default class LavagemScreenCliente extends React.Component {
+export default class LavagemDetailsOperacoes extends React.Component {
 
     static navigationOptions = {
         drawerLabel: 'Lavagem',
@@ -307,7 +307,7 @@ export default class LavagemScreenCliente extends React.Component {
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
                         <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('LavagemDetails', { lavagem: objeto })}>
-                            <Lavagem key={objeto.oid} lavagem={objeto} />
+                            <LavagemOperacoes key={objeto.oid} lavagem={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>

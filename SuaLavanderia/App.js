@@ -12,6 +12,7 @@ import TamanhoScreen from './screens/TamanhoScreen';
 import MarcaScreen from './screens/MarcaScreen';
 import LavagemScreen from './screens/LavagemScreen';
 import LavagemScreenCliente from './screens/LavagemScreenCliente';
+import LavagemScreenOperacoes from './screens/LavagemScreenOperacoes';
 import MovimentacaoDeCaixaScreen from './screens/MovimentacaoDeCaixaScreen';
 import CaixaScreen from './screens/CaixaScreen';
 import MovimentacaoDeCaixaDetails from './screens/details/MovimentacaoDeCaixaDetails';
@@ -22,6 +23,7 @@ import AvaliacaoDetailsSoLeitura from './screens/details/AvaliacaoDetailsSoLeitu
 import LavagemDetails from './screens/details/LavagemDetails';
 import LavagemDetailsEdit from './screens/details/LavagemDetailsEdit';
 import LavagemDetailsCliente from './screens/details/LavagemDetailsCliente';
+import LavagemDetailsOperacoes from './screens/details/LavagemDetailsOperacoes';
 import RoupaEmLavagemDetails from './screens/details/RoupaEmLavagemDetails';
 import LoginScreen from './screens/LoginScreen';
 import LogoutScreen from './screens/LogoutScreen';
@@ -124,7 +126,7 @@ const DrawerGerenteDeOperacoes = createDrawerNavigator(
 const DrawerSupervisorDeOperacoes = createDrawerNavigator(
   {
     Home: HomeScreen,
-    Lavagem: LavagemScreen,
+    Lavagem: LavagemScreenOperacoes,
     Roupa: RoupaScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
@@ -256,7 +258,7 @@ const StackGerenteDeOperacoes = createStackNavigator(
 
 const StackSupervisorDeOperacoes = createStackNavigator(
   {
-    LavagemDetails: LavagemDetails,
+    LavagemDetails: LavagemDetailsOperacoes,
     LavagemDetailsEdit: LavagemDetailsEdit,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
