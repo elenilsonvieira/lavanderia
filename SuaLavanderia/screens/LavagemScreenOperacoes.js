@@ -116,7 +116,7 @@ export default class LavagemDetailsOperacoes extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var argumentos = `status=${this.state.status}&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}`;
+        var argumentos = `status=${this.state.status}&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&usarDataPreferivelParaEntrega=true`;
 
         if(this.state.nome != ''){
             argumentos += '&nome=' + this.state.nome;
