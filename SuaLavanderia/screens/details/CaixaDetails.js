@@ -6,7 +6,7 @@ export default class CaixaDetails extends React.Component {
 
     state ={
         oid: '',
-        conta: '',
+        conta: 'Geral',
         saldoInicial: '0',
         saldoAtual: '0',
         fechado: false,
