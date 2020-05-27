@@ -55,6 +55,10 @@ export default class LogoutScreen extends React.Component {
                 <Text style={styles.info}>Site</Text>
             </View>
           </TouchableOpacity>
+
+          <Text style={styles.title3}>Manaíra: Av. Esperança, 1088A. 58038-280</Text>
+          <Text style={styles.title3}>Bessa: Av. Nilo Peçanha, 244, Loja 106. 58035-200</Text>
+          <Text style={styles.title3}>João Pessoa - PB</Text>
         </View>
       );
     }
@@ -96,5 +100,10 @@ export default class LogoutScreen extends React.Component {
       fontSize: 15,
       textAlign: 'center',
       marginBottom: 30,
+    },
+    title3: {
+      fontSize: 15,
+      textAlign: 'center',
+      fontWeight: 'bold',
     },
   });
