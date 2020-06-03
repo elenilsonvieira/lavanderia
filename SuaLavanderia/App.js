@@ -3,6 +3,7 @@ import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } fr
 
 import HomeScreen from "./screens/HomeScreen";
 import HomeScreenCliente from "./screens/HomeScreenCliente";
+import HomeScreenAplicativo from "./screens/HomeScreenAplicativo";
 import RoupaScreen from "./screens/RoupaScreen";
 import SobreScreen from './screens/SobreScreen';
 import UnidadeScreen from './screens/UnidadeScreen';
@@ -128,6 +129,21 @@ const DrawerGerenteDeOperacoes = createDrawerNavigator(
 const DrawerSupervisorDeOperacoes = createDrawerNavigator(
   {
     Home: HomeScreen,
+    Lavagem: LavagemScreenOperacoes,
+    Roupa: RoupaScreen,
+    Sobre: SobreScreen,
+    Logout: LogoutScreen,
+  },{
+    initialRouteName: 'Home',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
+const DrawerAplicativo = createDrawerNavigator(
+  {
+    Home: HomeScreenAplicativo,
     Lavagem: LavagemScreenOperacoes,
     Roupa: RoupaScreen,
     Sobre: SobreScreen,
@@ -277,6 +293,24 @@ const StackSupervisorDeOperacoes = createStackNavigator(
   }
 );
 
+const StackAplicativo = createStackNavigator(
+  {
+    LavagemDetails: LavagemDetailsOperacoes,
+    LavagemDetailsEdit: LavagemDetailsEdit,
+    AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
+    AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
+    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+    RoupasDoCliente: RoupasDoClienteScreen,
+    RoupaDetails: RoupaDetails,
+    Drawer: DrawerAplicativo,
+  },{
+    initialRouteName: 'Drawer',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
 const StackAtendente = createStackNavigator(
   {
     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
@@ -323,6 +357,7 @@ const LoginStack = createSwitchNavigator(
     StackSupervisorDeOperacoes: StackSupervisorDeOperacoes,
     StackAtendente: StackAtendente,
     StackCliente: StackCliente,
+    StackAplicativo: StackAplicativo,
   },{
     initialRouteName: 'LoadingLogin',
     navigationOptions: {
