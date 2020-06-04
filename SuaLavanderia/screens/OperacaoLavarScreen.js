@@ -3,6 +3,7 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, 
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import LavagemOperacoes from "../components/LavagemOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
+import ConfirmacaoModal from '../components/modals/ConfirmacaoModal';
 
 export default class OperacaoLavarScreen extends React.Component {
 
@@ -11,7 +12,9 @@ export default class OperacaoLavarScreen extends React.Component {
         dataFinal: '',
         objetos: [],
         usuarioOid: '',
+        lavagemOid: '',
         modalVisible: false,
+        confirmacaoModalVisible: false,
     };
 
     dataString = () => {
@@ -104,7 +107,7 @@ export default class OperacaoLavarScreen extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var argumentos = `status=0&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&usarDataPreferivelParaEntrega=true&recolhidaDoVaral=true`;
+        var argumentos = `status=0&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&usarDataPreferivelParaEntrega=true`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -224,6 +227,18 @@ export default class OperacaoLavarScreen extends React.Component {
         });
     }
 
+    openModal = (lavagemOid) => {
+        this.setState({confirmacaoModalVisible: true, lavagemOid});
+    };
+    
+    closeModal = () => {
+        this.setState({confirmacaoModalVisible: false});
+    };
+
+    lavar = () => {
+        this.setState({confirmacaoModalVisible: false});
+    };
+
     render(){
         return(
             <View style={styles.container}>
@@ -259,13 +274,14 @@ export default class OperacaoLavarScreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('LavagemDetails', { lavagem: objeto })}>
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto.Oid)}>
                             <LavagemOperacoes key={objeto.oid} lavagem={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
+                <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto="Confirmar lavar?" onSim={this.lavar} onNao={this.closeModal} />
             </View>
         );
     }
