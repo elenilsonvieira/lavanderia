@@ -187,5 +187,9 @@ const styles = StyleSheet.create(
             flexDirection: 'row',
             justifyContent: 'flex-end'
         },
+        icon: {
+            width: 24,
+            height: 24,
+        },
     }
 );
