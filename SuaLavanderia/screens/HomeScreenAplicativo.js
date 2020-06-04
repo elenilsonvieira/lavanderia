@@ -111,9 +111,8 @@ export default class HomeScreenAplicativo extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                      // TROCAR NOME POR OID AQUI
-                        <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('Operacoes', {usuarioOid: objeto.nome})}>
-                            <UsuarioOperacoes key={objeto.nome} objeto={objeto} />
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('Operacoes', {usuarioOid: objeto.oid})}>
+                            <UsuarioOperacoes key={objeto.oid} objeto={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>

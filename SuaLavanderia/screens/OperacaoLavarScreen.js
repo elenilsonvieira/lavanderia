@@ -11,7 +11,6 @@ export default class OperacaoLavarScreen extends React.Component {
         dataInicial: '',
         dataFinal: '',
         objetos: [],
-        usuarioOid: '',
         lavagemOid: '',
         modalVisible: false,
         confirmacaoModalVisible: false,
@@ -242,8 +241,9 @@ export default class OperacaoLavarScreen extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
+        const usuarioOid = this.props.navigation.getParam('usuarioOid');
 
-        var argumentos = `lavagemOid=${this.state.lavagemOid}&usuarioOid=${this.state.usuarioOid}`;
+        var argumentos = `lavagemOid=${this.state.lavagemOid}&usuarioOid=${usuarioOid}`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/LavarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -252,7 +252,8 @@ export default class OperacaoLavarScreen extends React.Component {
                 });
             
             if(call.status != 200){
-                alert('Erro.' + call.statusText);    
+                //alert('Erro.' + call.statusText);    
+                alert(`http://painel.sualavanderia.com.br/api/LavarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`);
             }            
         }catch(erro){
             alert('Erro.' + erro);
