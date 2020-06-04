@@ -252,8 +252,7 @@ export default class OperacaoLavarScreen extends React.Component {
                 });
             
             if(call.status != 200){
-                //alert('Erro.' + call.statusText);    
-                alert(`http://painel.sualavanderia.com.br/api/LavarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`);
+                alert('Erro.' + call.statusText);    
             }            
         }catch(erro){
             alert('Erro.' + erro);
@@ -261,7 +260,8 @@ export default class OperacaoLavarScreen extends React.Component {
 
         this.setState({modalVisible: false});
 
-        this.buscar();
+        //this.buscar();
+        this.props.navigation.navigate('Home');
     };
 
     render(){

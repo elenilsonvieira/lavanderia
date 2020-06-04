@@ -260,7 +260,8 @@ export default class OperacaoEmpacotarScreen extends React.Component {
 
         this.setState({modalVisible: false});
 
-        this.buscar();
+        //this.buscar();
+        this.props.navigation.navigate('Home');
     };
 
     render(){
