@@ -129,7 +129,6 @@ const DrawerGerenteDeOperacoes = createDrawerNavigator(
 const DrawerSupervisorDeOperacoes = createDrawerNavigator(
   {
     Home: HomeScreen,
-    Lavagem: LavagemScreenOperacoes,
     Roupa: RoupaScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
