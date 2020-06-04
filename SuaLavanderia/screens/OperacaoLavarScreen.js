@@ -62,7 +62,6 @@ export default class OperacaoLavarScreen extends React.Component {
 
         var hoje = new Date();
         var diasAtras = new Date(hoje.getTime() - 3 * 24*60*60*1000);
-        //diasAtras.setMonth(diasAtras.getMonth() -1);
 
         var dataInicial = this.state.dataInicial;
         var dataFinal = this.state.dataFinal;
@@ -73,7 +72,7 @@ export default class OperacaoLavarScreen extends React.Component {
                 mes = '0' + mes;
             }
 
-            var dia = hoje.getDate();
+            var dia = diasAtras.getDate();
             if(dia < 10){
                 dia = '0' + dia;
             }

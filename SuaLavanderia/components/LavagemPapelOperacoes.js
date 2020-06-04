@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-export default class LavagemOperacoes extends React.Component {
+export default class LavagemPapelOperacoes extends React.Component {
 
     render(){
         return(
@@ -27,8 +27,18 @@ export default class LavagemOperacoes extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Data de Entrega: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.lavagem.dataDeEntrega}</Text>
+                    </View>
+
+                    <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Status: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.lavagem.status}</Text>
+                    </View>
+
+                    <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Avaliação: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.lavagem.avaliacao != null ? this.props.lavagem.avaliacao.media : null}</Text>
                     </View>
                 </View>
             </View>

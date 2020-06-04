@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import LavagemOperacoes from "../components/LavagemOperacoes";
+import LavagemPapelOperacoes from "../components/LavagemPapelOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
 
 export default class LavagemDetailsOperacoes extends React.Component {
@@ -311,7 +311,7 @@ export default class LavagemDetailsOperacoes extends React.Component {
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
                         <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('LavagemDetails', { lavagem: objeto })}>
-                            <LavagemOperacoes key={objeto.oid} lavagem={objeto} />
+                            <LavagemPapelOperacoes key={objeto.oid} lavagem={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>
