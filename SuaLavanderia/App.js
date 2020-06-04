@@ -26,6 +26,7 @@ import LavagemDetails from './screens/details/LavagemDetails';
 import LavagemDetailsEdit from './screens/details/LavagemDetailsEdit';
 import LavagemDetailsCliente from './screens/details/LavagemDetailsCliente';
 import LavagemDetailsOperacoes from './screens/details/LavagemDetailsOperacoes';
+import LavagemDetailsOperacaoEmpacotar from './screens/details/LavagemDetailsOperacaoEmpacotar';
 import RoupaEmLavagemDetails from './screens/details/RoupaEmLavagemDetails';
 import LoginScreen from './screens/LoginScreen';
 import LogoutScreen from './screens/LogoutScreen';
@@ -300,7 +301,7 @@ const StackSupervisorDeOperacoes = createStackNavigator(
 const StackAplicativo = createStackNavigator(
   {
     LavagemDetails: LavagemDetailsOperacoes,
-    LavagemDetailsEdit: LavagemDetailsEdit,
+    LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
