@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
+import {StyleSheet, View, ScrollView, Text, TouchableOpacity } from 'react-native';
 
 import Operacao from "../components/Operacao";
 import LoadingModal from '../components/modals/LoadingModal';
@@ -8,7 +8,13 @@ export default class OperacoesScreen extends React.Component {
 
     state ={
         modalVisible: false,
+        usuarioOid: '',
     };
+
+    componentDidMount(){
+        const usuarioOid = this.props.navigation.getParam("usuarioOid");
+        this.setState({usuarioOid});
+    }
 
     render(){
         return(
@@ -18,13 +24,21 @@ export default class OperacoesScreen extends React.Component {
                 </View>
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
-                    <Operacao nome="Lavar" />
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoLavar', {usuarioOid: this.state.usuarioOid})}>
+                        <Operacao nome="Lavar" />
+                    </TouchableOpacity>
 
-                    <Operacao nome="Recolher do Varal" />
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoRecolher', {usuarioOid: this.state.usuarioOid})}>
+                        <Operacao nome="Recolher do Varal" />
+                    </TouchableOpacity>
 
-                    <Operacao nome="Passar" />
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoPassar', {usuarioOid: this.state.usuarioOid})}>
+                        <Operacao nome="Passar" />
+                    </TouchableOpacity>
 
-                    <Operacao nome="Empacotar" />
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoEmpacotar', {usuarioOid: this.state.usuarioOid})}>
+                        <Operacao nome="Empacotar" />
+                    </TouchableOpacity>
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
