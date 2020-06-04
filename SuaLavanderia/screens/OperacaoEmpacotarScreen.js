@@ -5,7 +5,7 @@ import LavagemOperacoes from "../components/LavagemOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
 import ConfirmacaoModal from '../components/modals/ConfirmacaoModal';
 
-export default class OperacaoLavarScreen extends React.Component {
+export default class OperacaoEmpacotarScreen extends React.Component {
 
     state ={
         dataInicial: '',
@@ -107,7 +107,7 @@ export default class OperacaoLavarScreen extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var argumentos = `status=0&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&usarDataPreferivelParaEntrega=true`;
+        var argumentos = `status=2&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&usarDataPreferivelParaEntrega=true&empacotada=false`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -245,7 +245,7 @@ export default class OperacaoLavarScreen extends React.Component {
         var argumentos = `lavagemOid=${this.state.lavagemOid}&usuarioOid=${this.state.usuarioOid}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/LavarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/EmpacotarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -304,7 +304,7 @@ export default class OperacaoLavarScreen extends React.Component {
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
-                <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto="Confirmar lavar?" onSim={this.acao} onNao={this.closeModal} />
+                <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto="Confirmar Empacotar?" onSim={this.acao} onNao={this.closeModal} />
             </View>
         );
     }
