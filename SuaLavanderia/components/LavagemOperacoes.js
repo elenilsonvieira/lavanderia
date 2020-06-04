@@ -8,7 +8,7 @@ export default class LavagemOperacoes extends React.Component {
             <View style={styles.container}>
                 <View style={styles.unidadeContainer}>
                     <View style={styles.lavagemInfoContainerCliente}>
-                        <Text style={styles.lavagemInfoCliente}>{this.props.lavagem.cliente}</Text>
+                        <Text style={styles.lavagemInfoCliente}>{this.props.lavagem.cliente} ({this.props.lavagem.codigoDoCliente})</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>

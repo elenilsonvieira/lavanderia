@@ -73,7 +73,7 @@ export default class LavagemDetailsOperacoes extends React.Component {
 
         var hoje = new Date();
         var mesAnterior = new Date();
-        mesAnterior.setMonth(mesAnterior.getMonth() -1);
+        //mesAnterior.setMonth(mesAnterior.getMonth() -1);
 
         var dataInicial = this.state.dataInicial;
         var dataFinal = this.state.dataFinal;
@@ -144,6 +144,9 @@ export default class LavagemDetailsOperacoes extends React.Component {
                             quantidade: roupaResponse.Quantidade,
                             observacoes: roupaResponse.Observacoes,
                             soPassar: roupaResponse.SoPassar,
+                            cliente: objetoResponse.Cliente,
+                            clienteOid: objetoResponse.ClienteOid,
+                            codigoDoCliente: objetoResponse.CodigoDoCliente,
                             roupa: {
                                 oid: roupaResponse.Roupa.Oid,
                                 tipo: roupaResponse.Roupa.Tipo,
@@ -166,6 +169,7 @@ export default class LavagemDetailsOperacoes extends React.Component {
                         oid: objetoResponse.Oid,
                         cliente: objetoResponse.Cliente,
                         clienteOid: objetoResponse.ClienteOid,
+                        codigoDoCliente: objetoResponse.CodigoDoCliente,
                         dataDeRecebimento: objetoResponse.DataDeRecebimento,
                         dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
                         dataDeEntrega: objetoResponse.DataDeEntrega,
