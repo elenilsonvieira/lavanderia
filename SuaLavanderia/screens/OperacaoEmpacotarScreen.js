@@ -242,7 +242,7 @@ export default class OperacaoEmpacotarScreen extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        var argumentos = `lavagemOid=${this.state.lavagemOid}&usuarioOid=${this.state.usuarioOid}`;
+        var argumentos = `lavagemOid=${this.state.lavagemOid}&usuarioOid=${this.state.usuarioOid}&tipoDePacote=dobrada`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/EmpacotarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
