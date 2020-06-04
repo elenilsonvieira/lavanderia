@@ -41,10 +41,10 @@ const styles = StyleSheet.create(
             flex: 1,
         },
         buttonAdd: {
-            backgroundColor: 'green',
+            backgroundColor: '#33cc00',
         },
         buttonCancel: {
-            backgroundColor: 'red',
+            backgroundColor: '#ff9999',
         },
         button:{
             flex: 1,
