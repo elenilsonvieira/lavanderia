@@ -33,6 +33,7 @@ import LoadingLoginScreen from './screens/LoadingLoginScreen';
 import RoupaDetails from './screens/details/RoupaDetails';
 import RoupasDoClienteScreen from './screens/RoupasDoClienteScreen';
 import ContatoScreen from './screens/ContatoScreen';
+import OperacoesScreen from './screens/OperacoesScreen';
 
 export default class App extends Component {
   render() {
@@ -301,6 +302,7 @@ const StackAplicativo = createStackNavigator(
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
+    Operacoes: OperacoesScreen,
     Drawer: DrawerAplicativo,
   },{
     initialRouteName: 'Drawer',
