@@ -37,6 +37,11 @@ export default class Lavagem extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Quantidade de Peças: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.lavagem.quantidadeDePecas}</Text>
+                    </View>
+
+                    <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Paga: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.lavagem.paga}</Text>
                     </View>
