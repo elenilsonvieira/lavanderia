@@ -15,7 +15,7 @@ export default class ConfirmacaoModal extends React.Component {
 
                         <View style={styles.buttonContainer}>
                             <TouchableOpacity 
-                                onPress={() => this.props.onSim} 
+                                onPress={this.props.onSim} 
                                 style={[styles.button, styles.buttonAdd]}>
                                 <Text style={styles.buttonText}>Sim</Text>
                             </TouchableOpacity>

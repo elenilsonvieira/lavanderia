@@ -59,7 +59,7 @@ export default class OperacaoLavarScreen extends React.Component {
     buscar = async () => {
         this.setState({modalVisible: true});
 
-        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
+        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
 
@@ -235,8 +235,31 @@ export default class OperacaoLavarScreen extends React.Component {
         this.setState({confirmacaoModalVisible: false});
     };
 
-    lavar = () => {
-        this.setState({confirmacaoModalVisible: false});
+    lavar = async () => {
+        this.setState({confirmacaoModalVisible: false, modalVisible: true});
+
+        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
+        var hash = this.hash(usuario);
+        var email = usuario.email;
+
+        var argumentos = `lavagemOid=${this.state.lavagemOid}&usuarioOid=${this.state.usuarioOid}`;
+
+        try{
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/LavarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                });
+            
+            if(call.status != 200){
+                alert('Erro.' + call.statusText);    
+            }            
+        }catch(erro){
+            alert('Erro.' + erro);
+        }
+
+        this.setState({modalVisible: false});
+
+        this.buscar();
     };
 
     render(){
@@ -274,7 +297,7 @@ export default class OperacaoLavarScreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto.Oid)}>
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto.oid)}>
                             <LavagemOperacoes key={objeto.oid} lavagem={objeto} />
                         </TouchableOpacity>
                     )}
