@@ -1,17 +1,16 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
-import DateTimePicker from 'react-native-modal-datetime-picker';
-import LavagemOperacoes from "../components/LavagemOperacoes";
+
+import MaterialPapelOperacoes from "../components/MaterialPapelOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
-import ConfirmacaoModal from '../components/modals/ConfirmacaoModal';
+import ConfirmacaoModalComQuantidade from '../components/modals/ConfirmacaoModalComQuantidade';
 
 export default class OperacaoRetirarMaterialScreen extends React.Component {
 
     state ={
-        dataInicial: '',
-        dataFinal: '',
         objetos: [],
-        lavagemOid: '',
+        materialOid: '',
+        quantidade: 0,
         modalVisible: false,
         confirmacaoModalVisible: false,
     };
@@ -62,54 +61,10 @@ export default class OperacaoRetirarMaterialScreen extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        var hoje = new Date();
-        var diasAtras = new Date(hoje.getTime() - 3 * 24*60*60*1000);
-
-        var dataInicial = this.state.dataInicial;
-        var dataFinal = this.state.dataFinal;
-
-        if(dataInicial == ''){
-            var mes = diasAtras.getMonth() + 1;
-            if(mes < 10){
-                mes = '0' + mes;
-            }
-
-            var dia = diasAtras.getDate();
-            if(dia < 10){
-                dia = '0' + dia;
-            }
-
-            dataInicial = dia + '/' + mes + '/' + diasAtras.getFullYear();
-
-            this.setState({dataInicial});
-        }
-
-        if(dataFinal == ''){
-            var mes = hoje.getMonth() + 1;
-            if(mes < 10){
-                mes = '0' + mes;
-            }
-
-            var dia = hoje.getDate();
-            if(dia < 10){
-                dia = '0' + dia;
-            }
-
-            dataFinal = dia + '/' + mes + '/' + hoje.getFullYear();
-
-            this.setState({dataInicial, dataFinal});
-        }
-
-        var dataInicialArray = dataInicial.split('/');
-        var dataInicialParameter = dataInicialArray[2] + '-'+ dataInicialArray[1] + '-' + dataInicialArray[0];
-
-        var dataFinalArray = dataFinal.split('/');
-        var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
-
-        var argumentos = `status=1&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&usarDataPreferivelParaEntrega=true&recolhidaDoVaral=true`;
+        var argumentos = `ativo=true`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMaterial.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -119,52 +74,32 @@ export default class OperacaoRetirarMaterialScreen extends React.Component {
 
             for(index in response){
                 const objetoResponse = response[index];
-                var roupas = [];
+                var movimentacoes = [];
 
-                for(indexRoupa in objetoResponse.Roupas){
-                    const roupaResponse = objetoResponse.Roupas[indexRoupa];
+                for(indexRoupa in objetoResponse.Movimentacoes){
+                    const movimentacaoResposta = objetoResponse.Movimentacoes[indexRoupa];
 
-                    const roupaEmLavagem = {
-                        oid: roupaResponse.Oid,
-                        quantidade: roupaResponse.Quantidade,
-                        observacoes: roupaResponse.Observacoes,
-                        soPassar: roupaResponse.SoPassar,
-                        cliente: roupaResponse.Cliente,
-                        clienteOid: roupaResponse.ClienteOid,
-                        codigoDoCliente: roupaResponse.CodigoDoCliente,
-                        roupa: {
-                            oid: roupaResponse.Roupa.Oid,
-                            tipo: roupaResponse.Roupa.Tipo,
-                            tecido: roupaResponse.Roupa.Tecido,
-                            tamanho: roupaResponse.Roupa.Tamanho,
-                            marca: roupaResponse.Roupa.Marca,
-                            cliente: roupaResponse.Roupa.Cliente,
-                            clienteOid: roupaResponse.Roupa.ClienteOid,
-                            observacao: roupaResponse.Roupa.Observacao,
-                            codigo: roupaResponse.Roupa.Codigo,
-                            chave: roupaResponse.Roupa.Chave,
-                            cores: roupaResponse.Roupa.Cores,
-                        },
+                    const movimentacaoDeMaterial = {
+                        oid: movimentacaoResposta.Oid,
+                        data: movimentacaoResposta.Data,
+                        modo: movimentacaoResposta.Modo,
+                        quantidade: movimentacaoResposta.Quantidade,
+                        usuario: movimentacaoResposta.Usuario,
+                        usuarioOid: movimentacaoResposta.UsuarioOid,
                     };
 
-                    roupas = [...roupas, roupaEmLavagem];
+                    movimentacoes = [...movimentacoes, movimentacaoDeMaterial];
                 }
 
                 const objeto = {
                     oid: objetoResponse.Oid,
-                    cliente: objetoResponse.Cliente,
-                    clienteOid: objetoResponse.ClienteOid,
-                    codigoDoCliente: objetoResponse.CodigoDoCliente,
-                    dataDeRecebimento: objetoResponse.DataDeRecebimento,
-                    dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
-                    dataDeEntrega: objetoResponse.DataDeEntrega,
-                    valor: objetoResponse.Valor,
-                    paga: objetoResponse.Paga,
-                    unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
-                    unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
-                    quantidadeDePecas: objetoResponse.QuantidadeDePecas,
-                    roupas: roupas,
-                    status: objetoResponse.Status,
+                    nome: objetoResponse.Nome,
+                    fornecedor: objetoResponse.Fornecedor,
+                    estoque: objetoResponse.Estoque,
+                    minimoEmEstoque: objetoResponse.MinimoEmEstoque,
+                    mediaDeDiasDeUmaUnidade: objetoResponse.MediaDeDiasDeUmaUnidade,
+                    proximaCompra: objetoResponse.ProximaCompra,
+                    ultimaMovimentacao: objetoResponse.UltimaMovimentacao,
                 };    
 
                 objetos = [...objetos, objeto];
@@ -183,52 +118,8 @@ export default class OperacaoRetirarMaterialScreen extends React.Component {
         this.setState(objetos);
     }
 
-    dataInicialEscolhida = (dataEscolhida) => {
-        //var dataEscolhidaString = dataString(dataEscolhida);
-
-        var dia = dataEscolhida.getDate();
-        var mes = dataEscolhida.getMonth() + 1;
-
-        if(dia < 10){
-            dia = '0' + dia;
-        }
-
-        if(mes < 10){
-            mes = '0' + mes;
-        }
-
-        var dataEscolhidaString = dia + '/' + mes + '/' + dataEscolhida.getFullYear();
-
-        this.setState({ 
-            dataInicialPickerVisible: false,
-            dataInicial: dataEscolhidaString,
-        });
-    }
-
-    dataFinalEscolhida = (dataEscolhida) => {
-        //var dataEscolhidaString = dataString(dataEscolhida);
-
-        var dia = dataEscolhida.getDate();
-        var mes = dataEscolhida.getMonth() + 1;
-
-        if(dia < 10){
-            dia = '0' + dia;
-        }
-
-        if(mes < 10){
-            mes = '0' + mes;
-        }
-
-        var dataEscolhidaString = dia + '/' + mes + '/' + dataEscolhida.getFullYear();
-
-        this.setState({ 
-            dataFinalPickerVisible: false,
-            dataFinal: dataEscolhidaString,
-        });
-    }
-
-    openModal = (lavagemOid) => {
-        this.setState({confirmacaoModalVisible: true, lavagemOid});
+    openModal = (materialOid) => {
+        this.setState({confirmacaoModalVisible: true, materialOid});
     };
     
     closeModal = () => {
@@ -243,10 +134,10 @@ export default class OperacaoRetirarMaterialScreen extends React.Component {
         var email = usuario.email;
         const usuarioOid = this.props.navigation.getParam('usuarioOid');
 
-        var argumentos = `lavagemOid=${this.state.lavagemOid}&usuarioOid=${usuarioOid}`;
+        var argumentos = `materialOid=${this.state.materialOid}&usuarioOid=${usuarioOid}&quantidade=${this.state.quantidade}&modo=saida`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/PassarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/MovimentarMaterial.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -270,13 +161,13 @@ export default class OperacaoRetirarMaterialScreen extends React.Component {
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
                         <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto.oid)}>
-                            <LavagemOperacoes key={objeto.oid} lavagem={objeto} />
+                            <MaterialPapelOperacoes key={objeto.oid} material={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
-                <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto="Confirmar Passar?" onSim={this.acao} onNao={this.closeModal} />
+                <ConfirmacaoModalComQuantidade visible={this.state.confirmacaoModalVisible} texto="Remover quantos?" onSim={this.acao} onNao={this.closeModal} />
             </View>
         );
     }
