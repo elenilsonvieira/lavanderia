@@ -11,6 +11,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         modalVisible: false,
         confirmacaoModalVisible: false,
         roupasSelecionadas: [],
+        lavagem: {},
     };
 
     async componentWillMount(){
@@ -90,8 +91,6 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
             roupaEmLavagemOids = roupaEmLavagemOids + ';' + this.state.roupasSelecionadas[i].oid;
         }
 
-        alert(roupaEmLavagemOids);
-
         var argumentos = `roupaEmLavagemOid=${roupaEmLavagemOids}&usuarioOid=${usuarioOid}&tipoDePacote=${tipoDePacote}`;
 
         try{
@@ -107,7 +106,9 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
             alert('Erro.' + erro);
         }
 
-        this.setState({modalVisible: false, roupasSelecionadas: []});
+        this.setState({roupasSelecionadas: []});
+
+        this.buscar();
     };
 
     selecionarRoupa = (roupaEmLavagem) => {
@@ -141,6 +142,96 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         }
 
         return false;
+    };
+
+    async buscar() {
+        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
+        var hash = this.hash(usuario);
+        var email = usuario.email;
+        var oid = this.state.lavagem.oid;
+
+        this.setState({modalVisible: true});
+
+        try{
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                });
+            const response = await call.json();
+
+            var objetos = [];
+
+            for(index in response){
+                const objetoResponse = response[index];
+                var roupas = [];
+
+                for(indexRoupa in objetoResponse.Roupas){
+                    const roupaResponse = objetoResponse.Roupas[indexRoupa];
+
+                    const roupaEmLavagem = {
+                        oid: roupaResponse.Oid,
+                        quantidade: roupaResponse.Quantidade,
+                        observacoes: roupaResponse.Observacoes,
+                        soPassar: roupaResponse.SoPassar,
+                        pacoteDeRoupa: roupaResponse.PacoteDeRoupa,
+                        roupa: {
+                            oid: roupaResponse.Roupa.Oid,
+                            tipo: roupaResponse.Roupa.Tipo,
+                            tecido: roupaResponse.Roupa.Tecido,
+                            tamanho: roupaResponse.Roupa.Tamanho,
+                            marca: roupaResponse.Roupa.Marca,
+                            cliente: roupaResponse.Roupa.Cliente,
+                            clienteOid: roupaResponse.Roupa.ClienteOid,
+                            observacao: roupaResponse.Roupa.Observacao,
+                            codigo: roupaResponse.Roupa.Codigo,
+                            chave: roupaResponse.Roupa.Chave,
+                            cores: roupaResponse.Roupa.Cores,
+                        },
+                    };
+
+                    roupas = [...roupas, roupaEmLavagem];
+                }
+
+                var avaliacao = null;
+
+                if(objetoResponse.Avaliacao){
+                    avaliacao = {
+                        data: objetoResponse.Avaliacao.Data,
+                        notaDoAtendimento: objetoResponse.Avaliacao.NotaDoAtendimento,
+                        notaDaLavagem: objetoResponse.Avaliacao.NotaDaLavagem,
+                        notaDaPassagem: objetoResponse.Avaliacao.NotaDaPassagem,
+                        notaDaEntrega: objetoResponse.Avaliacao.NotaDaEntrega,
+                        comentarios: objetoResponse.Avaliacao.Comentarios,
+                        media: (parseInt(objetoResponse.Avaliacao.NotaDoAtendimento) + parseInt(objetoResponse.Avaliacao.NotaDaLavagem) + parseInt(objetoResponse.Avaliacao.NotaDaPassagem) + parseInt(objetoResponse.Avaliacao.NotaDaEntrega)) / 4,//objetoResponse.Media,
+                    };
+                }
+
+                const lavagem = {
+                    oid: objetoResponse.Oid,
+                    cliente: objetoResponse.Cliente,
+                    clienteOid: objetoResponse.ClienteOid,
+                    dataDeRecebimento: objetoResponse.DataDeRecebimento,
+                    dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
+                    dataDeEntrega: objetoResponse.DataDeEntrega,
+                    valor: objetoResponse.Valor,
+                    saldoDevedor: objetoResponse.SaldoDevedor,
+                    paga: objetoResponse.Paga,
+                    unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
+                    unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
+                    quantidadeDePecas: objetoResponse.QuantidadeDePecas,
+                    roupas: roupas,
+                    status: objetoResponse.Status,
+                    avaliacao: avaliacao,
+                };    
+
+                this.setState({lavagem});
+            }
+
+            this.setState({modalVisible: false});
+        }catch{
+            this.setState({modalVisible: false});
+            alert('Erro buscando lavagem');
+        }
     };
 
     render(){
@@ -199,11 +290,11 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
 
                         <View style={styles.botoesContainer}>
                             <TouchableOpacity onPress={() => this.empacotarRoupasDobradas()} style={styles.buttonAcao}>
-                                <Image style={styles.iconAcao} source={require('../../images/roupa-dobrada_32x32.png')} />
+                                <Image style={styles.iconAcao} source={require('../../images/roupa-dobrada_72x72.png')} />
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => this.empacotarComCabides()} style={styles.buttonAcao}>
-                                <Image style={styles.iconAcao} source={require('../../images/cabide2_32x32.png')} />
+                                <Image style={styles.iconAcao} source={require('../../images/cabide2_128x128.png')} />
                             </TouchableOpacity>
                         </View>
                     </View>
