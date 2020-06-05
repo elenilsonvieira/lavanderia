@@ -2,6 +2,7 @@ import React from 'react';
 import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage } from 'react-native';
 import RoupaEmLavagem from '../../components/RoupaEmLavagem';
 import ConfirmacaoModal from '../../components/modals/ConfirmacaoModal';
+import LoadingModal from '../../components/modals/LoadingModal';
 
 export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
 
@@ -83,15 +84,13 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         var email = usuario.email;
         const usuarioOid = this.props.navigation.getParam('usuarioOid');
 
-        var roupaEmLavagemOids = this.state.roupasSelecionadas[0].Oid;
+        var roupaEmLavagemOids = this.state.roupasSelecionadas[0].oid;
 
-        for (const index in this.state.roupasSelecionadas) {
-            if(index == 0){
-                continue;
-            }
-
-            roupaEmLavagemOids = roupaEmLavagemOids + ';' + this.state.roupasSelecionadas[index].Oid;
+        for (i = 1; i < this.state.roupasSelecionadas.length; i++) {
+            roupaEmLavagemOids = roupaEmLavagemOids + ';' + this.state.roupasSelecionadas[i].oid;
         }
+
+        alert(roupaEmLavagemOids);
 
         var argumentos = `roupaEmLavagemOid=${roupaEmLavagemOids}&usuarioOid=${usuarioOid}&tipoDePacote=${tipoDePacote}`;
 
@@ -218,6 +217,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                     )}
                 </ScrollView>
 
+                <LoadingModal modalVisible={this.state.modalVisible} />
                 <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto={this.props.navigation.getParam("texto")} 
                     onSim={() => this.acao()} onNao={() => this.closeModal()} />
             </View>
