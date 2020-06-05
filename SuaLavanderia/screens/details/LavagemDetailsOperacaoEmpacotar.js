@@ -141,6 +141,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                 paga: objetoResponse.Paga,
                 unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
                 unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
+                quantidadeDePecas: objetoResponse.QuantidadeDePecas,
                 roupas: roupas,
                 status: objetoResponse.Status,
             };    
@@ -191,6 +192,11 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                         <View style={styles.lavagemInfoContainer}>
                             <Text style={styles.lavagemInfoTitle}>Status: </Text>
                             <Text style={styles.lavagemInfo}>{lavagem.status}</Text>
+                        </View>
+
+                        <View style={styles.lavagemInfoContainer}>
+                            <Text style={styles.lavagemInfoTitle}>Quantidade de Peças: </Text>
+                            <Text style={styles.lavagemInfo}>{lavagem.quantidadeDePecas}</Text>
                         </View>
                     </View>
 

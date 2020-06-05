@@ -3,7 +3,7 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, 
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import LavagemOperacoes from "../components/LavagemOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
-import ConfirmacaoModal from '../components/modals/ConfirmacaoModal';
+import ConfirmacaoModalComDetalhes from '../components/modals/ConfirmacaoModalComDetalhes';
 
 export default class OperacaoRecolherScreen extends React.Component {
 
@@ -11,7 +11,7 @@ export default class OperacaoRecolherScreen extends React.Component {
         dataInicial: '',
         dataFinal: '',
         objetos: [],
-        lavagemOid: '',
+        lavagem: {},
         modalVisible: false,
         confirmacaoModalVisible: false,
     };
@@ -227,12 +227,17 @@ export default class OperacaoRecolherScreen extends React.Component {
         });
     }
 
-    openModal = (lavagemOid) => {
-        this.setState({confirmacaoModalVisible: true, lavagemOid});
+    openModal = (lavagem) => {
+        this.setState({confirmacaoModalVisible: true, lavagem});
     };
     
     closeModal = () => {
         this.setState({confirmacaoModalVisible: false});
+    };
+
+    navegarParaDetalhes = () => {
+        this.setState({confirmacaoModalVisible: false});
+        this.props.navigation.navigate("LavagemDetails", { lavagem: this.state.lavagem })
     };
 
     acao = async () => {
@@ -243,7 +248,7 @@ export default class OperacaoRecolherScreen extends React.Component {
         var email = usuario.email;
         const usuarioOid = this.props.navigation.getParam('usuarioOid');
 
-        var argumentos = `lavagemOid=${this.state.lavagemOid}&usuarioOid=${usuarioOid}`;
+        var argumentos = `lavagemOid=${this.state.lavagem.oid}&usuarioOid=${usuarioOid}`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/RecolherRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -299,14 +304,15 @@ export default class OperacaoRecolherScreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto.oid)}>
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto)}>
                             <LavagemOperacoes key={objeto.oid} lavagem={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
-                <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto="Confirmar Recolher?" onSim={this.acao} onNao={this.closeModal} />
+                <ConfirmacaoModalComDetalhes visible={this.state.confirmacaoModalVisible} texto="Confirmar Recolher?" 
+                    onSim={this.acao} onNao={this.closeModal} onDetalhes={this.navegarParaDetalhes}/>
             </View>
         );
     }

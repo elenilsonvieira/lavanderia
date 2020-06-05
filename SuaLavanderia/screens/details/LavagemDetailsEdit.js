@@ -8,6 +8,7 @@ export default class LavagemDetailsEdit extends React.Component {
         modalVisible: false,
         status: '0',
         valor: '0',
+        quantidadeDePecas: '0',
         lavagem: {},
     };
 
@@ -19,8 +20,9 @@ export default class LavagemDetailsEdit extends React.Component {
         const lavagem = this.props.navigation.getParam('lavagem');
         var status = lavagem.status;
         var valor = lavagem.valor;
+        var quantidadeDePecas = lavagem.quantidadeDePecas;
 
-        this.setState({lavagem, status, valor});
+        this.setState({lavagem, status, valor, quantidadeDePecas});
     }
     
     dataString = () => {
@@ -71,7 +73,7 @@ export default class LavagemDetailsEdit extends React.Component {
             default: ;
         }
 
-        var argumentos = 'status=' + status + '&valor=' + this.state.valor + '&oid=' + lavagem.oid;
+        var argumentos = 'status=' + status + '&valor=' + this.state.valor + '&oid=' + lavagem.oid + '&quantidadeDePecas=' + this.state.quantidadeDePecas;
 
         const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
@@ -147,6 +149,16 @@ export default class LavagemDetailsEdit extends React.Component {
                                 <Picker.Item label='Pronta' value='Pronta' />
                                 <Picker.Item label='Entregue' value='Entregue' />
                             </Picker>
+                        </View>
+
+                        <View style={styles.lavagemInfoContainer}>
+                            <Text style={styles.lavagemInfoTitle}>Quantidade de Peças: </Text>
+                            <TextInput
+                                style={styles.boxInput}
+                                value={this.state.quantidadeDePecas}
+                                keyboardType='numeric'
+                                onChangeText={quantidadeDePecas => this.setState({quantidadeDePecas})}
+                            />
                         </View>
 
                         <View style={styles.lavagemInfoContainer}>
