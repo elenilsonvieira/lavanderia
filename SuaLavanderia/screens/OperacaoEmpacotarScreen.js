@@ -238,7 +238,7 @@ export default class OperacaoEmpacotarScreen extends React.Component {
 
     navegarParaDetalhes = () => {
         this.setState({confirmacaoModalVisible: false});
-        this.props.navigation.navigate("LavagemDetailsOperacaoEmpacotar", { lavagem: this.state.lavagem, acao: this.acao, texto: "Confirmar Empacotar?" })
+        this.props.navigation.navigate("LavagemDetailsOperacaoEmpacotar", { lavagem: this.state.lavagem, acao: this.acao, texto: "Confirmar empacotar tudo?", usuarioOid: this.props.navigation.getParam('usuarioOid') })
     };
 
     acao = async () => {
@@ -312,7 +312,7 @@ export default class OperacaoEmpacotarScreen extends React.Component {
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
-                <ConfirmacaoModalComDetalhes visible={this.state.confirmacaoModalVisible} texto="Confirmar Empacotar?" 
+                <ConfirmacaoModalComDetalhes visible={this.state.confirmacaoModalVisible} texto="Confirmar empacotar tudo?" 
                     onSim={this.acao} onNao={this.closeModal} onDetalhes={this.navegarParaDetalhes}/>
             </View>
         );

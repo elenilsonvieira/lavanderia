@@ -59,6 +59,58 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         this.props.navigation.getParam("acao")();
     };
 
+    empacotarComCabides = () => {
+        if(this.state.roupasSelecionadas.length == 0){
+            alert('Selecione ao menos uma roupa');
+        }else{
+            this.empacotar("cabide");
+        }
+    };
+
+    empacotarRoupasDobradas = () => {
+        if(this.state.roupasSelecionadas.length == 0){
+            alert('Selecione ao menos uma roupa');
+        }else{
+            this.empacotar("dobrada");
+        }
+    };
+
+    empacotar = async (tipoDePacote) => {
+        this.setState({modalVisible: true});
+
+        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
+        var hash = this.hash(usuario);
+        var email = usuario.email;
+        const usuarioOid = this.props.navigation.getParam('usuarioOid');
+
+        var roupaEmLavagemOids = this.state.roupasSelecionadas[0].Oid;
+
+        for (const index in this.state.roupasSelecionadas) {
+            if(index == 0){
+                continue;
+            }
+
+            roupaEmLavagemOids = roupaEmLavagemOids + ';' + this.state.roupasSelecionadas[index].Oid;
+        }
+
+        var argumentos = `roupaEmLavagemOid=${roupaEmLavagemOids}&usuarioOid=${usuarioOid}&tipoDePacote=${tipoDePacote}`;
+
+        try{
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/EmpacotarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                });
+            
+            if(call.status != 200){
+                alert('Erro.' + call.statusText);    
+            }            
+        }catch(erro){
+            alert('Erro.' + erro);
+        }
+
+        this.setState({modalVisible: false, roupasSelecionadas: []});
+    };
+
     selecionarRoupa = (roupaEmLavagem) => {
         var roupasSelecionadas = [];
         var jaContem = false;
@@ -99,6 +151,10 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.infoTitle}>Lavagem</Text>
+
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} style={styles.button}>
+                        <Image style={styles.icon} source={require('../../images/salvar_32x32.png')} />
+                    </TouchableOpacity>
                 </View>
                 <ScrollView>
                     <TouchableOpacity onPress={() => this.openModal()}>
@@ -141,6 +197,16 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
 
                     <View style={styles.roupasContainer}>
                         <Text style={styles.roupasTitle}>Roupas</Text>
+
+                        <View style={styles.botoesContainer}>
+                            <TouchableOpacity onPress={() => this.empacotarRoupasDobradas()} style={styles.buttonAcao}>
+                                <Image style={styles.iconAcao} source={require('../../images/roupa-dobrada_32x32.png')} />
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => this.empacotarComCabides()} style={styles.buttonAcao}>
+                                <Image style={styles.iconAcao} source={require('../../images/cabide2_32x32.png')} />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     
                     { lavagem.roupas.map(roupaEmLavagem => 
@@ -171,6 +237,11 @@ const styles = StyleSheet.create(
             justifyContent: 'center',
             height: 40,
             backgroundColor: '#FFF',
+            flexDirection: 'row',
+          },
+          botoesContainer:{
+            alignItems: 'center',
+            justifyContent: 'center',
             flexDirection: 'row',
           },
           headerText: {
@@ -213,9 +284,16 @@ const styles = StyleSheet.create(
         button:{
             margin: 10,
         },
+        buttonAcao:{
+            marginHorizontal: 20,
+        },
         icon: {
             width: 24,
             height: 24,
+        },
+        iconAcao: {
+            width: 48,
+            height: 48,
         },
         roupasContainer: {
             alignItems: 'center',
