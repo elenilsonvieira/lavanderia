@@ -237,7 +237,7 @@ export default class OperacaoRecolherScreen extends React.Component {
 
     navegarParaDetalhes = () => {
         this.setState({confirmacaoModalVisible: false});
-        this.props.navigation.navigate("LavagemDetails", { lavagem: this.state.lavagem })
+        this.props.navigation.navigate("LavagemDetails", { lavagem: this.state.lavagem, acao: this.acao, texto: "Confirmar Recolher?" })
     };
 
     acao = async () => {
