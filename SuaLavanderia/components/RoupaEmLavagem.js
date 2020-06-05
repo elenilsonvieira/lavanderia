@@ -26,6 +26,11 @@ export default class RoupaEmLavagem extends React.Component {
                         <Text style={styles.lavagemInfo}>{this.props.roupaEmLavagem.observacoes}</Text>
                     </View>
 
+                    <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Pacote: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.roupaEmLavagem.pacoteDeRoupa? this.props.roupaEmLavagem.pacoteDeRoupa.tipo (this.props.roupaEmLavagem.pacoteDeRoupa.dataEHora) : ''}</Text>
+                    </View>
+
                     <View style={styles.roupaContainer}>
                         <View style={styles.roupaInfoContainer}>
                             <Text style={styles.roupaInfoTitle}>Chave: </Text>

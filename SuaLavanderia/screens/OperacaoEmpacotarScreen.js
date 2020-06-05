@@ -129,9 +129,10 @@ export default class OperacaoEmpacotarScreen extends React.Component {
                         quantidade: roupaResponse.Quantidade,
                         observacoes: roupaResponse.Observacoes,
                         soPassar: roupaResponse.SoPassar,
-                        cliente: objetoResponse.Cliente,
-                        clienteOid: objetoResponse.ClienteOid,
-                        codigoDoCliente: objetoResponse.CodigoDoCliente,
+                        pacoteDeRoupa: roupaResponse.PacoteDeRoupa,
+                        cliente: roupaResponse.Cliente,
+                        clienteOid: roupaResponse.ClienteOid,
+                        codigoDoCliente: roupaResponse.CodigoDoCliente,
                         roupa: {
                             oid: roupaResponse.Roupa.Oid,
                             tipo: roupaResponse.Roupa.Tipo,

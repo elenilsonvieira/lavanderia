@@ -112,6 +112,7 @@ export default class LavagemDetailsPapelOperacoes extends React.Component {
                     quantidade: roupaResponse.Quantidade,
                     observacoes: roupaResponse.Observacoes,
                     soPassar: roupaResponse.SoPassar,
+                    pacoteDeRoupa: roupaResponse.PacoteDeRoupa,
                     roupa: {
                         oid: roupaResponse.Roupa.Oid,
                         tipo: roupaResponse.Roupa.Tipo,
