@@ -160,6 +160,11 @@ export default class LavagemDetailsOperacoes extends React.Component {
         this.setState({confirmacaoModalVisible: false});
     };
 
+    acao = () => {
+        this.setState({confirmacaoModalVisible: false});
+        this.props.navigation.getParam("acao")();
+    };
+
     render(){
         const lavagem = this.state.lavagem;
 
@@ -222,7 +227,7 @@ export default class LavagemDetailsOperacoes extends React.Component {
                 </ScrollView>
 
                 <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto={this.props.navigation.getParam("texto")} 
-                    onSim={() => this.props.navigation.getParam("acao")} onNao={() => this.closeModal()} />
+                    onSim={() => this.acao()} onNao={() => this.closeModal()} />
             </View>
         );
     }
