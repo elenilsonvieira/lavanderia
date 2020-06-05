@@ -11,19 +11,6 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         confirmacaoModalVisible: false,
     };
 
-    navegarParaDetalhes(props, roupaEmLavagem){
-        const lavagem = this.props.navigation.getParam('lavagem');
-        const cliente = lavagem.cliente;
-        const clienteOid = lavagem.clienteOid;
-        const lavagemOid = lavagem.oid;
-
-        if(lavagem.status == 'Anotada'){
-            props.navigation.navigate('RoupaEmLavagemDetails', {roupaEmLavagem: roupaEmLavagem, cliente: cliente, clienteOid: clienteOid, lavagemOid: lavagemOid, reload: this.buscar.bind(this)});
-        }else {
-            alert('Essa lavagem já está anotada.');
-        }
-    }
-
     async componentWillMount(){
         const lavagem = this.props.navigation.getParam('lavagem');
         this.setState({lavagem});
