@@ -40,6 +40,7 @@ import OperacaoLavarScreen from './screens/OperacaoLavarScreen';
 import OperacaoRecolherScreen from './screens/OperacaoRecolherScreen';
 import OperacaoPassarScreen from './screens/OperacaoPassarScreen';
 import OperacaoEmpacotarScreen from './screens/OperacaoEmpacotarScreen';
+import OperacaoRetirarMaterialScreen from './screens/OperacaoRetirarMaterialScreen';
 
 export default class App extends Component {
   render() {
@@ -313,6 +314,7 @@ const StackAplicativo = createStackNavigator(
     OperacaoRecolher: OperacaoRecolherScreen,
     OperacaoPassar: OperacaoPassarScreen,
     OperacaoEmpacotar: OperacaoEmpacotarScreen,
+    OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
     Drawer: DrawerAplicativo,
   },{
     initialRouteName: 'Drawer',

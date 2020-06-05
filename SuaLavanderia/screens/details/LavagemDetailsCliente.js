@@ -166,12 +166,7 @@ export default class LavagemDetailsCliente extends React.Component {
                 <ScrollView>
                     <View style={styles.unidadeContainer}>
                         <View style={styles.lavagemInfoContainerCliente}>
-                            <Text style={styles.lavagemInfoCliente}>{lavagem.cliente}</Text>
-                        </View>
-
-                        <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Oid: </Text>
-                            <Text style={styles.lavagemInfo}>{lavagem.oid}</Text>
+                            <Text style={styles.lavagemInfoCliente}>{lavagem.cliente} ({lavagem.codigoDoCliente})</Text>
                         </View>
 
                         <View style={styles.lavagemInfoContainer}>

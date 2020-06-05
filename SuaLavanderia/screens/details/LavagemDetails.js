@@ -205,12 +205,7 @@ export default class LavagemDetails extends React.Component {
                     <TouchableOpacity onPress={() => this.navegarParaEdit(this.props)}>
                         <View style={styles.unidadeContainer}>
                             <View style={styles.lavagemInfoContainerCliente}>
-                                <Text style={styles.lavagemInfoCliente}>{lavagem.cliente}</Text>
-                            </View>
-
-                            <View style={styles.lavagemInfoContainer}>
-                                <Text style={styles.lavagemInfoTitle}>Oid: </Text>
-                                <Text style={styles.lavagemInfo}>{lavagem.oid}</Text>
+                                <Text style={styles.lavagemInfoCliente}>{lavagem.cliente} ({lavagem.codigoDoCliente})</Text>
                             </View>
 
                             <View style={styles.lavagemInfoContainer}>

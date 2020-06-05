@@ -11,10 +11,6 @@ export default class LavagemDetailsOperacoes extends React.Component {
         confirmacaoModalVisible: false,
     };
 
-    LavagemDetails(){
-        this.buscar = this.buscar.bind(this);
-    }
-
     navegarParaDetalhes(props, roupaEmLavagem){
         const lavagem = this.props.navigation.getParam('lavagem');
         const cliente = lavagem.cliente;
@@ -28,35 +24,9 @@ export default class LavagemDetailsOperacoes extends React.Component {
         }
     }
 
-    pagar(){
-        const lavagem = this.props.navigation.getParam('lavagem');
-        
-        if(lavagem.paga != 'Não/Parcialmente'){
-            alert("Essa lavagem já está paga!");
-        }else{
-            this.props.navigation.navigate('MovimentacaoDeCaixaDetails', {lavagem: lavagem, reload: this.buscar.bind(this)});
-        }
-    }
-
     async componentWillMount(){
         const lavagem = this.props.navigation.getParam('lavagem');
-        const reload = true;//this.props.navigation.getParam('reload');
         this.setState({lavagem});
-
-        if(reload){
-            this.buscar();
-        }
-    }
-
-    avaliar(){
-        const lavagem = this.props.navigation.getParam('lavagem');
-        
-        if(lavagem.status != 'Entregue'){
-            alert("Essa lavagem ainda não foi entregue para poder ser avaliada!");
-        }else{
-            var tela = lavagem.avaliacao == null ? 'AvaliacaoDetails' : 'AvaliacaoDetailsSoLeitura';
-            this.props.navigation.navigate(tela, {lavagem: lavagem, reload: this.buscar.bind(this)});
-        }
     }
 
     dataString = () => {
@@ -88,70 +58,6 @@ export default class LavagemDetailsOperacoes extends React.Component {
         return hash;
     };
 
-    async buscar() {
-        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
-        var hash = this.hash(usuario);
-        var email = usuario.email;
-        var oid = this.state.lavagem.oid;
-
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
-            { 
-                method: 'post' 
-            });
-        const response = await call.json();
-
-        var objetos = [];
-
-        for(index in response){
-            const objetoResponse = response[index];
-            var roupas = [];
-
-            for(indexRoupa in objetoResponse.Roupas){
-                const roupaResponse = objetoResponse.Roupas[indexRoupa];
-
-                const roupaEmLavagem = {
-                    oid: roupaResponse.Oid,
-                    quantidade: roupaResponse.Quantidade,
-                    observacoes: roupaResponse.Observacoes,
-                    soPassar: roupaResponse.SoPassar,
-                    roupa: {
-                        oid: roupaResponse.Roupa.Oid,
-                        tipo: roupaResponse.Roupa.Tipo,
-                        tecido: roupaResponse.Roupa.Tecido,
-                        tamanho: roupaResponse.Roupa.Tamanho,
-                        marca: roupaResponse.Roupa.Marca,
-                        cliente: roupaResponse.Roupa.Cliente,
-                        clienteOid: roupaResponse.Roupa.ClienteOid,
-                        observacao: roupaResponse.Roupa.Observacao,
-                        codigo: roupaResponse.Roupa.Codigo,
-                        chave: roupaResponse.Roupa.Chave,
-                        cores: roupaResponse.Roupa.Cores,
-                    },
-                };
-
-                roupas = [...roupas, roupaEmLavagem];
-            }
-
-            const lavagem = {
-                oid: objetoResponse.Oid,
-                cliente: objetoResponse.Cliente,
-                clienteOid: objetoResponse.ClienteOid,
-                dataDeRecebimento: objetoResponse.DataDeRecebimento,
-                dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
-                dataDeEntrega: objetoResponse.DataDeEntrega,
-                valor: objetoResponse.Valor,
-                paga: objetoResponse.Paga,
-                unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
-                unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
-                quantidadeDePecas: objetoResponse.QuantidadeDePecas,
-                roupas: roupas,
-                status: objetoResponse.Status,
-            };    
-
-            this.setState({lavagem});
-        }
-    };
-
     openModal = () => {
         this.setState({confirmacaoModalVisible: true});
     };
@@ -177,12 +83,7 @@ export default class LavagemDetailsOperacoes extends React.Component {
                     <TouchableOpacity onPress={() => this.openModal()}>
                         <View style={styles.unidadeContainer}>
                             <View style={styles.lavagemInfoContainerCliente}>
-                                <Text style={styles.lavagemInfoCliente}>{lavagem.cliente}</Text>
-                            </View>
-
-                            <View style={styles.lavagemInfoContainer}>
-                                <Text style={styles.lavagemInfoTitle}>Oid: </Text>
-                                <Text style={styles.lavagemInfo}>{lavagem.oid}</Text>
+                                <Text style={styles.lavagemInfoCliente}>{lavagem.cliente} ({lavagem.codigoDoCliente})</Text>
                             </View>
 
                             <View style={styles.lavagemInfoContainer}>
