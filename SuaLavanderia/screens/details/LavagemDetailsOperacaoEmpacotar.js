@@ -1,17 +1,15 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Text, AsyncStorage } from 'react-native';
+import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage } from 'react-native';
 import RoupaEmLavagem from '../../components/RoupaEmLavagem';
+import ConfirmacaoModal from '../../components/modals/ConfirmacaoModal';
 
 export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
 
     state ={
         nome: '',
         modalVisible: false,
+        confirmacaoModalVisible: false,
     };
-
-    LavagemDetails(){
-        this.buscar = this.buscar.bind(this);
-    }
 
     navegarParaDetalhes(props, roupaEmLavagem){
         const lavagem = this.props.navigation.getParam('lavagem');
@@ -26,35 +24,9 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         }
     }
 
-    pagar(){
-        const lavagem = this.props.navigation.getParam('lavagem');
-        
-        if(lavagem.paga != 'Não/Parcialmente'){
-            alert("Essa lavagem já está paga!");
-        }else{
-            this.props.navigation.navigate('MovimentacaoDeCaixaDetails', {lavagem: lavagem, reload: this.buscar.bind(this)});
-        }
-    }
-
     async componentWillMount(){
         const lavagem = this.props.navigation.getParam('lavagem');
-        const reload = true;//this.props.navigation.getParam('reload');
         this.setState({lavagem});
-
-        if(reload){
-            this.buscar();
-        }
-    }
-
-    avaliar(){
-        const lavagem = this.props.navigation.getParam('lavagem');
-        
-        if(lavagem.status != 'Entregue'){
-            alert("Essa lavagem ainda não foi entregue para poder ser avaliada!");
-        }else{
-            var tela = lavagem.avaliacao == null ? 'AvaliacaoDetails' : 'AvaliacaoDetailsSoLeitura';
-            this.props.navigation.navigate(tela, {lavagem: lavagem, reload: this.buscar.bind(this)});
-        }
     }
 
     dataString = () => {
@@ -86,68 +58,17 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         return hash;
     };
 
-    async buscar() {
-        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
-        var hash = this.hash(usuario);
-        var email = usuario.email;
-        var oid = this.state.lavagem.oid;
+    openModal = () => {
+        this.setState({confirmacaoModalVisible: true});
+    };
+    
+    closeModal = () => {
+        this.setState({confirmacaoModalVisible: false});
+    };
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
-            { 
-                method: 'post' 
-            });
-        const response = await call.json();
-
-        var objetos = [];
-
-        for(index in response){
-            const objetoResponse = response[index];
-            var roupas = [];
-
-            for(indexRoupa in objetoResponse.Roupas){
-                const roupaResponse = objetoResponse.Roupas[indexRoupa];
-
-                const roupaEmLavagem = {
-                    oid: roupaResponse.Oid,
-                    quantidade: roupaResponse.Quantidade,
-                    observacoes: roupaResponse.Observacoes,
-                    soPassar: roupaResponse.SoPassar,
-                    roupa: {
-                        oid: roupaResponse.Roupa.Oid,
-                        tipo: roupaResponse.Roupa.Tipo,
-                        tecido: roupaResponse.Roupa.Tecido,
-                        tamanho: roupaResponse.Roupa.Tamanho,
-                        marca: roupaResponse.Roupa.Marca,
-                        cliente: roupaResponse.Roupa.Cliente,
-                        clienteOid: roupaResponse.Roupa.ClienteOid,
-                        observacao: roupaResponse.Roupa.Observacao,
-                        codigo: roupaResponse.Roupa.Codigo,
-                        chave: roupaResponse.Roupa.Chave,
-                        cores: roupaResponse.Roupa.Cores,
-                    },
-                };
-
-                roupas = [...roupas, roupaEmLavagem];
-            }
-
-            const lavagem = {
-                oid: objetoResponse.Oid,
-                cliente: objetoResponse.Cliente,
-                clienteOid: objetoResponse.ClienteOid,
-                dataDeRecebimento: objetoResponse.DataDeRecebimento,
-                dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
-                dataDeEntrega: objetoResponse.DataDeEntrega,
-                valor: objetoResponse.Valor,
-                paga: objetoResponse.Paga,
-                unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
-                unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
-                quantidadeDePecas: objetoResponse.QuantidadeDePecas,
-                roupas: roupas,
-                status: objetoResponse.Status,
-            };    
-
-            this.setState({lavagem});
-        }
+    acao = () => {
+        this.setState({confirmacaoModalVisible: false});
+        this.props.navigation.getParam("acao")();
     };
 
     render(){
@@ -159,46 +80,43 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                     <Text style={styles.infoTitle}>Lavagem</Text>
                 </View>
                 <ScrollView>
-                    <View style={styles.unidadeContainer}>
-                        <View style={styles.lavagemInfoContainerCliente}>
-                            <Text style={styles.lavagemInfoCliente}>{lavagem.cliente}</Text>
-                        </View>
+                    <TouchableOpacity onPress={() => this.openModal()}>
+                        <View style={styles.unidadeContainer}>
+                            <View style={styles.lavagemInfoContainerCliente}>
+                                <Text style={styles.lavagemInfoCliente}>{lavagem.cliente} ({lavagem.codigoDoCliente})</Text>
+                            </View>
 
-                        <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Oid: </Text>
-                            <Text style={styles.lavagemInfo}>{lavagem.oid}</Text>
-                        </View>
+                            <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Unidade: </Text>
+                                <Text style={styles.lavagemInfo}>{lavagem.unidadeDeRecebimento}</Text>
+                            </View>
 
-                        <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Unidade: </Text>
-                            <Text style={styles.lavagemInfo}>{lavagem.unidadeDeRecebimento}</Text>
-                        </View>
+                            <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Data de Recebimento: </Text>
+                                <Text style={styles.lavagemInfo}>{lavagem.dataDeRecebimento}</Text>
+                            </View>
 
-                        <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Data de Recebimento: </Text>
-                            <Text style={styles.lavagemInfo}>{lavagem.dataDeRecebimento}</Text>
-                        </View>
+                            <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Data Preferível para Entrega: </Text>
+                                <Text style={styles.lavagemInfo}>{lavagem.dataPreferivelParaEntrega}</Text>
+                            </View>
 
-                        <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Data Preferível para Entrega: </Text>
-                            <Text style={styles.lavagemInfo}>{lavagem.dataPreferivelParaEntrega}</Text>
-                        </View>
+                            <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Data de Entrega: </Text>
+                                <Text style={styles.lavagemInfo}>{lavagem.dataDeEntrega}</Text>
+                            </View>
 
-                        <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Data de Entrega: </Text>
-                            <Text style={styles.lavagemInfo}>{lavagem.dataDeEntrega}</Text>
-                        </View>
+                            <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Status: </Text>
+                                <Text style={styles.lavagemInfo}>{lavagem.status}</Text>
+                            </View>
 
-                        <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Status: </Text>
-                            <Text style={styles.lavagemInfo}>{lavagem.status}</Text>
+                            <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Quantidade de Peças: </Text>
+                                <Text style={styles.lavagemInfo}>{lavagem.quantidadeDePecas}</Text>
+                            </View>
                         </View>
-
-                        <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Quantidade de Peças: </Text>
-                            <Text style={styles.lavagemInfo}>{lavagem.quantidadeDePecas}</Text>
-                        </View>
-                    </View>
+                    </TouchableOpacity>
 
                     <View style={styles.roupasContainer}>
                         <Text style={styles.roupasTitle}>Roupas</Text>
@@ -208,6 +126,9 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                         <RoupaEmLavagem key={roupaEmLavagem.roupa.oid} roupaEmLavagem={roupaEmLavagem} />
                     )}
                 </ScrollView>
+
+                <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto={this.props.navigation.getParam("texto")} 
+                    onSim={() => this.acao()} onNao={() => this.closeModal()} />
             </View>
         );
     }
