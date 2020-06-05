@@ -6,7 +6,7 @@ export default class RoupaEmLavagem extends React.Component {
     render(){
         return(
             <View style={styles.container}>
-                <View style={styles.unidadeContainer}>
+                <View style={[styles.unidadeContainer, this.props.styleExtra]}>
                     <View style={styles.lavagemInfoContainerCliente}>
                         <Text style={styles.lavagemInfoCliente}>{this.props.roupaEmLavagem.roupa.tipo}</Text>
                     </View>

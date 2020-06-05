@@ -9,6 +9,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         nome: '',
         modalVisible: false,
         confirmacaoModalVisible: false,
+        roupasSelecionadas: [],
     };
 
     async componentWillMount(){
@@ -56,6 +57,39 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
     acao = () => {
         this.setState({confirmacaoModalVisible: false});
         this.props.navigation.getParam("acao")();
+    };
+
+    selecionarRoupa = (roupaEmLavagem) => {
+        var roupasSelecionadas = [];
+        var jaContem = false;
+
+        for(index in this.state.roupasSelecionadas){
+            const roupa = this.state.roupasSelecionadas[index];
+
+            if(roupa.oid != roupaEmLavagem.oid){
+                roupasSelecionadas = [...roupasSelecionadas, roupa];
+            }else{
+                jaContem = true;
+            }
+        }
+
+        if(!jaContem){
+            roupasSelecionadas = [...roupasSelecionadas, roupaEmLavagem];
+        }
+
+        this.setState({roupasSelecionadas});
+    };
+
+    roupaJaSelecionada = (roupaEmLavagem) => {
+        for(index in this.state.roupasSelecionadas){
+            const roupa = this.state.roupasSelecionadas[index];
+
+            if(roupa.oid == roupaEmLavagem.oid){
+                return true;
+            }
+        }
+
+        return false;
     };
 
     render(){
@@ -110,7 +144,11 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                     </View>
                     
                     { lavagem.roupas.map(roupaEmLavagem => 
-                        <RoupaEmLavagem key={roupaEmLavagem.roupa.oid} roupaEmLavagem={roupaEmLavagem} />
+                        <TouchableOpacity onPress={() => this.selecionarRoupa(roupaEmLavagem)}>
+                            <RoupaEmLavagem key={roupaEmLavagem.roupa.oid} roupaEmLavagem={roupaEmLavagem} 
+                                styleExtra={ this.roupaJaSelecionada(roupaEmLavagem) ? 
+                                    { borderWidth: 10, borderColor: 'green'} : {}} />
+                        </TouchableOpacity>
                     )}
                 </ScrollView>
 
