@@ -151,7 +151,13 @@ export default class MaterialScreen extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
-        const usuarioOid = this.props.navigation.getParam('usuarioOid');
+        var usuarioOid = this.props.navigation.getParam('usuarioOid');
+        var usarUsuarioLogado = false;
+
+        if(!usuarioOid){
+            usuarioOid = usuario.oid;
+            usarUsuarioLogado = true;
+        }
 
         var argumentos = `materialOid=${this.state.materialOid}&usuarioOid=${usuarioOid}&quantidade=${this.state.quantidade}&modo=${this.state.modo}`;
 
@@ -170,8 +176,11 @@ export default class MaterialScreen extends React.Component {
 
         this.setState({modalVisible: false});
 
-        //this.buscar();
-        this.props.navigation.navigate('Home');
+        if(usarUsuarioLogado){
+            this.buscar();
+        }else{
+            this.props.navigation.navigate('Home');
+        }
     };
 
     render(){

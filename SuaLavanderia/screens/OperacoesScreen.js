@@ -28,7 +28,6 @@ export default class OperacoesScreen extends React.Component {
             usuarioOid = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario")).oid;
         }
 
-
         this.setState({usuarioOid});
     }
 

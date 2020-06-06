@@ -51,6 +51,7 @@ export default class LoginScreen extends Component {
             var usuarioResponse = resposta[0];
 
             const usuario = {
+              oid: usuarioResponse.Oid,
               nome: usuarioResponse.Nome,
               email: usuarioResponse.Email,
               papel: usuarioResponse.Papel,
