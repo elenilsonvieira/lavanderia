@@ -1,22 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
 
-import Material from "../components/Material";
-import LoadingModal from '../components/modals/LoadingModal';
-import ConfirmacaoModalMaterialComDetalhes from '../components/modals/ConfirmacaoModalMaterialComDetalhes';
-import ListaDeComprasModal from '../components/modals/ListaDeComprasModal';
+import ItemDeCompra from "../components/ItemDeCompra";
 
 export default class ListaDeComprasScreen extends React.Component {
-
-    static navigationOptions = {
-        drawerLabel: 'Material',
-        drawerIcon: ({ tintColor }) => (
-            <Image
-            source={require('../images/sabao_64x64.png')}
-            style={styles.icon}
-            />
-        ),
-    };
 
     state ={
         objetos: [],
@@ -91,7 +78,7 @@ export default class ListaDeComprasScreen extends React.Component {
                 var objetos = [];    
 
                 var dataDaCompra = objetoResponse.DataDaCompra;
-                var duracaoDoEstoque = objetoResponse.duracaoDoEstoque;
+                var duracaoDoEstoque = objetoResponse.DuracaoDoEstoque;
 
                 for(indexItem in objetoResponse.Itens){
                     const itemResponse = objetoResponse.Itens[indexItem];
@@ -166,9 +153,9 @@ export default class ListaDeComprasScreen extends React.Component {
                         <Text style={styles.roupasTitle}>Itens</Text>
                     </View>
 
-                    {/* {this.state.objetos.map(objeto => 
-                        <Material key={objeto.oid} material={objeto} />
-                    )} */}
+                    {this.state.objetos.map(objeto => 
+                        <ItemDeCompra key={objeto.material.oid} objeto={objeto} />
+                    )}
                 </ScrollView>
             </View>
         );
