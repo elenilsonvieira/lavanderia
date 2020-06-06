@@ -33,6 +33,7 @@ import LoginScreen from './screens/LoginScreen';
 import LogoutScreen from './screens/LogoutScreen';
 import LoadingLoginScreen from './screens/LoadingLoginScreen';
 import RoupaDetails from './screens/details/RoupaDetails';
+import MaterialDetails from './screens/details/MaterialDetails';
 import RoupasDoClienteScreen from './screens/RoupasDoClienteScreen';
 import ContatoScreen from './screens/ContatoScreen';
 import OperacoesScreen from './screens/OperacoesScreen';
@@ -203,6 +204,7 @@ const StackAdministrador = createStackNavigator(
     LavagemDetailsEdit: LavagemDetailsEdit,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupaDetails: RoupaDetails,
+    MaterialDetails: MaterialDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
     Drawer: DrawerAdministrador,
   },{
@@ -225,6 +227,7 @@ const StackGerenteGeral = createStackNavigator(
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
+    MaterialDetails: MaterialDetails,
     Drawer: DrawerGerenteGeral,
   },{
     initialRouteName: 'Drawer',
@@ -246,6 +249,7 @@ const StackSubGerenteGeral = createStackNavigator(
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
+    MaterialDetails: MaterialDetails,
     Drawer: DrawerSubGerenteGeral,
   },{
     initialRouteName: 'Drawer',

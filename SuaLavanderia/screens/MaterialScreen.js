@@ -3,7 +3,7 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, 
 
 import Material from "../components/Material";
 import LoadingModal from '../components/modals/LoadingModal';
-import ConfirmacaoModalMaterial from '../components/modals/ConfirmacaoModalMaterial';
+import ConfirmacaoModalMaterialComDetalhes from '../components/modals/ConfirmacaoModalMaterialComDetalhes';
 
 export default class MaterialScreen extends React.Component {
 
@@ -19,7 +19,7 @@ export default class MaterialScreen extends React.Component {
 
     state ={
         objetos: [],
-        materialOid: '',
+        material: {},
         quantidade: 0,
         modo: 'saida',
         modalVisible: false,
@@ -85,9 +85,7 @@ export default class MaterialScreen extends React.Component {
 
             for(index in response){
                 const objetoResponse = response[index];
-                var movimentacoes = [];
-
-                
+                var movimentacoes = [];    
 
                 for(indexRoupa in objetoResponse.Movimentacoes){
                     var movimentacaoResposta = objetoResponse.Movimentacoes[indexRoupa];
@@ -130,6 +128,7 @@ export default class MaterialScreen extends React.Component {
                     ativo: objetoResponse.Ativo,
                     alertaAmarelo: objetoResponse.AlertaAmarelo,
                     alertaVermelho: objetoResponse.AlertaVermelho,
+                    movimentacoes: movimentacoes,
                 };    
 
                 objetos = [...objetos, objeto];
@@ -148,12 +147,17 @@ export default class MaterialScreen extends React.Component {
         this.setState(objetos);
     }
 
-    openModal = (materialOid) => {
-        this.setState({confirmacaoModalVisible: true, materialOid});
+    openModal = (material) => {
+        this.setState({confirmacaoModalVisible: true, material});
     };
     
     closeModal = () => {
         this.setState({confirmacaoModalVisible: false});
+    };
+
+    navegarParaDetalhes = () => {
+        this.setState({confirmacaoModalVisible: false});
+        this.props.navigation.navigate("MaterialDetails", { material: this.state.material, acao: this.acao })
     };
 
     acao = async (quantidade, modo) => {
@@ -170,7 +174,7 @@ export default class MaterialScreen extends React.Component {
             usarUsuarioLogado = true;
         }
 
-        var argumentos = `materialOid=${this.state.materialOid}&usuarioOid=${usuarioOid}&quantidade=${this.state.quantidade}&modo=${this.state.modo}`;
+        var argumentos = `materialOid=${this.state.material.oid}&usuarioOid=${usuarioOid}&quantidade=${this.state.quantidade}&modo=${this.state.modo}`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeMaterial.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -210,8 +214,8 @@ export default class MaterialScreen extends React.Component {
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
-                <ConfirmacaoModalMaterial visible={this.state.confirmacaoModalVisible} 
-                    texto="Remover quantos?" onSim={this.acao} onNao={this.closeModal} />
+                <ConfirmacaoModalMaterialComDetalhes visible={this.state.confirmacaoModalVisible} 
+                    texto="Remover quantos?" onSim={this.acao} onNao={this.closeModal} onDetalhes={this.navegarParaDetalhes} />
             </View>
         );
     }
