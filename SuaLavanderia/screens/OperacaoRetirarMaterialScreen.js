@@ -134,6 +134,10 @@ export default class OperacaoRetirarMaterialScreen extends React.Component {
         this.setState({confirmacaoModalVisible: false});
     };
 
+    definirQuantidade = (quantidade) => {
+        this.setState({quantidade});
+    };
+
     acao = async (quantidade) => {
         this.setState({confirmacaoModalVisible: false, modalVisible: true, quantidade});
 
@@ -179,14 +183,13 @@ export default class OperacaoRetirarMaterialScreen extends React.Component {
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
-                
+                <ConfirmacaoModalComQuantidade visible={this.state.confirmacaoModalVisible} 
+                texto="Remover quantos?" onSim={this.acao} onNao={this.closeModal} definirQuantidade={this.definirQuantidade} />
             </View>
         );
     }
 
 }
-
-//<ConfirmacaoModalComQuantidade visible={this.state.confirmacaoModalVisible} texto="Remover quantos?" onSim={this.acao} onNao={this.closeModal} />
 
 const styles = StyleSheet.create(
     {

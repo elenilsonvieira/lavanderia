@@ -7,6 +7,11 @@ export default class ConfirmacaoModalComQuantidade extends React.Component {
         quantidade: '1',
     };
 
+    // onSim = () => {
+    //     this.props.definirQuantidade(this.state.quantidade);
+    //     this.props.onSim
+    // };
+
     render(){
         return(
             <Modal visible={this.props.visible} animationType="fade" transparent={true} onRequestClose={() => {}} >
@@ -18,7 +23,6 @@ export default class ConfirmacaoModalComQuantidade extends React.Component {
                         </View>
 
                         <View style={styles.infoContainer}>
-                            <Text style={styles.infoTitle}>Quantidade: </Text>
                                 <TextInput
                                     style={styles.boxInput}
                                     autoFocus
@@ -30,13 +34,13 @@ export default class ConfirmacaoModalComQuantidade extends React.Component {
 
                         <View style={styles.buttonContainer}>
                             <TouchableOpacity 
-                                onPress={this.props.onSim(this.state.quantidade)} 
+                                onPress={() => this.props.onSim(this.state.quantidade)} 
                                 style={[styles.button, styles.buttonAdd]}>
-                                <Text style={styles.buttonText}>Sim</Text>
+                                <Text style={styles.buttonText}>Confirmar</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={this.props.onNao} style={[styles.button, styles.buttonCancel]}>
-                                <Text style={styles.buttonText}>Não</Text>
+                                <Text style={styles.buttonText}>Cancelar</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
