@@ -72,7 +72,7 @@ export default class MaterialScreen extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        var argumentos = `ativo=true`;
+        var argumentos = `ativo=true&incluirMovimentacoes=false`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMaterial.aspx?${argumentos}&login=${email}&senha=${hash}`, 
