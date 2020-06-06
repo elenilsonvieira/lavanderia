@@ -5,7 +5,7 @@ export default class ConfirmacaoModalMaterial extends React.Component {
 
     state = {
         quantidade: '1',
-        modo: 'saida',
+        status: 'saida',
     };
 
     render(){
@@ -26,17 +26,17 @@ export default class ConfirmacaoModalMaterial extends React.Component {
 
                         <View style={styles.infoContainer}>
                             <Picker
-                                style={styles.picker}
-                                selectecValue={this.state.modo}
-                                onValueChange={(itemValue, itemIndex) => this.setState({modo: itemValue})}>
-                                <Picker.Item label='Saída' value='saida' />
+                                style={styles.picker} 
+                                selectedValue={this.state.status}
+                                onValueChange={(itemValue, itemIndex) => this.setState({status: itemValue})} >
                                 <Picker.Item label='Entrada' value='entrada' />
+                                <Picker.Item label='Saída' value='saida' />
                             </Picker>
                         </View>
 
                         <View style={styles.buttonContainer}>
                             <TouchableOpacity 
-                                onPress={() => this.props.onSim(this.state.quantidade, this.state.modo)} 
+                                onPress={() => this.props.onSim(this.state.quantidade, this.state.status)} 
                                 style={[styles.button, styles.buttonAdd]}>
                                 <Text style={styles.buttonText}>Confirmar</Text>
                             </TouchableOpacity>

@@ -72,10 +72,10 @@ export default class LoginScreen extends Component {
               this.props.navigation.navigate('Login');
             }
         }else{
-          var mensagem = 'Erro ao tentar fazer o login!';
+          var mensagem = 'Erro ao tentar fazer o login! Erro: ' + call.status;
 
           if(call.statusText){
-            mensagem += ' ' + response.statusText;
+            mensagem += ' ' + call.statusText;
           }
 
           this.setState({modalVisible: false});
