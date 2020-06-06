@@ -21,7 +21,7 @@ export default class RoupaEmLavagemModal extends React.Component {
                                     style={styles.boxInput}
                                     autoFocus
                                     placeholder="Quantidade"
-                                    value={this.state.title}
+                                    value={this.state.quantidade}
                                     onChangeText={quantidade => this.setState({quantidade})}
                                 />
                         </View>

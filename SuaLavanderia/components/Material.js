@@ -40,6 +40,17 @@ export default class Material extends React.Component {
                         <Text style={styles.lavagemInfoTitle}>Última Movimentação: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.material.ultimaMovimentacao}</Text>
                     </View>
+
+                    <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Ativo: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.material.ativo? "Sim" : "Não"}</Text>
+                    </View>
+
+                    <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Alerta: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.material.alertaAmarelo? "AMARELO" : 
+                            this.props.material.alertaVermelho ? "VERMELHO" : ""}</Text>
+                    </View>
                 </View>
             </View>
         );

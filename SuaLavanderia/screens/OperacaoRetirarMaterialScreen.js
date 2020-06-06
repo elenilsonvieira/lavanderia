@@ -76,30 +76,38 @@ export default class OperacaoRetirarMaterialScreen extends React.Component {
                 const objetoResponse = response[index];
                 var movimentacoes = [];
 
+                
+
                 for(indexRoupa in objetoResponse.Movimentacoes){
-                    const movimentacaoResposta = objetoResponse.Movimentacoes[indexRoupa];
+                    var movimentacaoResposta = objetoResponse.Movimentacoes[indexRoupa];
+                    
+                    if(movimentacaoResposta){
+                        const movimentacaoDeMaterial = {
+                            oid: movimentacaoResposta.Oid,
+                            materialOid: movimentacaoResposta.MaterialOid,
+                            data: movimentacaoResposta.Data,
+                            modo: movimentacaoResposta.Modo,
+                            quantidade: movimentacaoResposta.Quantidade,
+                            usuario: movimentacaoResposta.Usuario,
+                        };
 
-                    const movimentacaoDeMaterial = {
-                        oid: movimentacaoResposta.Oid,
-                        data: movimentacaoResposta.Data,
-                        modo: movimentacaoResposta.Modo,
-                        quantidade: movimentacaoResposta.Quantidade,
-                        usuario: movimentacaoResposta.Usuario,
-                        usuarioOid: movimentacaoResposta.UsuarioOid,
-                    };
-
-                    movimentacoes = [...movimentacoes, movimentacaoDeMaterial];
+                        movimentacoes = [...movimentacoes, movimentacaoDeMaterial];
+                    }
                 }
 
                 const objeto = {
                     oid: objetoResponse.Oid,
                     nome: objetoResponse.Nome,
+                    detalhes: objetoResponse.Detalhes,
                     fornecedor: objetoResponse.Fornecedor,
                     estoque: objetoResponse.Estoque,
                     minimoEmEstoque: objetoResponse.MinimoEmEstoque,
                     mediaDeDiasDeUmaUnidade: objetoResponse.MediaDeDiasDeUmaUnidade,
                     proximaCompra: objetoResponse.ProximaCompra,
                     ultimaMovimentacao: objetoResponse.UltimaMovimentacao,
+                    ativo: objetoResponse.ativo,
+                    alertaAmarelo: objetoResponse.AlertaAmarelo,
+                    alertaVermelho: objetoResponse.AlertaVermelho,
                 };    
 
                 objetos = [...objetos, objeto];
@@ -126,8 +134,8 @@ export default class OperacaoRetirarMaterialScreen extends React.Component {
         this.setState({confirmacaoModalVisible: false});
     };
 
-    acao = async () => {
-        this.setState({confirmacaoModalVisible: false, modalVisible: true});
+    acao = async (quantidade) => {
+        this.setState({confirmacaoModalVisible: false, modalVisible: true, quantidade});
 
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
@@ -137,7 +145,7 @@ export default class OperacaoRetirarMaterialScreen extends React.Component {
         var argumentos = `materialOid=${this.state.materialOid}&usuarioOid=${usuarioOid}&quantidade=${this.state.quantidade}&modo=saida`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/MovimentarMaterial.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeMaterial.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -158,6 +166,10 @@ export default class OperacaoRetirarMaterialScreen extends React.Component {
     render(){
         return(
             <View style={styles.container}>
+                <View style={styles.header}>
+                  <Text style={styles.infoTitle}>Clique em um Material</Text>
+                </View>
+
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
                         <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto.oid)}>
@@ -167,12 +179,14 @@ export default class OperacaoRetirarMaterialScreen extends React.Component {
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
-                <ConfirmacaoModalComQuantidade visible={this.state.confirmacaoModalVisible} texto="Remover quantos?" onSim={this.acao} onNao={this.closeModal} />
+                
             </View>
         );
     }
 
 }
+
+//<ConfirmacaoModalComQuantidade visible={this.state.confirmacaoModalVisible} texto="Remover quantos?" onSim={this.acao} onNao={this.closeModal} />
 
 const styles = StyleSheet.create(
     {
@@ -187,7 +201,6 @@ const styles = StyleSheet.create(
             alignItems: 'center',
             justifyContent: 'space-between',
             backgroundColor: '#FFF',
-            flexDirection: 'row',
           },
           headerText: {
               fontSize: 22,

@@ -3,6 +3,10 @@ import { View, Text, TouchableOpacity, TextInput, StyleSheet, Modal, Picker } fr
 
 export default class ConfirmacaoModalComQuantidade extends React.Component {
 
+    state = {
+        quantidade: '1',
+    };
+
     render(){
         return(
             <Modal visible={this.props.visible} animationType="fade" transparent={true} onRequestClose={() => {}} >
@@ -13,9 +17,20 @@ export default class ConfirmacaoModalComQuantidade extends React.Component {
                             <Text style={styles.infoTitle}>{this.props.texto}</Text>
                         </View>
 
+                        <View style={styles.infoContainer}>
+                            <Text style={styles.infoTitle}>Quantidade: </Text>
+                                <TextInput
+                                    style={styles.boxInput}
+                                    autoFocus
+                                    placeholder="Quantidade"
+                                    value={this.state.quantidade}
+                                    onChangeText={quantidade => this.setState({quantidade})}
+                                />
+                        </View>
+
                         <View style={styles.buttonContainer}>
                             <TouchableOpacity 
-                                onPress={this.props.onSim} 
+                                onPress={this.props.onSim(this.state.quantidade)} 
                                 style={[styles.button, styles.buttonAdd]}>
                                 <Text style={styles.buttonText}>Sim</Text>
                             </TouchableOpacity>
