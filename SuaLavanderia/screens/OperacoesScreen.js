@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Text, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, ScrollView, Text, TouchableOpacity, Image } from 'react-native';
 
 import Operacao from "../components/Operacao";
 import LoadingModal from '../components/modals/LoadingModal';
@@ -10,7 +10,7 @@ export default class OperacoesScreen extends React.Component {
         drawerLabel: 'Operações',
         drawerIcon: ({ tintColor }) => (
             <Image
-            source={require('../images/maquina-de-lavar_64x64.png')}
+            source={require('../images/roupa-dobrada_32x32.png')}
             style={styles.icon}
             />
         ),

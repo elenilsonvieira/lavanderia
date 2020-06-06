@@ -131,6 +131,7 @@ const DrawerSupervisorDeOperacoes = createDrawerNavigator(
   {
     Home: HomeScreen,
     Lavagem: LavagemScreenOperacoes,
+    Operacoes: OperacoesScreen,
     Roupa: RoupaScreen,
     Material: MaterialScreen,
     Sobre: SobreScreen,
@@ -280,6 +281,12 @@ const StackSupervisorDeOperacoes = createStackNavigator(
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
+    Operacoes: OperacoesScreen,
+    OperacaoLavar: OperacaoLavarScreen,
+    OperacaoRecolher: OperacaoRecolherScreen,
+    OperacaoPassar: OperacaoPassarScreen,
+    OperacaoEmpacotar: OperacaoEmpacotarScreen,
+    OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
     Drawer: DrawerSupervisorDeOperacoes,
   },{
     initialRouteName: 'Drawer',
