@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
 
 import ItemDeCompra from "../components/ItemDeCompra";
+import LoadingModal from '../components/modals/LoadingModal';
 
 export default class ListaDeComprasScreen extends React.Component {
 
@@ -157,6 +158,8 @@ export default class ListaDeComprasScreen extends React.Component {
                         <ItemDeCompra key={objeto.material.oid} objeto={objeto} />
                     )}
                 </ScrollView>
+
+                <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );
     }

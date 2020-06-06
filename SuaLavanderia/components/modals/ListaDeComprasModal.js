@@ -57,7 +57,7 @@ export default class ListaDeComprasModal extends React.Component {
                     <View style={styles.boxContainer}>
 
                         <View style={styles.infoContainer}>
-                            <Text style={styles.boxDate}>Data: </Text>
+                            <Text style={styles.boxDate}>Durar até: </Text>
                             
                             <TouchableOpacity onPress={() => this.setState({dataPickerVisible: true})}>
                                 <Text style={styles.boxDate}>{this.state.data}</Text>
