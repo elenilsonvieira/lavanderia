@@ -20,6 +20,7 @@ export default class MaterialScreen extends React.Component {
     state ={
         objetos: [],
         material: {},
+        materialOid: '',
         quantidade: 0,
         modo: 'saida',
         modalVisible: false,
@@ -87,23 +88,6 @@ export default class MaterialScreen extends React.Component {
                 const objetoResponse = response[index];
                 var movimentacoes = [];    
 
-                for(indexRoupa in objetoResponse.Movimentacoes){
-                    var movimentacaoResposta = objetoResponse.Movimentacoes[indexRoupa];
-                    
-                    if(movimentacaoResposta){
-                        const movimentacaoDeMaterial = {
-                            oid: movimentacaoResposta.Oid,
-                            materialOid: movimentacaoResposta.MaterialOid,
-                            data: movimentacaoResposta.Data,
-                            modo: movimentacaoResposta.Modo,
-                            quantidade: movimentacaoResposta.Quantidade,
-                            usuario: movimentacaoResposta.Usuario,
-                        };
-
-                        movimentacoes = [...movimentacoes, movimentacaoDeMaterial];
-                    }
-                }
-
                 const fornecedor = {
                     oid: objetoResponse.Fornecedor.Oid,
                     tipo: objetoResponse.Fornecedor.Tipo,
@@ -147,8 +131,8 @@ export default class MaterialScreen extends React.Component {
         this.setState(objetos);
     }
 
-    openModal = (material) => {
-        this.setState({confirmacaoModalVisible: true, material});
+    openModal = (materialOid) => {
+        this.setState({confirmacaoModalVisible: true, materialOid});
     };
     
     closeModal = () => {
@@ -157,7 +141,7 @@ export default class MaterialScreen extends React.Component {
 
     navegarParaDetalhes = () => {
         this.setState({confirmacaoModalVisible: false});
-        this.props.navigation.navigate("MaterialDetails", { material: this.state.material, acao: this.acao })
+        this.props.navigation.navigate("MaterialDetails", { materialOid: this.state.materialOid, acao: this.acao })
     };
 
     acao = async (quantidade, modo) => {

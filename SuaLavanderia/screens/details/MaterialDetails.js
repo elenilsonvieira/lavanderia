@@ -13,6 +13,7 @@ export default class MaterialDetails extends React.Component {
         confirmacaoModalVisible: false,
         materialOid: '',
         material: {},
+        movimentacoes: [],
     };
 
     MaterialDetails(){
@@ -20,9 +21,9 @@ export default class MaterialDetails extends React.Component {
     }
 
     async componentWillMount(){
-        const materialOid = this.props.navigation.getParam('material');
+        const materialOid = this.props.navigation.getParam('materialOid');
         const reload = true;//this.props.navigation.getParam('reload');
-        this.setState({material});
+        this.setState({materialOid});
 
         if(reload){
             this.buscar();
@@ -62,11 +63,12 @@ export default class MaterialDetails extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
+        const materialOid = this.state.materialOid;
 
         this.setState({modalVisible: true});
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMaterial.aspx?oid=${this.state.material.oid}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMaterial.aspx?oid=${materialOid}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -87,6 +89,7 @@ export default class MaterialDetails extends React.Component {
                             modo: movimentacaoResposta.Modo,
                             quantidade: movimentacaoResposta.Quantidade,
                             usuario: movimentacaoResposta.Usuario,
+                            usuarioOid: movimentacaoResposta.UsuarioOid,
                         };
 
                         movimentacoes = [...movimentacoes, movimentacaoDeMaterial];
@@ -120,13 +123,13 @@ export default class MaterialDetails extends React.Component {
                     movimentacoes: movimentacoes,
                 };
 
-                this.setState({material});
+                this.setState({material, movimentacoes});
             }
 
             this.setState({modalVisible: false});
-        }catch{
+        }catch (erro){
             this.setState({modalVisible: false});
-            alert('Erro buscando material');
+            alert('Erro buscando material: ' + erro);
         }
     };
 
@@ -144,8 +147,6 @@ export default class MaterialDetails extends React.Component {
     };
 
     render(){
-        const material = this.state.material;
-
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -153,14 +154,14 @@ export default class MaterialDetails extends React.Component {
                 </View>
                 <ScrollView>
                     <TouchableOpacity onPress={() => this.openModal()}>
-                        <Material material={material} />
+                        <Material material={this.state.material} />
                     </TouchableOpacity>
 
                     <View style={styles.roupasContainer}>
                         <Text style={styles.roupasTitle}>Movimentações</Text>
                     </View>
                     
-                    { material.movimentacoes.map(movimentacao => 
+                    { this.state.movimentacoes.map(movimentacao => 
                         <MovimentacaoDeMaterial key={movimentacao.oid} objeto={movimentacao} />
                     )}
                 </ScrollView>
@@ -182,9 +183,10 @@ const styles = StyleSheet.create(
           },
           header:{
             alignItems: 'center',
-            justifyContent: 'flex-end',
+            justifyContent: 'center',
             backgroundColor: '#FFF',
             flexDirection: 'row',
+            height: 40,
           },
           headerText: {
               fontSize: 22,

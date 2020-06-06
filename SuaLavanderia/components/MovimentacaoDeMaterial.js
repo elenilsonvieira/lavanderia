@@ -8,12 +8,7 @@ export default class MovimentacaoDeMaterial extends React.Component {
             <View style={styles.container}>
                 <View style={[styles.unidadeContainer, this.props.styleExtra]}>
                     <View style={styles.lavagemInfoContainerCliente}>
-                        <Text style={styles.lavagemInfoCliente}>{this.props.objeto.data}</Text>
-                    </View>
-
-                    <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Modo: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.objeto.modo}</Text>
+                        <Text style={styles.lavagemInfoCliente}>{this.props.objeto.data} - {this.props.objeto.modo}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
@@ -23,7 +18,7 @@ export default class MovimentacaoDeMaterial extends React.Component {
 
                     <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Usuário: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.objeto.usuario ? this.props.objeto.usuario.nome : ''}</Text>
+                        <Text style={styles.lavagemInfo}>{this.props.objeto.usuario}</Text>
                     </View>
                 </View>
             </View>
