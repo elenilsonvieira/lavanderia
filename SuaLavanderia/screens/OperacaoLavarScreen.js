@@ -243,9 +243,11 @@ export default class OperacaoLavarScreen extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
         var usuarioOid = this.props.navigation.getParam('usuarioOid');
+        var usarUsuarioLogado = false;
 
         if(!usuarioOid){
             usuarioOid = usuario.oid;
+            usarUsuarioLogado = true;
         }
 
         var argumentos = `lavagemOid=${this.state.lavagemOid}&usuarioOid=${usuarioOid}`;
@@ -265,8 +267,12 @@ export default class OperacaoLavarScreen extends React.Component {
 
         this.setState({modalVisible: false});
 
-        //this.buscar();
-        this.props.navigation.navigate('Home');
+        if(usarUsuarioLogado){
+            this.props.navigation.navigate('OperacaoLavar');
+            this.buscar();
+        }else{
+            this.props.navigation.navigate('Home');
+        }
     };
 
     render(){

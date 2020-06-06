@@ -238,7 +238,7 @@ export default class OperacaoPassarScreen extends React.Component {
 
     navegarParaDetalhes = () => {
         this.setState({confirmacaoModalVisible: false});
-        this.props.navigation.navigate("LavagemDetails", { lavagem: this.state.lavagem, acao: this.acao, texto: "Confirmar Passar?" })
+        this.props.navigation.navigate("LavagemDetailsOperacoes", { lavagem: this.state.lavagem, acao: this.acao, texto: "Confirmar Passar?" })
     };
 
     acao = async () => {
@@ -248,9 +248,11 @@ export default class OperacaoPassarScreen extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
         var usuarioOid = this.props.navigation.getParam('usuarioOid');
+        var usarUsuarioLogado = false;
 
         if(!usuarioOid){
             usuarioOid = usuario.oid;
+            usarUsuarioLogado = true;
         }
 
         var argumentos = `lavagemOid=${this.state.lavagem.oid}&usuarioOid=${usuarioOid}`;
@@ -270,8 +272,12 @@ export default class OperacaoPassarScreen extends React.Component {
 
         this.setState({modalVisible: false});
 
-        //this.buscar();
-        this.props.navigation.navigate('Home');
+        if(usarUsuarioLogado){
+            this.props.navigation.navigate('OperacaoPassar');
+            this.buscar();
+        }else{
+            this.props.navigation.navigate('Home');
+        }
     };
 
     render(){

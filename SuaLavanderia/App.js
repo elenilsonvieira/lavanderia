@@ -275,7 +275,9 @@ const StackGerenteDeOperacoes = createStackNavigator(
 const StackSupervisorDeOperacoes = createStackNavigator(
   {
     LavagemDetails: LavagemDetailsPapelOperacoes,
+    LavagemDetailsOperacoes: LavagemDetailsOperacoes,
     LavagemDetailsEdit: LavagemDetailsEdit,
+    LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
@@ -299,6 +301,7 @@ const StackSupervisorDeOperacoes = createStackNavigator(
 const StackAplicativo = createStackNavigator(
   {
     LavagemDetails: LavagemDetailsOperacoes,
+    LavagemDetailsOperacoes: LavagemDetailsOperacoes,
     LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     AvaliacaoDetails: AvaliacaoDetailsSoLeitura,

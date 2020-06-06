@@ -145,6 +145,12 @@ export default class OperacaoRetirarMaterialScreen extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
         const usuarioOid = this.props.navigation.getParam('usuarioOid');
+        var usarUsuarioLogado = false;
+
+        if(!usuarioOid){
+            usuarioOid = usuario.oid;
+            usarUsuarioLogado = true;
+        }
 
         var argumentos = `materialOid=${this.state.materialOid}&usuarioOid=${usuarioOid}&quantidade=${this.state.quantidade}&modo=saida`;
 
@@ -163,8 +169,11 @@ export default class OperacaoRetirarMaterialScreen extends React.Component {
 
         this.setState({modalVisible: false});
 
-        //this.buscar();
-        this.props.navigation.navigate('Home');
+        if(usarUsuarioLogado){
+            this.buscar();
+        }else{
+            this.props.navigation.navigate('Home');
+        }
     };
 
     render(){

@@ -248,9 +248,11 @@ export default class OperacaoEmpacotarScreen extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
         var usuarioOid = this.props.navigation.getParam('usuarioOid');
+        var usarUsuarioLogado = false;
 
         if(!usuarioOid){
             usuarioOid = usuario.oid;
+            usarUsuarioLogado = true;
         }
 
         var argumentos = `lavagemOid=${this.state.lavagem.oid}&usuarioOid=${usuarioOid}&tipoDePacote=dobrada`;
@@ -270,8 +272,12 @@ export default class OperacaoEmpacotarScreen extends React.Component {
 
         this.setState({modalVisible: false});
 
-        //this.buscar();
-        this.props.navigation.navigate('Home');
+        if(usarUsuarioLogado){
+            this.props.navigation.navigate('OperacaoEmpacotar');
+            this.buscar();
+        }else{
+            this.props.navigation.navigate('Home');
+        }
     };
 
     render(){
