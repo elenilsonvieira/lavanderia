@@ -41,6 +41,7 @@ import OperacaoRecolherScreen from './screens/OperacaoRecolherScreen';
 import OperacaoPassarScreen from './screens/OperacaoPassarScreen';
 import OperacaoEmpacotarScreen from './screens/OperacaoEmpacotarScreen';
 import OperacaoRetirarMaterialScreen from './screens/OperacaoRetirarMaterialScreen';
+import MaterialScreen from './screens/MaterialScreen';
 
 export default class App extends Component {
   render() {
@@ -57,12 +58,13 @@ const DrawerAdministrador = createDrawerNavigator(
     Roupa: RoupaScreen,
     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
     Caixa: CaixaScreen,
-    Tipo: TipoScreen,
-    Tamanho: TamanhoScreen,
-    Tecido: TecidoScreen,
-    Cor: CorScreen,
-    Marca: MarcaScreen,
-    Unidade: UnidadeScreen,
+    Material: MaterialScreen,
+    // Tipo: TipoScreen,
+    // Tamanho: TamanhoScreen,
+    // Tecido: TecidoScreen,
+    // Cor: CorScreen,
+    // Marca: MarcaScreen,
+    // Unidade: UnidadeScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -80,12 +82,7 @@ const DrawerGerenteGeral = createDrawerNavigator(
     Roupa: RoupaScreen,
     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
     Caixa: CaixaScreen,
-    Tipo: TipoScreen,
-    Tamanho: TamanhoScreen,
-    Tecido: TecidoScreen,
-    Cor: CorScreen,
-    Marca: MarcaScreen,
-    Unidade: UnidadeScreen,
+    Material: MaterialScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -103,12 +100,7 @@ const DrawerSubGerenteGeral = createDrawerNavigator(
     Roupa: RoupaScreen,
     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
     Caixa: CaixaScreen,
-    Tipo: TipoScreen,
-    Tamanho: TamanhoScreen,
-    Tecido: TecidoScreen,
-    Cor: CorScreen,
-    Marca: MarcaScreen,
-    Unidade: UnidadeScreen,
+    Material: MaterialScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -124,6 +116,7 @@ const DrawerGerenteDeOperacoes = createDrawerNavigator(
     Home: HomeScreen,
     Lavagem: LavagemScreen,
     Roupa: RoupaScreen,
+    Material: MaterialScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -137,7 +130,9 @@ const DrawerGerenteDeOperacoes = createDrawerNavigator(
 const DrawerSupervisorDeOperacoes = createDrawerNavigator(
   {
     Home: HomeScreen,
+    Lavagem: LavagemScreenOperacoes,
     Roupa: RoupaScreen,
+    Material: MaterialScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -170,12 +165,6 @@ const DrawerAtendente = createDrawerNavigator(
     Roupa: RoupaScreen,
     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
     Caixa: CaixaScreen,
-    Tipo: TipoScreen,
-    Tamanho: TamanhoScreen,
-    Tecido: TecidoScreen,
-    Cor: CorScreen,
-    Marca: MarcaScreen,
-    Unidade: UnidadeScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{

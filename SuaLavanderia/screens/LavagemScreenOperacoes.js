@@ -4,7 +4,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import LavagemPapelOperacoes from "../components/LavagemPapelOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
 
-export default class LavagemDetailsOperacoes extends React.Component {
+export default class LavagemScreenOperacoes extends React.Component {
 
     static navigationOptions = {
         drawerLabel: 'Lavagem',
@@ -388,6 +388,10 @@ const styles = StyleSheet.create(
         viewBotao: {
             flexDirection: 'row',
             justifyContent: 'flex-end'
+        },
+        icon: {
+            width: 24,
+            height: 24,
         },
     }
 );

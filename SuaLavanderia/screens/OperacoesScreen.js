@@ -6,13 +6,29 @@ import LoadingModal from '../components/modals/LoadingModal';
 
 export default class OperacoesScreen extends React.Component {
 
+    static navigationOptions = {
+        drawerLabel: 'Operações',
+        drawerIcon: ({ tintColor }) => (
+            <Image
+            source={require('../images/maquina-de-lavar_64x64.png')}
+            style={styles.icon}
+            />
+        ),
+    };
+
     state ={
         modalVisible: false,
         usuarioOid: '',
     };
 
-    componentDidMount(){
-        const usuarioOid = this.props.navigation.getParam("usuarioOid");
+    async componentDidMount(){
+        var usuarioOid = this.props.navigation.getParam("usuarioOid");
+
+        if(!usuarioOid){
+            usuarioOid = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario")).oid;
+        }
+
+
         this.setState({usuarioOid});
     }
 
@@ -113,6 +129,10 @@ const styles = StyleSheet.create(
         viewBotao: {
             flexDirection: 'row',
             justifyContent: 'flex-end'
+        },
+        icon: {
+            width: 24,
+            height: 24,
         },
     }
 );
