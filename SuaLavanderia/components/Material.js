@@ -4,9 +4,23 @@ import {StyleSheet, Text, View} from 'react-native';
 export default class Material extends React.Component {
 
     render(){
+        var fornecedor = null;
+
+        if(this.props.material.fornecedor){
+            fornecedor = this.props.material.fornecedor.nome + ' | ' + this.props.material.fornecedor.telefone;
+        }
+
+        var estiloDeAlerta = {};
+
+        if(this.props.material.alertaAmarelo){
+            estiloDeAlerta = styles.alertaAmarelo;
+        } else if(this.props.material.alertaVermelho){
+            estiloDeAlerta = styles.alertaVermelho;
+        }
+
         return(
             <View style={styles.container}>
-                <View style={styles.unidadeContainer}>
+                <View style={[styles.unidadeContainer, estiloDeAlerta]}>
                     <View style={styles.lavagemInfoContainerCliente}>
                         <Text style={styles.lavagemInfoCliente}>{this.props.material.nome}</Text>
                     </View>
@@ -32,13 +46,13 @@ export default class Material extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Fornecedor: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.material.fornecedor}</Text>
+                        <Text style={styles.lavagemInfoTitle}>Última Movimentação: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.material.ultimaMovimentacao}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Última Movimentação: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.material.ultimaMovimentacao}</Text>
+                        <Text style={styles.lavagemInfoTitle}>Fornecedor: </Text>
+                        <Text style={styles.lavagemInfo}>{fornecedor}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
@@ -47,9 +61,8 @@ export default class Material extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Alerta: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.material.alertaAmarelo? "AMARELO" : 
-                            this.props.material.alertaVermelho ? "VERMELHO" : ""}</Text>
+                        <Text style={styles.lavagemInfoTitle}>Preço Base: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.material.precoBase}</Text>
                     </View>
                 </View>
             </View>
@@ -116,5 +129,13 @@ const styles = StyleSheet.create(
             padding: 10,
             backgroundColor: '#DDD',
         },
+        alertaAmarelo: { 
+            borderWidth: 10, 
+            borderColor: 'yellow'
+        },
+        alertaVermelho: { 
+            borderWidth: 10, 
+            borderColor: 'red'
+        }
     }
 );

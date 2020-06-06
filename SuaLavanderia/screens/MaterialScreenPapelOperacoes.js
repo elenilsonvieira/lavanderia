@@ -1,11 +1,11 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
 
-import Material from "../components/Material";
+import MaterialPapelOperacoes from "../components/MaterialPapelOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
 import ConfirmacaoModalMaterial from '../components/modals/ConfirmacaoModalMaterial';
 
-export default class MaterialScreen extends React.Component {
+export default class MaterialScreenPapelOperacoes extends React.Component {
 
     static navigationOptions = {
         drawerLabel: 'Material',
@@ -123,6 +123,7 @@ export default class MaterialScreen extends React.Component {
                     fornecedor: fornecedor,
                     estoque: objetoResponse.Estoque,
                     minimoEmEstoque: objetoResponse.MinimoEmEstoque,
+                    precoBase: objetoResponse.PrecoBase,
                     mediaDeDiasDeUmaUnidade: objetoResponse.MediaDeDiasDeUmaUnidade,
                     proximaCompra: objetoResponse.ProximaCompra,
                     ultimaMovimentacao: objetoResponse.UltimaMovimentacao,
@@ -203,7 +204,7 @@ export default class MaterialScreen extends React.Component {
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
                         <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto.oid)}>
-                            <Material key={objeto.oid} material={objeto} />
+                            <MaterialPapelOperacoes key={objeto.oid} material={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>

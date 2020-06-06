@@ -42,6 +42,7 @@ import OperacaoPassarScreen from './screens/OperacaoPassarScreen';
 import OperacaoEmpacotarScreen from './screens/OperacaoEmpacotarScreen';
 import OperacaoRetirarMaterialScreen from './screens/OperacaoRetirarMaterialScreen';
 import MaterialScreen from './screens/MaterialScreen';
+import MaterialScreenPapelOperacoes from './screens/MaterialScreenPapelOperacoes';
 
 export default class App extends Component {
   render() {
@@ -133,7 +134,7 @@ const DrawerSupervisorDeOperacoes = createDrawerNavigator(
     Lavagem: LavagemScreenOperacoes,
     Operacoes: OperacoesScreen,
     Roupa: RoupaScreen,
-    Material: MaterialScreen,
+    Material: MaterialScreenPapelOperacoes,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{

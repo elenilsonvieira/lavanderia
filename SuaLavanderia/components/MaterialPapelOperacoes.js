@@ -4,9 +4,18 @@ import {StyleSheet, Text, View} from 'react-native';
 export default class MaterialPapelOperacoes extends React.Component {
 
     render(){
+
+        var estiloDeAlerta = {};
+
+        if(this.props.material.alertaAmarelo){
+            estiloDeAlerta = styles.alertaAmarelo;
+        } else if(this.props.material.alertaVermelho){
+            estiloDeAlerta = styles.alertaVermelho;
+        }
+
         return(
             <View style={styles.container}>
-                <View style={styles.unidadeContainer}>
+                <View style={[styles.unidadeContainer, estiloDeAlerta]}>
                     <View style={styles.lavagemInfoContainerCliente}>
                         <Text style={styles.lavagemInfoCliente}>{this.props.material.nome}</Text>
                     </View>
@@ -90,5 +99,13 @@ const styles = StyleSheet.create(
             padding: 10,
             backgroundColor: '#DDD',
         },
+        alertaAmarelo: { 
+            borderWidth: 10, 
+            borderColor: 'yellow'
+        },
+        alertaVermelho: { 
+            borderWidth: 10, 
+            borderColor: 'red'
+        }
     }
 );
