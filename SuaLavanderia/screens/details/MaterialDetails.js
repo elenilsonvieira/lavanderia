@@ -141,9 +141,9 @@ export default class MaterialDetails extends React.Component {
         this.setState({confirmacaoModalVisible: false});
     };
 
-    acao = () => {
+    acao = (quantidade, modo) => {
         this.setState({confirmacaoModalVisible: false});
-        this.props.navigation.getParam("acao")();
+        this.props.navigation.getParam("acao")(quantidade, modo);
     };
 
     render(){
@@ -168,7 +168,7 @@ export default class MaterialDetails extends React.Component {
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
                 <ConfirmacaoModalMaterial visible={this.state.confirmacaoModalVisible} 
-                    texto="Remover quantos?" onSim={() => this.acao()} onNao={() => this.closeModal()} />
+                    texto="Remover quantos?" onSim={this.acao} onNao={this.closeModal} />
             </View>
         );
     }

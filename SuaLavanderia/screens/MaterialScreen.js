@@ -21,7 +21,7 @@ export default class MaterialScreen extends React.Component {
         objetos: [],
         material: {},
         materialOid: '',
-        quantidade: 0,
+        quantidade: 1,
         modo: 'saida',
         modalVisible: false,
         confirmacaoModalVisible: false,
@@ -158,7 +158,9 @@ export default class MaterialScreen extends React.Component {
             usarUsuarioLogado = true;
         }
 
-        var argumentos = `materialOid=${this.state.material.oid}&usuarioOid=${usuarioOid}&quantidade=${this.state.quantidade}&modo=${this.state.modo}`;
+        var argumentos = `materialOid=${this.state.materialOid}&usuarioOid=${usuarioOid}&quantidade=${this.state.quantidade}&modo=${this.state.modo}`;
+
+        alert('argumentos: ' + argumentos);
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeMaterial.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -167,10 +169,10 @@ export default class MaterialScreen extends React.Component {
                 });
             
             if(call.status != 200){
-                alert('Erro.' + call.statusText);    
+                // alert('Erro.' + call.statusText);    
             }            
         }catch(erro){
-            alert('Erro.' + erro);
+            // alert('Erro.' + erro);
         }
 
         this.setState({modalVisible: false});
