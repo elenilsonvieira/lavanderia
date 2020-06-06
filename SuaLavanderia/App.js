@@ -44,6 +44,7 @@ import OperacaoEmpacotarScreen from './screens/OperacaoEmpacotarScreen';
 import OperacaoRetirarMaterialScreen from './screens/OperacaoRetirarMaterialScreen';
 import MaterialScreen from './screens/MaterialScreen';
 import MaterialScreenPapelOperacoes from './screens/MaterialScreenPapelOperacoes';
+import ListaDeComprasScreen from './screens/ListaDeComprasScreen';
 
 export default class App extends Component {
   render() {
@@ -206,6 +207,7 @@ const StackAdministrador = createStackNavigator(
     RoupaDetails: RoupaDetails,
     MaterialDetails: MaterialDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
+    ListaDeCompras: ListaDeComprasScreen,
     Drawer: DrawerAdministrador,
   },{
     initialRouteName: 'Drawer',
@@ -228,6 +230,7 @@ const StackGerenteGeral = createStackNavigator(
     RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
     MaterialDetails: MaterialDetails,
+    ListaDeCompras: ListaDeComprasScreen,
     Drawer: DrawerGerenteGeral,
   },{
     initialRouteName: 'Drawer',
@@ -250,6 +253,7 @@ const StackSubGerenteGeral = createStackNavigator(
     RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
     MaterialDetails: MaterialDetails,
+    ListaDeCompras: ListaDeComprasScreen,
     Drawer: DrawerSubGerenteGeral,
   },{
     initialRouteName: 'Drawer',

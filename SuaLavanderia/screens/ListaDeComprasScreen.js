@@ -6,7 +6,7 @@ import LoadingModal from '../components/modals/LoadingModal';
 import ConfirmacaoModalMaterialComDetalhes from '../components/modals/ConfirmacaoModalMaterialComDetalhes';
 import ListaDeComprasModal from '../components/modals/ListaDeComprasModal';
 
-export default class MaterialScreen extends React.Component {
+export default class ListaDeComprasScreen extends React.Component {
 
     static navigationOptions = {
         drawerLabel: 'Material',
@@ -138,7 +138,7 @@ export default class MaterialScreen extends React.Component {
     };
 
     openModalListaDeCompras = () => {
-        this.setState({listaDeComprasModalVisible: true});
+        this.setState({listaDeComprasModalVisible: true, materialOid});
     };
     
     closeModal = () => {
@@ -192,9 +192,35 @@ export default class MaterialScreen extends React.Component {
         }
     };
 
-    navegarParaListaDeCompras = async (dataDaCompra) => {
-        this.setState({listaDeComprasModalVisible: false});
-        this.props.navigation.navigate('ListaDeCompras', {dataDaCompra: dataDaCompra});
+    acaoListaDeCompras = async (dataDaCompra) => {
+        this.setState({listaDeComprasModalVisible: false, modalVisible: true, dataDaCompra});
+
+        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
+        var hash = this.hash(usuario);
+        var email = usuario.email;
+
+        var argumentos = `data=${this.state.dataDaCompra}`;
+
+        try{
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarListaDeCompras.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                });
+            
+            if(call.status != 200){
+                alert('Erro.' + call.statusText);    
+            }            
+        }catch(erro){
+            alert('Erro.' + erro);
+        }
+
+        this.setState({modalVisible: false});
+
+        if(usarUsuarioLogado){
+            this.buscar();
+        }else{
+            this.props.navigation.navigate('Home');
+        }
     };
 
     render(){
@@ -223,7 +249,7 @@ export default class MaterialScreen extends React.Component {
                     texto="Remover quantos?" onSim={this.acao} onNao={this.closeModal} onDetalhes={this.navegarParaDetalhes} />
                 
                 <ListaDeComprasModal visible={this.state.listaDeComprasModalVisible} 
-                    onSim={this.navegarParaListaDeCompras} onNao={this.closeModalListaDeCompras}/>
+                    onSim={this.acaoListaDeCompras} onNao={this.closeModalListaDeCompras}/>
             </View>
         );
     }
