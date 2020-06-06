@@ -143,6 +143,7 @@ export default class MaterialDetails extends React.Component {
 
     acao = (quantidade, modo) => {
         this.setState({confirmacaoModalVisible: false});
+        this.props.navigation.goBack();
         this.props.navigation.getParam("acao")(quantidade, modo);
     };
 
