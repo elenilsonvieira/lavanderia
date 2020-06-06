@@ -20,10 +20,8 @@ export default class ListaDeComprasScreen extends React.Component {
 
     state ={
         objetos: [],
-        material: {},
-        materialOid: '',
-        quantidade: 1,
-        modo: 'saida',
+        dataDaCompra: '',
+        duracaoDoEstoque: '',
         modalVisible: false,
         confirmacaoModalVisible: false,
         listaDeComprasModalVisible: false,
@@ -75,52 +73,63 @@ export default class ListaDeComprasScreen extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        var argumentos = `ativo=true&incluirMovimentacoes=false`;
+        var dataDaCompra = this.props.navigation.getParam("dataDaCompra");
+        var dataDaCompraArray = dataDaCompra.split('/');
+        var data = dataDaCompraArray[2] + '-'+ dataDaCompraArray[1] + '-' + dataDaCompraArray[0];
+
+        var argumentos = `data=${data}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMaterial.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarListaDeCompras.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
             const response = await call.json();
 
-            var objetos = [];
-
             for(index in response){
                 const objetoResponse = response[index];
-                var movimentacoes = [];    
+                var objetos = [];    
 
-                const fornecedor = {
-                    oid: objetoResponse.Fornecedor.Oid,
-                    tipo: objetoResponse.Fornecedor.Tipo,
-                    nome: objetoResponse.Fornecedor.Nome,
-                    tipo: objetoResponse.Fornecedor.Tipo,
-                    cpfCnpj: objetoResponse.Fornecedor.CpfCnpj,
-                    telefone: objetoResponse.Fornecedor.Telefone,
-                    endereco: objetoResponse.Fornecedor.Endereco,
-                };
+                var dataDaCompra = objetoResponse.DataDaCompra;
+                var duracaoDoEstoque = objetoResponse.duracaoDoEstoque;
 
-                const objeto = {
-                    oid: objetoResponse.Oid,
-                    nome: objetoResponse.Nome,
-                    detalhes: objetoResponse.Detalhes,
-                    precoBase: objetoResponse.PrecoBase,
-                    fornecedor: fornecedor,
-                    estoque: objetoResponse.Estoque,
-                    minimoEmEstoque: objetoResponse.MinimoEmEstoque,
-                    mediaDeDiasDeUmaUnidade: objetoResponse.MediaDeDiasDeUmaUnidade,
-                    proximaCompra: objetoResponse.ProximaCompra,
-                    ultimaMovimentacao: objetoResponse.UltimaMovimentacao,
-                    ativo: objetoResponse.Ativo,
-                    alertaAmarelo: objetoResponse.AlertaAmarelo,
-                    alertaVermelho: objetoResponse.AlertaVermelho,
-                    movimentacoes: movimentacoes,
-                };    
+                for(indexItem in objetoResponse.Itens){
+                    const itemResponse = objetoResponse.Itens[indexItem];
 
-                objetos = [...objetos, objeto];
+                    const objeto = {
+                        quantidadeASerComprada: itemResponse.QuantidadeASerComprada,
+                        dataDaCompra: itemResponse.DataDaCompra,
+                        material: {
+                            oid: itemResponse.Material.Oid,
+                            nome: itemResponse.Material.Nome,
+                            detalhes: itemResponse.Material.Detalhes,
+                            precoBase: itemResponse.Material.PrecoBase,
+                            fornecedor: {
+                                oid: itemResponse.Material.Fornecedor.Oid,
+                                tipo: itemResponse.Material.Fornecedor.Tipo,
+                                nome: itemResponse.Material.Fornecedor.Nome,
+                                tipo: itemResponse.Material.Fornecedor.Tipo,
+                                cpfCnpj: itemResponse.Material.Fornecedor.CpfCnpj,
+                                telefone: itemResponse.Material.Fornecedor.Telefone,
+                                endereco: itemResponse.Material.Fornecedor.Endereco,
+                            },
+                            estoque: itemResponse.Material.Estoque,
+                            minimoEmEstoque: itemResponse.Material.MinimoEmEstoque,
+                            mediaDeDiasDeUmaUnidade: itemResponse.Material.MediaDeDiasDeUmaUnidade,
+                            proximaCompra: itemResponse.Material.ProximaCompra,
+                            ultimaMovimentacao: itemResponse.Material.UltimaMovimentacao,
+                            ativo: itemResponse.Material.Ativo,
+                            alertaAmarelo: itemResponse.Material.AlertaAmarelo,
+                            alertaVermelho: itemResponse.Material.AlertaVermelho,
+                            movimentacoes: [],
+                        },    
+                    };
+
+                    objetos = [...objetos, objeto];
+                }
             }
 
-            this.setState({objetos});
+            this.setState({objetos, dataDaCompra, duracaoDoEstoque});
         }catch(erro){
             alert('Erro.' + erro);
         }
@@ -133,123 +142,34 @@ export default class ListaDeComprasScreen extends React.Component {
         this.setState(objetos);
     }
 
-    openModal = (materialOid) => {
-        this.setState({confirmacaoModalVisible: true, materialOid});
-    };
-
-    openModalListaDeCompras = () => {
-        this.setState({listaDeComprasModalVisible: true, materialOid});
-    };
-    
-    closeModal = () => {
-        this.setState({confirmacaoModalVisible: false});
-    };
-
-    closeModalListaDeCompras = () => {
-        this.setState({listaDeComprasModalVisible: false});
-    };
-
-    navegarParaDetalhes = () => {
-        this.setState({confirmacaoModalVisible: false});
-        this.props.navigation.navigate("MaterialDetails", { materialOid: this.state.materialOid, acao: this.acao })
-    };
-
-    acao = async (quantidade, modo) => {
-        this.setState({confirmacaoModalVisible: false, modalVisible: true, quantidade, modo});
-
-        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
-        var hash = this.hash(usuario);
-        var email = usuario.email;
-        var usuarioOid = this.props.navigation.getParam('usuarioOid');
-        var usarUsuarioLogado = false;
-
-        if(!usuarioOid){
-            usuarioOid = usuario.oid;
-            usarUsuarioLogado = true;
-        }
-
-        var argumentos = `materialOid=${this.state.materialOid}&usuarioOid=${usuarioOid}&quantidade=${this.state.quantidade}&modo=${this.state.modo}`;
-
-        try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeMaterial.aspx?${argumentos}&login=${email}&senha=${hash}`, 
-                { 
-                    method: 'post' 
-                });
-            
-            if(call.status != 200){
-                alert('Erro.' + call.statusText);    
-            }            
-        }catch(erro){
-            alert('Erro.' + erro);
-        }
-
-        this.setState({modalVisible: false});
-
-        if(usarUsuarioLogado){
-            this.buscar();
-        }else{
-            this.props.navigation.navigate('Home');
-        }
-    };
-
-    acaoListaDeCompras = async (dataDaCompra) => {
-        this.setState({listaDeComprasModalVisible: false, modalVisible: true, dataDaCompra});
-
-        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
-        var hash = this.hash(usuario);
-        var email = usuario.email;
-
-        var argumentos = `data=${this.state.dataDaCompra}`;
-
-        try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarListaDeCompras.aspx?${argumentos}&login=${email}&senha=${hash}`, 
-                { 
-                    method: 'post' 
-                });
-            
-            if(call.status != 200){
-                alert('Erro.' + call.statusText);    
-            }            
-        }catch(erro){
-            alert('Erro.' + erro);
-        }
-
-        this.setState({modalVisible: false});
-
-        if(usarUsuarioLogado){
-            this.buscar();
-        }else{
-            this.props.navigation.navigate('Home');
-        }
-    };
-
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.infoTitle}>Materiais</Text>
-                    <View style={styles.viewBotao}>
-                        <TouchableOpacity onPress={this.openModalListaDeCompras} style={styles.button}>
-                            <Image style={styles.icon} source={require('../images/lista_32x32.png')} />
-                        </TouchableOpacity>
-                    </View>
+                    <Text style={styles.infoTitle}>Lista de Compras</Text>
                 </View>
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
-                    {this.state.objetos.map(objeto => 
-                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto.oid)}>
-                            <Material key={objeto.oid} material={objeto} />
-                        </TouchableOpacity>
-                    )}
+                    <View style={styles.unidadeContainer}>
+                        <View style={styles.lavagemInfoContainer}>
+                            <Text style={styles.lavagemInfoTitle}>Data da Compra: </Text>
+                            <Text style={styles.lavagemInfo}>{this.state.dataDaCompra}</Text>
+                        </View>
+
+                        <View style={styles.lavagemInfoContainer}>
+                            <Text style={styles.lavagemInfoTitle}>Duração do Estoque: </Text>
+                            <Text style={styles.lavagemInfo}>{this.state.duracaoDoEstoque}</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.roupasContainer}>
+                        <Text style={styles.roupasTitle}>Itens</Text>
+                    </View>
+
+                    {/* {this.state.objetos.map(objeto => 
+                        <Material key={objeto.oid} material={objeto} />
+                    )} */}
                 </ScrollView>
-
-                <LoadingModal modalVisible={this.state.modalVisible} />
-
-                <ConfirmacaoModalMaterialComDetalhes visible={this.state.confirmacaoModalVisible} 
-                    texto="Remover quantos?" onSim={this.acao} onNao={this.closeModal} onDetalhes={this.navegarParaDetalhes} />
-                
-                <ListaDeComprasModal visible={this.state.listaDeComprasModalVisible} 
-                    onSim={this.acaoListaDeCompras} onNao={this.closeModalListaDeCompras}/>
             </View>
         );
     }
@@ -322,6 +242,31 @@ const styles = StyleSheet.create(
         icon: {
             width: 24,
             height: 24,
+        },
+        unidadeContainer: {
+            borderRadius: 5,
+            backgroundColor: '#FFF',
+            padding: 5,
+            margin: 10,
+            justifyContent: 'center',
+        },
+        lavagemInfoContainer: {
+            marginTop: 5,
+            flexDirection: 'row',
+        },
+        lavagemInfoTitle: {
+            fontWeight: 'bold',
+            fontSize: 20,
+        },
+        lavagemInfo: {
+            fontSize: 20,
+        },
+        roupasContainer: {
+            alignItems: 'center',
+            backgroundColor: '#F8F8F8',
+            borderRadius: 5, 
+            marginLeft: 20,
+            marginRight: 20,
         },
     }
 );
