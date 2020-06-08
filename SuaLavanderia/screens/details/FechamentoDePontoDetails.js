@@ -74,9 +74,7 @@ export default class FechamentoDePontoDetails extends React.Component {
                     
                     if(batidaResposta){
                         const batida = {
-                            data: batidaResposta.Data,
-                            quantidade: batidaResposta.Quantidade,
-                            tipo: batidaResposta.Tipo,
+                            hora: batidaResposta.Hora,
                         };
 
                         batidas = [...batidas, batida];

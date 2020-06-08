@@ -29,12 +29,11 @@ export default class Ponto extends React.Component {
                     </View>
 
                     <View style={styles.roupasContainer}>
-                        <Text style={styles.roupasTitle}>Batidas</Text>
+                        <Text style={styles.lavagemInfoTitle}>Batidas</Text>
+                        { this.props.objeto.batidas.map(batida => 
+                            <Text key={batida.oid} style={styles.lavagemInfo}>{batida.hora} ({batida.modo})</Text>
+                        )}
                     </View>
-
-                    {/* { this.props.objeto.batidas.map(batida => 
-                        <Batida key={batida.hora} objeto={batida} />
-                    )} */}
                 </View>
             </View>
         );
