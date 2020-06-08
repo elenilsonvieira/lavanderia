@@ -9,7 +9,7 @@ import ListaDeComprasModal from '../components/modals/ListaDeComprasModal';
 export default class MaterialScreen extends React.Component {
 
     static navigationOptions = {
-        drawerLabel: 'Material',
+        drawerLabel: 'Estoque',
         drawerIcon: ({ tintColor }) => (
             <Image
             source={require('../images/sabao_64x64.png')}

@@ -8,7 +8,7 @@ import ConfirmacaoModalMaterial from '../components/modals/ConfirmacaoModalMater
 export default class MaterialScreenPapelOperacoes extends React.Component {
 
     static navigationOptions = {
-        drawerLabel: 'Material',
+        drawerLabel: 'Estoque',
         drawerIcon: ({ tintColor }) => (
             <Image
             source={require('../images/sabao_64x64.png')}
