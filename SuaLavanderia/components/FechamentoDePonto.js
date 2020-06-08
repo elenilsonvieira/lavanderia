@@ -16,7 +16,7 @@ export default class FechamentoDePonto extends React.Component {
                         <Text style={styles.lavagemInfo}>{this.props.objeto.previsto}</Text>
                     </View>
 
-                    <View style={styles.lavagemInfoContainer}>
+                    <View style={styles.lavagemInfoContainer}> 
                         <Text style={styles.lavagemInfoTitle}>Realizado: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.objeto.realizado}</Text>
                     </View>

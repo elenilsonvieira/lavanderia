@@ -63,6 +63,7 @@ export default class FechamentoDePontoDetails extends React.Component {
                     method: 'post' 
                 });
             const response = await call.json();
+            var pontos = [];
 
             for(index in response){
                 const objetoResponse = response[index];
@@ -73,9 +74,9 @@ export default class FechamentoDePontoDetails extends React.Component {
                     
                     if(batidaResposta){
                         const batida = {
-                            data: fechamentoResposta.Data,
-                            quantidade: fechamentoResposta.Quantidade,
-                            tipo: fechamentoResposta.Tipo,
+                            data: batidaResposta.Data,
+                            quantidade: batidaResposta.Quantidade,
+                            tipo: batidaResposta.Tipo,
                         };
 
                         batidas = [...batidas, batida];
@@ -89,12 +90,12 @@ export default class FechamentoDePontoDetails extends React.Component {
                     horasAbonadas: objetoResponse.HorasAbonadas,
                     pontoValido: objetoResponse.PontoValido,
                     batidas: batidas,
-                };    
-
-                this.setState({objeto, batidas});
+                };
+                
+                pontos = [...pontos, objeto];
             }
 
-            this.setState({modalVisible: false});
+            this.setState({modalVisible: false, pontos});
         }catch (erro){
             this.setState({modalVisible: false});
             alert('Erro buscando ponto: ' + erro);
