@@ -46,6 +46,8 @@ import MaterialScreen from './screens/MaterialScreen';
 import MaterialScreenPapelOperacoes from './screens/MaterialScreenPapelOperacoes';
 import ListaDeComprasScreen from './screens/ListaDeComprasScreen';
 import BancoDeHorasScreen from './screens/BancoDeHorasScreen';
+import BancoDeHorasDetails from './screens/details/BancoDeHorasDetails';
+import FechamentoDePontoDetails from './screens/details/FechamentoDePontoDetails';
 
 export default class App extends Component {
   render() {
@@ -228,6 +230,8 @@ const StackAdministrador = createStackNavigator(
     MaterialDetails: MaterialDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
     ListaDeCompras: ListaDeComprasScreen,
+    BancoDeHorasDetails: BancoDeHorasDetails,
+    FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerAdministrador,
   },{
     initialRouteName: 'Drawer',
@@ -251,6 +255,8 @@ const StackGerenteGeral = createStackNavigator(
     RoupaDetails: RoupaDetails,
     MaterialDetails: MaterialDetails,
     ListaDeCompras: ListaDeComprasScreen,
+    BancoDeHorasDetails: BancoDeHorasDetails,
+    FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerGerenteGeral,
   },{
     initialRouteName: 'Drawer',
@@ -274,6 +280,8 @@ const StackSubGerenteGeral = createStackNavigator(
     RoupaDetails: RoupaDetails,
     MaterialDetails: MaterialDetails,
     ListaDeCompras: ListaDeComprasScreen,
+    BancoDeHorasDetails: BancoDeHorasDetails,
+    FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerSubGerenteGeral,
   },{
     initialRouteName: 'Drawer',
@@ -292,6 +300,8 @@ const StackGerenteDeOperacoes = createStackNavigator(
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
+    BancoDeHorasDetails: BancoDeHorasDetails,
+    FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerGerenteDeOperacoes,
   },{
     initialRouteName: 'Drawer',
@@ -318,6 +328,8 @@ const StackSupervisorDeOperacoes = createStackNavigator(
     OperacaoPassar: OperacaoPassarScreen,
     OperacaoEmpacotar: OperacaoEmpacotarScreen,
     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
+    BancoDeHorasDetails: BancoDeHorasDetails,
+    FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerSupervisorDeOperacoes,
   },{
     initialRouteName: 'Drawer',
@@ -331,6 +343,8 @@ const StackOperacoes = createStackNavigator(
   {
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
+    BancoDeHorasDetails: BancoDeHorasDetails,
+    FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerOperacoes,
   },{
     initialRouteName: 'Drawer',

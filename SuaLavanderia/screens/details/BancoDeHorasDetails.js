@@ -1,29 +1,27 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity } from 'react-native';
+import FechamentoDePonto from '../../components/FechamentoDePonto';
+import LoadingModal from '../../components/modals/LoadingModal';
+import BancoDeHoras from '../../components/BancoDeHoras';
 
-import BancoDeHoras from "../components/BancoDeHoras";
-import LoadingModal from '../components/modals/LoadingModal';
-
-export default class BancoDeHorasScreen extends React.Component {
-
-    static navigationOptions = {
-        drawerLabel: 'Banco de Horas',
-        drawerIcon: ({ tintColor }) => (
-            <Image
-            source={require('../images/bater-pontos_32x32.png')}
-            style={styles.icon}
-            />
-        ),
-    };
+export default class BancoDeHorasDetails extends React.Component {
 
     state ={
-        objetos: [],
-        oid: '',
         objeto: {},
         fechamentos: [],
         pagamentos: [],
         modalVisible: false,
     };
+
+    async componentWillMount(){
+        const objeto = this.props.navigation.getParam('objeto');
+        const fechamentos = objeto.fechamentos;
+        const pagamentos = objeto.pagamentos;
+        
+        this.setState({objeto, fechamentos, pagamentos});
+
+        //this.buscar();
+    }
 
     dataString = () => {
         var data = new Date();
@@ -42,7 +40,7 @@ export default class BancoDeHorasScreen extends React.Component {
         return data.getFullYear() + '' + mes + '' + dia;
     };
     
-    hash = (usuario) => {        
+    hash(usuario) {        
         var dataString = this.dataString();
         var md5 = require('md5');
     
@@ -53,34 +51,21 @@ export default class BancoDeHorasScreen extends React.Component {
     
         return hash;
     };
-    
-    getUser = async () => {
-        var usuario;
-    
-        try{
-          usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
-        }catch(exception){}
-    
-        return usuario;
-    };
 
-    buscar = async () => {
-        this.setState({modalVisible: true});
-
-        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
+    async buscar() {
+        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
+        const oid = this.state.objeto.oid;
 
-        var argumentos = `temContratoDeTrabalho=true&incluirFechamentosEPagamentos=false`;
+        this.setState({modalVisible: true});
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarBancoDeHoras.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarBancoDeHoras.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
             const response = await call.json();
-
-            var objetos = [];
 
             for(index in response){
                 const objetoResponse = response[index];
@@ -105,46 +90,58 @@ export default class BancoDeHorasScreen extends React.Component {
                     }
                 }
 
+                for(indexRoupa in objetoResponse.Pagamentos){
+                    var pagamentoResposta = objetoResponse.Pagamentos[indexRoupa];
+                    
+                    if(pagamentoResposta){
+                        const pagamento = {
+                            data: fechamentoResposta.Data,
+                            quantidade: fechamentoResposta.Quantidade,
+                            tipo: fechamentoResposta.Tipo,
+                        };
+
+                        pagamentos = [...pagamentos, pagamento];
+                    }
+                }
+
                 const objeto = {
                     oid: objetoResponse.Oid,
                     usuario: objetoResponse.Funcionario.Nome,
                     saldo: objetoResponse.Saldo,
                     fechamentos: fechamentos,
                     pagamentos: pagamentos,
-                };   
+                };    
 
-                objetos = [...objetos, objeto];
+                this.setState({objeto, fechamentos, pagamentos});
             }
 
-            this.setState({objetos});
-        }catch(erro){
-            alert('Erro.' + erro);
+            this.setState({modalVisible: false});
+        }catch (erro){
+            this.setState({modalVisible: false});
+            alert('Erro buscando material: ' + erro);
         }
-
-        this.setState({modalVisible: false});
     };
 
-    async componentDidMount(){
-        const objetos = await this.buscar() || [];
-        this.setState(objetos);
-    }
-
     navegarParaDetalhes = (objeto) => {
-        this.setState({objeto, oid: objeto.oid, fechamentos: objeto.fechamentos, pagamentos: objeto.pagamentos});
-        this.props.navigation.navigate("BancoDeHorasDetails", { objeto: objeto});
+        this.props.navigation.navigate("FechamentoDePontoDetails", { objeto: objeto});
     };
 
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.infoTitle}>Banco de Horas</Text>
+                    <Text style={styles.infoTitle}>Bando de Horas</Text>
                 </View>
+                <ScrollView>
+                    <BancoDeHoras objeto={this.state.objeto} />
 
-                <ScrollView contentContainerStyle={styles.objetoList}>
-                    {this.state.objetos.map(objeto => 
+                    <View style={styles.roupasContainer}>
+                        <Text style={styles.roupasTitle}>Fechamentos de Ponto</Text>
+                    </View>
+                    
+                    { this.state.fechamentos.map(objeto => 
                         <TouchableOpacity key={objeto.oid} onPress={() => this.navegarParaDetalhes(objeto)}>
-                            <BancoDeHoras key={objeto.oid} objeto={objeto} />
+                            <FechamentoDePonto key={objeto.oid} objeto={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>
@@ -162,14 +159,12 @@ const styles = StyleSheet.create(
             flex: 1,
             backgroundColor: '#333',
           },
-          objetoList: {
-              paddingTop: 20,
-          },
           header:{
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: '#FFF',
             flexDirection: 'row',
+            height: 40,
           },
           headerText: {
               fontSize: 22,
@@ -180,48 +175,51 @@ const styles = StyleSheet.create(
             height: 40,
             borderRadius: 5,
             alignSelf: 'stretch',
-            width: 250,
+            width: 200,
             padding: 5,
         },
         buttonText: {
             fontWeight: 'bold',
         },
+        unidadeContainer: {
+            borderRadius: 5,
+            backgroundColor: '#FFF',
+            padding: 10,
+            margin: 20,
+            justifyContent: 'center',
+        },
+        lavagemInfoContainer: {
+            flexDirection: 'row',
+        },
+        lavagemInfoContainerCliente: {
+            alignItems: 'center',
+        },
+        lavagemInfoTitle: {
+            fontWeight: 'bold',
+        },
+        lavagemInfo: {
+        },
+        lavagemInfoCliente: {
+            fontSize: 20,
+            fontWeight: 'bold',
+        },
         button:{
             margin: 10,
-        },
-        viewHeader: {
-            flexDirection: 'row',
-        },
-        viewHeaderSegundaLinha: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-        },
-        boxDate:{
-            height: 40,
-            borderRadius: 5,
-            padding: 5,
-            paddingTop: 10,
-            justifyContent: 'center',
-            fontSize: 15,
-            fontWeight: 'bold',
-        },
-        picker:{
-            height: 40,
-            width: 150,
-            borderRadius: 15,
-            padding: 5,
-        },
-        infoTitle: {
-            fontWeight: 'bold',
-            margin: 10,
-        },
-        viewBotao: {
-            flexDirection: 'row',
-            justifyContent: 'flex-end'
         },
         icon: {
             width: 24,
             height: 24,
+        },
+        roupasContainer: {
+            alignItems: 'center',
+            backgroundColor: '#F8F8F8',
+            borderRadius: 5, 
+            marginLeft: 20,
+            marginRight: 20,
+        },
+        roupasTitle: {
+            fontSize: 18,
+            fontWeight: 'bold',
         },
     }
 );
