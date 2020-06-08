@@ -45,6 +45,7 @@ import OperacaoRetirarMaterialScreen from './screens/OperacaoRetirarMaterialScre
 import MaterialScreen from './screens/MaterialScreen';
 import MaterialScreenPapelOperacoes from './screens/MaterialScreenPapelOperacoes';
 import ListaDeComprasScreen from './screens/ListaDeComprasScreen';
+import BancoDeHorasScreen from './screens/BancoDeHorasScreen';
 
 export default class App extends Component {
   render() {
@@ -62,6 +63,7 @@ const DrawerAdministrador = createDrawerNavigator(
     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
     Caixa: CaixaScreen,
     Material: MaterialScreen,
+    BancoDeHoras: BancoDeHorasScreen,
     // Tipo: TipoScreen,
     // Tamanho: TamanhoScreen,
     // Tecido: TecidoScreen,
@@ -86,6 +88,7 @@ const DrawerGerenteGeral = createDrawerNavigator(
     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
     Caixa: CaixaScreen,
     Material: MaterialScreen,
+    BancoDeHoras: BancoDeHorasScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -104,6 +107,7 @@ const DrawerSubGerenteGeral = createDrawerNavigator(
     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
     Caixa: CaixaScreen,
     Material: MaterialScreen,
+    BancoDeHoras: BancoDeHorasScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -120,6 +124,7 @@ const DrawerGerenteDeOperacoes = createDrawerNavigator(
     Lavagem: LavagemScreen,
     Roupa: RoupaScreen,
     Material: MaterialScreen,
+    BancoDeHoras: BancoDeHorasScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -137,6 +142,21 @@ const DrawerSupervisorDeOperacoes = createDrawerNavigator(
     Operacoes: OperacoesScreen,
     Roupa: RoupaScreen,
     Material: MaterialScreenPapelOperacoes,
+    BancoDeHoras: BancoDeHorasScreen,
+    Sobre: SobreScreen,
+    Logout: LogoutScreen,
+  },{
+    initialRouteName: 'Home',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
+const DrawerOperacoes = createDrawerNavigator(
+  {
+    Home: HomeScreen,
+    BancoDeHoras: BancoDeHorasScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -307,6 +327,19 @@ const StackSupervisorDeOperacoes = createStackNavigator(
   }
 );
 
+const StackOperacoes = createStackNavigator(
+  {
+    AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
+    AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
+    Drawer: DrawerOperacoes,
+  },{
+    initialRouteName: 'Drawer',
+    navigationOptions: {
+      headerTransparent: true,
+    },
+  }
+);
+
 const StackAplicativo = createStackNavigator(
   {
     LavagemDetails: LavagemDetailsOperacoes,
@@ -376,6 +409,7 @@ const LoginStack = createSwitchNavigator(
     StackSubGerenteGeral: StackSubGerenteGeral,
     StackGerenteDeOperacoes: StackGerenteDeOperacoes,
     StackSupervisorDeOperacoes: StackSupervisorDeOperacoes,
+    StackOperacoes: StackOperacoes,
     StackAtendente: StackAtendente,
     StackCliente: StackCliente,
     StackAplicativo: StackAplicativo,
