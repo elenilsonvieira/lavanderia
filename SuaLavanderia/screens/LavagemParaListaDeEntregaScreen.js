@@ -233,6 +233,7 @@ export default class LavagemParaListaDeEntregaScreen extends React.Component {
         }
 
         this.setState({modalVisible: false});
+        this.props.navigation.goBack();
         this.props.navigation.getParam('buscar')();
     };
 
