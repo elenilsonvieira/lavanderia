@@ -5,7 +5,6 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 export default class ListaDeEntregaDeLavagensModal extends React.Component {
 
     state = {
-        quantidade: '1',
         status: 'Manaíra',
         data: '',
         dataPickerVisible: false,
@@ -13,7 +12,7 @@ export default class ListaDeEntregaDeLavagensModal extends React.Component {
 
     componentDidMount(){
         var hoje = new Date();
-        var mes = hoje.getMonth() + 2;
+        var mes = hoje.getMonth() + 1;
         if(mes < 10){
             mes = '0' + mes;
         }
