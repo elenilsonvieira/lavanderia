@@ -111,8 +111,6 @@ export default class LavagemParaListaDeEntregaScreen extends React.Component {
 
         var argumentos = `dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&unidadeOid=${unidadeOid}`;
 
-        alert('argumentos: ' + argumentos);
-
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
@@ -235,6 +233,7 @@ export default class LavagemParaListaDeEntregaScreen extends React.Component {
         }
 
         this.setState({modalVisible: false});
+        this.props.navigation.getParam('buscar')();
     };
 
     render(){

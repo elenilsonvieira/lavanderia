@@ -55,12 +55,12 @@ export default class ListaDeEntregaDetails extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
-        const oid = this.state.oid;
+        const oid = this.state.objeto.oid;
 
         this.setState({modalVisible: true});
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarListaDeEntregaDeLavagens.aspx?oid=${materialOid}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarListaDeEntregaDeLavagens.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

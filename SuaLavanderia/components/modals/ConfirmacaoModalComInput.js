@@ -90,6 +90,7 @@ const styles = StyleSheet.create(
             height: 40,
             margin: 5,
             borderRadius: 5,
+            width: '100%',
         },
         infoContainer: {
             flexDirection: 'row',
