@@ -80,18 +80,18 @@ export default class ListaDeEntregaDetails extends React.Component {
                     const lavagemResponse = objetoResponse.Lavagens[indexLavagem];
 
                     const lavagem = {
-                        oid: lavagemResponse.Lavagem[0].Oid,
-                        cliente: lavagemResponse.Lavagem[0].Cliente,
-                        clienteOid: lavagemResponse.Lavagem[0].ClienteOid,
-                        codigoDoCliente: lavagemResponse.Lavagem[0].CodigoDoCliente,
-                        dataDeRecebimento: lavagemResponse.Lavagem[0].DataDeRecebimento,
-                        dataPreferivelParaEntrega: lavagemResponse.Lavagem[0].DataPreferivelParaEntrega,
-                        dataDeEntrega: lavagemResponse.Lavagem[0].DataDeEntrega,
-                        unidadeDeRecebimentoOid: lavagemResponse.Lavagem[0].UnidadeDeRecebimentoOid,
-                        unidadeDeRecebimento: lavagemResponse.Lavagem[0].UnidadeDeRecebimento,
-                        quantidadeDePecas: lavagemResponse.Lavagem[0].QuantidadeDePecas,
+                        oid: lavagemResponse.Lavagem.Oid,
+                        cliente: lavagemResponse.Lavagem.Cliente,
+                        clienteOid: lavagemResponse.Lavagem.ClienteOid,
+                        codigoDoCliente: lavagemResponse.Lavagem.CodigoDoCliente,
+                        dataDeRecebimento: lavagemResponse.Lavagem.DataDeRecebimento,
+                        dataPreferivelParaEntrega: lavagemResponse.Lavagem.DataPreferivelParaEntrega,
+                        dataDeEntrega: lavagemResponse.Lavagem.DataDeEntrega,
+                        unidadeDeRecebimentoOid: lavagemResponse.Lavagem.UnidadeDeRecebimentoOid,
+                        unidadeDeRecebimento: lavagemResponse.Lavagem.UnidadeDeRecebimento,
+                        quantidadeDePecas: lavagemResponse.Lavagem.QuantidadeDePecas,
                         roupas: [],
-                        status: lavagemResponse.Lavagem[0].Status,
+                        status: lavagemResponse.Lavagem.Status,
                     };
 
                     const lavagemEmLista = {
