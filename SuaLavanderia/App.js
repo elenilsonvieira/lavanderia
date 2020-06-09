@@ -48,6 +48,8 @@ import ListaDeComprasScreen from './screens/ListaDeComprasScreen';
 import BancoDeHorasScreen from './screens/BancoDeHorasScreen';
 import BancoDeHorasDetails from './screens/details/BancoDeHorasDetails';
 import FechamentoDePontoDetails from './screens/details/FechamentoDePontoDetails';
+import OperacaoListaDeEntregaScreen from './screens/OperacaoListaDeEntregaScreen';
+import ListaDeEntregaDetails from './screens/details/ListaDeEntregaDetails';
 
 export default class App extends Component {
   render() {
@@ -231,6 +233,7 @@ const StackAdministrador = createStackNavigator(
     RoupasDoCliente: RoupasDoClienteScreen,
     ListaDeCompras: ListaDeComprasScreen,
     BancoDeHorasDetails: BancoDeHorasDetails,
+    ListaDeEntregaDetails: ListaDeEntregaDetails,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerAdministrador,
   },{
@@ -256,6 +259,7 @@ const StackGerenteGeral = createStackNavigator(
     MaterialDetails: MaterialDetails,
     ListaDeCompras: ListaDeComprasScreen,
     BancoDeHorasDetails: BancoDeHorasDetails,
+    ListaDeEntregaDetails: ListaDeEntregaDetails,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerGerenteGeral,
   },{
@@ -281,6 +285,7 @@ const StackSubGerenteGeral = createStackNavigator(
     MaterialDetails: MaterialDetails,
     ListaDeCompras: ListaDeComprasScreen,
     BancoDeHorasDetails: BancoDeHorasDetails,
+    ListaDeEntregaDetails: ListaDeEntregaDetails,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerSubGerenteGeral,
   },{
@@ -302,6 +307,7 @@ const StackGerenteDeOperacoes = createStackNavigator(
     RoupaDetails: RoupaDetails,
     BancoDeHorasDetails: BancoDeHorasDetails,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
+    ListaDeEntregaDetails: ListaDeEntregaDetails,
     Drawer: DrawerGerenteDeOperacoes,
   },{
     initialRouteName: 'Drawer',
@@ -328,6 +334,8 @@ const StackSupervisorDeOperacoes = createStackNavigator(
     OperacaoPassar: OperacaoPassarScreen,
     OperacaoEmpacotar: OperacaoEmpacotarScreen,
     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
+    OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
+    ListaDeEntregaDetails: ListaDeEntregaDetails,
     BancoDeHorasDetails: BancoDeHorasDetails,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerSupervisorDeOperacoes,
@@ -370,6 +378,8 @@ const StackAplicativo = createStackNavigator(
     OperacaoPassar: OperacaoPassarScreen,
     OperacaoEmpacotar: OperacaoEmpacotarScreen,
     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
+    OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
+    ListaDeEntregaDetails: ListaDeEntregaDetails,
     Drawer: DrawerAplicativo,
   },{
     initialRouteName: 'Drawer',
