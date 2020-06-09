@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import Lavagem from "../components/Lavagem";
+import LavagemPapelCliente from "../components/LavagemPapelCliente";
 import LoadingModal from '../components/modals/LoadingModal';
 
 export default class LavagemScreenCliente extends React.Component {
@@ -117,7 +117,7 @@ export default class LavagemScreenCliente extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var argumentos = `status=${this.state.status}&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&todas=${this.state.todas}`;
+        var argumentos = `status=${this.state.status}&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&todas=${this.state.todas}&incluirRoupas=false`;
 
         if(this.state.nome != ''){
             argumentos += '&nome=' + this.state.nome;
@@ -313,7 +313,7 @@ export default class LavagemScreenCliente extends React.Component {
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
                         <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('LavagemDetails', { lavagem: objeto })}>
-                            <Lavagem key={objeto.oid} lavagem={objeto} />
+                            <LavagemPapelCliente key={objeto.oid} lavagem={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>
