@@ -128,6 +128,7 @@ export default class ListaDeEntregaDetails extends React.Component {
 
     navegarParaBuscarLavagens = () => {
         // alert('oid ' + Object.getOwnPropertyNames(this.state.lavagens[0].lavagem));
+        this.props.navigation.navigate("LavagemParaListaDeEntrega", {objeto: this.state.objeto, buscar: this.buscar});
     };
 
     render(){

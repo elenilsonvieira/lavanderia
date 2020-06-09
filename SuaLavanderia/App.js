@@ -50,6 +50,7 @@ import BancoDeHorasDetails from './screens/details/BancoDeHorasDetails';
 import FechamentoDePontoDetails from './screens/details/FechamentoDePontoDetails';
 import OperacaoListaDeEntregaScreen from './screens/OperacaoListaDeEntregaScreen';
 import ListaDeEntregaDetails from './screens/details/ListaDeEntregaDetails';
+import LavagemParaListaDeEntregaScreen from './screens/LavagemParaListaDeEntregaScreen';
 
 export default class App extends Component {
   render() {
@@ -234,6 +235,7 @@ const StackAdministrador = createStackNavigator(
     ListaDeCompras: ListaDeComprasScreen,
     BancoDeHorasDetails: BancoDeHorasDetails,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
+    LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerAdministrador,
   },{
@@ -260,6 +262,7 @@ const StackGerenteGeral = createStackNavigator(
     ListaDeCompras: ListaDeComprasScreen,
     BancoDeHorasDetails: BancoDeHorasDetails,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
+    LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerGerenteGeral,
   },{
@@ -286,6 +289,7 @@ const StackSubGerenteGeral = createStackNavigator(
     ListaDeCompras: ListaDeComprasScreen,
     BancoDeHorasDetails: BancoDeHorasDetails,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
+    LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerSubGerenteGeral,
   },{
@@ -308,6 +312,7 @@ const StackGerenteDeOperacoes = createStackNavigator(
     BancoDeHorasDetails: BancoDeHorasDetails,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
+    LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     Drawer: DrawerGerenteDeOperacoes,
   },{
     initialRouteName: 'Drawer',
@@ -336,6 +341,7 @@ const StackSupervisorDeOperacoes = createStackNavigator(
     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
+    LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     BancoDeHorasDetails: BancoDeHorasDetails,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerSupervisorDeOperacoes,
@@ -380,6 +386,7 @@ const StackAplicativo = createStackNavigator(
     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
+    LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     Drawer: DrawerAplicativo,
   },{
     initialRouteName: 'Drawer',
