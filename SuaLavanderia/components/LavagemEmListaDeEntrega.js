@@ -8,47 +8,37 @@ export default class LavagemEmListaDeEntrega extends React.Component {
             <View style={styles.container}>
                 <View style={styles.unidadeContainer}>
                     <View style={styles.lavagemInfoContainerCliente}>
-                        <Text style={styles.lavagemInfoCliente}>{this.props.lavagem.cliente} ({this.props.lavagem.codigoDoCliente})</Text>
-                    </View>
-
-                    <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Unidade: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.lavagem.unidadeDeRecebimento}</Text>
-                    </View>
-
-                    <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Data de Recebimento: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.lavagem.dataDeRecebimento}</Text>
-                    </View>
-
-                    <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Data Preferível para Entrega: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.lavagem.dataPreferivelParaEntrega}</Text>
-                    </View>
-
-                    <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Data de Entrega: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.lavagem.dataDeEntrega}</Text>
-                    </View>
-
-                    <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Status: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.lavagem.status}</Text>
+                        <Text style={styles.lavagemInfoCliente}>{this.props.objeto.lavagem.cliente}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Quantidade de Peças: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.lavagem.quantidadeDePecas}</Text>
+                        <Text style={styles.lavagemInfo}>{this.props.objeto.lavagem.quantidadeDePecas}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Paga: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.lavagem.paga}</Text>
+                        <Text style={styles.lavagemInfoTitle}>Comentários: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.objeto.comentario}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Avaliação: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.lavagem.avaliacao != null ? this.props.lavagem.avaliacao.media : null}</Text>
+                        <Text style={styles.lavagemInfoTitle}>Unidade: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.objeto.lavagem.unidadeDeRecebimento}</Text>
+                    </View>
+
+                    <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Data de Recebimento: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.objeto.lavagem.dataDeRecebimento}</Text>
+                    </View>
+
+                    <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Data Preferível para Entrega: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.objeto.lavagem.dataPreferivelParaEntrega}</Text>
+                    </View>
+
+                    <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Status: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.objeto.lavagem.status}</Text>
                     </View>
                 </View>
             </View>

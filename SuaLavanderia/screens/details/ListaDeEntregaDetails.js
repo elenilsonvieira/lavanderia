@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity } from 'react-native';
-import MovimentacaoDeMaterial from '../../components/MovimentacaoDeMaterial';
+import LavagemEmListaDeEntrega from '../../components/LavagemEmListaDeEntrega';
 import LoadingModal from '../../components/modals/LoadingModal';
 import ListaDeEntrega from '../../components/ListaDeEntrega';
 
@@ -17,7 +17,7 @@ export default class ListaDeEntregaDetails extends React.Component {
         this.setState({modalVisible: true});
 
         const objeto = this.props.navigation.getParam('objeto');
-        this.setState({objeto});
+        this.setState({objeto, lavagens: objeto.lavagens});
 
         this.setState({modalVisible: false});
     }
@@ -126,8 +126,8 @@ export default class ListaDeEntregaDetails extends React.Component {
         this.setState({confirmacaoModalVisible: false});
     };
 
-    acao = () => {
-        this.buscar();
+    navegarParaBuscarLavagens = () => {
+        // alert('oid ' + Object.getOwnPropertyNames(this.state.lavagens[0].lavagem));
     };
 
     render(){
@@ -136,7 +136,7 @@ export default class ListaDeEntregaDetails extends React.Component {
                 <View style={styles.header}>
                     <Text style={styles.infoTitle}>Lista de Entrega</Text>
                     
-                    <TouchableOpacity onPress={() => this.openModal()} style={styles.button}>
+                    <TouchableOpacity onPress={() => this.navegarParaBuscarLavagens()} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/novo_32x32.png')} />
                     </TouchableOpacity>
                 </View>
@@ -147,9 +147,9 @@ export default class ListaDeEntregaDetails extends React.Component {
                         <Text style={styles.roupasTitle}>Lavagens</Text>
                     </View>
                     
-                    {/* { this.state.movimentacoes.map(movimentacao => 
-                        <MovimentacaoDeMaterial key={movimentacao.oid} objeto={movimentacao} />
-                    )} */}
+                    { this.state.lavagens.map(objeto => 
+                        <LavagemEmListaDeEntrega key={objeto.lavagem.oid} objeto={objeto} />
+                    )}
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
