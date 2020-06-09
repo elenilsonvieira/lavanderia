@@ -13,7 +13,7 @@ export default class ListaDeEntregaDetails extends React.Component {
         lavagens: [],
     };
 
-    async componentDidMount(){
+    componentWillMount(){
         this.setState({modalVisible: true});
 
         const objeto = this.props.navigation.getParam('objeto');
@@ -135,6 +135,10 @@ export default class ListaDeEntregaDetails extends React.Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.infoTitle}>Lista de Entrega</Text>
+                    
+                    <TouchableOpacity onPress={() => this.openModal()} style={styles.button}>
+                        <Image style={styles.icon} source={require('../../images/novo_32x32.png')} />
+                    </TouchableOpacity>
                 </View>
                 <ScrollView>
                     <ListaDeEntrega objeto={this.state.objeto} />
