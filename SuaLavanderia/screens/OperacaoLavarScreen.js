@@ -164,6 +164,7 @@ export default class OperacaoLavarScreen extends React.Component {
                     unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
                     unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
                     quantidadeDePecas: objetoResponse.QuantidadeDePecas,
+                    pesoDaPassagem: objetoResponse.PesoDaPassagem,
                     roupas: roupas,
                     status: objetoResponse.Status,
                 };    

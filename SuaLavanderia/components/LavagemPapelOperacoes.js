@@ -42,6 +42,11 @@ export default class LavagemPapelOperacoes extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Peso da Passagem: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.lavagem.pesoDaPassagem}</Text>
+                    </View>
+
+                    <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Avaliação: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.lavagem.avaliacao != null ? this.props.lavagem.avaliacao.media : null}</Text>
                     </View>
