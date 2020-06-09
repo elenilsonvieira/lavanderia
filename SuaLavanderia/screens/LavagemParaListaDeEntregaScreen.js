@@ -112,7 +112,7 @@ export default class LavagemParaListaDeEntregaScreen extends React.Component {
         var argumentos = `dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&unidadeOid=${unidadeOid}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagemParaListaDeEntrega.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
