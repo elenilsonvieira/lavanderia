@@ -230,6 +230,9 @@ export default class OperacaoListaDeEntregaScreen extends React.Component {
         var email = usuario.email;
         var usuarioOid = this.props.navigation.getParam('usuarioOid');
 
+        var dataDaCompraArray = data.split('/');
+        data = dataDaCompraArray[2] + '-'+ dataDaCompraArray[1] + '-' + dataDaCompraArray[0];
+
         var argumentos = `unidade=${unidade}&data=${data}&usuarioOid=${usuarioOid}`;
 
         try{
