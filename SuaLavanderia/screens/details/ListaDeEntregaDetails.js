@@ -53,6 +53,10 @@ export default class ListaDeEntregaDetails extends React.Component {
         return hash;
     };
 
+    async buscar2() {
+        alert('hey hou');
+    };
+
     async buscar() {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
@@ -132,7 +136,7 @@ export default class ListaDeEntregaDetails extends React.Component {
 
     navegarParaBuscarLavagens = () => {
         // alert('oid ' + Object.getOwnPropertyNames(this.state.lavagens[0].lavagem));
-        this.props.navigation.navigate("LavagemParaListaDeEntrega", {objeto: this.state.objeto, buscar: this.buscar});
+        this.props.navigation.navigate("LavagemParaListaDeEntrega", {objeto: this.state.objeto, buscar: this.buscar.bind(this)});
     };
 
     render(){
