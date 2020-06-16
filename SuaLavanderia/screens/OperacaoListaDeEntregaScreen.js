@@ -247,7 +247,7 @@ export default class OperacaoListaDeEntregaScreen extends React.Component {
                     method: 'post' 
                 });
             
-            if(call.status == 422){
+            if(call.status == 407){
                 alert('Já existe uma lista criada para esse dia!');    
             }
             else if(call.status != 200){

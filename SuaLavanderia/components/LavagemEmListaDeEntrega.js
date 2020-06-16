@@ -40,6 +40,11 @@ export default class LavagemEmListaDeEntrega extends React.Component {
                         <Text style={styles.lavagemInfoTitle}>Status: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.objeto.lavagem.status}</Text>
                     </View>
+
+                    <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Observações: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.objeto.lavagem.observacoes}</Text>
+                    </View>
                 </View>
             </View>
         );

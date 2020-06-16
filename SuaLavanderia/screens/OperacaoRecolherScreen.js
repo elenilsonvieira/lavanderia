@@ -63,6 +63,7 @@ export default class OperacaoRecolherScreen extends React.Component {
         var email = usuario.email;
 
         var hoje = new Date();
+        hoje = new Date(hoje.getTime() + 1 * 24*60*60*1000);
         var diasAtras = new Date(hoje.getTime() - 3 * 24*60*60*1000);
 
         var dataInicial = this.state.dataInicial;
@@ -106,7 +107,7 @@ export default class OperacaoRecolherScreen extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var argumentos = `status=1&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&usarDataPreferivelParaEntrega=true&recolhidaDoVaral=false`;
+        var argumentos = `status=1&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&usarDataPreferivelParaEntrega=true&recolhidaDoVaral=false&operacoes=true`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -165,6 +166,7 @@ export default class OperacaoRecolherScreen extends React.Component {
                     unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
                     quantidadeDePecas: objetoResponse.QuantidadeDePecas,
                     pesoDaPassagem: objetoResponse.PesoDaPassagem,
+                    observacoes: objetoResponse.Observacoes,
                     roupas: roupas,
                     status: objetoResponse.Status,
                 };    

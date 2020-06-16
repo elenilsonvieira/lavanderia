@@ -140,13 +140,21 @@ export default class LoginScreen extends Component {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity onPress={() => this.open(1)}>
-            <View style={styles.infoContainer}>
-                <Image source={require('../images/whatsapp_64x64.png')} style={styles.redesSociaisLogo} />
-                <Text style={styles.info}>Fale Conosco Agora</Text>
-                <Text style={styles.info}>(83) 3268-4285</Text>
-            </View>
-          </TouchableOpacity>
+          <View style={styles.midiasSociais}>
+            <TouchableOpacity onPress={() => this.open(1)}>
+              <View style={styles.infoContainer}>
+                  <Image source={require('../images/whatsapp_64x64.png')} style={styles.redesSociaisLogo} />
+                  <Text style={styles.info}>(83) 3268-4285</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => this.open(2)}>
+              <View style={styles.infoContainer}>
+                  <Image source={require('../images/instagram_64x64.png')} style={styles.redesSociaisLogo} />
+                  <Text style={styles.info}>  Instagram   </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <LoadingModal modalVisible={this.state.modalVisible} />
@@ -212,7 +220,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   redesSociaisLogo: {
-    width: 40,
-    height: 40,
+    width: 32,
+    height: 32,
+  },
+  midiasSociais: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });
