@@ -12,7 +12,7 @@ export default class ListaDeEntrega extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>QuantidadeDeLavagens: </Text>
+                        <Text style={styles.lavagemInfoTitle}>Quantidade de Lavagens: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.objeto.quantidadeDeLavagens}</Text>
                     </View>
 
