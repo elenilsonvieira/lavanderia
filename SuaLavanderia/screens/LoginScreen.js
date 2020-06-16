@@ -1,13 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Image, AsyncStorage, TextInput} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Image, AsyncStorage, TextInput, Linking} from 'react-native';
 import LoadingModal from '../components/modals/LoadingModal';
 
 export default class LoginScreen extends Component {
@@ -106,6 +98,15 @@ export default class LoginScreen extends Component {
     return data.getFullYear() + '' + mes + '' + dia;
   }
 
+  open = (redeSocial) => {
+    switch(redeSocial){
+      case 1: Linking.openURL("https://wa.me/558332684285") ; break;
+      case 2: Linking.openURL("https://instagram.com/sualavanderia") ; break;
+      case 3: Linking.openURL("https://facebook.com/sualavanderia.com.br") ; break;
+      case 4: Linking.openURL("https://www.sualavanderia.com.br") ; break;
+    }
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -138,6 +139,14 @@ export default class LoginScreen extends Component {
               <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
           </View>
+
+          <TouchableOpacity onPress={() => this.open(1)}>
+            <View style={styles.infoContainer}>
+                <Image source={require('../images/whatsapp_64x64.png')} style={styles.redesSociaisLogo} />
+                <Text style={styles.info}>Fale Conosco Agora</Text>
+                <Text style={styles.info}>(83) 3268-4285</Text>
+            </View>
+          </TouchableOpacity>
         </View>
 
         <LoadingModal modalVisible={this.state.modalVisible} />
@@ -195,5 +204,15 @@ const styles = StyleSheet.create({
   },
   imagem: {
     margin: 20,
+  },
+  infoContainer: {
+    marginTop: 50,
+    margin: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  redesSociaisLogo: {
+    width: 40,
+    height: 40,
   },
 });
