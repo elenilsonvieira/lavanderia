@@ -52,6 +52,7 @@ import OperacaoListaDeEntregaScreen from './screens/OperacaoListaDeEntregaScreen
 import ListaDeEntregaDetails from './screens/details/ListaDeEntregaDetails';
 import LavagemParaListaDeEntregaScreen from './screens/LavagemParaListaDeEntregaScreen';
 import UsuarioScreen from './screens/UsuarioScreen';
+import UsuarioDetails from './screens/details/UsuarioDetails';
 
 export default class App extends Component {
   render() {
@@ -198,6 +199,7 @@ const DrawerAtendente = createDrawerNavigator(
     Roupa: RoupaScreen,
     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
     Caixa: CaixaScreen,
+    Usuario: UsuarioScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -241,6 +243,7 @@ const StackAdministrador = createStackNavigator(
     ListaDeEntregaDetails: ListaDeEntregaDetails,
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
+    UsuarioDetails: UsuarioDetails,
     Drawer: DrawerAdministrador,
   },{
     initialRouteName: 'Drawer',
@@ -268,6 +271,7 @@ const StackGerenteGeral = createStackNavigator(
     ListaDeEntregaDetails: ListaDeEntregaDetails,
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
+    UsuarioDetails: UsuarioDetails,
     Drawer: DrawerGerenteGeral,
   },{
     initialRouteName: 'Drawer',
@@ -295,6 +299,7 @@ const StackSubGerenteGeral = createStackNavigator(
     ListaDeEntregaDetails: ListaDeEntregaDetails,
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
+    UsuarioDetails: UsuarioDetails,
     Drawer: DrawerSubGerenteGeral,
   },{
     initialRouteName: 'Drawer',
@@ -412,6 +417,7 @@ const StackAtendente = createStackNavigator(
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
+    UsuarioDetails: UsuarioDetails,
     Drawer: DrawerAtendente,
   },{
     initialRouteName: 'Drawer',

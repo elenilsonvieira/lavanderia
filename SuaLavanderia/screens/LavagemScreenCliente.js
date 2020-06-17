@@ -19,11 +19,9 @@ export default class LavagemScreenCliente extends React.Component {
     state ={
         dataInicial: '',
         dataFinal: '',
-        nome: '',
         status: '',
         objetos: [],
         modalVisible: false,
-        todas: true,
     };
 
     dataString = () => {
@@ -117,11 +115,7 @@ export default class LavagemScreenCliente extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var argumentos = `status=${this.state.status}&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&todas=${this.state.todas}&incluirRoupas=false`;
-
-        if(this.state.nome != ''){
-            argumentos += '&nome=' + this.state.nome;
-        }
+        var argumentos = `status=${this.state.status}&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -136,55 +130,53 @@ export default class LavagemScreenCliente extends React.Component {
                 const objetoResponse = response[index];
                 var roupas = [];
 
-                if(this.state.nome == '' || objetoResponse.Cliente.toLowerCase().includes(this.state.nome.trim().toLowerCase())){
-                    for(indexRoupa in objetoResponse.Roupas){
-                        const roupaResponse = objetoResponse.Roupas[indexRoupa];
+                for(indexRoupa in objetoResponse.Roupas){
+                    const roupaResponse = objetoResponse.Roupas[indexRoupa];
 
-                        const roupaEmLavagem = {
-                            oid: roupaResponse.Oid,
-                            quantidade: roupaResponse.Quantidade,
-                            observacoes: roupaResponse.Observacoes,
-                            soPassar: roupaResponse.SoPassar,
-                            pacoteDeRoupa: roupaResponse.PacoteDeRoupa,
-                            pacoteDeRoupa: roupaResponse.PacoteDeRoupa,
-                            roupa: {
-                                oid: roupaResponse.Roupa.Oid,
-                                tipo: roupaResponse.Roupa.Tipo,
-                                tecido: roupaResponse.Roupa.Tecido,
-                                tamanho: roupaResponse.Roupa.Tamanho,
-                                marca: roupaResponse.Roupa.Marca,
-                                cliente: roupaResponse.Roupa.Cliente,
-                                clienteOid: roupaResponse.Roupa.ClienteOid,
-                                observacao: roupaResponse.Roupa.Observacao,
-                                codigo: roupaResponse.Roupa.Codigo,
-                                chave: roupaResponse.Roupa.Chave,
-                                cores: roupaResponse.Roupa.Cores,
-                            },
-                        };
+                    const roupaEmLavagem = {
+                        oid: roupaResponse.Oid,
+                        quantidade: roupaResponse.Quantidade,
+                        observacoes: roupaResponse.Observacoes,
+                        soPassar: roupaResponse.SoPassar,
+                        pacoteDeRoupa: roupaResponse.PacoteDeRoupa,
+                        pacoteDeRoupa: roupaResponse.PacoteDeRoupa,
+                        roupa: {
+                            oid: roupaResponse.Roupa.Oid,
+                            tipo: roupaResponse.Roupa.Tipo,
+                            tecido: roupaResponse.Roupa.Tecido,
+                            tamanho: roupaResponse.Roupa.Tamanho,
+                            marca: roupaResponse.Roupa.Marca,
+                            cliente: roupaResponse.Roupa.Cliente,
+                            clienteOid: roupaResponse.Roupa.ClienteOid,
+                            observacao: roupaResponse.Roupa.Observacao,
+                            codigo: roupaResponse.Roupa.Codigo,
+                            chave: roupaResponse.Roupa.Chave,
+                            cores: roupaResponse.Roupa.Cores,
+                        },
+                    };
 
-                        roupas = [...roupas, roupaEmLavagem];
-                    }
-
-                    const objeto = {
-                        oid: objetoResponse.Oid,
-                        cliente: objetoResponse.Cliente,
-                        clienteOid: objetoResponse.ClienteOid,
-                        dataDeRecebimento: objetoResponse.DataDeRecebimento,
-                        dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
-                        dataDeEntrega: objetoResponse.DataDeEntrega,
-                        valor: objetoResponse.Valor,
-                        saldoDevedor: objetoResponse.SaldoDevedor,
-                        paga: objetoResponse.Paga,
-                        unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
-                        unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
-                        quantidadeDePecas: objetoResponse.QuantidadeDePecas,
-                        pesoDaPassagem: objetoResponse.PesoDaPassagem,
-                        roupas: roupas,
-                        status: objetoResponse.Status,
-                    };    
-
-                    objetos = [...objetos, objeto];
+                    roupas = [...roupas, roupaEmLavagem];
                 }
+
+                const objeto = {
+                    oid: objetoResponse.Oid,
+                    cliente: objetoResponse.Cliente,
+                    clienteOid: objetoResponse.ClienteOid,
+                    dataDeRecebimento: objetoResponse.DataDeRecebimento,
+                    dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
+                    dataDeEntrega: objetoResponse.DataDeEntrega,
+                    valor: objetoResponse.Valor,
+                    saldoDevedor: objetoResponse.SaldoDevedor,
+                    paga: objetoResponse.Paga,
+                    unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
+                    unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
+                    quantidadeDePecas: objetoResponse.QuantidadeDePecas,
+                    pesoDaPassagem: objetoResponse.PesoDaPassagem,
+                    roupas: roupas,
+                    status: objetoResponse.Status,
+                };    
+
+                objetos = [...objetos, objeto];
             }
 
             this.setState({objetos});
@@ -195,23 +187,8 @@ export default class LavagemScreenCliente extends React.Component {
         this.setState({modalVisible: false});
     };
 
-    filtrar =  () => {        
-        if(this.state.nome.trim() !== '') {
-            var objetos = [];
-
-            this.state.objetos.map(objeto => {
-                if(objeto.nome.toLowerCase().includes(this.state.nome.toLowerCase())){ 
-                    objetos = [...objetos, objeto];
-                }
-            });
-
-            this.setState({objetos});
-        }
-    };
-
     async componentDidMount(){
-        const objetos = await this.buscar() || [];
-        this.setState({objetos, todas: false});
+        this.buscar();
     }
 
     dataInicialEscolhida = (dataEscolhida) => {

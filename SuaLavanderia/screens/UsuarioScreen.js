@@ -160,7 +160,7 @@ export default class UsuarioScreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('Operacoes', {usuarioOid: objeto.oid})}>
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('UsuarioDetails', {objeto: objeto})}>
                             <Usuario key={objeto.oid} objeto={objeto} />
                         </TouchableOpacity>
                     )}
