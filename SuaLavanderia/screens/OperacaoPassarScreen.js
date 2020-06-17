@@ -284,7 +284,7 @@ export default class OperacaoPassarScreen extends React.Component {
     };
 
     openVideoInformativo = () => {
-        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+        Linking.openURL("http://sualavanderia.com.br/videos/OperacaoPassarScreen.mp4");
     };
 
     render(){

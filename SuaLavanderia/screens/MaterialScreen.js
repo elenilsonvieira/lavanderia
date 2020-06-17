@@ -198,7 +198,7 @@ export default class MaterialScreen extends React.Component {
     };
 
     openVideoInformativo = () => {
-        Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+        Linking.openURL("http://sualavanderia.com.br/videos/MaterialScreen.mp4");
     };
 
     render(){

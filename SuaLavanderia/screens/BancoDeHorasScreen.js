@@ -135,7 +135,7 @@ export default class BancoDeHorasScreen extends React.Component {
     };
 
     openVideoInformativo = () => {
-        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+        Linking.openURL("http://sualavanderia.com.br/videos/BancoDeHorasScreen.mp4");
     };
 
     render(){

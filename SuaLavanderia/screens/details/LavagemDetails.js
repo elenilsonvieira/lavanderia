@@ -184,7 +184,7 @@ export default class LavagemDetails extends React.Component {
     };
 
     openVideoInformativo = () => {
-        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+        Linking.openURL("http://sualavanderia.com.br/videos/LavagemDetails.mp4");
     };
 
     render(){

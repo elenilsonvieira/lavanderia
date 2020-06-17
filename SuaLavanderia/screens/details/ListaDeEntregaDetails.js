@@ -140,7 +140,7 @@ export default class ListaDeEntregaDetails extends React.Component {
     };
 
     openVideoInformativo = () => {
-        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+        Linking.openURL("http://sualavanderia.com.br/videos/ListaDeEntregaDetails.mp4");
     };
 
     render(){

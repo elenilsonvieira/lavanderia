@@ -278,7 +278,7 @@ export default class OperacaoLavarScreen extends React.Component {
     };
 
     openVideoInformativo = () => {
-        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+        Linking.openURL("http://sualavanderia.com.br/videos/OperacaoLavarScreen.mp4");
     };
 
     render(){

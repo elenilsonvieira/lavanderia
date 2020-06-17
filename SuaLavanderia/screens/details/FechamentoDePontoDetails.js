@@ -101,7 +101,7 @@ export default class FechamentoDePontoDetails extends React.Component {
     };
 
     openVideoInformativo = () => {
-        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+        Linking.openURL("http://sualavanderia.com.br/videos/FechamentoDePontoDetails.mp4");
     };
 
     render(){
