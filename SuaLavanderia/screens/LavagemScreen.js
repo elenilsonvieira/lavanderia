@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage, Linking } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Lavagem from "../components/Lavagem";
 import LoadingModal from '../components/modals/LoadingModal';
@@ -257,6 +257,10 @@ export default class LavagemScreen extends React.Component {
         });
     }
 
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+    };
+
     render(){
         return(
             <View style={styles.container}>
@@ -314,7 +318,13 @@ export default class LavagemScreen extends React.Component {
                                 <TouchableOpacity onPress={this.buscar} style={styles.button}>
                                     <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
                                 </TouchableOpacity>
+
+                                <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
+                                    <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
+                                </TouchableOpacity>
                             </View>
+
+                            
                         </View>
                     </View>
                 </View>
@@ -396,6 +406,10 @@ const styles = StyleSheet.create(
         viewBotao: {
             flexDirection: 'row',
             justifyContent: 'flex-end'
+        },
+        icon: {
+            width: 24,
+            height: 24,
         },
     }
 );

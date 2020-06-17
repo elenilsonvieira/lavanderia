@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage, Linking } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import ListaDeEntrega from "../components/ListaDeEntrega";
 import LoadingModal from '../components/modals/LoadingModal';
@@ -270,6 +270,10 @@ export default class OperacaoListaDeEntregaScreen extends React.Component {
         this.setState({confirmacaoModalVisible: false});
     };
 
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+    };
+
     render(){
         return(
             <View style={styles.container}>
@@ -304,6 +308,12 @@ export default class OperacaoListaDeEntregaScreen extends React.Component {
 
                             <TouchableOpacity onPress={() => this.openModal()} style={styles.button}>
                                 <Image style={styles.icon} source={require('../images/novo_32x32.png')} />
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={styles.viewBotao}>
+                            <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
+                                <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
                             </TouchableOpacity>
                         </View>
                     </View>

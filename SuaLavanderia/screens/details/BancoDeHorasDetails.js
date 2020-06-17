@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity, Linking } from 'react-native';
 import FechamentoDePonto from '../../components/FechamentoDePonto';
 import LoadingModal from '../../components/modals/LoadingModal';
 import BancoDeHoras from '../../components/BancoDeHoras';
@@ -124,6 +124,10 @@ export default class BancoDeHorasDetails extends React.Component {
 
     navegarParaDetalhes = (objeto) => {
         this.props.navigation.navigate("FechamentoDePontoDetails", { objeto: objeto});
+    };
+
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
     };
 
     render(){

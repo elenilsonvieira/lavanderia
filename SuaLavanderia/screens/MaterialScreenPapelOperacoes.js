@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage, Linking } from 'react-native';
 
 import MaterialPapelOperacoes from "../components/MaterialPapelOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
@@ -194,11 +194,20 @@ export default class MaterialScreenPapelOperacoes extends React.Component {
         }
     };
 
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+    };
+
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                  <Text style={styles.infoTitle}>Clique em um Material</Text>
+                    <Text style={styles.infoTitle}>Clique em um Material</Text>
+                    <View style={styles.viewBotao}>
+                        <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
+                            <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <ScrollView contentContainerStyle={styles.objetoList}>

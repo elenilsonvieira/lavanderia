@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity, Linking } from 'react-native';
 import FechamentoDePonto from '../../components/FechamentoDePonto';
 import Ponto from '../../components/Ponto';
 import LoadingModal from '../../components/modals/LoadingModal';
@@ -98,6 +98,10 @@ export default class FechamentoDePontoDetails extends React.Component {
             this.setState({modalVisible: false});
             alert('Erro buscando ponto: ' + erro);
         }
+    };
+
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
     };
 
     render(){

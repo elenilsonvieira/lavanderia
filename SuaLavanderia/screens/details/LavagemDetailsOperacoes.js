@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage } from 'react-native';
+import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage, Linking } from 'react-native';
 import RoupaEmLavagem from '../../components/RoupaEmLavagem';
 import ConfirmacaoModal from '../../components/modals/ConfirmacaoModal';
 
@@ -56,6 +56,10 @@ export default class LavagemDetailsOperacoes extends React.Component {
     acao = () => {
         this.setState({confirmacaoModalVisible: false});
         this.props.navigation.getParam("acao")();
+    };
+
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
     };
 
     render(){

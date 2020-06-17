@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage } from 'react-native';
+import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage, Linking } from 'react-native';
 import RoupaEmLavagem from '../../components/RoupaEmLavagem';
 import ConfirmacaoModal from '../../components/modals/ConfirmacaoModal';
 import LoadingModal from '../../components/modals/LoadingModal';
@@ -233,6 +233,10 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
             this.setState({modalVisible: false});
             alert('Erro buscando lavagem');
         }
+    };
+
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
     };
 
     render(){

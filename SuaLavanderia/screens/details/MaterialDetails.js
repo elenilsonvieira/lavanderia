@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity, Linking } from 'react-native';
 import MovimentacaoDeMaterial from '../../components/MovimentacaoDeMaterial';
 import LoadingModal from '../../components/modals/LoadingModal';
 import Material from '../../components/Material';
@@ -147,11 +147,20 @@ export default class MaterialDetails extends React.Component {
         this.props.navigation.getParam("acao")(quantidade, modo);
     };
 
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+    };
+
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.infoTitle}>Material</Text>
+                    <View style={styles.viewBotao}>
+                        <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
+                            <Image style={styles.icon} source={require('../../images/pergunta_32x32.png')} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 <ScrollView>
                     <TouchableOpacity onPress={() => this.openModal()}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Text, TouchableOpacity, Image } from 'react-native';
+import {StyleSheet, View, ScrollView, Text, TouchableOpacity, Image, Linking } from 'react-native';
 
 import Operacao from "../components/Operacao";
 import LoadingModal from '../components/modals/LoadingModal';
@@ -31,11 +31,20 @@ export default class OperacoesScreen extends React.Component {
         this.setState({usuarioOid});
     }
 
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+    };
+
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                  <Text style={styles.infoTitle}>O que deseja fazer?</Text>
+                    <Text style={styles.infoTitle}>O que deseja fazer?</Text>
+                    <View style={styles.viewBotao}>
+                        <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
+                            <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <ScrollView contentContainerStyle={styles.objetoList}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Picker, Text, TouchableOpacity, AsyncStorage } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Picker, Text, TouchableOpacity, AsyncStorage, Linking } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import MovimentacaoDeCaixa from "../components/MovimentacaoDeCaixa";
 import LoadingModal from '../components/modals/LoadingModal';
@@ -241,6 +241,10 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
         });
     }
 
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+    };
+
     render(){
         return(
             <View style={styles.container}>
@@ -288,6 +292,10 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
 
                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('MovimentacaoDeCaixaDetails')} style={styles.button}>
                                     <Image style={styles.icon} source={require('../images/novo_32x32.png')} />
+                                </TouchableOpacity>
+
+                                <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
+                                    <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
                                 </TouchableOpacity>
                             </View>
                         </View>

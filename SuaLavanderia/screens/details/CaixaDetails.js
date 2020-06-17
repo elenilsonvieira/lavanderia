@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
+import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage, Linking } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
 export default class CaixaDetails extends React.Component {
@@ -117,6 +117,10 @@ export default class CaixaDetails extends React.Component {
         }catch(exception){}
     
         return usuario;
+    };
+
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
     };
 
     render(){

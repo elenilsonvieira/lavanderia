@@ -152,6 +152,10 @@ export default class LavagemDetailsPapelOperacoes extends React.Component {
         }
     };
 
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+    };
+
     render(){
         const lavagem = this.state.lavagem;
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity, Linking } from 'react-native';
 import LavagemEmListaDeEntrega from '../../components/LavagemEmListaDeEntrega';
 import LoadingModal from '../../components/modals/LoadingModal';
 import ListaDeEntrega from '../../components/ListaDeEntrega';
@@ -137,6 +137,10 @@ export default class ListaDeEntregaDetails extends React.Component {
     navegarParaBuscarLavagens = () => {
         // alert('oid ' + Object.getOwnPropertyNames(this.state.lavagens[0].lavagem));
         this.props.navigation.navigate("LavagemParaListaDeEntrega", {objeto: this.state.objeto, buscar: this.buscar.bind(this)});
+    };
+
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
     };
 
     render(){
