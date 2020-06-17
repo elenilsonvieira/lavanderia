@@ -51,6 +51,7 @@ import FechamentoDePontoDetails from './screens/details/FechamentoDePontoDetails
 import OperacaoListaDeEntregaScreen from './screens/OperacaoListaDeEntregaScreen';
 import ListaDeEntregaDetails from './screens/details/ListaDeEntregaDetails';
 import LavagemParaListaDeEntregaScreen from './screens/LavagemParaListaDeEntregaScreen';
+import UsuarioScreen from './screens/UsuarioScreen';
 
 export default class App extends Component {
   render() {
@@ -69,6 +70,7 @@ const DrawerAdministrador = createDrawerNavigator(
     Caixa: CaixaScreen,
     Material: MaterialScreen,
     BancoDeHoras: BancoDeHorasScreen,
+    Usuario: UsuarioScreen,
     // Tipo: TipoScreen,
     // Tamanho: TamanhoScreen,
     // Tecido: TecidoScreen,
@@ -94,6 +96,7 @@ const DrawerGerenteGeral = createDrawerNavigator(
     Caixa: CaixaScreen,
     Material: MaterialScreen,
     BancoDeHoras: BancoDeHorasScreen,
+    Usuario: UsuarioScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -113,6 +116,7 @@ const DrawerSubGerenteGeral = createDrawerNavigator(
     Caixa: CaixaScreen,
     Material: MaterialScreen,
     BancoDeHoras: BancoDeHorasScreen,
+    Usuario: UsuarioScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
