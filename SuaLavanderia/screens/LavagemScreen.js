@@ -322,9 +322,7 @@ export default class LavagemScreen extends React.Component {
                                 <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
                                     <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
                                 </TouchableOpacity>
-                            </View>
-
-                            
+                            </View>                            
                         </View>
                     </View>
                 </View>

@@ -132,6 +132,10 @@ export default class CaixaDetails extends React.Component {
                     <TouchableOpacity onPress={() => this.salvar(this.props)} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/salvar_32x32.png')} />
                     </TouchableOpacity>
+
+                    <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
+                        <Image style={styles.icon} source={require('../../images/pergunta_32x32.png')} />
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.movimentacaoContainer}>

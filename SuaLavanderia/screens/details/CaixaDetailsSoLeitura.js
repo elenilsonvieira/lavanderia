@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, ScrollView, Linking, Image } from 'react-native';
 
 import Caixa from '../../components/Caixa';
 import MovimentacaoDeCaixa from '../../components/MovimentacaoDeCaixa';
@@ -174,11 +174,20 @@ export default class CaixaDetailsSoleitura extends React.Component {
         props.navigation.navigate('MovimentacaoDeCaixaDetails', {movimentacao: movimentacaoEmCaixa, reload: this.buscar.bind(this)});
     }
 
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+    };
+
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.infoTitle}>Caixa</Text>
+                    <View style={styles.viewBotao}>
+                        <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
+                            <Image style={styles.icon} source={require('../../images/pergunta_32x32.png')} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <ScrollView>
@@ -296,6 +305,10 @@ const styles = StyleSheet.create(
         roupasTitle: {
             fontSize: 18,
             fontWeight: 'bold',
+        },
+        viewBotao: {
+            flexDirection: 'row',
+            justifyContent: 'flex-end'
         },
     }
 );

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity, Linking } from 'react-native';
 import RoupaEmLavagem from '../../components/RoupaEmLavagem';
 import LoadingModal from '../../components/modals/LoadingModal';
 
@@ -183,6 +183,10 @@ export default class LavagemDetails extends React.Component {
         }
     };
 
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+    };
+
     render(){
         const lavagem = this.state.lavagem;
 
@@ -201,6 +205,10 @@ export default class LavagemDetails extends React.Component {
 
                     <TouchableOpacity onPress={() => this.navegarParaDetalhes(this.props, null)} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/roupa-dobrada_32x32.png')} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
+                        <Image style={styles.icon} source={require('../../images/pergunta_32x32.png')} />
                     </TouchableOpacity>
                 </View>
                 <ScrollView>

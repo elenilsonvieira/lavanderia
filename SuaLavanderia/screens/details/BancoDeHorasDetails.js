@@ -20,7 +20,7 @@ export default class BancoDeHorasDetails extends React.Component {
         
         this.setState({objeto, fechamentos, pagamentos});
 
-        //this.buscar();
+        this.buscar();
     }
 
     dataString = () => {
@@ -60,8 +60,10 @@ export default class BancoDeHorasDetails extends React.Component {
 
         this.setState({modalVisible: true});
 
+        var argumentos = `oid=${oid}&incluirFechamentosEPagamentos=true`;
+
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarBancoDeHoras.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarBancoDeHoras.aspx?oid=${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -135,6 +137,11 @@ export default class BancoDeHorasDetails extends React.Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.infoTitle}>Bando de Horas</Text>
+                    <View style={styles.viewBotao}>
+                        <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
+                            <Image style={styles.icon} source={require('../../images/pergunta_32x32.png')} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 <ScrollView>
                     <BancoDeHoras objeto={this.state.objeto} />
@@ -224,6 +231,10 @@ const styles = StyleSheet.create(
         roupasTitle: {
             fontSize: 18,
             fontWeight: 'bold',
+        },
+        viewBotao: {
+            flexDirection: 'row',
+            justifyContent: 'flex-end'
         },
     }
 );

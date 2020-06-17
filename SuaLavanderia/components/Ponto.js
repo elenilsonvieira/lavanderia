@@ -31,7 +31,7 @@ export default class Ponto extends React.Component {
                     <View style={styles.roupasContainer}>
                         <Text style={styles.lavagemInfoTitle}>Batidas</Text>
                         { this.props.objeto.batidas.map(batida => 
-                            <Text key={batida.oid} style={styles.lavagemInfo}>{batida.hora} ({batida.modo})</Text>
+                            <Text key={batida.oid} style={styles.lavagemInfo}>{batida.hora}</Text>
                         )}
                     </View>
                 </View>
