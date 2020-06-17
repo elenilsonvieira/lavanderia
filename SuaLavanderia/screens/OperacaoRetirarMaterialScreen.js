@@ -220,8 +220,9 @@ const styles = StyleSheet.create(
           },
           header:{
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             backgroundColor: '#FFF',
+            flexDirection: 'row',
           },
           headerText: {
               fontSize: 22,
@@ -270,6 +271,10 @@ const styles = StyleSheet.create(
         viewBotao: {
             flexDirection: 'row',
             justifyContent: 'flex-end'
+        },
+        icon: {
+            width: 24,
+            height: 24,
         },
     }
 );

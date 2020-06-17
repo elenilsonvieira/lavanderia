@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Linking, AsyncStorage } from 'react-native';
 
 import UsuarioOperacoes from "../components/UsuarioOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
@@ -102,11 +102,20 @@ export default class HomeScreenAplicativo extends React.Component {
         this.setState(objetos);
     }
 
+    openVideoInformativo = () => {
+        //Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+    };
+
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
                   <Text style={styles.infoTitle}>Quem é você?</Text>
+                  <View style={styles.viewBotao}>
+                        <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
+                            <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
@@ -135,8 +144,9 @@ const styles = StyleSheet.create(
           },
           header:{
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             backgroundColor: '#FFF',
+            flexDirection: 'row',
           },
           headerText: {
               fontSize: 22,
