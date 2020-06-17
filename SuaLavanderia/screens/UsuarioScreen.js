@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Linking, AsyncStorage } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Linking, AsyncStorage, Picker } from 'react-native';
 
 import Usuario from "../components/Usuario";
 import LoadingModal from '../components/modals/LoadingModal';
@@ -17,6 +17,8 @@ export default class UsuarioScreen extends React.Component {
     };
 
     state ={
+        nome: '',
+        papel: 'Cliente',
         objetos: [],
         modalVisible: false,
     };
@@ -61,45 +63,49 @@ export default class UsuarioScreen extends React.Component {
     };
 
     buscar = async () => {
-        this.setState({modalVisible: true});
+        if(this.state.nome != ''){
+            this.setState({modalVisible: true});
 
-        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
-        var hash = this.hash(usuario);
-        var email = usuario.email;
+            var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
+            var hash = this.hash(usuario);
+            var email = usuario.email;
 
-        var argumentos = `temContratoDeTrabalhoAtivo=true&papeis=SupervisorDeOperacoes;Operacoes`;
+            var argumentos = `papeis=${this.state.papel}&nome=${this.state.nome}`;
 
-        try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarUsuario.aspx?${argumentos}&login=${email}&senha=${hash}`, 
-                { 
-                    method: 'post' 
-                });
-            const response = await call.json();
+            try{
+                const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarUsuario.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+                    { 
+                        method: 'post' 
+                    });
+                const response = await call.json();
 
-            var objetos = [];
+                var objetos = [];
 
-            for(index in response){
-                const objetoResponse = response[index];
+                for(index in response){
+                    const objetoResponse = response[index];
 
-                const objeto = {
-                    oid: objetoResponse.Oid,
-                    nome: objetoResponse.Nome,
-                    email: objetoResponse.Email,
-                    papel: objetoResponse.Papel,
-                    codigo: objetoResponse.Codigo,
-                    vipClub: objetoResponse.VipClub,
-                    pontoDeColetaPadrao: objetoResponse.PontoDeColetaPadrao,
-                };    
+                    const objeto = {
+                        oid: objetoResponse.Oid,
+                        nome: objetoResponse.Nome,
+                        email: objetoResponse.Email,
+                        papel: objetoResponse.Papel,
+                        codigo: objetoResponse.Codigo,
+                        vipClub: objetoResponse.VipClub,
+                        unidade: objetoResponse.PontoDeColetaPadrao ? objetoResponse.PontoDeColetaPadrao.Nome : '',
+                    };    
 
-                objetos = [...objetos, objeto];
+                    objetos = [...objetos, objeto];
+                }
+
+                this.setState({objetos});
+            }catch(erro){
+                alert('Erro.' + erro);
             }
 
-            this.setState({objetos});
-        }catch(erro){
-            alert('Erro.' + erro);
+            this.setState({modalVisible: false});
+        }else{
+            alert("Digite ao menos o primeiro nome");
         }
-
-        this.setState({modalVisible: false});
     };
 
     openVideoInformativo = () => {
@@ -110,10 +116,45 @@ export default class UsuarioScreen extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                  <View style={styles.viewBotao}>
-                        <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
-                            <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
-                        </TouchableOpacity>
+                    <View>
+                        <View style={styles.viewHeader}>
+                            <View style={styles.viewHeader}>
+                                <Text style={styles.infoTitle}>Nome: </Text>
+                                <TextInput
+                                    style={styles.boxInput}
+                                    value={this.state.nome}
+                                    onChangeText={nome => this.setState({nome})} 
+                                />
+                            </View>
+                        </View>
+                        <View style={styles.viewHeaderSegundaLinha}>
+                            <View style={styles.viewHeader}>
+                                <Text style={styles.infoTitle}>Papel: </Text>
+                                <Picker
+                                    style={styles.picker} 
+                                    selectedValue={this.state.papel}
+                                    onValueChange={(itemValue, itemIndex) => this.setState({papel: itemValue})} >
+                                    <Picker.Item label='Cliente' value='Cliente' />
+                                    <Picker.Item label='Operações' value='Operacoes' />
+                                    <Picker.Item label='Supervisor de Operações' value='SupervisorDeOperacoes' />
+                                    <Picker.Item label='Atendente' value='Atendente' />
+                                    <Picker.Item label='Gerente Dde Operações' value='GerenteDeOperacoes' />
+                                    <Picker.Item label='Gerente Geral' value='GerenteGeral' />
+                                    <Picker.Item label='Sub-gerente Geral' value='SubGerenteGeral' />
+                                    <Picker.Item label='Entregador' value='Entregador' />
+                                </Picker>
+                            </View>
+
+                            <View style={styles.viewBotao}>
+                                <TouchableOpacity onPress={this.buscar} style={styles.button}>
+                                    <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
+                                </TouchableOpacity>
+
+                                <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
+                                    <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
+                                </TouchableOpacity>
+                            </View>                            
+                        </View>
                     </View>
                 </View>
 
@@ -167,6 +208,7 @@ const styles = StyleSheet.create(
         },
         viewHeader: {
             flexDirection: 'row',
+            marginTop: 3,
         },
         viewHeaderSegundaLinha: {
             flexDirection: 'row',

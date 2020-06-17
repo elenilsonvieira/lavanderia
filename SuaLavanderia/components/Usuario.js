@@ -33,7 +33,7 @@ export default class Usuario extends React.Component {
 
                     <View style={styles.valorInfoContainer}>
                         <Text style={styles.valorInfoTitle}>Unidade Padrão: </Text>
-                        <Text style={styles.tipoInfo}>{this.props.objeto.pontoDeColetaPadrao}</Text>
+                        <Text style={styles.tipoInfo}>{this.props.objeto.unidade}</Text>
                     </View>
                 </View>
             </View>
