@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage, Linking } from 'react-native';
 
 import Material from "../components/Material";
 import LoadingModal from '../components/modals/LoadingModal';
@@ -197,6 +197,10 @@ export default class MaterialScreen extends React.Component {
         this.props.navigation.navigate('ListaDeCompras', {dataDaCompra: dataDaCompra});
     };
 
+    openVideoInformativo = () => {
+        Linking.openURL("http://sualavanderia.com.br/videos/estoque.mp4");
+    };
+
     render(){
         return(
             <View style={styles.container}>
@@ -205,6 +209,11 @@ export default class MaterialScreen extends React.Component {
                     <View style={styles.viewBotao}>
                         <TouchableOpacity onPress={this.openModalListaDeCompras} style={styles.button}>
                             <Image style={styles.icon} source={require('../images/lista_32x32.png')} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.viewBotao}>
+                        <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
+                            <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
                         </TouchableOpacity>
                     </View>
                 </View>
