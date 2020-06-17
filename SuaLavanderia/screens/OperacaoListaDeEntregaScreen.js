@@ -62,7 +62,7 @@ export default class OperacaoListaDeEntregaScreen extends React.Component {
         var email = usuario.email;
 
         var hoje = new Date();
-        var diasAtras = new Date(hoje.getTime() - 3 * 24*60*60*1000);
+        var diasAtras = new Date();
 
         var dataInicial = this.state.dataInicial;
         var dataFinal = this.state.dataFinal;
@@ -290,12 +290,6 @@ export default class OperacaoListaDeEntregaScreen extends React.Component {
                                 onCancel={() => this.setState({dataInicialPickerVisible: false})}
                             />
 
-                            <TouchableOpacity onPress={this.buscar} style={styles.button}>
-                                <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={styles.viewHeaderSegundaLinha}>
                             <Text style={styles.infoTitle}>Fim: </Text>
                             <TouchableOpacity onPress={() => this.setState({dataFinalPickerVisible: true})}>
                                 <Text style={styles.boxDate}>{this.state.dataFinal}</Text>
@@ -306,12 +300,16 @@ export default class OperacaoListaDeEntregaScreen extends React.Component {
                                 onCancel={() => this.setState({dataFinalPickerVisible: false})}
                             />
 
-                            <TouchableOpacity onPress={() => this.openModal()} style={styles.button}>
-                                <Image style={styles.icon} source={require('../images/novo_32x32.png')} />
+                            <TouchableOpacity onPress={this.buscar} style={styles.button}>
+                                <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
                             </TouchableOpacity>
                         </View>
 
-                        <View style={styles.viewBotao}>
+                        <View style={styles.viewHeaderSegundaLinha}>
+                            <TouchableOpacity onPress={() => this.openModal()} style={styles.button}>
+                                <Image style={styles.icon} source={require('../images/novo_32x32.png')} />
+                            </TouchableOpacity>
+
                             <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
                                 <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
                             </TouchableOpacity>
@@ -375,7 +373,7 @@ const styles = StyleSheet.create(
         },
         viewHeaderSegundaLinha: {
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
         },
         boxDate:{
             height: 40,
@@ -399,6 +397,10 @@ const styles = StyleSheet.create(
         viewBotao: {
             flexDirection: 'row',
             justifyContent: 'flex-end'
+        },
+        icon: {
+            width: 24,
+            height: 24,
         },
     }
 );

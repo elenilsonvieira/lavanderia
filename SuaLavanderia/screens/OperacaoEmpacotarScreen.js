@@ -316,9 +316,7 @@ export default class OperacaoEmpacotarScreen extends React.Component {
                             <TouchableOpacity onPress={this.buscar} style={styles.button}>
                                 <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
                             </TouchableOpacity>
-                        </View>
 
-                        <View style={styles.viewBotao}>
                             <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
                                 <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
                             </TouchableOpacity>
@@ -374,7 +372,7 @@ const styles = StyleSheet.create(
             fontWeight: 'bold',
         },
         button:{
-            margin: 10,
+            margin: 5,
         },
         viewHeader: {
             flexDirection: 'row',
@@ -405,6 +403,10 @@ const styles = StyleSheet.create(
         viewBotao: {
             flexDirection: 'row',
             justifyContent: 'flex-end'
+        },
+        icon: {
+            width: 24,
+            height: 24,
         },
     }
 );

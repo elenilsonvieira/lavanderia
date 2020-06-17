@@ -373,7 +373,7 @@ const styles = StyleSheet.create(
             fontWeight: 'bold',
         },
         button:{
-            margin: 10,
+            margin: 5,
         },
         viewHeader: {
             flexDirection: 'row',
@@ -404,6 +404,10 @@ const styles = StyleSheet.create(
         viewBotao: {
             flexDirection: 'row',
             justifyContent: 'flex-end'
+        },
+        icon: {
+            width: 24,
+            height: 24,
         },
     }
 );
