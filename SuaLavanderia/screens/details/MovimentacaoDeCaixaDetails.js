@@ -170,8 +170,6 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                 </View>
 
                 <View style={styles.movimentacaoContainer}>
-                    <Text style={styles.valorInfoTitle}>Oid: {this.state.oid}</Text>
-
                     <Text style={styles.infoTitle}>Data: </Text>
                     <TouchableOpacity onPress={() => this.setState({dataTimePickerVisible: true})}>
                         <Text style={styles.boxDate}>{this.state.data}</Text>
