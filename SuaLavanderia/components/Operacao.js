@@ -59,7 +59,7 @@ const styles = StyleSheet.create(
             flexDirection: 'row',
         },
         objetoInfoTitle: {
-            fontSize: 25,
+            fontSize: 35,
             fontWeight: 'bold',
         },
         valorInfoTitle: {

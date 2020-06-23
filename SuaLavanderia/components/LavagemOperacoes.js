@@ -12,6 +12,11 @@ export default class LavagemOperacoes extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Quantidade de Peças: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.lavagem.quantidadeDePecas}</Text>
+                    </View>
+
+                    <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Unidade: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.lavagem.unidadeDeRecebimento}</Text>
                     </View>
@@ -29,11 +34,6 @@ export default class LavagemOperacoes extends React.Component {
                     <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Status: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.lavagem.status}</Text>
-                    </View>
-
-                    <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Quantidade de Peças: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.lavagem.quantidadeDePecas}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
@@ -95,11 +95,13 @@ const styles = StyleSheet.create(
         },
         lavagemInfoTitle: {
             fontWeight: 'bold',
+            fontSize: 16,
         },
         lavagemInfo: {
+            fontSize: 16,
         },
         lavagemInfoCliente: {
-            fontSize: 20,
+            fontSize: 30,
             fontWeight: 'bold',
         },
         button:{

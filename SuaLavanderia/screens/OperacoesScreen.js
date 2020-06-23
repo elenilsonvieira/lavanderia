@@ -49,27 +49,27 @@ export default class OperacoesScreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoLavar', {usuarioOid: this.state.usuarioOid})}>
-                        <Operacao nome="Lavar" />
+                        <Operacao nome="1 - Lavar" />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoRecolher', {usuarioOid: this.state.usuarioOid})}>
-                        <Operacao nome="Recolher do Varal" />
+                        <Operacao nome="2 - Recolher do Varal" />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoPassar', {usuarioOid: this.state.usuarioOid})}>
-                        <Operacao nome="Passar" />
+                        <Operacao nome="3 - Passar" />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoEmpacotar', {usuarioOid: this.state.usuarioOid})}>
-                        <Operacao nome="Empacotar" />
+                        <Operacao nome="4 - Empacotar" />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoListaDeEntrega', {usuarioOid: this.state.usuarioOid})}>
-                        <Operacao nome="Lista de Entrega" />
+                        <Operacao nome="5 - Lista de Entrega" />
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoRetirarMaterial', {usuarioOid: this.state.usuarioOid})}>
-                        <Operacao nome="Retirar Material" />
+                        <Operacao nome="6 - Retirar Material" />
                     </TouchableOpacity>
                 </ScrollView>
 
