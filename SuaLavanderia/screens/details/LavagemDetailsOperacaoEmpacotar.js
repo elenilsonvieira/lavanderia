@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage, Linking } from 'react-native';
-import RoupaEmLavagem from '../../components/RoupaEmLavagem';
+import RoupaEmLavagemOperacoes from '../../components/RoupaEmLavagemOperacoes';
 import ConfirmacaoModal from '../../components/modals/ConfirmacaoModal';
 import LoadingModal from '../../components/modals/LoadingModal';
 
@@ -306,9 +306,9 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                     
                     { lavagem.roupas.map(roupaEmLavagem => 
                         <TouchableOpacity onPress={() => this.selecionarRoupa(roupaEmLavagem)}>
-                            <RoupaEmLavagem key={roupaEmLavagem.roupa.oid} roupaEmLavagem={roupaEmLavagem} 
+                            <RoupaEmLavagemOperacoes key={roupaEmLavagem.roupa.oid} roupaEmLavagem={roupaEmLavagem} 
                                 styleExtra={ this.roupaJaSelecionada(roupaEmLavagem) ? 
-                                    { borderWidth: 10, borderColor: 'green'} : {}} />
+                                    { borderWidth: 15, borderColor: 'green'} : {}} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage, Linking } from 'react-native';
-import RoupaEmLavagem from '../../components/RoupaEmLavagem';
+import RoupaEmLavagemOperacoes from '../../components/RoupaEmLavagemOperacoes';
 import ConfirmacaoModal from '../../components/modals/ConfirmacaoModal';
 
 export default class LavagemDetailsOperacoes extends React.Component {
@@ -78,6 +78,11 @@ export default class LavagemDetailsOperacoes extends React.Component {
                             </View>
 
                             <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Quantidade de Peças: </Text>
+                                <Text style={styles.lavagemInfo}>{lavagem.quantidadeDePecas}</Text>
+                            </View>
+
+                            <View style={styles.lavagemInfoContainer}>
                                 <Text style={styles.lavagemInfoTitle}>Unidade: </Text>
                                 <Text style={styles.lavagemInfo}>{lavagem.unidadeDeRecebimento}</Text>
                             </View>
@@ -101,11 +106,6 @@ export default class LavagemDetailsOperacoes extends React.Component {
                                 <Text style={styles.lavagemInfoTitle}>Status: </Text>
                                 <Text style={styles.lavagemInfo}>{lavagem.status}</Text>
                             </View>
-
-                            <View style={styles.lavagemInfoContainer}>
-                                <Text style={styles.lavagemInfoTitle}>Quantidade de Peças: </Text>
-                                <Text style={styles.lavagemInfo}>{lavagem.quantidadeDePecas}</Text>
-                            </View>
                         </View>
                     </TouchableOpacity>
 
@@ -114,7 +114,7 @@ export default class LavagemDetailsOperacoes extends React.Component {
                     </View>
                     
                     { lavagem.roupas.map(roupaEmLavagem => 
-                        <RoupaEmLavagem key={roupaEmLavagem.roupa.oid} roupaEmLavagem={roupaEmLavagem} />
+                        <RoupaEmLavagemOperacoes key={roupaEmLavagem.roupa.oid} roupaEmLavagem={roupaEmLavagem} />
                     )}
                 </ScrollView>
 
