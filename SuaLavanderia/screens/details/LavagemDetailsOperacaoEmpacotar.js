@@ -240,7 +240,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
     };
 
     navegarParaOperacaoListaDeEntregaDireta = () => {
-        this.props.navigation.navigate('OperacaoListaDeEntregaDireta', {lavagemOid: this.state.lavagem.oid, usuarioOid: this.props.navigation.getParam('usuarioOid')});
+        this.props.navigation.navigate('OperacaoListaDeEntregaDireta', {lavagemOid: this.state.lavagem.oid, unidadeOid: this.state.lavagem.unidadeDeRecebimentoOid, usuarioOid: this.props.navigation.getParam('usuarioOid')});
     };
 
     render(){
