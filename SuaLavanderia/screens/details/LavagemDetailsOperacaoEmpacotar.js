@@ -210,6 +210,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                     oid: objetoResponse.Oid,
                     cliente: objetoResponse.Cliente,
                     clienteOid: objetoResponse.ClienteOid,
+                    codigoDoCliente: objetoResponse.CodigoDoCliente,
                     dataDeRecebimento: objetoResponse.DataDeRecebimento,
                     dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
                     dataDeEntrega: objetoResponse.DataDeEntrega,
