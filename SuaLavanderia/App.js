@@ -323,7 +323,7 @@ const StackGerenteDeOperacoes = createStackNavigator(
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
-    //OperacaoListaDeEntregaDireta, OperacaoListaDeEntregaDiretaScreen,
+    OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
     Drawer: DrawerGerenteDeOperacoes,
   },{
     initialRouteName: 'Drawer',
@@ -353,7 +353,7 @@ const StackSupervisorDeOperacoes = createStackNavigator(
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
-    //OperacaoListaDeEntregaDireta, OperacaoListaDeEntregaDiretaScreen,
+    OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
     BancoDeHorasDetails: BancoDeHorasDetails,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerSupervisorDeOperacoes,
@@ -399,7 +399,7 @@ const StackAplicativo = createStackNavigator(
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
-    //OperacaoListaDeEntregaDireta, OperacaoListaDeEntregaDiretaScreen,
+    OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
     Drawer: DrawerAplicativo,
   },{
     initialRouteName: 'Drawer',
