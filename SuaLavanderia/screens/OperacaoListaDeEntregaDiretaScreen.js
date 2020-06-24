@@ -3,7 +3,6 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, 
 import ListaDeEntrega from "../components/ListaDeEntrega";
 import LoadingModal from '../components/modals/LoadingModal';
 import ConfirmacaoModalComInput from '../components/modals/ConfirmacaoModalComInput';
-import ListaDeEntregaDeLavagensModal from '../components/modals/ListaDeEntregaDeLavagensModal';
 
 export default class OperacaoListaDeEntregaDiretaScreen extends React.Component {
 
@@ -223,10 +222,6 @@ export default class OperacaoListaDeEntregaDiretaScreen extends React.Component 
         });
     }
 
-    navegarParaDetalhes = (objeto) => {
-        this.props.navigation.navigate("ListaDeEntregaDetails", { objeto: objeto})
-    };
-
     acao = async (comentarios) => {
         this.setState({confirmacaoModalVisible: false, modalVisible: true});
 
@@ -276,7 +271,7 @@ export default class OperacaoListaDeEntregaDiretaScreen extends React.Component 
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal()}>
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto.oid)}>
                             <ListaDeEntrega objeto={objeto} />
                         </TouchableOpacity>
                     )}
@@ -284,9 +279,6 @@ export default class OperacaoListaDeEntregaDiretaScreen extends React.Component 
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
                 <ConfirmacaoModalComInput visible={this.state.confirmacaoModalVisible} texto="Adicionar na lista?" inputText="Comentários" onSim={this.acao} onNao={this.closeModal} />
-
-                <ListaDeEntregaDeLavagensModal visible={this.state.confirmacaoModalVisible} 
-                    onSim={this.acao} onNao={this.closeModal}/>
             </View>
         );
     }
