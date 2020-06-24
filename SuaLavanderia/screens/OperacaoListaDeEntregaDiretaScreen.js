@@ -104,8 +104,12 @@ export default class OperacaoListaDeEntregaDiretaScreen extends React.Component 
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        const usuarioOid = this.props.navigation.getParam('usuarioOid');
+        var usuarioOid = this.props.navigation.getParam('usuarioOid');
         const unidadeOid = this.props.navigation.getParam('unidadeOid');
+
+        if(!usuarioOid){
+            usuarioOid = usuario.oid;
+        }
 
         var argumentos = `dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&incluirLavagens=false&criarSeNaoExistir=true&usuarioOid=${usuarioOid}&unidadeOid=${unidadeOid}`;
 

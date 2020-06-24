@@ -83,7 +83,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
-        const usuarioOid = this.props.navigation.getParam('usuarioOid');
+        var usuarioOid = this.props.navigation.getParam('usuarioOid');
 
         if(!usuarioOid){
             usuarioOid = usuario.oid;
@@ -153,6 +153,10 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
         var oid = this.state.lavagem.oid;
+
+        if(!oid){
+            oid = this.props.navigation.getParam('lavagem').oid;
+        }
 
         this.setState({modalVisible: true});
 
