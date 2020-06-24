@@ -63,7 +63,7 @@ export default class OperacaoLavarTapeteScreen extends React.Component {
         var email = usuario.email;
 
         var hoje = new Date();
-        var diasAtras = new Date(hoje.getTime() - 3 * 24*60*60*1000);
+        var diasAtras = new Date(hoje.getTime() - 15 * 24*60*60*1000);
 
         var dataInicial = this.state.dataInicial;
         var dataFinal = this.state.dataFinal;
@@ -106,7 +106,7 @@ export default class OperacaoLavarTapeteScreen extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var argumentos = `status=0&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&operacoes=true`;
+        var argumentos = `status=0&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&contemTapete=true`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -270,8 +270,7 @@ export default class OperacaoLavarTapeteScreen extends React.Component {
         this.setState({modalVisible: false});
 
         if(usarUsuarioLogado){
-            this.props.navigation.navigate('OperacaoLavar');
-            this.buscar();
+            this.props.navigation.navigate('OperacoesTapete');
         }else{
             this.props.navigation.navigate('Home');
         }
