@@ -53,6 +53,7 @@ import ListaDeEntregaDetails from './screens/details/ListaDeEntregaDetails';
 import LavagemParaListaDeEntregaScreen from './screens/LavagemParaListaDeEntregaScreen';
 import UsuarioScreen from './screens/UsuarioScreen';
 import UsuarioDetails from './screens/details/UsuarioDetails';
+import OperacaoListaDeEntregaDiretaScreen from './screens/OperacaoListaDeEntregaDiretaScreen';
 
 export default class App extends Component {
   render() {
@@ -322,6 +323,7 @@ const StackGerenteDeOperacoes = createStackNavigator(
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
+    //OperacaoListaDeEntregaDireta, OperacaoListaDeEntregaDiretaScreen,
     Drawer: DrawerGerenteDeOperacoes,
   },{
     initialRouteName: 'Drawer',
@@ -351,6 +353,7 @@ const StackSupervisorDeOperacoes = createStackNavigator(
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
+    //OperacaoListaDeEntregaDireta, OperacaoListaDeEntregaDiretaScreen,
     BancoDeHorasDetails: BancoDeHorasDetails,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     Drawer: DrawerSupervisorDeOperacoes,
@@ -396,6 +399,7 @@ const StackAplicativo = createStackNavigator(
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
+    //OperacaoListaDeEntregaDireta, OperacaoListaDeEntregaDiretaScreen,
     Drawer: DrawerAplicativo,
   },{
     initialRouteName: 'Drawer',

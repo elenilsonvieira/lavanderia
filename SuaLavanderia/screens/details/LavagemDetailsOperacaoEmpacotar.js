@@ -239,6 +239,10 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         Linking.openURL("http://sualavanderia.com.br/videos/LavagemDetailsOperacaoEmpacotar.mp4");
     };
 
+    navegarParaOperacaoListaDeEntregaDireta = () => {
+        this.props.navigation.navigate('OperacaoListaDeEntregaDireta', {lavagemOid: this.state.lavagem.oid, usuarioOid: this.props.navigation.getParam('usuarioOid')});
+    };
+
     render(){
         const lavagem = this.state.lavagem;
 
@@ -251,7 +255,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                         <Image style={styles.icon} source={require('../../images/salvar_32x32.png')} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} style={styles.button}>
+                    <TouchableOpacity onPress={() => this.navegarParaOperacaoListaDeEntregaDireta()} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/lista_32x32.png')} />
                     </TouchableOpacity>
                 </View>
