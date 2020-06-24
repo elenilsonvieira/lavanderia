@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-export default class Operacao extends React.Component {
+export default class OperacaoCelular extends React.Component {
 
     render(){
         return(
@@ -59,7 +59,7 @@ const styles = StyleSheet.create(
             flexDirection: 'row',
         },
         objetoInfoTitle: {
-            fontSize: 30,
+            fontSize: 25,
             fontWeight: 'bold',
         },
         valorInfoTitle: {

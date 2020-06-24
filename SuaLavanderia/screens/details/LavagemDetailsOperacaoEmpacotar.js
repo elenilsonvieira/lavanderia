@@ -85,6 +85,10 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         var email = usuario.email;
         const usuarioOid = this.props.navigation.getParam('usuarioOid');
 
+        if(!usuarioOid){
+            usuarioOid = usuario.oid;
+        }
+
         var roupaEmLavagemOids = this.state.roupasSelecionadas[0].oid;
 
         for (i = 1; i < this.state.roupasSelecionadas.length; i++) {

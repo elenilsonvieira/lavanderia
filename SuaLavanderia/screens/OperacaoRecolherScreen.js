@@ -276,8 +276,8 @@ export default class OperacaoRecolherScreen extends React.Component {
         this.setState({modalVisible: false});
 
         if(usarUsuarioLogado){
-            this.props.navigation.navigate('OperacaoRecolher');
-            this.buscar();
+            this.props.navigation.navigate('Operacoes');
+            // this.buscar();
         }else{
             this.props.navigation.navigate('Home');
         }

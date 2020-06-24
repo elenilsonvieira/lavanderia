@@ -3,15 +3,15 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, 
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import LavagemOperacoes from "../components/LavagemOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
-import ConfirmacaoModalComDetalhes from '../components/modals/ConfirmacaoModalComDetalhes';
+import ConfirmacaoModal from '../components/modals/ConfirmacaoModal';
 
-export default class OperacaoPassarScreen extends React.Component {
+export default class OperacaoLavarTapeteScreen extends React.Component {
 
     state ={
         dataInicial: '',
         dataFinal: '',
         objetos: [],
-        lavagem: {},
+        lavagemOid: '',
         modalVisible: false,
         confirmacaoModalVisible: false,
     };
@@ -63,7 +63,6 @@ export default class OperacaoPassarScreen extends React.Component {
         var email = usuario.email;
 
         var hoje = new Date();
-        hoje = new Date(hoje.getTime() + 1 * 24*60*60*1000);
         var diasAtras = new Date(hoje.getTime() - 3 * 24*60*60*1000);
 
         var dataInicial = this.state.dataInicial;
@@ -107,7 +106,7 @@ export default class OperacaoPassarScreen extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var argumentos = `status=1&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&usarDataPreferivelParaEntrega=true&recolhidaDoVaral=true&operacoes=true`;
+        var argumentos = `status=0&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&operacoes=true`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -231,17 +230,12 @@ export default class OperacaoPassarScreen extends React.Component {
         });
     }
 
-    openModal = (lavagem) => {
-        this.setState({confirmacaoModalVisible: true, lavagem});
+    openModal = (lavagemOid) => {
+        this.setState({confirmacaoModalVisible: true, lavagemOid});
     };
     
     closeModal = () => {
         this.setState({confirmacaoModalVisible: false});
-    };
-
-    navegarParaDetalhes = () => {
-        this.setState({confirmacaoModalVisible: false});
-        this.props.navigation.navigate("LavagemDetailsOperacoes", { lavagem: this.state.lavagem, acao: this.acao, texto: "Confirmar Passar?" })
     };
 
     acao = async () => {
@@ -258,10 +252,10 @@ export default class OperacaoPassarScreen extends React.Component {
             usarUsuarioLogado = true;
         }
 
-        var argumentos = `lavagemOid=${this.state.lavagem.oid}&usuarioOid=${usuarioOid}`;
+        var argumentos = `lavagemOid=${this.state.lavagemOid}&usuarioOid=${usuarioOid}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/PassarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/LavarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -276,15 +270,15 @@ export default class OperacaoPassarScreen extends React.Component {
         this.setState({modalVisible: false});
 
         if(usarUsuarioLogado){
-            this.props.navigation.navigate('Operacoes');
-            // this.buscar();
+            this.props.navigation.navigate('OperacaoLavar');
+            this.buscar();
         }else{
             this.props.navigation.navigate('Home');
         }
     };
 
     openVideoInformativo = () => {
-        Linking.openURL("http://sualavanderia.com.br/videos/OperacaoPassarScreen.mp4");
+        Linking.openURL("http://sualavanderia.com.br/videos/OperacaoLavarScreen.mp4");
     };
 
     render(){
@@ -316,7 +310,7 @@ export default class OperacaoPassarScreen extends React.Component {
                             <TouchableOpacity onPress={this.buscar} style={styles.button}>
                                 <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
                             </TouchableOpacity>
-                            
+
                             <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
                                 <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
                             </TouchableOpacity>
@@ -326,15 +320,14 @@ export default class OperacaoPassarScreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto)}>
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto.oid)}>
                             <LavagemOperacoes key={objeto.oid} lavagem={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
-                <ConfirmacaoModalComDetalhes visible={this.state.confirmacaoModalVisible} texto="Confirmar Passar?" 
-                    onSim={this.acao} onNao={this.closeModal} onDetalhes={this.navegarParaDetalhes}/>
+                <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto="Confirmar lavar?" onSim={this.acao} onNao={this.closeModal} />
             </View>
         );
     }
