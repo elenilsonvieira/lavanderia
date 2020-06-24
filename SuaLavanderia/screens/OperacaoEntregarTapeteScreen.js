@@ -5,7 +5,7 @@ import LavagemOperacoes from "../components/LavagemOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
 import ConfirmacaoModal from '../components/modals/ConfirmacaoModal';
 
-export default class OperacaoProntoTapeteScreen extends React.Component {
+export default class OperacaoEntregarTapeteScreen extends React.Component {
 
     state ={
         dataInicial: '',
@@ -106,7 +106,7 @@ export default class OperacaoProntoTapeteScreen extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var argumentos = `status=1&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&contemTapete=true`;
+        var argumentos = `status=4&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&contemTapete=true`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -252,7 +252,7 @@ export default class OperacaoProntoTapeteScreen extends React.Component {
             usarUsuarioLogado = true;
         }
 
-        var argumentos = `oid=${this.state.lavagemOid}&usuarioOid=${usuarioOid}&status=4`;
+        var argumentos = `oid=${this.state.lavagemOid}&usuarioOid=${usuarioOid}&status=5`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -277,7 +277,7 @@ export default class OperacaoProntoTapeteScreen extends React.Component {
     };
 
     openVideoInformativo = () => {
-        Linking.openURL("http://sualavanderia.com.br/videos/OperacaoProntoTapeteScreen.mp4");
+        Linking.openURL("http://sualavanderia.com.br/videos/OperacaoEntregarTapeteScreen.mp4");
     };
 
     render(){
@@ -326,7 +326,7 @@ export default class OperacaoProntoTapeteScreen extends React.Component {
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
-                <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto="Confirmar Pronto?" onSim={this.acao} onNao={this.closeModal} />
+                <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto="Confirmar Entregar?" onSim={this.acao} onNao={this.closeModal} />
             </View>
         );
     }

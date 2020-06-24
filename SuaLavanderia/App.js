@@ -58,6 +58,7 @@ import OperacaoListaDeEntregaDiretaScreen from './screens/OperacaoListaDeEntrega
 import OperacoesTapeteScreen from './screens/OperacoesTapeteScreen';
 import OperacaoLavarTapeteScreen from './screens/OperacaoLavarTapeteScreen';
 import OperacaoProntoTapeteScreen from './screens/OperacaoProntoTapeteScreen';
+import OperacaoEntregarTapeteScreen from './screens/OperacaoEntregarTapeteScreen';
 
 export default class App extends Component {
   render() {
@@ -260,6 +261,7 @@ const StackAdministrador = createStackNavigator(
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
+    OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
     MaterialDetails: MaterialDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
     ListaDeCompras: ListaDeComprasScreen,
@@ -300,6 +302,7 @@ const StackGerenteGeral = createStackNavigator(
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
+    OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
     MaterialDetails: MaterialDetails,
     ListaDeCompras: ListaDeComprasScreen,
     BancoDeHorasDetails: BancoDeHorasDetails,
@@ -339,6 +342,7 @@ const StackSubGerenteGeral = createStackNavigator(
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
+    OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
     OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
     MaterialDetails: MaterialDetails,
     ListaDeCompras: ListaDeComprasScreen,
@@ -375,6 +379,7 @@ const StackGerenteDeOperacoes = createStackNavigator(
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
+    OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
     BancoDeHorasDetails: BancoDeHorasDetails,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
@@ -409,6 +414,7 @@ const StackSupervisorDeOperacoes = createStackNavigator(
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
+    OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
@@ -457,6 +463,7 @@ const StackAplicativo = createStackNavigator(
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
+    OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,

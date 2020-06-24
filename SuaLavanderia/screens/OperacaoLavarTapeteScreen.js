@@ -63,7 +63,7 @@ export default class OperacaoLavarTapeteScreen extends React.Component {
         var email = usuario.email;
 
         var hoje = new Date();
-        var diasAtras = new Date(hoje.getTime() - 15 * 24*60*60*1000);
+        var diasAtras = new Date(hoje.getTime() - 20 * 24*60*60*1000);
 
         var dataInicial = this.state.dataInicial;
         var dataFinal = this.state.dataFinal;
@@ -277,7 +277,7 @@ export default class OperacaoLavarTapeteScreen extends React.Component {
     };
 
     openVideoInformativo = () => {
-        Linking.openURL("http://sualavanderia.com.br/videos/OperacaoLavarScreen.mp4");
+        Linking.openURL("http://sualavanderia.com.br/videos/OperacaoLavarTapeteScreen.mp4");
     };
 
     render(){
