@@ -52,7 +52,7 @@ export default class OperacoesTapeteScreen extends React.Component {
                         <OperacaoCelular nome="Lavar" />
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoMarcarTapeteComoPronto', {usuarioOid: this.state.usuarioOid})}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoProntoTapete', {usuarioOid: this.state.usuarioOid})}>
                         <OperacaoCelular nome="Pronto" />
                     </TouchableOpacity>
 
