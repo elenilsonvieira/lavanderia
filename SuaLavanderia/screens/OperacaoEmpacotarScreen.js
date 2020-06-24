@@ -239,9 +239,9 @@ export default class OperacaoEmpacotarScreen extends React.Component {
         this.setState({confirmacaoModalVisible: false});
     };
 
-    navegarParaDetalhes = () => {
+    navegarParaDetalhes = (lavagem) => {
         this.setState({confirmacaoModalVisible: false});
-        this.props.navigation.navigate("LavagemDetailsOperacaoEmpacotar", { lavagem: this.state.lavagem, acao: this.acao, texto: "Confirmar empacotar tudo?", usuarioOid: this.props.navigation.getParam('usuarioOid') })
+        this.props.navigation.navigate("LavagemDetailsOperacaoEmpacotar", { lavagem: lavagem, acao: this.acao, texto: "Confirmar empacotar tudo?", usuarioOid: this.props.navigation.getParam('usuarioOid') })
     };
 
     acao = async () => {
@@ -326,7 +326,7 @@ export default class OperacaoEmpacotarScreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto)}>
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.navegarParaDetalhes(objeto)}>
                             <LavagemOperacoes key={objeto.oid} lavagem={objeto} />
                         </TouchableOpacity>
                     )}

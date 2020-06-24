@@ -250,6 +250,10 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/salvar_32x32.png')} />
                     </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} style={styles.button}>
+                        <Image style={styles.icon} source={require('../../images/lista_32x32.png')} />
+                    </TouchableOpacity>
                 </View>
                 <ScrollView>
                     <TouchableOpacity onPress={() => this.openModal()}>
