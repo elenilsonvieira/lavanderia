@@ -1,4 +1,4 @@
-function fetchWithTimeout (url, options, timeout = 7000, i) {
+function fetchWithTimeout (url, options, timeout = 10000, i) {
     return Promise.race([
         fetch(url, options),
         new Promise((_, reject) =>
@@ -7,14 +7,22 @@ function fetchWithTimeout (url, options, timeout = 7000, i) {
     ]);
 }
 
-export default async function (url, options, timeout = 7000) {
+export default async function (url, options, timeout = 10000) {
     try{
         return await fetchWithTimeout(url, options, timeout, 1);
     }catch(error1){
         try{
             return await fetchWithTimeout(url, options, timeout, 2);
         }catch(error2){
-            return await fetchWithTimeout(url, options, timeout, 3);
+            try{
+                return await fetchWithTimeout(url, options, timeout, 3);
+            }catch(error3){
+                try{
+                    return await fetchWithTimeout(url, options, timeout, 4);
+                }catch(error4){
+                    return await fetchWithTimeout(url, options, timeout, 5);
+                }
+            }
         }   
     }
 }
