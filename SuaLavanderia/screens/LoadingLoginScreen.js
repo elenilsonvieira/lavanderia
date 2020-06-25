@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, StatusBar, ActivityIndicator, AsyncStorage, StyleSheet} from 'react-native';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class LoadingLoginScreen extends React.Component {
 
