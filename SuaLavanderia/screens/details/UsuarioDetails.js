@@ -4,6 +4,7 @@ import {StyleSheet, View, Text, TouchableOpacity, ScrollView, Linking, AsyncStor
 import Usuario from '../../components/Usuario';
 import Lavagem from '../../components/Lavagem';
 import LoadingModal from '../../components/modals/LoadingModal';
+import fetch from '../../utils/FetchWithTimeout';
 
 export default class UsuarioDetails extends React.Component {
 

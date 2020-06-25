@@ -3,6 +3,7 @@ import {StyleSheet, View, ScrollView, Image, Picker, Text, TouchableOpacity, Asy
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import Caixa from "../components/Caixa";
 import LoadingModal from '../components/modals/LoadingModal';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class CaixaScreen extends React.Component {
 

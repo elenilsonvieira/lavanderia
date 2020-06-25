@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, ScrollView, Image, AsyncStorage, TextInput, TouchableOpacity } from 'react-native';
 import LoadingModal from '../components/modals/LoadingModal';
 import Tamanho from "../components/Tamanho";
+import fetch from '../utils/FetchWithTimeout';
 
 export default class TamanhoScreen extends React.Component {
 

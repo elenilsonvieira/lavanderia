@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, ScrollView, Image, AsyncStorage, TextInput, TouchableOpacity } from 'react-native';
 import LoadingModal from '../components/modals/LoadingModal';
 import Cor from "../components/Cor";
+import fetch from '../utils/FetchWithTimeout';
 
 export default class CorScreen extends React.Component {
 

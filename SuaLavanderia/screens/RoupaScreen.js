@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, AsyncStorage, View, TouchableOpacity, TextInput, Image } from 'react-native';
 import LoadingModal from '../components/modals/LoadingModal';
 import Roupa from "../components/Roupa";
+import fetch from '../utils/FetchWithTimeout';
 
 export default class RoupaScreen extends React.Component {
 

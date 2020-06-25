@@ -4,6 +4,7 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, 
 import MaterialPapelOperacoes from "../components/MaterialPapelOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
 import ConfirmacaoModalMaterial from '../components/modals/ConfirmacaoModalMaterial';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class MaterialScreenPapelOperacoes extends React.Component {
 

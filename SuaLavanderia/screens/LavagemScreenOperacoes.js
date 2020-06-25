@@ -3,6 +3,7 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, 
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import LavagemPapelOperacoes from "../components/LavagemPapelOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class LavagemScreenOperacoes extends React.Component {
 

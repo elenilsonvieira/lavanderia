@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 import LoadingModal from '../../components/modals/LoadingModal';
+import fetch from '../../utils/FetchWithTimeout';
 
 export default class RoupaEmLavagemDetails extends React.Component {
 

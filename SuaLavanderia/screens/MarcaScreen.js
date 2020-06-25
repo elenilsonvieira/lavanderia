@@ -3,6 +3,7 @@ import {StyleSheet, View, ScrollView, Image, AsyncStorage, TextInput, TouchableO
 
 import Marca from "../components/Marca";
 import LoadingModal from '../components/modals/LoadingModal';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class MarcaScreen extends React.Component {
 

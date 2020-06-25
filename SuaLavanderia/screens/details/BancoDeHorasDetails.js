@@ -4,6 +4,8 @@ import FechamentoDePonto from '../../components/FechamentoDePonto';
 import LoadingModal from '../../components/modals/LoadingModal';
 import BancoDeHoras from '../../components/BancoDeHoras';
 
+import fetch from '../../utils/FetchWithTimeout';
+
 export default class BancoDeHorasDetails extends React.Component {
 
     state ={

@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native';
 import LoadingModal from '../../components/modals/LoadingModal';
 import MultiPicker from '../../components/MultiPicker';
+import fetch from '../../utils/FetchWithTimeout';
 
 export default class MovimentacaoDeCaixaDetails extends React.Component {
 

@@ -4,6 +4,7 @@ import MovimentacaoDeMaterial from '../../components/MovimentacaoDeMaterial';
 import LoadingModal from '../../components/modals/LoadingModal';
 import Material from '../../components/Material';
 import ConfirmacaoModalMaterial from '../../components/modals/ConfirmacaoModalMaterial';
+import fetch from '../../utils/FetchWithTimeout';
 
 export default class MaterialDetails extends React.Component {
 

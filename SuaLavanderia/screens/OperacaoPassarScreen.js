@@ -4,6 +4,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import LavagemOperacoes from "../components/LavagemOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
 import ConfirmacaoModalComDetalhes from '../components/modals/ConfirmacaoModalComDetalhes';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class OperacaoPassarScreen extends React.Component {
 

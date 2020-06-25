@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, ScrollView, Image, AsyncStorage, TextInput, TouchableOpacity } from 'react-native';
 import LoadingModal from '../components/modals/LoadingModal';
 import Tecido from "../components/Tecido";
+import fetch from '../utils/FetchWithTimeout';
 
 export default class TecidoScreen extends React.Component {
 

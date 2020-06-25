@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
+import fetch from '../../utils/FetchWithTimeout';
 
 export default class AvaliacaoDetailsSoLeitura extends React.Component {
 

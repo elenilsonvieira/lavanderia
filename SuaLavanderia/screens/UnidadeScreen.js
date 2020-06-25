@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, ScrollView, Image, AsyncStorage } from 'react-native';
 import LoadingModal from '../components/modals/LoadingModal';
 import Unidade from "../components/Unidade";
+import fetch from '../utils/FetchWithTimeout';
 
 export default class UnidadeScreen extends React.Component {
 

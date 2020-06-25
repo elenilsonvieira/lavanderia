@@ -2,6 +2,7 @@ import React from 'react';
 import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage, Linking } from 'react-native';
 import RoupaEmLavagemOperacoes from '../../components/RoupaEmLavagemOperacoes';
 import ConfirmacaoModal from '../../components/modals/ConfirmacaoModal';
+import fetch from '../../utils/FetchWithTimeout';
 
 export default class LavagemDetailsOperacoes extends React.Component {
 

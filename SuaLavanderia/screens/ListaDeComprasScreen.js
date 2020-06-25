@@ -3,6 +3,7 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, 
 
 import ItemDeCompra from "../components/ItemDeCompra";
 import LoadingModal from '../components/modals/LoadingModal';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class ListaDeComprasScreen extends React.Component {
 

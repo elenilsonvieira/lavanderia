@@ -3,6 +3,7 @@ import {StyleSheet, View, ScrollView, Text, TouchableOpacity, Image, Linking } f
 
 import OperacaoCelular from "../components/OperacaoCelular";
 import LoadingModal from '../components/modals/LoadingModal';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class OperacoesCelularScreen extends React.Component {
 

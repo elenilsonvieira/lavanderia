@@ -5,6 +5,7 @@ import Material from "../components/Material";
 import LoadingModal from '../components/modals/LoadingModal';
 import ConfirmacaoModalMaterialComDetalhes from '../components/modals/ConfirmacaoModalMaterialComDetalhes';
 import ListaDeComprasModal from '../components/modals/ListaDeComprasModal';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class MaterialScreen extends React.Component {
 

@@ -3,6 +3,7 @@ import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorag
 import RoupaEmLavagemOperacoes from '../../components/RoupaEmLavagemOperacoes';
 import ConfirmacaoModal from '../../components/modals/ConfirmacaoModal';
 import LoadingModal from '../../components/modals/LoadingModal';
+import fetch from '../../utils/FetchWithTimeout';
 
 export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
 
@@ -238,9 +239,9 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
             }
 
             this.setState({modalVisible: false});
-        }catch{
+        }catch(erro){
             this.setState({modalVisible: false});
-            alert('Erro buscando lavagem');
+            alert('Erro buscando lavagem: ' + erro);
         }
     };
 

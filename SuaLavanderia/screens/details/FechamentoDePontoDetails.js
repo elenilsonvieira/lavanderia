@@ -4,6 +4,8 @@ import FechamentoDePonto from '../../components/FechamentoDePonto';
 import Ponto from '../../components/Ponto';
 import LoadingModal from '../../components/modals/LoadingModal';
 
+import fetch from '../../utils/FetchWithTimeout';
+
 export default class FechamentoDePontoDetails extends React.Component {
 
     state ={

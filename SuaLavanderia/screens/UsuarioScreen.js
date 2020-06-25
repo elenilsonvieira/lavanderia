@@ -4,6 +4,8 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, 
 import Usuario from "../components/Usuario";
 import LoadingModal from '../components/modals/LoadingModal';
 
+import fetch from '../utils/FetchWithTimeout';
+
 export default class UsuarioScreen extends React.Component {
 
     static navigationOptions = {

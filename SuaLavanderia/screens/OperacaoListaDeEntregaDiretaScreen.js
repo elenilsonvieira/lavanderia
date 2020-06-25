@@ -3,6 +3,7 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, 
 import ListaDeEntrega from "../components/ListaDeEntrega";
 import LoadingModal from '../components/modals/LoadingModal';
 import ConfirmacaoModalComInput from '../components/modals/ConfirmacaoModalComInput';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class OperacaoListaDeEntregaDiretaScreen extends React.Component {
 

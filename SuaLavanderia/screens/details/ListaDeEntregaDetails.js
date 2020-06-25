@@ -3,6 +3,7 @@ import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacit
 import LavagemEmListaDeEntrega from '../../components/LavagemEmListaDeEntrega';
 import LoadingModal from '../../components/modals/LoadingModal';
 import ListaDeEntrega from '../../components/ListaDeEntrega';
+import fetch from '../../utils/FetchWithTimeout';
 
 export default class ListaDeEntregaDetails extends React.Component {
 

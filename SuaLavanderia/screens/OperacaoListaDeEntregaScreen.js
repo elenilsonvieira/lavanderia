@@ -4,6 +4,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import ListaDeEntrega from "../components/ListaDeEntrega";
 import LoadingModal from '../components/modals/LoadingModal';
 import ListaDeEntregaDeLavagensModal from '../components/modals/ListaDeEntregaDeLavagensModal';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class OperacaoListaDeEntregaScreen extends React.Component {
 

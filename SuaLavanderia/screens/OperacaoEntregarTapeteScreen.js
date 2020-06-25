@@ -4,6 +4,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import LavagemOperacoes from "../components/LavagemOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
 import ConfirmacaoModal from '../components/modals/ConfirmacaoModal';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class OperacaoEntregarTapeteScreen extends React.Component {
 

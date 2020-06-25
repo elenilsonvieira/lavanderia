@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage, Linking } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import fetch from '../../utils/FetchWithTimeout';
 
 export default class MovimentacaoDeCaixaDetails extends React.Component {
 

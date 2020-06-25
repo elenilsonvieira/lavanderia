@@ -3,6 +3,7 @@ import {StyleSheet, View, ScrollView, Image, Picker, Text, TouchableOpacity, Asy
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import MovimentacaoDeCaixa from "../components/MovimentacaoDeCaixa";
 import LoadingModal from '../components/modals/LoadingModal';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class MovimentacaoDeCaixaScreen extends React.Component {
 

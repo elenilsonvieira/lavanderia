@@ -4,6 +4,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import LavagemOperacoes from "../components/LavagemOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
 import ConfirmacaoModalComInput from '../components/modals/ConfirmacaoModalComInput';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class LavagemParaListaDeEntregaScreen extends React.Component {
 

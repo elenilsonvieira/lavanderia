@@ -3,6 +3,7 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, 
 
 import UsuarioOperacoes from "../components/UsuarioOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
+import fetch from '../utils/FetchWithTimeout';
 
 export default class HomeScreenAplicativo extends React.Component {
 
