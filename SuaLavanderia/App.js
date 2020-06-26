@@ -43,6 +43,7 @@ import OperacaoRecolherScreen from './screens/OperacaoRecolherScreen';
 import OperacaoPassarScreen from './screens/OperacaoPassarScreen';
 import OperacaoEmpacotarScreen from './screens/OperacaoEmpacotarScreen';
 import OperacaoRetirarMaterialScreen from './screens/OperacaoRetirarMaterialScreen';
+import OperacaoAdicionarMaterialScreen from './screens/OperacaoAdicionarMaterialScreen';
 import MaterialScreen from './screens/MaterialScreen';
 import MaterialScreenPapelOperacoes from './screens/MaterialScreenPapelOperacoes';
 import ListaDeComprasScreen from './screens/ListaDeComprasScreen';
@@ -258,6 +259,7 @@ const StackAdministrador = createStackNavigator(
     OperacaoPassar: OperacaoPassarScreen,
     OperacaoEmpacotar: OperacaoEmpacotarScreen,
     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
+    OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
@@ -299,6 +301,7 @@ const StackGerenteGeral = createStackNavigator(
     OperacaoPassar: OperacaoPassarScreen,
     OperacaoEmpacotar: OperacaoEmpacotarScreen,
     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
+    OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
@@ -339,6 +342,7 @@ const StackSubGerenteGeral = createStackNavigator(
     OperacaoPassar: OperacaoPassarScreen,
     OperacaoEmpacotar: OperacaoEmpacotarScreen,
     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
+    OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
@@ -376,6 +380,7 @@ const StackGerenteDeOperacoes = createStackNavigator(
     OperacaoPassar: OperacaoPassarScreen,
     OperacaoEmpacotar: OperacaoEmpacotarScreen,
     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
+    OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
@@ -411,6 +416,7 @@ const StackSupervisorDeOperacoes = createStackNavigator(
     OperacaoPassar: OperacaoPassarScreen,
     OperacaoEmpacotar: OperacaoEmpacotarScreen,
     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
+    OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
@@ -460,6 +466,7 @@ const StackAplicativo = createStackNavigator(
     OperacaoPassar: OperacaoPassarScreen,
     OperacaoEmpacotar: OperacaoEmpacotarScreen,
     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
+    OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
     OperacaoProntoTapete: OperacaoProntoTapeteScreen,

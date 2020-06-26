@@ -71,6 +71,10 @@ export default class OperacoesScreen extends React.Component {
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoRetirarMaterial', {usuarioOid: this.state.usuarioOid})}>
                         <Operacao nome="6 - Retirar Material" />
                     </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoAdicionarMaterial', {usuarioOid: this.state.usuarioOid})}>
+                        <Operacao nome="7 - Adicionar Material" />
+                    </TouchableOpacity>
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
