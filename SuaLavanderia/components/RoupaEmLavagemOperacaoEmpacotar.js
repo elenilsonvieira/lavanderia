@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-export default class RoupaEmLavagemOperacoes extends React.Component {
+export default class RoupaEmLavagemOperacaoEmpacotar extends React.Component {
 
     render(){
         return(
@@ -13,28 +13,18 @@ export default class RoupaEmLavagemOperacoes extends React.Component {
 
                     <View style={styles.roupaContainer}>
                         <View style={styles.roupaInfoContainer}>
-                            <Text style={styles.roupaInfoTitle}>Cores: </Text>
-                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.cores}</Text>
-                        </View>
-
-                        <View style={styles.roupaInfoContainer}>
                             <Text style={styles.roupaInfoTitle}>Observação: </Text>
                             <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.observacao}</Text>
                         </View>
 
                         <View style={styles.roupaInfoContainer}>
+                            <Text style={styles.roupaInfoTitle}>Cores: </Text>
+                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.cores}</Text>
+                        </View>
+
+                        <View style={styles.roupaInfoContainer}>
                             <Text style={styles.roupaInfoTitle}>Marca: </Text>
                             <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.marca}</Text>
-                        </View>
-
-                        <View style={styles.roupaInfoContainer}>
-                            <Text style={styles.roupaInfoTitle}>Tecido: </Text>
-                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.tecido}</Text>
-                        </View>
-
-                        <View style={styles.roupaInfoContainer}>
-                            <Text style={styles.roupaInfoTitle}>Tamanho: </Text>
-                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.tamanho}</Text>
                         </View>
                     </View>
 
@@ -49,8 +39,8 @@ export default class RoupaEmLavagemOperacoes extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Só Passar?: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.roupaEmLavagem.soPassar ? 'Sim' : 'Não'}</Text>
+                        <Text style={styles.lavagemInfoTitle}>Empacotada? </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.roupaEmLavagem.pacoteDeRoupa ? 'SIM' : 'NÃO'}</Text>
                     </View>
                 </View>
             </View>
@@ -102,8 +92,10 @@ const styles = StyleSheet.create(
         },
         lavagemInfoTitle: {
             fontWeight: 'bold',
+            fontSize: 16,
         },
         lavagemInfo: {
+            fontSize: 16,
         },
         lavagemInfoCliente: {
             fontSize: 30,
@@ -130,8 +122,10 @@ const styles = StyleSheet.create(
         },
         roupaInfoTitle: {
             fontWeight: 'bold',
+            fontSize: 18,
         },
         roupaInfo: {
+            fontSize: 18,
         },
     }
 );

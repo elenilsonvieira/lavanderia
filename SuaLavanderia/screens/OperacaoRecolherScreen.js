@@ -64,8 +64,8 @@ export default class OperacaoRecolherScreen extends React.Component {
         var email = usuario.email;
 
         var hoje = new Date();
-        hoje = new Date(hoje.getTime() + 1 * 24*60*60*1000);
-        var diasAtras = new Date(hoje.getTime() - 3 * 24*60*60*1000);
+        hoje = new Date(hoje.getTime() + 2 * 24*60*60*1000);
+        var diasAtras = new Date(hoje.getTime() - 7 * 24*60*60*1000);
 
         var dataInicial = this.state.dataInicial;
         var dataFinal = this.state.dataFinal;

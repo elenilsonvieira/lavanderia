@@ -64,7 +64,7 @@ export default class OperacaoEntregarTapeteScreen extends React.Component {
         var email = usuario.email;
 
         var hoje = new Date();
-        var diasAtras = new Date(hoje.getTime() - 20 * 24*60*60*1000);
+        var diasAtras = new Date(hoje.getTime() - 30 * 24*60*60*1000);
 
         var dataInicial = this.state.dataInicial;
         var dataFinal = this.state.dataFinal;
