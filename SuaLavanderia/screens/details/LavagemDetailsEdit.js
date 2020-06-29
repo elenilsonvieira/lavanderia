@@ -123,8 +123,13 @@ export default class LavagemDetailsEdit extends React.Component {
                         </View>
 
                         <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Data Preferível para Entrega: </Text>
+                            <Text style={styles.lavagemInfoTitle}>Data para Entrega: </Text>
                             <Text style={styles.lavagemInfo}>{lavagem.dataPreferivelParaEntrega}</Text>
+                        </View>
+
+                        <View style={styles.lavagemInfoContainer}>
+                            <Text style={styles.lavagemInfoTitle}>Hora para Entrega: </Text>
+                            <Text style={styles.lavagemInfo}>{lavagem.horaPreferivelParaEntrega}</Text>
                         </View>
 
                         <View style={styles.lavagemInfoContainer}>
