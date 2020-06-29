@@ -131,6 +131,7 @@ export default class OperacaoListaDeEntregaScreen extends React.Component {
                         codigoDoCliente: lavagemResponse.Lavagem.CodigoDoCliente,
                         dataDeRecebimento: lavagemResponse.Lavagem.DataDeRecebimento,
                         dataPreferivelParaEntrega: lavagemResponse.Lavagem.DataPreferivelParaEntrega,
+                        horaPreferivelParaEntrega: objetoResponse.HoraPreferivelParaEntrega,
                         dataDeEntrega: lavagemResponse.Lavagem.DataDeEntrega,
                         unidadeDeRecebimentoOid: lavagemResponse.Lavagem.UnidadeDeRecebimentoOid,
                         unidadeDeRecebimento: lavagemResponse.Lavagem.UnidadeDeRecebimento,

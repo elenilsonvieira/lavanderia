@@ -174,6 +174,7 @@ export default class LavagemScreenOperacoes extends React.Component {
                         codigoDoCliente: objetoResponse.CodigoDoCliente,
                         dataDeRecebimento: objetoResponse.DataDeRecebimento,
                         dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
+                        horaPreferivelParaEntrega: objetoResponse.HoraPreferivelParaEntrega,
                         dataDeEntrega: objetoResponse.DataDeEntrega,
                         valor: objetoResponse.Valor,
                         paga: objetoResponse.Paga,

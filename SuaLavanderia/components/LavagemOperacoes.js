@@ -27,8 +27,13 @@ export default class LavagemOperacoes extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Data Preferível para Entrega: </Text>
+                        <Text style={styles.lavagemInfoTitle}>Data para Entrega: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.lavagem.dataPreferivelParaEntrega}</Text>
+                    </View>
+
+                    <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Hora para Entrega: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.lavagem.horaPreferivelParaEntrega}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>

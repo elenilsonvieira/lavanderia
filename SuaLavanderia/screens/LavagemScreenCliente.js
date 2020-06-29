@@ -165,6 +165,7 @@ export default class LavagemScreenCliente extends React.Component {
                     clienteOid: objetoResponse.ClienteOid,
                     dataDeRecebimento: objetoResponse.DataDeRecebimento,
                     dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
+                    horaPreferivelParaEntrega: objetoResponse.HoraPreferivelParaEntrega,
                     dataDeEntrega: objetoResponse.DataDeEntrega,
                     valor: objetoResponse.Valor,
                     saldoDevedor: objetoResponse.SaldoDevedor,

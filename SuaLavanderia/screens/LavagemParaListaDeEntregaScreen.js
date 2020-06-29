@@ -66,7 +66,8 @@ export default class LavagemParaListaDeEntregaScreen extends React.Component {
 
         var hoje = new Date();
         hoje = new Date(hoje.getTime() + 2 * 24*60*60*1000);
-        var diasAtras = new Date(hoje.getTime() - 7 * 24*60*60*1000);
+        
+        var diasAtras = new Date(new Date().getTime() - 10 * 24*60*60*1000);
 
         var dataInicial = this.state.dataInicial;
         var dataFinal = this.state.dataFinal;
@@ -133,6 +134,7 @@ export default class LavagemParaListaDeEntregaScreen extends React.Component {
                     codigoDoCliente: objetoResponse.CodigoDoCliente,
                     dataDeRecebimento: objetoResponse.DataDeRecebimento,
                     dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
+                    horaPreferivelParaEntrega: objetoResponse.HoraPreferivelParaEntrega,
                     dataDeEntrega: objetoResponse.DataDeEntrega,
                     valor: objetoResponse.Valor,
                     paga: objetoResponse.Paga,
