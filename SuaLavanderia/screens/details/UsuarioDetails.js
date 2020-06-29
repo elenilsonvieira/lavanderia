@@ -184,6 +184,8 @@ export default class UsuarioDetails extends React.Component {
                     dataDeRecebimento: objetoResponse.DataDeRecebimento,
                     dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
                     horaPreferivelParaEntrega: objetoResponse.HoraPreferivelParaEntrega,
+                    empacotada: objetoResponse.Empacotada,
+                    soPassar: objetoResponse.SoPassar,
                     dataDeEntrega: objetoResponse.DataDeEntrega,
                     valor: objetoResponse.Valor,
                     saldoDevedor: objetoResponse.SaldoDevedor,

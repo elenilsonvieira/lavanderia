@@ -222,6 +222,9 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                     codigoDoCliente: objetoResponse.CodigoDoCliente,
                     dataDeRecebimento: objetoResponse.DataDeRecebimento,
                     dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
+                    horaPreferivelParaEntrega: objetoResponse.HoraPreferivelParaEntrega,
+                    empacotada: objetoResponse.Empacotada,
+                    soPassar: objetoResponse.SoPassar,
                     dataDeEntrega: objetoResponse.DataDeEntrega,
                     valor: objetoResponse.Valor,
                     saldoDevedor: objetoResponse.SaldoDevedor,
@@ -308,6 +311,11 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                             <View style={styles.lavagemInfoContainer}>
                                 <Text style={styles.lavagemInfoTitle}>Quantidade de Peças: </Text>
                                 <Text style={styles.lavagemInfo}>{lavagem.quantidadeDePecas}</Text>
+                            </View>
+
+                            <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Empacotada? </Text>
+                                <Text style={styles.lavagemInfo}>{lavagem.empacotada ? 'SIM' : 'NÃO'}</Text>
                             </View>
                         </View>
                     </TouchableOpacity>

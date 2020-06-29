@@ -47,6 +47,11 @@ export default class LavagemPapelCliente extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Só Passar? </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.lavagem.soPassar ? 'Sim' : 'Não'}</Text>
+                    </View>
+
+                    <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Paga: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.lavagem.paga}</Text>
                     </View>

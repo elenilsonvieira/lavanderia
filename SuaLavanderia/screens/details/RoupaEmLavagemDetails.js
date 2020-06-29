@@ -200,17 +200,6 @@ export default class RoupaEmLavagemDetails extends React.Component {
                     </View>
 
                     <View style={styles.infoContainer}>
-                        <Text style={styles.infoTitlePicker}>Só Passar?: </Text>
-                        <Picker
-                            style={styles.picker}
-                            selectedValue={this.state.soPassar}
-                            onValueChange={(itemValue, itemIndex) => this.setState({soPassar: itemValue})}>
-                            <Picker.Item label='Não' value={false} />
-                            <Picker.Item label='Sim' value={true} />
-                        </Picker>
-                    </View>
-
-                    <View style={styles.infoContainer}>
                         <Text style={styles.infoTitle}>Observações: </Text>
                         <TextInput
                             style={styles.boxInput}

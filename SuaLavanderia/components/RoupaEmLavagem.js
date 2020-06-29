@@ -17,11 +17,6 @@ export default class RoupaEmLavagem extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Só Passar?: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.roupaEmLavagem.soPassar ? 'Sim' : 'Não'}</Text>
-                    </View>
-
-                    <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Observações: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.roupaEmLavagem.observacoes}</Text>
                     </View>
