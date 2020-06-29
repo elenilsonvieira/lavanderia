@@ -3,7 +3,7 @@ import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, 
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import LavagemOperacoes from "../components/LavagemOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
-import ConfirmacaoModal from '../components/modals/ConfirmacaoModal';
+import ConfirmacaoModalComDetalhes from '../components/modals/ConfirmacaoModalComDetalhes';
 import fetch from '../utils/FetchWithTimeout';
 
 export default class OperacaoLavarScreen extends React.Component {
@@ -12,7 +12,7 @@ export default class OperacaoLavarScreen extends React.Component {
         dataInicial: '',
         dataFinal: '',
         objetos: [],
-        lavagemOid: '',
+        lavagem: {},
         modalVisible: false,
         confirmacaoModalVisible: false,
     };
@@ -234,8 +234,8 @@ export default class OperacaoLavarScreen extends React.Component {
         });
     }
 
-    openModal = (lavagemOid) => {
-        this.setState({confirmacaoModalVisible: true, lavagemOid});
+    openModal = (lavagem) => {
+        this.setState({confirmacaoModalVisible: true, lavagem});
     };
     
     closeModal = () => {
@@ -256,7 +256,7 @@ export default class OperacaoLavarScreen extends React.Component {
             usarUsuarioLogado = true;
         }
 
-        var argumentos = `lavagemOid=${this.state.lavagemOid}&usuarioOid=${usuarioOid}`;
+        var argumentos = `lavagemOid=${this.state.lavagem.oid}&usuarioOid=${usuarioOid}`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/LavarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -283,6 +283,11 @@ export default class OperacaoLavarScreen extends React.Component {
 
     openVideoInformativo = () => {
         Linking.openURL("http://sualavanderia.com.br/videos/OperacaoLavarScreen.mp4");
+    };
+
+    navegarParaDetalhes = () => {
+        this.setState({confirmacaoModalVisible: false});
+        this.props.navigation.navigate("LavagemDetailsOperacoes", { lavagem: this.state.lavagem, acao: this.acao, texto: "Confirmar Lavar?" })
     };
 
     render(){
@@ -324,14 +329,15 @@ export default class OperacaoLavarScreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto.oid)}>
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto)}>
                             <LavagemOperacoes key={objeto.oid} lavagem={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
-                <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto="Confirmar lavar?" onSim={this.acao} onNao={this.closeModal} />
+                <ConfirmacaoModalComDetalhes visible={this.state.confirmacaoModalVisible} texto="Confirmar Lavar?" 
+                    onSim={this.acao} onNao={this.closeModal} onDetalhes={this.navegarParaDetalhes}/>
             </View>
         );
     }
