@@ -107,7 +107,7 @@ export default class OperacaoLavarScreen extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var argumentos = `status=0&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&operacoes=true`;
+        var argumentos = `status=0&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&operacoes=true&soPassar=false`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
