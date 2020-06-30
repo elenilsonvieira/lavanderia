@@ -286,7 +286,7 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
 
             this.setState({roupas: objetos});
         }else{
-            this.setState({roupas: this.lavagem.roupas});
+            this.setState({roupas: this.state.lavagem.roupas});
         }
     };
 
