@@ -1,11 +1,11 @@
 import React from 'react';
 import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage, Linking } from 'react-native';
-import RoupaEmLavagemOperacaoEmpacotar from '../../components/RoupaEmLavagemOperacaoEmpacotar';
+import RoupaEmLavagemOperacaoRecolher from '../../components/RoupaEmLavagemOperacaoRecolher';
 import ConfirmacaoModal from '../../components/modals/ConfirmacaoModal';
 import LoadingModal from '../../components/modals/LoadingModal';
 import fetch from '../../utils/FetchWithTimeout';
 
-export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
+export default class LavagemDetailsOperacaoRecolher extends React.Component {
 
     state ={
         nome: '',
@@ -62,23 +62,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         this.props.navigation.getParam("acao")();
     };
 
-    empacotarComCabides = () => {
-        if(this.state.roupasSelecionadas.length == 0){
-            alert('Selecione ao menos uma roupa');
-        }else{
-            this.empacotar("cabide");
-        }
-    };
-
-    empacotarRoupasDobradas = () => {
-        if(this.state.roupasSelecionadas.length == 0){
-            alert('Selecione ao menos uma roupa');
-        }else{
-            this.empacotar("dobrada");
-        }
-    };
-
-    empacotar = async (tipoDePacote) => {
+    recolher = async (tipoDePacote) => {
         this.setState({modalVisible: true});
 
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
@@ -96,10 +80,10 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
             roupaEmLavagemOids = roupaEmLavagemOids + ';' + this.state.roupasSelecionadas[i].oid;
         }
 
-        var argumentos = `roupaEmLavagemOid=${roupaEmLavagemOids}&usuarioOid=${usuarioOid}&tipoDePacote=${tipoDePacote}`;
+        var argumentos = `roupaEmLavagemOid=${roupaEmLavagemOids}&usuarioOid=${usuarioOid}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/EmpacotarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/RecolherRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -250,11 +234,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
     };
 
     openVideoInformativo = () => {
-        Linking.openURL("http://sualavanderia.com.br/videos/LavagemDetailsOperacaoEmpacotar.mp4");
-    };
-
-    navegarParaOperacaoListaDeEntregaDireta = () => {
-        this.props.navigation.navigate('OperacaoListaDeEntregaDireta', {lavagemOid: this.state.lavagem.oid, unidadeOid: this.state.lavagem.unidadeDeRecebimentoOid, usuarioOid: this.props.navigation.getParam('usuarioOid')});
+        Linking.openURL("http://sualavanderia.com.br/videos/LavagemDetailsOperacaoRecolher.mp4");
     };
 
     render(){
@@ -271,10 +251,6 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
 
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/salvar_32x32.png')} />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => this.navegarParaOperacaoListaDeEntregaDireta()} style={styles.button}>
-                        <Image style={styles.icon} source={require('../../images/lista_32x32.png')} />
                     </TouchableOpacity>
                 </View>
                 <ScrollView>
@@ -313,11 +289,6 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                                 <Text style={styles.lavagemInfoTitle}>Quantidade de Peças: </Text>
                                 <Text style={styles.lavagemInfo}>{lavagem.quantidadeDePecas}</Text>
                             </View>
-
-                            <View style={styles.lavagemInfoContainer}>
-                                <Text style={styles.lavagemInfoTitle}>Empacotada? </Text>
-                                <Text style={styles.lavagemInfo}>{lavagem.empacotada ? 'SIM' : 'NÃO'}</Text>
-                            </View>
                         </View>
                     </TouchableOpacity>
 
@@ -325,19 +296,15 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                         <Text style={styles.roupasTitle}>Roupas</Text>
 
                         <View style={styles.botoesContainer}>
-                            <TouchableOpacity onPress={() => this.empacotarRoupasDobradas()} style={styles.buttonAcao}>
-                                <Image style={styles.iconAcao} source={require('../../images/roupa-dobrada_72x72.png')} />
-                            </TouchableOpacity>
-
-                            <TouchableOpacity onPress={() => this.empacotarComCabides()} style={styles.buttonAcao}>
-                                <Image style={styles.iconAcao} source={require('../../images/cabide2_128x128.png')} />
+                            <TouchableOpacity onPress={() => this.recolher()} style={styles.buttonAcao}>
+                                <Image style={styles.iconAcao} source={require('../../images/olho_64x64.png')} />
                             </TouchableOpacity>
                         </View>
                     </View>
                     
                     { lavagem.roupas.map(roupaEmLavagem => 
                         <TouchableOpacity onPress={() => this.selecionarRoupa(roupaEmLavagem)}>
-                            <RoupaEmLavagemOperacaoEmpacotar key={roupaEmLavagem.roupa.oid} roupaEmLavagem={roupaEmLavagem} 
+                            <RoupaEmLavagemOperacaoRecolher key={roupaEmLavagem.roupa.oid} roupaEmLavagem={roupaEmLavagem} 
                                 styleExtra={ this.roupaJaSelecionada(roupaEmLavagem) ? 
                                     { borderWidth: 15, borderColor: 'green'} : {}} />
                         </TouchableOpacity>

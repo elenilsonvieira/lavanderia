@@ -133,6 +133,7 @@ export default class OperacaoRecolherScreen extends React.Component {
                         observacoes: roupaResponse.Observacoes,
                         soPassar: roupaResponse.SoPassar,
                         pacoteDeRoupa: roupaResponse.PacoteDeRoupa,
+                        recolhidaDoVaral: roupaResponse.RecolhidaDoVaral,
                         cliente: roupaResponse.Cliente,
                         clienteOid: roupaResponse.ClienteOid,
                         codigoDoCliente: roupaResponse.CodigoDoCliente,
@@ -246,7 +247,7 @@ export default class OperacaoRecolherScreen extends React.Component {
 
     navegarParaDetalhes = () => {
         this.setState({confirmacaoModalVisible: false});
-        this.props.navigation.navigate("LavagemDetailsOperacoes", { lavagem: this.state.lavagem, acao: this.acao, texto: "Confirmar Recolher?" })
+        this.props.navigation.navigate("LavagemDetailsOperacaoRecolher", { lavagem: this.state.lavagem, acao: this.acao, texto: "Confirmar recolher tudo?", usuarioOid: this.props.navigation.getParam('usuarioOid') })
     };
 
     acao = async () => {

@@ -44,8 +44,8 @@ export default class RoupaEmLavagemOperacaoEmpacotar extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Empacotada? </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.roupaEmLavagem.pacoteDeRoupa ? 'SIM' : 'NÃO'}</Text>
+                        <Text style={styles.lavagemInfoTitle}>Recolhida? </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.roupaEmLavagem.recolhidaDoVaral ? 'SIM' : 'NÃO'}</Text>
                     </View>
                 </View>
             </View>

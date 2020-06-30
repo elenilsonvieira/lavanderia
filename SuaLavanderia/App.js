@@ -28,6 +28,7 @@ import LavagemDetailsCliente from './screens/details/LavagemDetailsCliente';
 import LavagemDetailsOperacoes from './screens/details/LavagemDetailsOperacoes';
 import LavagemDetailsPapelOperacoes from './screens/details/LavagemDetailsPapelOperacoes';
 import LavagemDetailsOperacaoEmpacotar from './screens/details/LavagemDetailsOperacaoEmpacotar';
+import LavagemDetailsOperacaoRecolher from './screens/details/LavagemDetailsOperacaoRecolher';
 import RoupaEmLavagemDetails from './screens/details/RoupaEmLavagemDetails';
 import LoginScreen from './screens/LoginScreen';
 import LogoutScreen from './screens/LogoutScreen';
@@ -251,6 +252,7 @@ const StackAdministrador = createStackNavigator(
     LavagemDetails: LavagemDetails,
     LavagemDetailsOperacoes: LavagemDetailsOperacoes,
     LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
+    LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
     LavagemDetailsEdit: LavagemDetailsEdit,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupaDetails: RoupaDetails,
@@ -292,6 +294,7 @@ const StackGerenteGeral = createStackNavigator(
     LavagemDetails: LavagemDetails,
     LavagemDetailsOperacoes: LavagemDetailsOperacoes,
     LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
+    LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
     LavagemDetailsEdit: LavagemDetailsEdit,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
@@ -333,6 +336,7 @@ const StackSubGerenteGeral = createStackNavigator(
     LavagemDetails: LavagemDetails,
     LavagemDetailsOperacoes: LavagemDetailsOperacoes,
     LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
+    LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
     LavagemDetailsEdit: LavagemDetailsEdit,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
     RoupasDoCliente: RoupasDoClienteScreen,
@@ -369,6 +373,7 @@ const StackGerenteDeOperacoes = createStackNavigator(
     LavagemDetails: LavagemDetails,
     LavagemDetailsOperacoes: LavagemDetailsOperacoes,
     LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
+    LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
     LavagemDetailsEdit: LavagemDetailsEdit,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
@@ -405,6 +410,7 @@ const StackSupervisorDeOperacoes = createStackNavigator(
     LavagemDetailsOperacoes: LavagemDetailsOperacoes,
     LavagemDetailsEdit: LavagemDetailsEdit,
     LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
+    LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
@@ -455,6 +461,7 @@ const StackAplicativo = createStackNavigator(
     LavagemDetails: LavagemDetailsOperacoes,
     LavagemDetailsOperacoes: LavagemDetailsOperacoes,
     LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
+    LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
     AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
     RoupaEmLavagemDetails: RoupaEmLavagemDetails,

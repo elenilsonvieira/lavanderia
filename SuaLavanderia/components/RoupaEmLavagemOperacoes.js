@@ -13,6 +13,11 @@ export default class RoupaEmLavagemOperacoes extends React.Component {
 
                     <View style={styles.roupaContainer}>
                         <View style={styles.roupaInfoContainer}>
+                            <Text style={styles.roupaInfoTitle}>Chave: </Text>
+                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.chave}</Text>
+                        </View>
+                        
+                        <View style={styles.roupaInfoContainer}>
                             <Text style={styles.roupaInfoTitle}>Cores: </Text>
                             <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.cores}</Text>
                         </View>
