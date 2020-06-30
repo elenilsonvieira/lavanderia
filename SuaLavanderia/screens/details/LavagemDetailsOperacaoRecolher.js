@@ -246,37 +246,37 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
             this.state.roupas.map(objeto => {
                 for(var i = 0; i < nomeArray.length; i++){
                     if(nomeArray[i].trim() !== ''){ 
-                        if(objeto.chave && objeto.chave.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                        if(objeto.roupa.chave && objeto.roupa.chave.toLowerCase().includes(nomeArray[i].toLowerCase())){     
                             objetos = [...objetos, objeto];
                             break;
                         }
 
-                        if(objeto.tamanho && objeto.tamanho.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                        if(objeto.roupa.tamanho && objeto.roupa.tamanho.toLowerCase().includes(nomeArray[i].toLowerCase())){     
                             objetos = [...objetos, objeto];
                             break;
                         }
 
-                        if(objeto.tecido && objeto.tecido.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                        if(objeto.roupa.tecido && objeto.roupa.tecido.toLowerCase().includes(nomeArray[i].toLowerCase())){     
                             objetos = [...objetos, objeto];
                             break;
                         }
 
-                        if(objeto.marca && objeto.marca.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                        if(objeto.roupa.marca && objeto.roupa.marca.toLowerCase().includes(nomeArray[i].toLowerCase())){     
                             objetos = [...objetos, objeto];
                             break;
                         }
 
-                        if(objeto.cores && objeto.cores.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                        if(objeto.roupa.cores && objeto.roupa.cores.toLowerCase().includes(nomeArray[i].toLowerCase())){     
                             objetos = [...objetos, objeto];
                             break;
                         }
 
-                        if(objeto.observacao && objeto.observacao.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                        if(objeto.roupa.observacao && objeto.roupa.observacao.toLowerCase().includes(nomeArray[i].toLowerCase())){     
                             objetos = [...objetos, objeto];
                             break;
                         }
 
-                        if(objeto.tipo && objeto.tipo.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                        if(objeto.roupa.tipo && objeto.roupa.tipo.toLowerCase().includes(nomeArray[i].toLowerCase())){     
                             objetos = [...objetos, objeto];
                             break;
                         }
