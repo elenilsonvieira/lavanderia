@@ -60,6 +60,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
     acao = () => {
         this.setState({confirmacaoModalVisible: false});
         this.props.navigation.getParam("acao")();
+        this.buscar();
     };
 
     empacotarComCabides = () => {

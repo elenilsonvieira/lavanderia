@@ -284,12 +284,12 @@ export default class OperacaoEmpacotarScreen extends React.Component {
 
         this.setState({modalVisible: false});
 
-        if(usarUsuarioLogado){
-            this.props.navigation.navigate('Operacoes');
-            // this.buscar();
-        }else{
-            this.props.navigation.navigate('Home');
-        }
+        // if(usarUsuarioLogado){
+        //     this.props.navigation.navigate('Operacoes');
+        //     // this.buscar();
+        // }else{
+        //     this.props.navigation.navigate('Home');
+        // }
     };
 
     openVideoInformativo = () => {
