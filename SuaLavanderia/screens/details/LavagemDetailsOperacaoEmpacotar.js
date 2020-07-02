@@ -237,6 +237,9 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                     roupas: roupas,
                     status: objetoResponse.Status,
                     avaliacao: avaliacao,
+                    recolhidaDoVaral: objetoResponse.RecolhidaDoVaral,
+                    parcialmenteRecolhidaDoVaral: objetoResponse.ParcialmenteRecolhidaDoVaral,
+                    recolhidaDoVaralString: objetoResponse.RecolhidaDoVaralString,
                 };    
 
                 this.setState({lavagem});
@@ -263,6 +266,14 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
+                    <TouchableOpacity onPress={() => this.empacotarRoupasDobradas()} style={styles.button}>
+                        <Image style={styles.icon} source={require('../../images/roupa-dobrada_72x72.png')} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => this.empacotarComCabides()} style={styles.button}>
+                        <Image style={styles.icon} source={require('../../images/cabide2_128x128.png')} />
+                    </TouchableOpacity>
+
                     <Text style={styles.infoTitle}>Lavagem</Text>
 
                     <TouchableOpacity onPress={() => this.buscar()} style={styles.button}>
@@ -318,21 +329,16 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                                 <Text style={styles.lavagemInfoTitle}>Empacotada? </Text>
                                 <Text style={styles.lavagemInfo}>{lavagem.empacotada ? 'SIM' : 'NÃO'}</Text>
                             </View>
+
+                            <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Recolhida do Varal? </Text>
+                                <Text style={styles.lavagemInfo}>{lavagem.recolhidaDoVaralString}</Text>
+                            </View>
                         </View>
                     </TouchableOpacity>
 
                     <View style={styles.roupasContainer}>
                         <Text style={styles.roupasTitle}>Roupas</Text>
-
-                        <View style={styles.botoesContainer}>
-                            <TouchableOpacity onPress={() => this.empacotarRoupasDobradas()} style={styles.buttonAcao}>
-                                <Image style={styles.iconAcao} source={require('../../images/roupa-dobrada_72x72.png')} />
-                            </TouchableOpacity>
-
-                            <TouchableOpacity onPress={() => this.empacotarComCabides()} style={styles.buttonAcao}>
-                                <Image style={styles.iconAcao} source={require('../../images/cabide2_128x128.png')} />
-                            </TouchableOpacity>
-                        </View>
                     </View>
                     
                     { lavagem.roupas.map(roupaEmLavagem => 

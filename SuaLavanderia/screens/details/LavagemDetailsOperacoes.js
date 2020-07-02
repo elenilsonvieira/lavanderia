@@ -108,6 +108,11 @@ export default class LavagemDetailsOperacoes extends React.Component {
                                 <Text style={styles.lavagemInfoTitle}>Status: </Text>
                                 <Text style={styles.lavagemInfo}>{lavagem.status}</Text>
                             </View>
+
+                            <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Recolhida do Varal? </Text>
+                                <Text style={styles.lavagemInfo}>{lavagem.recolhidaDoVaralString}</Text>
+                            </View>
                         </View>
                     </TouchableOpacity>
 

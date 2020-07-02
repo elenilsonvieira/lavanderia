@@ -222,6 +222,9 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
                     roupas: roupas,
                     status: objetoResponse.Status,
                     avaliacao: avaliacao,
+                    recolhidaDoVaral: objetoResponse.RecolhidaDoVaral,
+                    parcialmenteRecolhidaDoVaral: objetoResponse.ParcialmenteRecolhidaDoVaral,
+                    recolhidaDoVaralString: objetoResponse.RecolhidaDoVaralString,
                 };    
 
                 this.setState({lavagem, roupas: lavagem.roupas, nome: ''});
@@ -244,43 +247,43 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
             var nomeArray = nome.split(' ');
 
             this.state.roupas.map(objeto => {
+                var criteriaAtendido = true;
+
                 for(var i = 0; i < nomeArray.length; i++){
                     if(nomeArray[i].trim() !== ''){ 
+                        var esseCriteriaAtendido = false;
+
                         if(objeto.roupa.chave && objeto.roupa.chave.toLowerCase().includes(nomeArray[i].toLowerCase())){     
-                            objetos = [...objetos, objeto];
-                            break;
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.roupa.tamanho && objeto.roupa.tamanho.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.roupa.tecido && objeto.roupa.tecido.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.roupa.marca && objeto.roupa.marca.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.roupa.cores && objeto.roupa.cores.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.roupa.observacao && objeto.roupa.observacao.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.roupa.tipo && objeto.roupa.tipo.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
                         }
 
-                        if(objeto.roupa.tamanho && objeto.roupa.tamanho.toLowerCase().includes(nomeArray[i].toLowerCase())){     
-                            objetos = [...objetos, objeto];
-                            break;
-                        }
-
-                        if(objeto.roupa.tecido && objeto.roupa.tecido.toLowerCase().includes(nomeArray[i].toLowerCase())){     
-                            objetos = [...objetos, objeto];
-                            break;
-                        }
-
-                        if(objeto.roupa.marca && objeto.roupa.marca.toLowerCase().includes(nomeArray[i].toLowerCase())){     
-                            objetos = [...objetos, objeto];
-                            break;
-                        }
-
-                        if(objeto.roupa.cores && objeto.roupa.cores.toLowerCase().includes(nomeArray[i].toLowerCase())){     
-                            objetos = [...objetos, objeto];
-                            break;
-                        }
-
-                        if(objeto.roupa.observacao && objeto.roupa.observacao.toLowerCase().includes(nomeArray[i].toLowerCase())){     
-                            objetos = [...objetos, objeto];
-                            break;
-                        }
-
-                        if(objeto.roupa.tipo && objeto.roupa.tipo.toLowerCase().includes(nomeArray[i].toLowerCase())){     
-                            objetos = [...objetos, objeto];
+                        if(!esseCriteriaAtendido){
+                            criteriaAtendido = false;
                             break;
                         }
                     }
+                }
+
+                if(criteriaAtendido){
+                    objetos = [...objetos, objeto];
                 }
             });
 

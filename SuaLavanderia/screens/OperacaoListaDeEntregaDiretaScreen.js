@@ -146,6 +146,9 @@ export default class OperacaoListaDeEntregaDiretaScreen extends React.Component 
                         quantidadeDePecas: lavagemResponse.Lavagem.QuantidadeDePecas,
                         roupas: [],
                         status: lavagemResponse.Lavagem.Status,
+                        recolhidaDoVaral: objetoResponse.RecolhidaDoVaral,
+                        parcialmenteRecolhidaDoVaral: objetoResponse.ParcialmenteRecolhidaDoVaral,
+                        recolhidaDoVaralString: objetoResponse.RecolhidaDoVaralString,
                     };
 
                     const lavagemEmLista = {

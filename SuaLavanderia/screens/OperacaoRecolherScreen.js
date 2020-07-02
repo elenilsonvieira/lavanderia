@@ -175,6 +175,9 @@ export default class OperacaoRecolherScreen extends React.Component {
                     observacoes: objetoResponse.Observacoes,
                     roupas: roupas,
                     status: objetoResponse.Status,
+                    recolhidaDoVaral: objetoResponse.RecolhidaDoVaral,
+                    parcialmenteRecolhidaDoVaral: objetoResponse.ParcialmenteRecolhidaDoVaral,
+                    recolhidaDoVaralString: objetoResponse.RecolhidaDoVaralString,
                 };    
 
                 objetos = [...objetos, objeto];
