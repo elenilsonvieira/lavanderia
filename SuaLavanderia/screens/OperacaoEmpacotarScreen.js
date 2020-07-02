@@ -249,12 +249,12 @@ export default class OperacaoEmpacotarScreen extends React.Component {
     };
 
     navegarParaDetalhes = (lavagem) => {
-        this.setState({confirmacaoModalVisible: false});
+        this.setState({confirmacaoModalVisible: false, lavagem});
         this.props.navigation.navigate("LavagemDetailsOperacaoEmpacotar", { lavagem: lavagem, acao: this.acao, texto: "Confirmar empacotar tudo?", usuarioOid: this.props.navigation.getParam('usuarioOid') })
     };
 
     acao = async () => {
-        this.setState({confirmacaoModalVisible: false, modalVisible: true});
+        // this.setState({confirmacaoModalVisible: false, modalVisible: true});
 
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
@@ -276,7 +276,7 @@ export default class OperacaoEmpacotarScreen extends React.Component {
                 });
             
             if(call.status != 200){
-                alert('Erro.' + call.statusText);    
+                alert('Erro:' + call.statusText);    
             }            
         }catch(erro){
             alert('Erro.' + erro);
