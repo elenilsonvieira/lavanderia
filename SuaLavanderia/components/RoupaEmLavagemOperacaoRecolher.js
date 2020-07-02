@@ -28,6 +28,11 @@ export default class RoupaEmLavagemOperacaoEmpacotar extends React.Component {
                         </View>
 
                         <View style={styles.roupaInfoContainer}>
+                            <Text style={styles.roupaInfoTitle}>Tamanho: </Text>
+                            <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.tamanho}</Text>
+                        </View>
+
+                        <View style={styles.roupaInfoContainer}>
                             <Text style={styles.roupaInfoTitle}>Marca: </Text>
                             <Text style={styles.roupaInfo}>{this.props.roupaEmLavagem.roupa.marca}</Text>
                         </View>
