@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage, Linking } from 'react-native';
+import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage, Linking, TextInput } from 'react-native';
 import RoupaEmLavagemOperacaoEmpacotar from '../../components/RoupaEmLavagemOperacaoEmpacotar';
 import ConfirmacaoModal from '../../components/modals/ConfirmacaoModal';
 import LoadingModal from '../../components/modals/LoadingModal';
@@ -13,11 +13,12 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         confirmacaoModalVisible: false,
         roupasSelecionadas: [],
         lavagem: {},
+        roupas: [],
     };
 
     async componentWillMount(){
         const lavagem = this.props.navigation.getParam('lavagem');
-        this.setState({lavagem});
+        this.setState({lavagem, roupas: lavagem.roupas});
     }
 
     dataString = () => {
@@ -243,7 +244,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                     recolhidaDoVaralString: objetoResponse.RecolhidaDoVaralString,
                 };    
 
-                this.setState({lavagem});
+                this.setState({lavagem, roupas: lavagem.roupas, nome: ''});
             }
 
             this.setState({modalVisible: false});
@@ -259,6 +260,63 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
 
     navegarParaOperacaoListaDeEntregaDireta = () => {
         this.props.navigation.navigate('OperacaoListaDeEntregaDireta', {lavagemOid: this.state.lavagem.oid, unidadeOid: this.state.lavagem.unidadeDeRecebimentoOid, usuarioOid: this.props.navigation.getParam('usuarioOid')});
+    };
+
+    filtrar =  (nome) => {        
+        if(nome.trim() !== '') {
+            var objetos = [];
+            var nomeArray = nome.split(' ');
+
+            this.state.roupas.map(objeto => {
+                var criteriaAtendido = true;
+
+                for(var i = 0; i < nomeArray.length; i++){
+                    if(nomeArray[i].trim() !== ''){ 
+                        var esseCriteriaAtendido = false;
+
+                        if(objeto.roupa.chave && objeto.roupa.chave.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.roupa.tamanho && objeto.roupa.tamanho.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.roupa.tecido && objeto.roupa.tecido.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.roupa.marca && objeto.roupa.marca.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.roupa.cores && objeto.roupa.cores.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.roupa.observacao && objeto.roupa.observacao.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.roupa.tipo && objeto.roupa.tipo.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+
+                        if(!esseCriteriaAtendido){
+                            criteriaAtendido = false;
+                            break;
+                        }
+                    }
+                }
+
+                if(criteriaAtendido){
+                    objetos = [...objetos, objeto];
+                }
+            });
+
+            this.setState({roupas: objetos});
+        }else{
+            this.setState({roupas: this.state.lavagem.roupas});
+        }
+    };
+
+    nomeAlterado = async (nome) => {
+        await this.setState(nome);
+        this.filtrar(this.state.nome);
     };
 
     render(){
@@ -327,11 +385,6 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                             </View>
 
                             <View style={styles.lavagemInfoContainer}>
-                                <Text style={styles.lavagemInfoTitle}>Empacotada? </Text>
-                                <Text style={styles.lavagemInfo}>{lavagem.empacotada ? 'SIM' : 'NÃO'}</Text>
-                            </View>
-
-                            <View style={styles.lavagemInfoContainer}>
                                 <Text style={styles.lavagemInfoTitle}>Observações: </Text>
                                 <Text style={styles.lavagemInfo}>{lavagem.observacoes}</Text>
                             </View>
@@ -340,14 +393,26 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
                                 <Text style={styles.lavagemInfoTitle}>Recolhida do Varal? </Text>
                                 <Text style={styles.lavagemInfo}>{lavagem.recolhidaDoVaralString}</Text>
                             </View>
+
+                            <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Empacotada? </Text>
+                                <Text style={styles.lavagemInfo}>{lavagem.empacotada ? 'SIM' : 'NÃO'}</Text>
+                            </View>
                         </View>
                     </TouchableOpacity>
 
                     <View style={styles.roupasContainer}>
                         <Text style={styles.roupasTitle}>Roupas</Text>
+
+                        <TextInput
+                            style={styles.boxInput} 
+                            placeholder='Nome'
+                            value={this.state.nome}
+                            onChangeText={nome => this.nomeAlterado({nome})} 
+                        />
                     </View>
                     
-                    { lavagem.roupas.map(roupaEmLavagem => 
+                    { this.state.roupas.map(roupaEmLavagem => 
                         <TouchableOpacity onPress={() => this.selecionarRoupa(roupaEmLavagem)}>
                             <RoupaEmLavagemOperacaoEmpacotar key={roupaEmLavagem.roupa.oid} roupaEmLavagem={roupaEmLavagem} 
                                 styleExtra={ this.roupaJaSelecionada(roupaEmLavagem) ? 
@@ -392,7 +457,6 @@ const styles = StyleSheet.create(
             height: 40,
             borderRadius: 5,
             alignSelf: 'stretch',
-            width: 200,
             padding: 5,
         },
         buttonText: {
