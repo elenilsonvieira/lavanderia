@@ -354,6 +354,16 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
                                 <Text style={styles.lavagemInfoTitle}>Quantidade de Peças: </Text>
                                 <Text style={styles.lavagemInfo}>{lavagem.quantidadeDePecas}</Text>
                             </View>
+
+                            <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Observações: </Text>
+                                <Text style={styles.lavagemInfo}>{lavagem.observacoes}</Text>
+                            </View>
+
+                            <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Recolhida do Varal? </Text>
+                                <Text style={styles.lavagemInfo}>{lavagem.recolhidaDoVaralString}</Text>
+                            </View>
                         </View>
                     </TouchableOpacity>
 

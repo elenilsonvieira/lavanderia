@@ -56,6 +56,11 @@ export default class Roupa extends React.Component {
                         <Text style={styles.roupaInfoTitle}>Última Lavagem: </Text>
                         <Text style={styles.roupaInfo}>{this.props.roupa.ultimaLavagem}</Text>
                     </View>
+
+                    <View style={styles.roupaInfoContainer}>
+                        <Text style={styles.roupaInfoTitle}>Unidade: </Text>
+                        <Text style={styles.roupaInfo}>{this.props.roupa.ultimaUnidade}</Text>
+                    </View>
                 </View>
             </View>
         );
