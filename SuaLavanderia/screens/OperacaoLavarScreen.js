@@ -64,6 +64,8 @@ export default class OperacaoLavarScreen extends React.Component {
         var email = usuario.email;
 
         var hoje = new Date();
+        hoje = new Date(hoje.getTime() + 10 * 24*60*60*1000);
+
         var diasAtras = new Date(hoje.getTime() - 10 * 24*60*60*1000);
 
         var dataInicial = this.state.dataInicial;
@@ -107,7 +109,7 @@ export default class OperacaoLavarScreen extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var argumentos = `status=0&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&operacoes=true&soPassar=false`;
+        var argumentos = `status=0&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&operacoes=true&soPassar=false&&usarDataPreferivelParaEntrega=true`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
