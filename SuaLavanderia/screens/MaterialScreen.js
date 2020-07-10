@@ -91,15 +91,19 @@ export default class MaterialScreen extends React.Component {
                 const objetoResponse = response[index];
                 var movimentacoes = [];    
 
-                const fornecedor = {
-                    oid: objetoResponse.Fornecedor.Oid,
-                    tipo: objetoResponse.Fornecedor.Tipo,
-                    nome: objetoResponse.Fornecedor.Nome,
-                    tipo: objetoResponse.Fornecedor.Tipo,
-                    cpfCnpj: objetoResponse.Fornecedor.CpfCnpj,
-                    telefone: objetoResponse.Fornecedor.Telefone,
-                    endereco: objetoResponse.Fornecedor.Endereco,
-                };
+                var fornecedor = null;
+
+                if(objetoResponse.Fornecedor){
+                    fornecedor = {
+                        oid: objetoResponse.Fornecedor.Oid,
+                        tipo: objetoResponse.Fornecedor.Tipo,
+                        nome: objetoResponse.Fornecedor.Nome,
+                        tipo: objetoResponse.Fornecedor.Tipo,
+                        cpfCnpj: objetoResponse.Fornecedor.CpfCnpj,
+                        telefone: objetoResponse.Fornecedor.Telefone,
+                        endereco: objetoResponse.Fornecedor.Endereco,
+                    };
+                }
 
                 const objeto = {
                     oid: objetoResponse.Oid,

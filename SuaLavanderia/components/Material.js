@@ -60,11 +60,6 @@ export default class Material extends React.Component {
                         <Text style={styles.lavagemInfo}>{fornecedor}</Text>
                     </View>
 
-                    {/* <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Ativo: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.material.ativo? "Sim" : "Não"}</Text>
-                    </View> */}
-
                     <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Preço Base: </Text>
                         <Text style={styles.lavagemInfo}>R$ {this.props.material.precoBase}</Text>

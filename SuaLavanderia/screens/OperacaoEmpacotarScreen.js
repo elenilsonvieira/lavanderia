@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage, Linking } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import LavagemOperacoes from "../components/LavagemOperacoes";
+import LavagemOperacaoEmpacotar from "../components/LavagemOperacaoEmpacotar";
 import LoadingModal from '../components/modals/LoadingModal';
 import ConfirmacaoModalComDetalhes from '../components/modals/ConfirmacaoModalComDetalhes';
 import fetch from '../utils/FetchWithTimeout';
@@ -109,7 +109,7 @@ export default class OperacaoEmpacotarScreen extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var argumentos = `status=2&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&usarDataPreferivelParaEntrega=true&empacotada=false&operacoes=true`;
+        var argumentos = `status=2&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&usarDataPreferivelParaEntrega=true&operacoes=true`;
 
         try{
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -178,6 +178,7 @@ export default class OperacaoEmpacotarScreen extends React.Component {
                     recolhidaDoVaral: objetoResponse.RecolhidaDoVaral,
                     parcialmenteRecolhidaDoVaral: objetoResponse.ParcialmenteRecolhidaDoVaral,
                     recolhidaDoVaralString: objetoResponse.RecolhidaDoVaralString,
+                    passadoresString: objetoResponse.PassadoresString,
                 };    
 
                 objetos = [...objetos, objeto];
@@ -336,7 +337,7 @@ export default class OperacaoEmpacotarScreen extends React.Component {
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
                         <TouchableOpacity key={objeto.oid} onPress={() => this.navegarParaDetalhes(objeto)}>
-                            <LavagemOperacoes key={objeto.oid} lavagem={objeto} />
+                            <LavagemOperacaoEmpacotar key={objeto.oid} lavagem={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>
