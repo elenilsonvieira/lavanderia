@@ -164,6 +164,7 @@ export default class OperacaoListaDeEntregaScreen extends React.Component {
                     data: objetoResponse.Data,
                     comentarioDoRecebedor: objetoResponse.ComentarioDoRecebedor,
                     quantidadeDeLavagens: objetoResponse.QuantidadeDeLavagens,
+                    quantidadeDePecas: objetoResponse.QuantidadeDePecas,
                     lavagens: lavagens,
                 };    
 
