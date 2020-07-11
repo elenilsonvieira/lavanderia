@@ -16,9 +16,10 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         roupas: [],
     };
 
-    async componentWillMount(){
+    async componentDidMount(){
         const lavagem = this.props.navigation.getParam('lavagem');
-        this.setState({lavagem, roupas: lavagem.roupas});
+        this.setState({lavagem});
+        this.buscar();
     }
 
     dataString = () => {

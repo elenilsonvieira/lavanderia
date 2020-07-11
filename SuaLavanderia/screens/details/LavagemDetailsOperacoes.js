@@ -11,11 +11,14 @@ export default class LavagemDetailsOperacoes extends React.Component {
         nome: '',
         modalVisible: false,
         confirmacaoModalVisible: false,
+        lavagem: {},
+        roupas: [],
     };
 
-    async componentWillMount(){
+    async componentDidMount(){
         const lavagem = this.props.navigation.getParam('lavagem');
         this.setState({lavagem});
+        this.buscar();
     }
 
     dataString = () => {
@@ -62,6 +65,109 @@ export default class LavagemDetailsOperacoes extends React.Component {
 
     openVideoInformativo = () => {
         Linking.openURL("http://sualavanderia.com.br/videos/LavagemDetailsOperacoes.mp4");
+    };
+
+    async buscar() {
+        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
+        var hash = this.hash(usuario);
+        var email = usuario.email;
+        var oid = this.state.lavagem.oid;
+
+        if(!oid){
+            oid = this.props.navigation.getParam('lavagem').oid;
+        }
+
+        this.setState({modalVisible: true});
+
+        try{
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                });
+            const response = await call.json();
+
+            var objetos = [];
+
+            for(index in response){
+                const objetoResponse = response[index];
+                var roupas = [];
+
+                for(indexRoupa in objetoResponse.Roupas){
+                    const roupaResponse = objetoResponse.Roupas[indexRoupa];
+
+                    const roupaEmLavagem = {
+                        oid: roupaResponse.Oid,
+                        quantidade: roupaResponse.Quantidade,
+                        observacoes: roupaResponse.Observacoes,
+                        soPassar: roupaResponse.SoPassar,
+                        pacoteDeRoupa: roupaResponse.PacoteDeRoupa,
+                        recolhidaDoVaral: roupaResponse.RecolhidaDoVaral,
+                        roupa: {
+                            oid: roupaResponse.Roupa.Oid,
+                            tipo: roupaResponse.Roupa.Tipo,
+                            tecido: roupaResponse.Roupa.Tecido,
+                            tamanho: roupaResponse.Roupa.Tamanho,
+                            marca: roupaResponse.Roupa.Marca,
+                            cliente: roupaResponse.Roupa.Cliente,
+                            clienteOid: roupaResponse.Roupa.ClienteOid,
+                            observacao: roupaResponse.Roupa.Observacao,
+                            codigo: roupaResponse.Roupa.Codigo,
+                            chave: roupaResponse.Roupa.Chave,
+                            cores: roupaResponse.Roupa.Cores,
+                        },
+                    };
+
+                    roupas = [...roupas, roupaEmLavagem];
+                }
+
+                var avaliacao = null;
+
+                if(objetoResponse.Avaliacao){
+                    avaliacao = {
+                        data: objetoResponse.Avaliacao.Data,
+                        notaDoAtendimento: objetoResponse.Avaliacao.NotaDoAtendimento,
+                        notaDaLavagem: objetoResponse.Avaliacao.NotaDaLavagem,
+                        notaDaPassagem: objetoResponse.Avaliacao.NotaDaPassagem,
+                        notaDaEntrega: objetoResponse.Avaliacao.NotaDaEntrega,
+                        comentarios: objetoResponse.Avaliacao.Comentarios,
+                        media: (parseInt(objetoResponse.Avaliacao.NotaDoAtendimento) + parseInt(objetoResponse.Avaliacao.NotaDaLavagem) + parseInt(objetoResponse.Avaliacao.NotaDaPassagem) + parseInt(objetoResponse.Avaliacao.NotaDaEntrega)) / 4,//objetoResponse.Media,
+                    };
+                }
+
+                const lavagem = {
+                    oid: objetoResponse.Oid,
+                    cliente: objetoResponse.Cliente,
+                    clienteOid: objetoResponse.ClienteOid,
+                    codigoDoCliente: objetoResponse.CodigoDoCliente,
+                    dataDeRecebimento: objetoResponse.DataDeRecebimento,
+                    dataPreferivelParaEntrega: objetoResponse.DataPreferivelParaEntrega,
+                    horaPreferivelParaEntrega: objetoResponse.HoraPreferivelParaEntrega,
+                    empacotada: objetoResponse.Empacotada,
+                    soPassar: objetoResponse.SoPassar,
+                    dataDeEntrega: objetoResponse.DataDeEntrega,
+                    valor: objetoResponse.Valor,
+                    saldoDevedor: objetoResponse.SaldoDevedor,
+                    paga: objetoResponse.Paga,
+                    unidadeDeRecebimentoOid: objetoResponse.UnidadeDeRecebimentoOid,
+                    unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
+                    quantidadeDePecas: objetoResponse.QuantidadeDePecas,
+                    pesoDaPassagem: objetoResponse.PesoDaPassagem,
+                    roupas: roupas,
+                    status: objetoResponse.Status,
+                    avaliacao: avaliacao,
+                    recolhidaDoVaral: objetoResponse.RecolhidaDoVaral,
+                    parcialmenteRecolhidaDoVaral: objetoResponse.ParcialmenteRecolhidaDoVaral,
+                    recolhidaDoVaralString: objetoResponse.RecolhidaDoVaralString,
+                };    
+
+                this.setState({lavagem, roupas: lavagem.roupas, nome: ''});
+            }
+
+            this.setState({modalVisible: false});
+        }catch(erro){
+            this.setState({modalVisible: false});
+            alert('Erro buscando lavagem: ' + erro);
+        }
     };
 
     render(){
@@ -125,7 +231,7 @@ export default class LavagemDetailsOperacoes extends React.Component {
                         <Text style={styles.roupasTitle}>Roupas</Text>
                     </View>
                     
-                    { lavagem.roupas.map(roupaEmLavagem => 
+                    { this.state.roupas.map(roupaEmLavagem => 
                         <RoupaEmLavagemOperacoes key={roupaEmLavagem.roupa.oid} roupaEmLavagem={roupaEmLavagem} />
                     )}
                 </ScrollView>
