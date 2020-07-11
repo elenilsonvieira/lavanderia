@@ -103,6 +103,8 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
     };
 
     selecionarRoupa = (roupaEmLavagem) => {
+        this.setState({modalVisible: true});
+
         var roupasSelecionadas = [];
         var jaContem = false;
 
@@ -120,7 +122,7 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
             roupasSelecionadas = [...roupasSelecionadas, roupaEmLavagem];
         }
 
-        this.setState({roupasSelecionadas});
+        this.setState({roupasSelecionadas, modalVisible: false});
     };
 
     roupaJaSelecionada = (roupaEmLavagem) => {
