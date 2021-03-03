@@ -70,7 +70,7 @@ export default class LavagemDetailsEdit extends React.Component {
             case 'Passando': status = 2; break;
             case 'EmDeslocamentoParaOPontoDeColeta': status = 3; break;
             case 'Pronta': status = 4; break;
-            case 'Entregue': capital = 5; break;
+            case 'Entregue': status = 5; break;
             default: ;
         }
 
