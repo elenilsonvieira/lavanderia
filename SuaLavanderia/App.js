@@ -61,6 +61,7 @@ import OperacoesTapeteScreen from './screens/OperacoesTapeteScreen';
 import OperacaoLavarTapeteScreen from './screens/OperacaoLavarTapeteScreen';
 import OperacaoProntoTapeteScreen from './screens/OperacaoProntoTapeteScreen';
 import OperacaoEntregarTapeteScreen from './screens/OperacaoEntregarTapeteScreen';
+import BuscaEntregaScreen from './screens/BuscaEntregaScreen';
 
 export default class App extends Component {
   render() {
@@ -82,6 +83,7 @@ const DrawerAdministrador = createDrawerNavigator(
     OperacoesTapete: OperacoesTapeteScreen,
     BancoDeHoras: BancoDeHorasScreen,
     Usuario: UsuarioScreen,
+    BuscaEntrega: BuscaEntregaScreen,
     // Tipo: TipoScreen,
     // Tamanho: TamanhoScreen,
     // Tecido: TecidoScreen,
@@ -110,6 +112,7 @@ const DrawerGerenteGeral = createDrawerNavigator(
     OperacoesTapete: OperacoesTapeteScreen,
     BancoDeHoras: BancoDeHorasScreen,
     Usuario: UsuarioScreen,
+    BuscaEntrega: BuscaEntregaScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -132,6 +135,7 @@ const DrawerSubGerenteGeral = createDrawerNavigator(
     OperacoesTapete: OperacoesTapeteScreen,
     BancoDeHoras: BancoDeHorasScreen,
     Usuario: UsuarioScreen,
+    BuscaEntrega: BuscaEntregaScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -183,6 +187,10 @@ const DrawerSupervisorDeOperacoes = createDrawerNavigator(
 const DrawerOperacoes = createDrawerNavigator(
   {
     Home: HomeScreen,
+    Lavagem: LavagemScreenOperacoes,
+    Operacoes: OperacoesCelularScreen,
+    Roupa: RoupaScreen,
+    Material: MaterialScreenPapelOperacoes,
     BancoDeHoras: BancoDeHorasScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
@@ -217,6 +225,7 @@ const DrawerAtendente = createDrawerNavigator(
     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
     Caixa: CaixaScreen,
     Usuario: UsuarioScreen,
+    BuscaEntrega: BuscaEntregaScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
