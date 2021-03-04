@@ -4,6 +4,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import BuscaEntrega from "../components/BuscaEntrega";
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';
+import ConfirmacaoModalComDetalhes from '../components/modals/ConfirmacaoModalComDetalhes';
 
 export default class BuscaEntregaScreen extends React.Component {
 
@@ -21,6 +22,7 @@ export default class BuscaEntregaScreen extends React.Component {
         objetos: [],
         dataInicial: '',
         dataFinal: '',
+        objeto: {},
         modalVisible: false,
         confirmacaoModalVisible: false,
         listaDeComprasModalVisible: false,
@@ -228,8 +230,8 @@ export default class BuscaEntregaScreen extends React.Component {
         });
     }
 
-    openModal = (materialOid) => {
-        this.setState({confirmacaoModalVisible: true, materialOid});
+    openModal = (objeto) => {
+        this.setState({confirmacaoModalVisible: true, objeto});
     };
 
     openModalListaDeCompras = () => {
@@ -246,45 +248,52 @@ export default class BuscaEntregaScreen extends React.Component {
 
     navegarParaDetalhes = () => {
         this.setState({confirmacaoModalVisible: false});
-        this.props.navigation.navigate("MaterialDetails", { materialOid: this.state.materialOid, acao: this.acao })
+        this.props.navigation.navigate("LavagemDetails", { objeto: this.state.objeto.lavagem, acao: this.acao })
     };
 
-    acao = async (quantidade, modo) => {
-        this.setState({confirmacaoModalVisible: false, modalVisible: true, quantidade, modo});
+    acao = async () => {
+        this.setState({confirmacaoModalVisible: false, modalVisible: true});
 
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
-        var usuarioOid = this.props.navigation.getParam('usuarioOid');
-        var usarUsuarioLogado = false;
 
-        if(!usuarioOid){
-            usuarioOid = usuario.oid;
-            usarUsuarioLogado = true;
-        }
+        if(this.state.objeto.lavagem){
 
-        var argumentos = `materialOid=${this.state.materialOid}&usuarioOid=${usuarioOid}&quantidade=${this.state.quantidade}&modo=${this.state.modo}`;
+            var argumentos = `oid=${this.state.objeto.lavagem.oid}&status=entregue`;
 
-        try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeMaterial.aspx?${argumentos}&login=${email}&senha=${hash}`, 
-                { 
-                    method: 'post' 
-                });
-            
-            if(call.status != 200){
-                alert('Erro.' + call.statusText);    
-            }            
-        }catch(erro){
-            alert('Erro.' + erro);
+            try {
+                const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`,
+                    {
+                        method: 'post'
+                    });
+
+                if (call.status != 200) {
+                    alert('Erro.' + call.statusText);
+                }
+            } catch (erro) {
+                alert('Erro.' + erro);
+            }
+
+        }else{
+            var argumentos = `oid=${this.state.objeto.oid}&atendida=true`;
+
+            try {
+                const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarSolicitacaoDeBusca.aspx?${argumentos}&login=${email}&senha=${hash}`,
+                    {
+                        method: 'post'
+                    });
+
+                if (call.status != 200) {
+                    alert('Erro.' + call.statusText);
+                }
+            } catch (erro) {
+                alert('Erro.' + erro);
+            }
         }
 
         this.setState({modalVisible: false});
-
-        if(usarUsuarioLogado){
-            this.buscar();
-        }else{
-            this.props.navigation.navigate('Home');
-        }
+        this.buscar();
     };
 
     navegarParaListaDeCompras = async (dataDaCompra) => {
@@ -329,13 +338,16 @@ export default class BuscaEntregaScreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto.oid)}>
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto)}>
                             <BuscaEntrega key={objeto.oid} objeto={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
+
+                <ConfirmacaoModalComDetalhes visible={this.state.confirmacaoModalVisible} texto="Confirmar Atendida?" 
+                    onSim={this.acao} onNao={this.closeModal} onDetalhes={this.navegarParaDetalhes}/>
             </View>
         );
     }
