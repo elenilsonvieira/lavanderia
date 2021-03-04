@@ -101,8 +101,8 @@ android {
         applicationId "com.sualavanderia"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 29
-        versionName "20.7.11.1"
+        versionCode 30
+        versionName "21.3.3.1"
         ndk {
             abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
         }
