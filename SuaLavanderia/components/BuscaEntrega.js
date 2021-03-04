@@ -48,6 +48,11 @@ export default class BuscaEntrega extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Unidade: </Text>
+                        <Text style={styles.lavagemInfo}>{this.props.objeto.unidade}</Text>
+                    </View>
+
+                    <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Observações: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.objeto.observacoes}</Text>
                     </View>
