@@ -260,7 +260,7 @@ export default class BuscaEntregaScreen extends React.Component {
 
         if(this.state.objeto.lavagem){
 
-            var argumentos = `oid=${this.state.objeto.lavagem.oid}&status=entregue`;
+            var argumentos = `oid=${this.state.objeto.lavagem.oid}&status=5`;
 
             try {
                 const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`,
