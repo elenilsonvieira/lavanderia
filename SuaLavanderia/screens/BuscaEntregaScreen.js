@@ -246,9 +246,19 @@ export default class BuscaEntregaScreen extends React.Component {
         this.setState({listaDeComprasModalVisible: false});
     };
 
+    pagar(){
+        const lavagem = this.state.objeto.lavagem;
+        
+        if(lavagem.paga != 'Não/Parcialmente'){
+            alert("Essa lavagem já está paga!");
+        }else{
+            this.setState({confirmacaoModalVisible: false});
+            this.props.navigation.navigate('MovimentacaoDeCaixaDetails', {lavagem: lavagem, reload: this.buscar.bind(this)});
+        }
+    }
+
     navegarParaDetalhes = () => {
-        this.setState({confirmacaoModalVisible: false});
-        this.props.navigation.navigate("LavagemDetails", { objeto: this.state.objeto.lavagem, acao: this.acao })
+        this.pagar();
     };
 
     acao = async () => {
