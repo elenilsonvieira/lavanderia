@@ -269,7 +269,7 @@ export default class BuscaEntregaScreen extends React.Component {
     navegarParaLigar = () => {
         const objeto = this.state.objeto;
         
-        Linking.openURL(`+${objeto.telefone}`); 
+        Linking.openURL(`tel:${objeto.telefone}`); 
     };
 
     acao = async () => {
