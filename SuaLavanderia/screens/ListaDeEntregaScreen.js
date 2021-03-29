@@ -239,7 +239,7 @@ export default class ListaDeEntregaScreen extends React.Component {
     }
 
     navegarParaDetalhes = (objeto) => {
-        this.props.navigation.navigate("ListaDeEntregaDetails", { objeto: objeto})
+        this.props.navigation.navigate("ListaDeEntregaDetailsAtendente", { objeto: objeto})
     };
 
     acao = async (data, unidade) => {

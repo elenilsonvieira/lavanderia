@@ -53,6 +53,7 @@ import BancoDeHorasDetails from './screens/details/BancoDeHorasDetails';
 import FechamentoDePontoDetails from './screens/details/FechamentoDePontoDetails';
 import OperacaoListaDeEntregaScreen from './screens/OperacaoListaDeEntregaScreen';
 import ListaDeEntregaDetails from './screens/details/ListaDeEntregaDetails';
+import ListaDeEntregaDetailsAtendente from './screens/details/ListaDeEntregaDetailsAtendente';
 import LavagemParaListaDeEntregaScreen from './screens/LavagemParaListaDeEntregaScreen';
 import UsuarioScreen from './screens/UsuarioScreen';
 import UsuarioDetails from './screens/details/UsuarioDetails';
@@ -285,6 +286,7 @@ const StackAdministrador = createStackNavigator(
     ListaDeCompras: ListaDeComprasScreen,
     BancoDeHorasDetails: BancoDeHorasDetails,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
+    ListaDeEntregaDetailsAtendente: ListaDeEntregaDetailsAtendente,
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
@@ -327,6 +329,7 @@ const StackGerenteGeral = createStackNavigator(
     ListaDeCompras: ListaDeComprasScreen,
     BancoDeHorasDetails: BancoDeHorasDetails,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
+    ListaDeEntregaDetailsAtendente: ListaDeEntregaDetailsAtendente,
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
@@ -370,6 +373,7 @@ const StackSubGerenteGeral = createStackNavigator(
     ListaDeCompras: ListaDeComprasScreen,
     BancoDeHorasDetails: BancoDeHorasDetails,
     ListaDeEntregaDetails: ListaDeEntregaDetails,
+    ListaDeEntregaDetailsAtendente: ListaDeEntregaDetailsAtendente,
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     UsuarioDetails: UsuarioDetails,
@@ -517,6 +521,7 @@ const StackAtendente = createStackNavigator(
     RoupasDoCliente: RoupasDoClienteScreen,
     RoupaDetails: RoupaDetails,
     UsuarioDetails: UsuarioDetails,
+    ListaDeEntregaDetailsAtendente: ListaDeEntregaDetailsAtendente,
     Drawer: DrawerAtendente,
   },{
     initialRouteName: 'Drawer',
