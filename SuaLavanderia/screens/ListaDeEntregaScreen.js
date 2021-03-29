@@ -73,7 +73,7 @@ export default class ListaDeEntregaScreen extends React.Component {
         var email = usuario.email;
 
         var hoje = new Date();
-        var diasAtras = new Date();
+        var diasAtras = new Date(new Date().getTime() - 1 * 24*60*60*1000);
 
         var dataInicial = this.state.dataInicial;
         var dataFinal = this.state.dataFinal;
