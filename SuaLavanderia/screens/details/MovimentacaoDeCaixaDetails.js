@@ -36,7 +36,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             this.dataEscolhida(new Date());
 
             if(lavagem != null){
-                const valor = lavagem.valor.toString();
+                const valor = lavagem.saldoDevedor.toString();
                 const modo = 'Entrada';
 
                 this.setState({valor, modo});

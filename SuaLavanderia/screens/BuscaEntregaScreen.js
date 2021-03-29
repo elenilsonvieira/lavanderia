@@ -4,7 +4,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import BuscaEntrega from "../components/BuscaEntrega";
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';
-import ConfirmacaoModalComDetalhes from '../components/modals/ConfirmacaoModalComDetalhes';
+import ConfirmacaoModalBuscaEntrega from '../components/modals/ConfirmacaoModalBuscaEntrega';
 
 export default class BuscaEntregaScreen extends React.Component {
 
@@ -257,8 +257,19 @@ export default class BuscaEntregaScreen extends React.Component {
         }
     }
 
-    navegarParaDetalhes = () => {
+    navegarParaPagar = () => {
         this.pagar();
+    };
+
+    navegarParaWaze = () => {
+        const objeto = this.state.objeto;
+        Linking.openURL(`https://waze.com/ul?q=${objeto.endereco}&navigate=yes`); 
+    };
+
+    navegarParaLigar = () => {
+        const lavagem = this.state.objeto.lavagem;
+        
+        Linking.openURL(`+${objeto.telefone}`); 
     };
 
     acao = async () => {
@@ -356,8 +367,8 @@ export default class BuscaEntregaScreen extends React.Component {
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
 
-                <ConfirmacaoModalComDetalhes visible={this.state.confirmacaoModalVisible} texto="Confirmar Atendida?" 
-                    onSim={this.acao} onNao={this.closeModal} onDetalhes={this.navegarParaDetalhes}/>
+                <ConfirmacaoModalBuscaEntrega visible={this.state.confirmacaoModalVisible} texto="Confirmar Atendida?" 
+                    onSim={this.acao} onNao={this.closeModal} onPagar={this.navegarParaPagar}/>
             </View>
         );
     }

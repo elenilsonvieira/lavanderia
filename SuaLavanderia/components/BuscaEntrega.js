@@ -43,6 +43,11 @@ export default class BuscaEntrega extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
+                        <Text style={styles.lavagemInfoTitle}>Saldo Devedor: </Text>
+                        <Text style={styles.lavagemInfo}>R$ {this.props.objeto.lavagem != null ? this.props.objeto.lavagem.saldoDevedor : ''}</Text>
+                    </View>
+
+                    <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Paga: </Text>
                         <Text style={styles.lavagemInfo}>{this.props.objeto.lavagem != null ? this.props.objeto.lavagem.paga : ''}</Text>
                     </View>
