@@ -62,6 +62,7 @@ import OperacaoLavarTapeteScreen from './screens/OperacaoLavarTapeteScreen';
 import OperacaoProntoTapeteScreen from './screens/OperacaoProntoTapeteScreen';
 import OperacaoEntregarTapeteScreen from './screens/OperacaoEntregarTapeteScreen';
 import BuscaEntregaScreen from './screens/BuscaEntregaScreen';
+import ListaDeEntregaScreen from './screens/ListaDeEntregaScreen';
 
 export default class App extends Component {
   render() {
@@ -82,6 +83,7 @@ const DrawerAdministrador = createDrawerNavigator(
     Operacoes: OperacoesCelularScreen,
     OperacoesTapete: OperacoesTapeteScreen,
     BuscaEntrega: BuscaEntregaScreen,
+    ListaDeEntrega: ListaDeEntregaScreen,
     BancoDeHoras: BancoDeHorasScreen,
     Usuario: UsuarioScreen,
     // Tipo: TipoScreen,
@@ -111,6 +113,7 @@ const DrawerGerenteGeral = createDrawerNavigator(
     Operacoes: OperacoesCelularScreen,
     OperacoesTapete: OperacoesTapeteScreen,
     BuscaEntrega: BuscaEntregaScreen,
+    ListaDeEntrega: ListaDeEntregaScreen,
     BancoDeHoras: BancoDeHorasScreen,
     Usuario: UsuarioScreen,
     Sobre: SobreScreen,
@@ -134,6 +137,7 @@ const DrawerSubGerenteGeral = createDrawerNavigator(
     Operacoes: OperacoesCelularScreen,
     OperacoesTapete: OperacoesTapeteScreen,
     BuscaEntrega: BuscaEntregaScreen,
+    ListaDeEntrega: ListaDeEntregaScreen,
     BancoDeHoras: BancoDeHorasScreen,
     Usuario: UsuarioScreen,
     Sobre: SobreScreen,
@@ -225,6 +229,7 @@ const DrawerAtendente = createDrawerNavigator(
     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
     Caixa: CaixaScreen,
     BuscaEntrega: BuscaEntregaScreen,
+    ListaDeEntrega: ListaDeEntregaScreen,
     Usuario: UsuarioScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
