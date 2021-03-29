@@ -267,7 +267,7 @@ export default class BuscaEntregaScreen extends React.Component {
     };
 
     navegarParaLigar = () => {
-        const lavagem = this.state.objeto.lavagem;
+        const objeto = this.state.objeto;
         
         Linking.openURL(`+${objeto.telefone}`); 
     };
@@ -368,7 +368,8 @@ export default class BuscaEntregaScreen extends React.Component {
                 <LoadingModal modalVisible={this.state.modalVisible} />
 
                 <ConfirmacaoModalBuscaEntrega visible={this.state.confirmacaoModalVisible} texto="Confirmar Atendida?" 
-                    onSim={this.acao} onNao={this.closeModal} onPagar={this.navegarParaPagar}/>
+                    onSim={this.acao} onNao={this.closeModal} onPagar={this.navegarParaPagar} 
+                    onWaze={this.navegarParaWaze} onLigar={this.navegarParaLigar}  />
             </View>
         );
     }
