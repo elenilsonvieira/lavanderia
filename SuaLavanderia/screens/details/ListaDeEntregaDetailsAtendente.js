@@ -147,13 +147,44 @@ export default class ListaDeEntregaDetailsAtendente extends React.Component {
         Linking.openURL("http://sualavanderia.com.br/videos/ListaDeEntregaDetails.mp4");
     };
 
+    acao = async () => {
+        if(this.state.objeto.status == 'Conferida'){
+            alert('Lista já está conferida');
+        }else{
+            this.setState({confirmacaoModalVisible: false, modalVisible: true});
+
+            var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
+            var hash = this.hash(usuario);
+            var email = usuario.email;
+
+            var argumentos = `oid=${this.state.objeto.oid}`;
+
+            try{
+                const call = await fetch(`http://painel.sualavanderia.com.br/api/AtualizarListaDeEntregaDeLavagens.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+                    { 
+                        method: 'post' 
+                    });
+                
+                if(call.status != 200){
+                    alert('Erro.' + call.statusText);    
+                }            
+            }catch(erro){
+                alert('Erro.' + erro);
+            }
+
+            this.setState({modalVisible: false});
+
+            this.props.navigation.navigate('ListaDeEntrega');
+        }
+    };
+
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.infoTitle}>Lista de Entrega</Text>
                     
-                    <TouchableOpacity onPress={() => this.navegarParaBuscarLavagens()} style={styles.button}>
+                    <TouchableOpacity onPress={() => this.acao()} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/Legal_32x32.png')} />
                     </TouchableOpacity>
                 </View>
