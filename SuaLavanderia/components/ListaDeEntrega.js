@@ -4,9 +4,15 @@ import {StyleSheet, Text, View} from 'react-native';
 export default class ListaDeEntrega extends React.Component {
 
     render(){
+        var estiloDeAlerta = {};
+
+        if(this.props.objeto.status == 'Conferida'){
+            estiloDeAlerta = styles.alertaVerde;
+        } 
+
         return(
             <View style={styles.container}>
-                <View style={styles.unidadeContainer}>
+                <View style={[styles.unidadeContainer, estiloDeAlerta]}>
                     <View style={styles.lavagemInfoContainerCliente}>
                         <Text style={styles.lavagemInfoCliente}>{this.props.objeto.data} - {this.props.objeto.unidade.nome}</Text>
                     </View>
@@ -100,5 +106,9 @@ const styles = StyleSheet.create(
             padding: 10,
             backgroundColor: '#DDD',
         },
+        alertaVerde: { 
+            borderWidth: 10, 
+            borderColor: 'green'
+        }
     }
 );

@@ -410,5 +410,9 @@ const styles = StyleSheet.create(
             width: 24,
             height: 24,
         },
+        alertaVerde: { 
+            borderWidth: 10, 
+            borderColor: 'green'
+        }
     }
 );
