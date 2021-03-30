@@ -174,6 +174,7 @@ export default class ListaDeEntregaDetailsAtendente extends React.Component {
 
             this.setState({modalVisible: false});
 
+            this.props.navigation.state.params.reload();
             this.props.navigation.navigate('ListaDeEntrega');
         }
     };
