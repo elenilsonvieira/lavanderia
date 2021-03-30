@@ -26,7 +26,8 @@ export default class SobreScreen extends Component {
       <View style={styles.container}>
         <Image source={require('../images/logo.png')} />
         <Text style={styles.welcome}>Aplicativo da Sua Lavanderia</Text>
-        <Text style={styles.instructions}>Versão 21.3.29.1</Text>
+        <Text style={styles.instructions}>Versão 21.3.30.1</Text>
+        <Text style={styles.instructions}>@Copyright - Elenilson Vieira da Silva Filho</Text>
       </View>
     );
   }
