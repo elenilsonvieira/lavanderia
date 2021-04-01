@@ -24,6 +24,7 @@ export default class LavagemScreen extends React.Component {
         status: '',
         objetos: [],
         modalVisible: false,
+        datasAlteradas: false,
     };
 
     dataString = () => {
@@ -77,6 +78,7 @@ export default class LavagemScreen extends React.Component {
 
         var dataInicial = this.state.dataInicial;
         var dataFinal = this.state.dataFinal;
+        var dataInicialAlterada = false;
 
         if(dataInicial == ''){
             var mes = diasAtras.getMonth() + 1;
@@ -108,6 +110,23 @@ export default class LavagemScreen extends React.Component {
             dataFinal = dia + '/' + mes + '/' + hoje.getFullYear();
 
             this.setState({dataInicial, dataFinal});
+        }
+
+        if(this.state.nome && !this.state.datasAlteradas){
+            diasAtras = new Date(new Date().getTime() - 90 * 24*60*60*1000);
+            var mes = diasAtras.getMonth() + 1;
+            if(mes < 10){
+                mes = '0' + mes;
+            }
+
+            var dia = diasAtras.getDate();
+            if(dia < 10){
+                dia = '0' + dia;
+            }
+
+            dataInicial = dia + '/' + mes + '/' + diasAtras.getFullYear();
+
+            this.setState({dataInicial});
         }
 
         var dataInicialArray = dataInicial.split('/');
@@ -257,6 +276,7 @@ export default class LavagemScreen extends React.Component {
         this.setState({ 
             dataInicialPickerVisible: false,
             dataInicial: dataEscolhidaString,
+            datasAlteradas: true,
         });
     }
 
@@ -279,6 +299,7 @@ export default class LavagemScreen extends React.Component {
         this.setState({ 
             dataFinalPickerVisible: false,
             dataFinal: dataEscolhidaString,
+            datasAlteradas: true,
         });
     }
 
