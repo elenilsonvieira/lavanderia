@@ -103,6 +103,11 @@ export default class SelecionarUsuarioDetails extends React.Component {
         Linking.openURL("http://sualavanderia.com.br/videos/UsuarioScreen.mp4");
     };
 
+    usuarioSelecionado = (usuario) => {
+        this.props.navigation.state.params.acao(usuario);
+        this.props.navigation.goBack();
+    };
+
     render(){
         return(
             <View style={styles.container}>
@@ -127,7 +132,7 @@ export default class SelecionarUsuarioDetails extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('UsuarioDetails', {objeto: objeto})}>
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.usuarioSelecionado(objeto)}>
                             <Usuario objeto={objeto} />
                         </TouchableOpacity>
                     )}
