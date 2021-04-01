@@ -272,6 +272,10 @@ export default class BuscaEntregaScreen extends React.Component {
         Linking.openURL(`tel:${objeto.telefone}`); 
     };
 
+    navegarParaNovo = () => {
+        this.props.navigation.navigate('BuscaDetails', {reload: this.buscar.bind(this)});
+    };
+
     acao = async () => {
         this.setState({confirmacaoModalVisible: false, modalVisible: true});
 
@@ -355,6 +359,13 @@ export default class BuscaEntregaScreen extends React.Component {
                             <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
                         </TouchableOpacity>
                     </View>
+                    <View style={styles.viewHeaderSegundaLinha}>
+                        <View style={styles.viewBotao}>
+                            <TouchableOpacity onPress={this.navegarParaNovo} style={styles.button}>
+                                <Image style={styles.icon} source={require('../images/novo_32x32.png')} />
+                            </TouchableOpacity>
+                        </View>                            
+                    </View>
                 </View>
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
@@ -389,7 +400,6 @@ const styles = StyleSheet.create(
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: '#FFF',
-            flexDirection: 'row',
           },
           headerText: {
               fontSize: 22,

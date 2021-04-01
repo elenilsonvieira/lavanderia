@@ -64,6 +64,7 @@ import OperacaoProntoTapeteScreen from './screens/OperacaoProntoTapeteScreen';
 import OperacaoEntregarTapeteScreen from './screens/OperacaoEntregarTapeteScreen';
 import BuscaEntregaScreen from './screens/BuscaEntregaScreen';
 import ListaDeEntregaScreen from './screens/ListaDeEntregaScreen';
+import BuscaDetails from './screens/details/BuscaDetails';
 
 export default class App extends Component {
   render() {
@@ -291,6 +292,7 @@ const StackAdministrador = createStackNavigator(
     OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     UsuarioDetails: UsuarioDetails,
+    BuscaDetails: BuscaDetails,
     Drawer: DrawerAdministrador,
   },{
     initialRouteName: 'Drawer',
@@ -334,6 +336,7 @@ const StackGerenteGeral = createStackNavigator(
     OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     UsuarioDetails: UsuarioDetails,
+    BuscaDetails: BuscaDetails,
     Drawer: DrawerGerenteGeral,
   },{
     initialRouteName: 'Drawer',
@@ -377,6 +380,7 @@ const StackSubGerenteGeral = createStackNavigator(
     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     UsuarioDetails: UsuarioDetails,
+    BuscaDetails: BuscaDetails,
     Drawer: DrawerSubGerenteGeral,
   },{
     initialRouteName: 'Drawer',
@@ -522,6 +526,7 @@ const StackAtendente = createStackNavigator(
     RoupaDetails: RoupaDetails,
     UsuarioDetails: UsuarioDetails,
     ListaDeEntregaDetailsAtendente: ListaDeEntregaDetailsAtendente,
+    BuscaDetails: BuscaDetails,
     Drawer: DrawerAtendente,
   },{
     initialRouteName: 'Drawer',
