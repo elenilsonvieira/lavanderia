@@ -10,7 +10,7 @@ export default class BuscaDetails extends React.Component {
         data: '',
         hora: '09:00',
         nomeDoCliente: '',
-        cliente: {},
+        cliente: null,
         dataTimePickerVisible: false,
     };
 
@@ -19,56 +19,40 @@ export default class BuscaDetails extends React.Component {
     }
 
     async salvar(props) {
+        if(!this.state.cliente){
+            alert('Selecione um cliente');
+            return;
+        }
+
+        var parteHora = this.state.hora.split(':')[0];
+        var parteMinutos = this.state.hora.split(':')[1];
+
+        if(parteHora == "" || isNaN(parteHora) || parseInt(parteHora)>23
+            || parteMinutos == "" || isNaN(parteMinutos) || parseInt(parteMinutos)>59)
+        {
+            alert("Hora inválida");
+            return;
+        }
+
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const movimentacao = this.props.navigation.getParam('movimentacao');
-        const lavagem = this.props.navigation.getParam('lavagem');
-
-        const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : email;
-
-        var capital = '0';
-
-        switch(this.state.capital){
-            case 'Dinheiro': capital = 0; break;
-            case 'Cheque': capital = 3; break;
-            case 'Boleto': capital = 4; break;
-            case 'PagSeguroDebito': capital = 6; break;
-            case 'PagSeguroCredito': capital = 7; break;
-            case 'TransferenciaBB': capital = 8; break;
-            case 'TransferenciaCaixa': capital = 9; break;
-            case 'PicPay': capital = 10; break;
-            default: ;
-        }
-
         var dataArray = this.state.data.split('/');
         const data = dataArray[2] + '-'+ dataArray[1] + '-' + dataArray[0];
 
-        var argumentos = 'data=' + data + '&capital=' + capital + '&valor=' + this.state.valor + '&observacoes=' + this.state.observacoes + '&responsavelOid=' + responsavelOid + '&modo=' + this.state.modo + '&contaDeEntrada=' + this.state.contaDeEntrada + '&contaDeSaida=' + this.state.contaDeSaida;
+        var argumentos = 'data=' + data + '&clienteOid=' + this.state.cliente.oid + '&hora=' + this.state.hora + '&observacoes=' + this.state.observacoes;
 
-        if(movimentacao != null){
-            argumentos += '&oid=' + movimentacao.oid;
-        }
-
-        if(lavagem != null){
-            argumentos += '&lavagemOid=' + lavagem.oid;
-        }
-
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarSolicitacaoDeBusca.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             }).then(function(response){
-                alert(movimentacao == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
-
-                if(lavagem != null){
-                    props.navigation.state.params.reload();
-                }
-
+                alert('Adicionado com sucesso!');
+                props.navigation.state.params.reload();
                 props.navigation.goBack();
             }
             ).catch(function(error){
-                alert('Erro adicionando a movimentação de caixa.' + error);    
+                alert('Erro adicionando busca.' + error);    
             });        
     }
 
