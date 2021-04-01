@@ -16,6 +16,7 @@ export default class UsuarioDetails extends React.Component {
     };
 
     async componentDidMount(){
+        this.setState({objeto: this.props.navigation.getParam('objeto')});
         this.buscar();
     }
 
@@ -218,6 +219,10 @@ export default class UsuarioDetails extends React.Component {
         props.navigation.navigate('MovimentacaoDeCaixaDetails', {movimentacao: movimentacaoEmCaixa, reload: this.buscar.bind(this)});
     }
 
+    navegarParaLavagensPendentes = () => {
+        this.props.navigation.navigate('LavagensPendentesDetails', {objeto: this.state.objeto});
+    }
+
     openVideoInformativo = () => {
         Linking.openURL("http://sualavanderia.com.br/videos/UsuarioDetails.mp4");
     };
@@ -227,7 +232,7 @@ export default class UsuarioDetails extends React.Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={styles.viewHeader}>
-                        <TouchableOpacity onPress={this.buscar} style={styles.button}>
+                        <TouchableOpacity onPress={this.navegarParaLavagensPendentes} style={styles.button}>
                             <Image style={styles.icon} source={require('../../images/Pendente_32x32.png')} />
                         </TouchableOpacity>
                     </View>

@@ -66,6 +66,7 @@ import BuscaEntregaScreen from './screens/BuscaEntregaScreen';
 import ListaDeEntregaScreen from './screens/ListaDeEntregaScreen';
 import BuscaDetails from './screens/details/BuscaDetails';
 import SelecionarUsuarioDetails from './screens/details/SelecionarUsuarioDetails';
+import LavagensPendentesDetails from './screens/details/LavagensPendentesDetails';
 
 export default class App extends Component {
   render() {
@@ -295,6 +296,7 @@ const StackAdministrador = createStackNavigator(
     UsuarioDetails: UsuarioDetails,
     BuscaDetails: BuscaDetails,
     SelecionarUsuarioDetails: SelecionarUsuarioDetails,
+    LavagensPendentesDetails: LavagensPendentesDetails,
     Drawer: DrawerAdministrador,
   },{
     initialRouteName: 'Drawer',
@@ -340,6 +342,7 @@ const StackGerenteGeral = createStackNavigator(
     UsuarioDetails: UsuarioDetails,
     BuscaDetails: BuscaDetails,
     SelecionarUsuarioDetails: SelecionarUsuarioDetails,
+    LavagensPendentesDetails: LavagensPendentesDetails,
     Drawer: DrawerGerenteGeral,
   },{
     initialRouteName: 'Drawer',
@@ -385,6 +388,7 @@ const StackSubGerenteGeral = createStackNavigator(
     UsuarioDetails: UsuarioDetails,
     BuscaDetails: BuscaDetails,
     SelecionarUsuarioDetails: SelecionarUsuarioDetails,
+    LavagensPendentesDetails: LavagensPendentesDetails,
     Drawer: DrawerSubGerenteGeral,
   },{
     initialRouteName: 'Drawer',
@@ -532,6 +536,7 @@ const StackAtendente = createStackNavigator(
     ListaDeEntregaDetailsAtendente: ListaDeEntregaDetailsAtendente,
     BuscaDetails: BuscaDetails,
     SelecionarUsuarioDetails: SelecionarUsuarioDetails,
+    LavagensPendentesDetails: LavagensPendentesDetails,
     Drawer: DrawerAtendente,
   },{
     initialRouteName: 'Drawer',
