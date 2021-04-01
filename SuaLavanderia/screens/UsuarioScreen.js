@@ -72,7 +72,11 @@ export default class UsuarioScreen extends React.Component {
             var hash = this.hash(usuario);
             var email = usuario.email;
 
-            var argumentos = `papeis=${this.state.papel}&nome=${this.state.nome}`;
+            var argumentos = `nome=${this.state.nome}`;
+
+            if(this.state.papel != ''){
+                argumentos += `&papeis=${this.state.papel}`;
+            }
 
             try{
                 const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarUsuario.aspx?${argumentos}&login=${email}&senha=${hash}`, 
@@ -144,6 +148,7 @@ export default class UsuarioScreen extends React.Component {
                                     <Picker.Item label='Gerente Geral' value='GerenteGeral' />
                                     <Picker.Item label='Sub-gerente Geral' value='SubGerenteGeral' />
                                     <Picker.Item label='Entregador' value='Entregador' />
+                                    <Picker.Item label='Tudo' value='' />
                                 </Picker>
                             </View>
 
