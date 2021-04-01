@@ -65,6 +65,7 @@ import OperacaoEntregarTapeteScreen from './screens/OperacaoEntregarTapeteScreen
 import BuscaEntregaScreen from './screens/BuscaEntregaScreen';
 import ListaDeEntregaScreen from './screens/ListaDeEntregaScreen';
 import BuscaDetails from './screens/details/BuscaDetails';
+import SelecionarUsuarioDetails from './screens/details/SelecionarUsuarioDetails';
 
 export default class App extends Component {
   render() {
@@ -293,6 +294,7 @@ const StackAdministrador = createStackNavigator(
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     UsuarioDetails: UsuarioDetails,
     BuscaDetails: BuscaDetails,
+    SelecionarUsuarioDetails: SelecionarUsuarioDetails,
     Drawer: DrawerAdministrador,
   },{
     initialRouteName: 'Drawer',
@@ -337,6 +339,7 @@ const StackGerenteGeral = createStackNavigator(
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     UsuarioDetails: UsuarioDetails,
     BuscaDetails: BuscaDetails,
+    SelecionarUsuarioDetails: SelecionarUsuarioDetails,
     Drawer: DrawerGerenteGeral,
   },{
     initialRouteName: 'Drawer',
@@ -381,6 +384,7 @@ const StackSubGerenteGeral = createStackNavigator(
     FechamentoDePontoDetails: FechamentoDePontoDetails,
     UsuarioDetails: UsuarioDetails,
     BuscaDetails: BuscaDetails,
+    SelecionarUsuarioDetails: SelecionarUsuarioDetails,
     Drawer: DrawerSubGerenteGeral,
   },{
     initialRouteName: 'Drawer',
@@ -527,6 +531,7 @@ const StackAtendente = createStackNavigator(
     UsuarioDetails: UsuarioDetails,
     ListaDeEntregaDetailsAtendente: ListaDeEntregaDetailsAtendente,
     BuscaDetails: BuscaDetails,
+    SelecionarUsuarioDetails: SelecionarUsuarioDetails,
     Drawer: DrawerAtendente,
   },{
     initialRouteName: 'Drawer',

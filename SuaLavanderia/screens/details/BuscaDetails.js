@@ -170,11 +170,7 @@ export default class BuscaDetails extends React.Component {
 
                     <Text style={styles.infoTitle}>Cliente: </Text>
                     <TouchableOpacity onPress={this.navegarParaBuscarCliente}>
-                        <TextInput
-                            style={styles.boxInput}
-                            value={this.state.nomeDoCliente}
-                            onChangeText={nomeDoCliente => this.setState({nomeDoCliente})}
-                        />
+                        <Text style={styles.boxInput}>{this.state.nomeDoCliente}</Text>
                     </TouchableOpacity>
 
                     <Text style={styles.infoTitle}>Observações: </Text>
