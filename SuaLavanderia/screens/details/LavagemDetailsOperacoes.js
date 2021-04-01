@@ -51,6 +51,10 @@ export default class LavagemDetailsOperacoes extends React.Component {
     };
 
     openModal = () => {
+        if(this.props.navigation.getParam("inativarModal")){
+            return;
+        }
+
         this.setState({confirmacaoModalVisible: true});
     };
     

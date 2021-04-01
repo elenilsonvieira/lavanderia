@@ -165,7 +165,9 @@ export default class ListaDeEntregaDetails extends React.Component {
                     </View>
                     
                     { this.state.lavagens.map(objeto => 
-                        <LavagemEmListaDeEntrega key={objeto.lavagem.oid} objeto={objeto} />
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('LavagemDetails', { lavagem: objeto.lavagem, inativarModal: true })}>
+                            <LavagemEmListaDeEntrega key={objeto.lavagem.oid} objeto={objeto} />
+                        </TouchableOpacity>
                     )}
                 </ScrollView>
 
