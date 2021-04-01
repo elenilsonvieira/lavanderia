@@ -99,7 +99,7 @@ export default class LavagemScreen extends React.Component {
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var argumentos = `status=${this.state.status}&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}`;
+        var argumentos = `status=${this.state.status}&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&incluirRoupas=false`;
 
         if(this.state.nome != ''){
             argumentos += '&nome=' + this.state.nome;
@@ -181,6 +181,10 @@ export default class LavagemScreen extends React.Component {
                         unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
                         quantidadeDePecas: objetoResponse.QuantidadeDePecas,
                         observacoes: objetoResponse.Observacoes,
+                        alertaAmarelo: objetoResponse.AlertaAmarelo,
+                        alertaVerde: objetoResponse.AlertaVerde,
+                        alertaVermelho: objetoResponse.AlertaVermelho,
+                        alertaCinza: objetoResponse.AlertaCinza,
                         roupas: roupas,
                         status: objetoResponse.Status,
                         avaliacao: avaliacao,

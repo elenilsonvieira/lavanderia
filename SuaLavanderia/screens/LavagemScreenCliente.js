@@ -176,6 +176,10 @@ export default class LavagemScreenCliente extends React.Component {
                     unidadeDeRecebimento: objetoResponse.UnidadeDeRecebimento,
                     quantidadeDePecas: objetoResponse.QuantidadeDePecas,
                     pesoDaPassagem: objetoResponse.PesoDaPassagem,
+                    alertaAmarelo: objetoResponse.AlertaAmarelo,
+                    alertaVerde: objetoResponse.AlertaVerde,
+                    alertaVermelho: objetoResponse.AlertaVermelho,
+                    alertaCinza: objetoResponse.AlertaCinza,
                     roupas: roupas,
                     status: objetoResponse.Status,
                 };    
