@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, ScrollView, Linking, AsyncStorage } from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, ScrollView, Linking, AsyncStorage, Image } from 'react-native';
 
 import Usuario from '../../components/Usuario';
 import Lavagem from '../../components/Lavagem';
@@ -225,6 +225,14 @@ export default class UsuarioDetails extends React.Component {
     render(){
         return(
             <View style={styles.container}>
+                <View style={styles.header}>
+                    <View style={styles.viewHeader}>
+                        <TouchableOpacity onPress={this.buscar} style={styles.button}>
+                            <Image style={styles.icon} source={require('../../images/Pendente_32x32.png')} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
                 <ScrollView>
                     <Usuario objeto={this.state.objeto ? this.state.objeto : this.props.navigation.getParam('objeto')} />
 
