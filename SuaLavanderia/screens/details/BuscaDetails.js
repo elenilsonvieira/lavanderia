@@ -14,6 +14,10 @@ export default class BuscaDetails extends React.Component {
         dataTimePickerVisible: false,
     };
 
+    componentDidMount(){
+        this.dataEscolhida(new Date());
+    }
+
     async salvar(props) {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
