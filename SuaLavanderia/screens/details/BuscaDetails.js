@@ -45,7 +45,7 @@ export default class BuscaDetails extends React.Component {
         var dataArray = this.state.data.split('/');
         const data = dataArray[2] + '-'+ dataArray[1] + '-' + dataArray[0];
 
-        var argumentos = 'data=' + data + '&clienteOid=' + this.state.cliente.oid + '&hora=' + this.state.hora + '&observacoes=' + this.state.observacoes;
+        var argumentos = 'data=' + data + '&clienteOid=' + this.state.cliente.oid + '&hora=' + this.state.hora + '&comentario=' + this.state.observacoes;
 
         const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarSolicitacaoDeBusca.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 

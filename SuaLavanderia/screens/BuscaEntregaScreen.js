@@ -165,7 +165,7 @@ export default class BuscaEntregaScreen extends React.Component {
                     cliente: objetoResponse.Cliente,
                     endereco: objetoResponse.Endereco,
                     telefone: objetoResponse.Telefone,
-                    observacoes: objetoResponse.Observacoes,
+                    observacoes: objetoResponse.Comentario,
                     atendida: objetoResponse.Atendida,
                     lavagem: lavagem,
                 };    
