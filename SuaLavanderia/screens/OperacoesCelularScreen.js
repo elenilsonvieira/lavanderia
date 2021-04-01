@@ -72,6 +72,10 @@ export default class OperacoesCelularScreen extends React.Component {
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoRetirarMaterial', {usuarioOid: this.state.usuarioOid})}>
                         <OperacaoCelular nome="6 - Retirar Material" />
                     </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('OperacaoPassadorExtra', {usuarioOid: this.state.usuarioOid})}>
+                        <OperacaoCelular nome="7 - Passador Extra" />
+                    </TouchableOpacity>
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
