@@ -101,10 +101,11 @@ export default class LavagensPendentesDetails extends React.Component {
                 saldoDevedor = objetoResponse.SaldoDevedor;
 
                 for(indexLavagens in objetoResponse.Lavagens){
+                    const lavagemResponse = objetoResponse.Lavagens[indexLavagens];
                     var roupas = [];
 
-                    for(indexRoupa in objetoResponse.Roupas){
-                        const roupaResponse = objetoResponse.Roupas[indexRoupa];
+                    for(indexRoupa in lavagemResponse.Roupas){
+                        const roupaResponse = lavagemResponse.Roupas[indexRoupa];
 
                         const roupaEmLavagem = {
                             oid: roupaResponse.Oid,
@@ -133,7 +134,48 @@ export default class LavagensPendentesDetails extends React.Component {
                         roupas = [...roupas, roupaEmLavagem];
                     }
 
-                    lavagens = [...lavagens, objeto];
+                    var avaliacao = null;
+
+                    if(lavagemResponse.Avaliacao){
+                        avaliacao = {
+                            data: lavagemResponse.Avaliacao.Data,
+                            notaDoAtendimento: lavagemResponse.Avaliacao.NotaDoAtendimento,
+                            notaDaLavagem: lavagemResponse.Avaliacao.NotaDaLavagem,
+                            notaDaPassagem: lavagemResponse.Avaliacao.NotaDaPassagem,
+                            notaDaEntrega: lavagemResponse.Avaliacao.NotaDaEntrega,
+                            comentarios: lavagemResponse.Avaliacao.Comentarios,
+                            media: (parseInt(lavagemResponse.Avaliacao.NotaDoAtendimento) + parseInt(lavagemResponse.Avaliacao.NotaDaLavagem) + parseInt(lavagemResponse.Avaliacao.NotaDaPassagem) + parseInt(lavagemResponse.Avaliacao.NotaDaEntrega)) / 4,//objetoResponse.Media,
+                        };
+                    }
+
+                    const lavagem = {
+                        oid: lavagemResponse.Oid,
+                        cliente: lavagemResponse.Cliente,
+                        clienteOid: lavagemResponse.ClienteOid,
+                        codigoDoCliente: lavagemResponse.CodigoDoCliente,
+                        dataDeRecebimento: lavagemResponse.DataDeRecebimento,
+                        dataPreferivelParaEntrega: lavagemResponse.DataPreferivelParaEntrega,
+                        horaPreferivelParaEntrega: lavagemResponse.HoraPreferivelParaEntrega,
+                        empacotada: lavagemResponse.Empacotada,
+                        soPassar: lavagemResponse.SoPassar,
+                        dataDeEntrega: lavagemResponse.DataDeEntrega,
+                        valor: lavagemResponse.Valor,
+                        saldoDevedor: lavagemResponse.SaldoDevedor,
+                        paga: lavagemResponse.Paga,
+                        unidadeDeRecebimentoOid: lavagemResponse.UnidadeDeRecebimentoOid,
+                        unidadeDeRecebimento: lavagemResponse.UnidadeDeRecebimento,
+                        quantidadeDePecas: lavagemResponse.QuantidadeDePecas,
+                        observacoes: lavagemResponse.Observacoes,
+                        alertaAmarelo: lavagemResponse.AlertaAmarelo,
+                        alertaVerde: lavagemResponse.AlertaVerde,
+                        alertaVermelho: lavagemResponse.AlertaVermelho,
+                        alertaCinza: lavagemResponse.AlertaCinza,
+                        roupas: roupas,
+                        status: lavagemResponse.Status,
+                        avaliacao: avaliacao,
+                    }; 
+
+                    lavagens = [...lavagens, lavagem];
                 }
             }
 
