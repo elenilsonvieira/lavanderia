@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage, Linking } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import fetch from '../../utils/FetchWithTimeout';
+import LoadingModal from '../../components/modals/LoadingModal';
 
 export default class BuscaDetails extends React.Component {
 
@@ -12,6 +13,7 @@ export default class BuscaDetails extends React.Component {
         nomeDoCliente: '',
         cliente: null,
         dataTimePickerVisible: false,
+        modalVisible: false,
     };
 
     componentDidMount(){
@@ -34,6 +36,8 @@ export default class BuscaDetails extends React.Component {
             return;
         }
 
+        this.setState({modalVisible: true});
+
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
@@ -54,6 +58,8 @@ export default class BuscaDetails extends React.Component {
             ).catch(function(error){
                 alert('Erro adicionando busca.' + error);    
             });        
+
+        this.setState({modalVisible: false});
     }
 
     dataEscolhida = (dataEscolhida) => {
@@ -168,6 +174,8 @@ export default class BuscaDetails extends React.Component {
                         onChangeText={observacoes => this.setState({observacoes})}
                     />
                 </View>
+
+                <LoadingModal modalVisible={this.state.modalVisible} />
             </View>
         );
     }
