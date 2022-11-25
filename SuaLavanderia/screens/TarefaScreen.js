@@ -314,7 +314,7 @@ const styles = StyleSheet.create(
           header:{
             alignItems: 'center',
             justifyContent: 'space-between',
-            height: 20,
+            height: 40,
             backgroundColor: '#FFF',
             flexDirection: 'row',
           },
@@ -324,14 +324,14 @@ const styles = StyleSheet.create(
           },
           boxInput:{
             backgroundColor: "#DDD",
-            height: 20,
+            height: 40,
             borderRadius: 5,
             alignSelf: 'stretch',
             width: 250,
             padding: 5,
         },
         picker:{
-            height: 20,
+            height: 40,
             width: 150,
             borderRadius: 15,
             padding: 5,
@@ -358,7 +358,7 @@ const styles = StyleSheet.create(
             justifyContent: 'space-between',
         },
         boxDate:{
-            height: 20,
+            height: 40,
             borderRadius: 5,
             padding: 5,
             paddingTop: 10,
