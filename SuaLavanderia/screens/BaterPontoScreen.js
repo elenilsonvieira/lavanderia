@@ -183,8 +183,6 @@ export default class BaterPontoScreen extends React.Component {
                 </View>
                 <ScrollView>
                     <View style={styles.roupasContainer}>
-                        <Text style={styles.roupasTitle}>Latitude: {this.state.latitude}</Text>
-                        <Text style={styles.roupasTitle}>Longitude: {this.state.longitude}</Text>
                         <Text style={styles.roupasTitle}>Batidas</Text>
                     </View>
                     
