@@ -70,6 +70,7 @@ import SelecionarUsuarioDetails from './screens/details/SelecionarUsuarioDetails
 import LavagensPendentesDetails from './screens/details/LavagensPendentesDetails';
 import BaterPontoScreen from './screens/BaterPontoScreen';
 import TarefaScreen from './screens/TarefaScreen';
+import MetaScreen from './screens/MetaScreen';
 
 export default class App extends Component {
   render() {
@@ -94,7 +95,8 @@ const DrawerAdministrador = createDrawerNavigator(
     BancoDeHoras: BancoDeHorasScreen,
     Usuario: UsuarioScreen,
     Tarefa: TarefaScreen,
-    BaterPonto: BaterPontoScreen,
+    Meta: MetaScreen,
+    //BaterPonto: BaterPontoScreen,
     // Tipo: TipoScreen,
     // Tamanho: TamanhoScreen,
     // Tecido: TecidoScreen,
@@ -126,6 +128,7 @@ const DrawerGerenteGeral = createDrawerNavigator(
     BancoDeHoras: BancoDeHorasScreen,
     Usuario: UsuarioScreen,
     Tarefa: TarefaScreen,
+    Meta: MetaScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -151,6 +154,7 @@ const DrawerSubGerenteGeral = createDrawerNavigator(
     BancoDeHoras: BancoDeHorasScreen,
     Usuario: UsuarioScreen,
     Tarefa: TarefaScreen,
+    Meta: MetaScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,
   },{
@@ -246,6 +250,7 @@ const DrawerAtendente = createDrawerNavigator(
     ListaDeEntrega: ListaDeEntregaScreen,
     Usuario: UsuarioScreen,
     Tarefa: TarefaScreen,
+    Meta: MetaScreen,
     BaterPonto: BaterPontoScreen,
     Sobre: SobreScreen,
     Logout: LogoutScreen,

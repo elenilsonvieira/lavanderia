@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-export default class Tarefa extends React.Component {
+export default class Meta extends React.Component {
 
     render(){
         return(
@@ -14,7 +14,17 @@ export default class Tarefa extends React.Component {
                     <View style={styles.movimentacaoInfoContainer}>
                         <View style={styles.valorInfoContainer}>
                             <Text style={styles.valorInfoTitle}>Prazo: </Text>
-                            <Text style={styles.movimentacaoInfo}>{this.props.objeto.data}</Text>
+                            <Text style={styles.movimentacaoInfo}>{this.props.objeto.inicio} a {this.props.objeto.fim}</Text>
+                        </View>
+
+                        <View style={styles.valorInfoContainer}>
+                            <Text style={styles.valorInfoTitle}>Valor: </Text>
+                            <Text style={styles.movimentacaoInfo}>{this.props.objeto.valor}</Text>
+                        </View>
+
+                        <View style={styles.valorInfoContainer}>
+                            <Text style={styles.valorInfoTitle}>Valor Alcançado: </Text>
+                            <Text style={styles.movimentacaoInfo}>{this.props.objeto.valorAlcancado}</Text>
                         </View>
 
                         <View style={styles.valorInfoContainer}>
