@@ -119,7 +119,8 @@ export default class TarefaScreen extends React.Component {
                 mes = '0' + mes;
             }
 
-            var dia = hoje.getDate();
+            var ultimoDia = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0);
+            var dia = ultimoDia.getDate();
             if(dia < 10){
                 dia = '0' + dia;
             }
