@@ -50,11 +50,13 @@ const styles = StyleSheet.create(
             borderRadius: 5,
             backgroundColor: '#FFF',
             padding: 20,
-            margin: 20,
+            margin: 10,
             justifyContent: 'center',
         },
         lavagemInfoContainer: {
             flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
         },
         lavagemInfoContainerCliente: {
             alignItems: 'center',
