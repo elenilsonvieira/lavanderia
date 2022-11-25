@@ -94,7 +94,7 @@ export default class MetaScreen extends React.Component {
         var dataFinal = this.state.dataFinal;
 
         if(dataInicial == ''){
-            var mes = primeiroDia.getMonth() + 1;
+            var mes = hoje.getMonth() + 1;
             if(mes < 10){
                 mes = '0' + mes;
             }
