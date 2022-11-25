@@ -1,9 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity, Linking } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import BatidaSimples from '../components/BatidaSimples';
 
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';
+
+import Geolocation from 'react-native-geolocation-service';
 
 export default class BaterPontoScreen extends React.Component {
 
@@ -21,9 +23,12 @@ export default class BaterPontoScreen extends React.Component {
         objeto: {},
         batidas: [],
         modalVisible: false,
+        latitude: '',
+        longitude: '',
     };
 
-    async componentWillMount(){
+    async componentDidMount(){
+        this.requestLocation();
         this.buscar();
     }
 
@@ -60,7 +65,6 @@ export default class BaterPontoScreen extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
-        const oid = this.state.objeto.oid;
 
         this.setState({modalVisible: true});
 
@@ -121,11 +125,7 @@ export default class BaterPontoScreen extends React.Component {
         this.setState({modalVisible: true});
 
         try{
-            const latitude = "-7,072050";
-            const longitude = "-34,845158";
-
-
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BaterPonto.aspx?latitude=${latitude}&longitude=${longitude}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BaterPonto.aspx?latitude=${this.state.latitude}&longitude=${this.state.longitude}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -141,6 +141,35 @@ export default class BaterPontoScreen extends React.Component {
         }
     };
 
+    geo_success = (position) => {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        this.setState(
+          {
+            latitude: latitude, 
+            longitude: longitude
+          });
+      };
+    
+      geo_error = (error) => {
+        alert('Falha ao buscar localização: ' + error.message);
+      };
+    
+      requestLocation = async () => {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            'title': 'Sua Lavanderia',
+            'message': 'Sua Lavanderia deseja acessar a sua localização!'
+          }
+        )
+  
+        if(granted){
+            navigator.geolocation.getCurrentPosition(this.geo_success, this.geo_error, 
+                { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 });
+        }
+      }
+
     render(){
         return(
             <View style={styles.container}>
@@ -154,6 +183,8 @@ export default class BaterPontoScreen extends React.Component {
                 </View>
                 <ScrollView>
                     <View style={styles.roupasContainer}>
+                        <Text style={styles.roupasTitle}>Latitude: {this.state.latitude}</Text>
+                        <Text style={styles.roupasTitle}>Longitude: {this.state.longitude}</Text>
                         <Text style={styles.roupasTitle}>Batidas</Text>
                     </View>
                     
