@@ -159,6 +159,10 @@ export default class MetaScreen extends React.Component {
                     comentarios: objetoResponse.Comentarios,
                     valorAlcancado: objetoResponse.ValorAlcancado,
                     alcancada: objetoResponse.Alcancada,
+                    alertaAmarelo: objetoResponse.AlertaAmarelo,
+                    alertaVerde: objetoResponse.AlertaVerde,
+                    alertaVermelho: objetoResponse.AlertaVermelho,
+                    alertaCinza: objetoResponse.AlertaCinza,
                 };    
 
                 objetos = [...objetos, objeto];

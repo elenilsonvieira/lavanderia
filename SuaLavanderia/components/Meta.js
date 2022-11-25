@@ -4,9 +4,21 @@ import {StyleSheet, Text, View} from 'react-native';
 export default class Meta extends React.Component {
 
     render(){
+        var estiloDeAlerta = {};
+
+        if(this.props.objeto.alertaAmarelo){
+            estiloDeAlerta = styles.alertaAmarelo;
+        }else if(this.props.objeto.alertaVerde){
+            estiloDeAlerta = styles.alertaVerde;
+        }else if(this.props.objeto.alertaVermelho){
+            estiloDeAlerta = styles.alertaVermelho;
+        }else if(this.props.objeto.alertaCinza){
+            estiloDeAlerta = styles.alertaCinza;
+        } 
+
         return(
             <View style={styles.container}>
-                <View style={styles.movimentacaoContainer}>
+                <View style={[styles.movimentacaoContainer, estiloDeAlerta]}>
                     <View style={styles.movimentacaoInfoContainerTitle}>
                         <Text style={styles.movimentacaoInfoTitle}>{this.props.objeto.descricao}</Text>
                     </View>
@@ -98,6 +110,20 @@ const styles = StyleSheet.create(
             margin: 10,
             padding: 10,
             backgroundColor: '#DDD',
+        },alertaAmarelo: { 
+            borderWidth: 10, 
+            borderColor: 'yellow'
         },
+        alertaVermelho: { 
+            borderWidth: 10, 
+            borderColor: 'red'
+        },
+        alertaVerde: { 
+            borderWidth: 10, 
+            borderColor: 'green'
+        },alertaCinza: { 
+            borderWidth: 10, 
+            borderColor: 'gray'
+        }
     }
 );
