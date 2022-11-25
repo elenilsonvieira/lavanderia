@@ -117,20 +117,18 @@ export default class BaterPontoScreen extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
         var hash = this.hash(usuario);
         var email = usuario.email;
-        const oid = this.state.objeto.oid;
 
         this.setState({modalVisible: true});
-        
+
         try{
-            const latitude = -7.072050;
-            const longitude = -34.845158;
+            const latitude = "-7,072050";
+            const longitude = "-34,845158";
 
 
             const call = await fetch(`http://painel.sualavanderia.com.br/api/BaterPonto.aspx?latitude=${latitude}&longitude=${longitude}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
-            const response = await call.json();
 
             alert('Ponto batido com sucesso!');
 
