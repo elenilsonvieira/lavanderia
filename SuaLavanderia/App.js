@@ -746,7 +746,7 @@ function StackGerenteGeralFunction()
   {
     return(
       <StackGerenteGeral.Navigator initialRouteName="Drawer" >
-        <StackGerenteGeral.Screen name='Drawer' component={DrawerGerenteGeralFunction} options={{ title: '' }}/>
+        <StackGerenteGeral.Screen name='Drawer' component={DrawerGerenteGeralFunction} options={{ title: '', headerTransparent: true }}/>
         <StackGerenteGeral.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: '' }} />
         <StackGerenteGeral.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: '' }} />
         <StackGerenteGeral.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: '' }} />
@@ -840,7 +840,7 @@ function StackSubGerenteGeralFunction()
   {
     return(
       <StackSubGerenteGeral.Navigator initialRouteName="Drawer" >
-        <StackSubGerenteGeral.Screen name='Drawer' component={DrawerSubGerenteGeralFunction} options={{ title: '' }}/>
+        <StackSubGerenteGeral.Screen name='Drawer' component={DrawerSubGerenteGeralFunction} options={{ title: '', headerTransparent: true }}/>
         <StackSubGerenteGeral.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: '' }} />
         <StackSubGerenteGeral.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: '' }} />
         <StackSubGerenteGeral.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: '' }} />
@@ -924,7 +924,7 @@ function StackGerenteDeOperacoesFunction()
   {
     return(
       <StackGerenteDeOperacoes.Navigator initialRouteName="Drawer" >
-        <StackGerenteDeOperacoes.Screen name='Drawer' component={DrawerGerenteDeOperacoesFunction} options={{ title: '' }}/>
+        <StackGerenteDeOperacoes.Screen name='Drawer' component={DrawerGerenteDeOperacoesFunction} options={{ title: '', headerTransparent: true }}/>
         <StackGerenteDeOperacoes.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: '' }} />
         <StackGerenteDeOperacoes.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: '' }} />
         <StackGerenteDeOperacoes.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: '' }} />
@@ -1009,43 +1009,43 @@ function StackSupervisorDeOperacoesFunction()
   {
     return(
       <StackSupervisorDeOperacoes.Navigator initialRouteName="Drawer" >
-        <StackSupervisorDeOperacoes.Screen name='Drawer' component={DrawerSupervisorDeOperacoesFunction} options={{ title: '' }}/>
-        <StackSupervisorDeOperacoes.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='AvaliacaoDetails' component={AvaliacaoDetails} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='AvaliacaoDetailsSoLeitura' component={AvaliacaoDetailsSoLeitura} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='LavagemDetails' component={LavagemDetailsPapelOperacoes} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='LavagemDetailsOperacoes' component={LavagemDetailsOperacoes} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='LavagemDetailsOperacaoEmpacotar' component={LavagemDetailsOperacaoEmpacotar} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='LavagemDetailsOperacaoRecolher' component={LavagemDetailsOperacaoRecolher} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='LavagemDetailsEdit' component={LavagemDetailsEdit} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='RoupaEmLavagemDetails' component={RoupaEmLavagemDetails} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='RoupaDetails' component={RoupaDetails} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='OperacaoLavar' component={OperacaoLavarScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='OperacaoRecolher' component={OperacaoRecolherScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='OperacaoPassar' component={OperacaoPassarScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='OperacaoPassadorExtra' component={OperacaoPassadorExtraScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='OperacaoEmpacotar' component={OperacaoEmpacotarScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='OperacaoRetirarMaterial' component={OperacaoRetirarMaterialScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='OperacaoAdicionarMaterial' component={OperacaoAdicionarMaterialScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='OperacaoListaDeEntrega' component={OperacaoListaDeEntregaScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='OperacaoLavarTapete' component={OperacaoLavarTapeteScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='OperacaoProntoTapete' component={OperacaoProntoTapeteScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='OperacaoEntregarTapete' component={OperacaoEntregarTapeteScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='MaterialDetails' component={MaterialDetails} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='RoupasDoCliente' component={RoupasDoClienteScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='ListaDeCompras' component={ListaDeComprasScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='BancoDeHorasDetails' component={BancoDeHorasDetails} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='ListaDeEntregaDetails' component={ListaDeEntregaDetails} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='ListaDeEntregaDetailsAtendente' component={ListaDeEntregaDetailsAtendente} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='LavagemParaListaDeEntrega' component={LavagemParaListaDeEntregaScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='OperacaoListaDeEntregaDireta' component={OperacaoListaDeEntregaDiretaScreen} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='FechamentoDePontoDetails' component={FechamentoDePontoDetails} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='UsuarioDetails' component={UsuarioDetails} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
-        <StackSupervisorDeOperacoes.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='Drawer' component={DrawerSupervisorDeOperacoesFunction} options={{ title: '', headerTransparent: true }}/>
+        <StackSupervisorDeOperacoes.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: 'Movimentação de Caixa' }} />
+        <StackSupervisorDeOperacoes.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: 'Caixa' }} />
+        <StackSupervisorDeOperacoes.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: 'Caixa' }} />
+        <StackSupervisorDeOperacoes.Screen name='AvaliacaoDetails' component={AvaliacaoDetails} options={{ title: 'Avaliação' }} />
+        <StackSupervisorDeOperacoes.Screen name='AvaliacaoDetailsSoLeitura' component={AvaliacaoDetailsSoLeitura} options={{ title: 'Avaliação' }} />
+        <StackSupervisorDeOperacoes.Screen name='LavagemDetails' component={LavagemDetailsPapelOperacoes} options={{ title: 'Lavagem' }} />
+        <StackSupervisorDeOperacoes.Screen name='LavagemDetailsOperacoes' component={LavagemDetailsOperacoes} options={{ title: 'Operações em Lavagem' }} />
+        <StackSupervisorDeOperacoes.Screen name='LavagemDetailsOperacaoEmpacotar' component={LavagemDetailsOperacaoEmpacotar} options={{ title: 'Empacotar' }} />
+        <StackSupervisorDeOperacoes.Screen name='LavagemDetailsOperacaoRecolher' component={LavagemDetailsOperacaoRecolher} options={{ title: 'Recolher do Varal' }} />
+        <StackSupervisorDeOperacoes.Screen name='LavagemDetailsEdit' component={LavagemDetailsEdit} options={{ title: 'Editar Lavagem' }} />
+        <StackSupervisorDeOperacoes.Screen name='RoupaEmLavagemDetails' component={RoupaEmLavagemDetails} options={{ title: 'Roupa em Lavagem' }} />
+        <StackSupervisorDeOperacoes.Screen name='RoupaDetails' component={RoupaDetails} options={{ title: 'Roupa' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoLavar' component={OperacaoLavarScreen} options={{ title: 'Lavar' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoRecolher' component={OperacaoRecolherScreen} options={{ title: 'Recolher' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoPassar' component={OperacaoPassarScreen} options={{ title: 'Passar' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoPassadorExtra' component={OperacaoPassadorExtraScreen} options={{ title: 'Passador Extra' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoEmpacotar' component={OperacaoEmpacotarScreen} options={{ title: 'Empacotar' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoRetirarMaterial' component={OperacaoRetirarMaterialScreen} options={{ title: 'Retirar Material' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoAdicionarMaterial' component={OperacaoAdicionarMaterialScreen} options={{ title: 'Adicionar Material' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoListaDeEntrega' component={OperacaoListaDeEntregaScreen} options={{ title: 'Lista de Entrega' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoLavarTapete' component={OperacaoLavarTapeteScreen} options={{ title: 'Lavar Tapete' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoProntoTapete' component={OperacaoProntoTapeteScreen} options={{ title: 'Tapete Pronto' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoEntregarTapete' component={OperacaoEntregarTapeteScreen} options={{ title: 'Entregar Tapete' }} />
+        <StackSupervisorDeOperacoes.Screen name='MaterialDetails' component={MaterialDetails} options={{ title: 'Material' }} />
+        <StackSupervisorDeOperacoes.Screen name='RoupasDoCliente' component={RoupasDoClienteScreen} options={{ title: 'Roupas do Cliente' }} />
+        <StackSupervisorDeOperacoes.Screen name='ListaDeCompras' component={ListaDeComprasScreen} options={{ title: 'Lista de Compras' }} />
+        <StackSupervisorDeOperacoes.Screen name='BancoDeHorasDetails' component={BancoDeHorasDetails} options={{ title: 'Banco de Horas' }} />
+        <StackSupervisorDeOperacoes.Screen name='ListaDeEntregaDetails' component={ListaDeEntregaDetails} options={{ title: 'Lista de Entrega' }} />
+        <StackSupervisorDeOperacoes.Screen name='ListaDeEntregaDetailsAtendente' component={ListaDeEntregaDetailsAtendente} options={{ title: 'Lista de Entrega' }} />
+        <StackSupervisorDeOperacoes.Screen name='LavagemParaListaDeEntrega' component={LavagemParaListaDeEntregaScreen} options={{ title: 'Lavagem para Lista de Entrega' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoListaDeEntregaDireta' component={OperacaoListaDeEntregaDiretaScreen} options={{ title: 'Operação Lista de Entrega' }} />
+        <StackSupervisorDeOperacoes.Screen name='FechamentoDePontoDetails' component={FechamentoDePontoDetails} options={{ title: 'Fechamento de Ponto' }} />
+        <StackSupervisorDeOperacoes.Screen name='UsuarioDetails' component={UsuarioDetails} options={{ title: 'Usuário' }} />
+        <StackSupervisorDeOperacoes.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: 'Busca' }} />
+        <StackSupervisorDeOperacoes.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: 'Selecionar Usuário' }} />
+        <StackSupervisorDeOperacoes.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: 'Lavagens Pendentes' }} />
       </StackSupervisorDeOperacoes.Navigator>
     );
   }
@@ -1071,7 +1071,7 @@ function StackOperacoesFunction()
   {
     return(
       <StackSupervisorDeOperacoes.Navigator initialRouteName="Drawer" >
-        <StackSupervisorDeOperacoes.Screen name='Drawer' component={DrawerOperacoesFunction} options={{ title: '' }}/>
+        <StackSupervisorDeOperacoes.Screen name='Drawer' component={DrawerOperacoesFunction} options={{ title: '', headerTransparent: true }}/>
         <StackSupervisorDeOperacoes.Screen name='AvaliacaoDetails' component={AvaliacaoDetailsSoLeitura} options={{ title: '' }} />
         <StackSupervisorDeOperacoes.Screen name='AvaliacaoDetailsSoLeitura' component={AvaliacaoDetailsSoLeitura} options={{ title: '' }} />
         <StackSupervisorDeOperacoes.Screen name='BancoDeHorasDetails' component={BancoDeHorasDetails} options={{ title: '' }} />
@@ -1121,7 +1121,7 @@ function StackAplicativoFunction()
   {
     return(
       <StackAplicativo.Navigator initialRouteName="Drawer" >
-        <StackAplicativo.Screen name='Drawer' component={DrawerAplicativoFunction} options={{ title: '' }}/>
+        <StackAplicativo.Screen name='Drawer' component={DrawerAplicativoFunction} options={{ title: '', headerTransparent: true }}/>
         <StackAplicativo.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: '' }} />
         <StackAplicativo.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: '' }} />
         <StackAplicativo.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: '' }} />
@@ -1194,7 +1194,7 @@ function StackAtendenteFunction()
   {
     return(
       <StackAtendente.Navigator initialRouteName="Drawer" >
-        <StackAtendente.Screen name='Drawer' component={DrawerAtendenteFunction} options={{ title: '' }}/>
+        <StackAtendente.Screen name='Drawer' component={DrawerAtendenteFunction} options={{ title: '', headerTransparent: true }}/>
         <StackAtendente.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: '' }} />
         <StackAtendente.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: '' }} />
         <StackAtendente.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: '' }} />
@@ -1255,7 +1255,7 @@ function StackClienteFunction()
   {
     return(
       <StackSupervisorDeOperacoes.Navigator initialRouteName="Drawer" >
-        <StackSupervisorDeOperacoes.Screen name='Drawer' component={DrawerClienteFunction} options={{ title: '' }}/>
+        <StackSupervisorDeOperacoes.Screen name='Drawer' component={DrawerClienteFunction} options={{ title: '', headerTransparent: true }}/>
         <StackSupervisorDeOperacoes.Screen name='LavagemDetails' component={LavagemDetailsCliente} options={{ title: '' }} />
         <StackSupervisorDeOperacoes.Screen name='AvaliacaoDetails' component={AvaliacaoDetails} options={{ title: '' }} />
         <StackSupervisorDeOperacoes.Screen name='AvaliacaoDetailsSoLeitura' component={AvaliacaoDetailsSoLeitura} options={{ title: '' }} />

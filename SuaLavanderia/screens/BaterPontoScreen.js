@@ -174,7 +174,7 @@ export default class BaterPontoScreen extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.infoTitle}>Bater Ponto</Text>
+                    {/* <Text style={styles.infoTitle}>Bater Ponto</Text> */}
                     <View style={styles.viewBotao}>
                         <TouchableOpacity onPress={this.baterPonto} style={styles.button}>
                             <Image style={styles.icon} source={require('../images/dedo_32x32.png')} />
@@ -187,7 +187,7 @@ export default class BaterPontoScreen extends React.Component {
                     </View>
                     
                     { this.state.batidas.map(objeto => 
-                        <BatidaSimples key={objeto.oid} objeto={objeto} />
+                        <BatidaSimples key={objeto.hora} objeto={objeto} />
                     )}
                 </ScrollView>
 
