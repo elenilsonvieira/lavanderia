@@ -1,9 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage, Linking } from 'react-native';
-import DateTimePicker from 'react-native-modal-datetime-picker';
+import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Linking } from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Lavagem from "../components/Lavagem";
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';
+import {Picker} from '@react-native-picker/picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class LavagemScreen extends React.Component {
 
@@ -317,7 +319,8 @@ export default class LavagemScreen extends React.Component {
                             <TouchableOpacity onPress={() => this.setState({dataInicialPickerVisible: true})}>
                                 <Text style={styles.boxDate}>{this.state.dataInicial}</Text>
                             </TouchableOpacity>
-                            <DateTimePicker 
+                            <DateTimePickerModal 
+                                mode="date"
                                 isVisible={this.state.dataInicialPickerVisible}
                                 onConfirm={this.dataInicialEscolhida}
                                 onCancel={() => this.setState({dataInicialPickerVisible: false})}
@@ -327,7 +330,8 @@ export default class LavagemScreen extends React.Component {
                             <TouchableOpacity onPress={() => this.setState({dataFinalPickerVisible: true})}>
                                 <Text style={styles.boxDate}>{this.state.dataFinal}</Text>
                             </TouchableOpacity>
-                            <DateTimePicker 
+                            <DateTimePickerModal 
+                                mode="date"
                                 isVisible={this.state.dataFinalPickerVisible}
                                 onConfirm={this.dataFinalEscolhida}
                                 onCancel={() => this.setState({dataFinalPickerVisible: false})}

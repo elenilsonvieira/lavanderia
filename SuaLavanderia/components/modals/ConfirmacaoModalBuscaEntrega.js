@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, Modal, Picker } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, Modal} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 
 export default class ConfirmacaoModalBuscaEntrega extends React.Component {
 
@@ -75,7 +76,6 @@ const styles = StyleSheet.create(
             justifyContent: 'center',
             borderRadius: 5,
             margin: 10,
-            padding: 20,
         },
         buttonText: {
             fontWeight: 'bold',

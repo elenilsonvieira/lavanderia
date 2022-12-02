@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, AsyncStorage, TextInput, TouchableOpacity } from 'react-native';
-
+import {StyleSheet, View, ScrollView, Image, TextInput, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Marca from "../components/Marca";
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';

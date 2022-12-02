@@ -4,6 +4,7 @@ import {StyleSheet, View, ScrollView, Text, TouchableOpacity, Image, Linking } f
 import OperacaoCelular from "../components/OperacaoCelular";
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class OperacoesCelularScreen extends React.Component {
 

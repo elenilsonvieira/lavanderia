@@ -1,7 +1,7 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, AsyncStorage, TouchableOpacity, PermissionsAndroid } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import BatidaSimples from '../components/BatidaSimples';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';
 

@@ -1,6 +1,8 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TouchableOpacity, Picker, TextInput, AsyncStorage } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, TouchableOpacity, TextInput } from 'react-native';
 import fetch from '../../utils/FetchWithTimeout';
+import {Picker} from '@react-native-picker/picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class LavagemDetailsEdit extends React.Component {
 

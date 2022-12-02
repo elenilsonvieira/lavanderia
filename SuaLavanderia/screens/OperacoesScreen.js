@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Text, TouchableOpacity, Image, Linking } from 'react-native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Operacao from "../components/Operacao";
 import LoadingModal from '../components/modals/LoadingModal';
 

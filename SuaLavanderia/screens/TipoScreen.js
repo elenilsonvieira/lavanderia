@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, AsyncStorage, TextInput, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, TextInput, TouchableOpacity } from 'react-native';
 import LoadingModal from '../components/modals/LoadingModal';
 import Tipo from "../components/Tipo";
 import fetch from '../utils/FetchWithTimeout';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class TipoScreen extends React.Component {
 

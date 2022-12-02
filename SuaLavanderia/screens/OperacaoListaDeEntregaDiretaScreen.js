@@ -1,9 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage, Linking } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Linking } from 'react-native';
 import ListaDeEntrega from "../components/ListaDeEntrega";
 import LoadingModal from '../components/modals/LoadingModal';
 import ConfirmacaoModalComInput from '../components/modals/ConfirmacaoModalComInput';
 import fetch from '../utils/FetchWithTimeout';
+import {Picker} from '@react-native-picker/picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class OperacaoListaDeEntregaDiretaScreen extends React.Component {
 

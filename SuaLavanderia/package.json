@@ -1,29 +1,47 @@
 {
   "name": "SuaLavanderia",
-  "version": "22.12.1.1",
+  "version": "22.12.1.2",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0",
-    "md5": "^2.2.1",
-    "react": "16.6.3",
-    "react-native": "0.59.1",
-    "react-native-geolocation-service": "^2.0.0",
-    "react-native-modal-datetime-picker": "^6.0.0",
-    "react-native-sectioned-multi-select": "^0.6.3",
-    "react-native-vector-icons": "^6.1.0",
-    "react-navigation": "^2.18.0"
+    "@react-native-async-storage/async-storage": "^1.17.11",
+    "@react-native-community/datetimepicker": "^6.7.1",
+    "@react-native-picker/picker": "^2.4.8",
+    "@react-navigation/drawer": "^6.5.3",
+    "@react-navigation/native": "^6.0.16",
+    "@react-navigation/native-stack": "^6.9.4",
+    "md5": "^2.3.0",
+    "react": "18.1.0",
+    "react-native": "0.70.0",
+    "react-native-geolocation-service": "^5.3.1",
+    "react-native-gesture-handler": "^2.8.0",
+    "react-native-modal-datetime-picker": "^14.0.0",
+    "react-native-reanimated": "^2.13.0",
+    "react-native-safe-area-context": "^4.4.1",
+    "react-native-screens": "^3.18.2",
+    "react-native-sectioned-multi-select": "^0.9.1",
+    "react-native-vector-icons": "^9.2.0"
   },
   "devDependencies": {
-    "babel-jest": "23.6.0",
-    "jest": "23.6.0",
-    "metro-react-native-babel-preset": "0.46.0",
-    "react-test-renderer": "16.5.0"
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.32.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "0.72.3",
+    "react-test-renderer": "18.1.0"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "resolutions": {
+    "react-native-safe-area-view": "1.1.0"
   }
 }

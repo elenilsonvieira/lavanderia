@@ -1,65 +1,70 @@
 import React from 'react';
-import {View, StatusBar, ActivityIndicator, AsyncStorage, StyleSheet} from 'react-native';
+import {View, StatusBar, ActivityIndicator, StyleSheet} from 'react-native';
 import fetch from '../utils/FetchWithTimeout';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class LoadingLoginScreen extends React.Component {
 
-    async componentDidMount() {
-      this.init();
-    }
-  
-    init = async () => {
+    // async componentDidMount() {
+    //   this.init();
+    // }
 
-      var usuario;
-      try{
-        usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
-      }catch(exception){}
+    // init2 = async () => {
+    //   this.props.navigation.navigate('Login');
+    // }
+  
+    // init = async () => {
+
+    //   var usuario;
+    //   try{
+    //     usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
+    //   }catch(exception){}
       
-      var resultado = false;
+    //   var resultado = false;
 
-      if(usuario){
-        const email = usuario.email;
-        const hashDaSenha = usuario.hashDaSenha;
+    //   if(usuario){
+    //     const email = usuario.email;
+    //     const hashDaSenha = usuario.hashDaSenha;
 
-        var dataString = this.dataString();
-        var md5 = require('md5');
-        var hashDaData = md5(dataString);
+    //     var dataString = this.dataString();
+    //     var md5 = require('md5');
+    //     var hashDaData = md5(dataString);
 
-        var hash = md5(hashDaSenha + ':' + hashDaData);
+    //     var hash = md5(hashDaSenha + ':' + hashDaData);
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/Login.aspx?login=${email}&senha=${hash}`, 
-              { 
-                  method: 'post' 
-              }).then(async function(response){
-                if(response.status == 200){          
-                  resultado = true;
-                }else{
-                  await AsyncStorage.removeItem("@SuaLavanderia:usuario"); 
-                }
-              }
-              ).catch(function(error){
-              });
-        }
+    //     const call = await fetch(`http://painel.sualavanderia.com.br/api/Login.aspx?login=${email}&senha=${hash}`, 
+    //           { 
+    //               method: 'post' 
+    //           }).then(async function(response){
+    //             if(response.status == 200){          
+    //               resultado = true;
+    //             }else{
+    //               await AsyncStorage.removeItem("@SuaLavanderia:usuario"); 
+    //             }
+    //           }
+    //           ).catch(function(error){
+    //           });
+    //     }
 
-      this.props.navigation.navigate(resultado ? ('Stack' + usuario.papel) : 'Login');
-    };
+    //   this.props.navigation.navigate(resultado ? ('Stack' + usuario.papel) : 'Login');
+    // };
 
-    dataString = () => {
-      var data = new Date();
+    // dataString = () => {
+    //   var data = new Date();
       
-      var dia = data.getDate();
-      var mes = data.getMonth() + 1;
+    //   var dia = data.getDate();
+    //   var mes = data.getMonth() + 1;
   
-      if(dia < 10){
-          dia = '0' + dia;
-      }
+    //   if(dia < 10){
+    //       dia = '0' + dia;
+    //   }
   
-      if(mes < 10){
-          mes = '0' + mes;
-      }
+    //   if(mes < 10){
+    //       mes = '0' + mes;
+    //   }
   
-      return data.getFullYear() + '' + mes + '' + dia;
-    }
+    //   return data.getFullYear() + '' + mes + '' + dia;
+    // }
   
     render() {
       return (

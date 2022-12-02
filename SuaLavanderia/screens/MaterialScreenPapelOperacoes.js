@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Picker, AsyncStorage, Linking } from 'react-native';
-
+import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Linking } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaterialPapelOperacoes from "../components/MaterialPapelOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
 import ConfirmacaoModalMaterial from '../components/modals/ConfirmacaoModalMaterial';
 import fetch from '../utils/FetchWithTimeout';
+import {Picker} from '@react-native-picker/picker';
 
 export default class MaterialScreenPapelOperacoes extends React.Component {
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, StatusBar, ActivityIndicator, AsyncStorage, StyleSheet, Image} from 'react-native';
+import {View, StatusBar, ActivityIndicator, StyleSheet, Image} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class LogoutScreen extends React.Component {
     static navigationOptions = {

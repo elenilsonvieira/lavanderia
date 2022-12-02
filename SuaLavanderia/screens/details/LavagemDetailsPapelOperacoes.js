@@ -1,7 +1,8 @@
 import React from 'react';
-import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, AsyncStorage } from 'react-native';
+import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text } from 'react-native';
 import RoupaEmLavagem from '../../components/RoupaEmLavagem';
 import fetch from '../../utils/FetchWithTimeout';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class LavagemDetailsPapelOperacoes extends React.Component {
 

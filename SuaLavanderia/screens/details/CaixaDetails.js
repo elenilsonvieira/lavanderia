@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage, Linking } from 'react-native';
-import DateTimePicker from 'react-native-modal-datetime-picker';
-
+import {StyleSheet, View, Image, Text, TextInput, TouchableOpacity, Linking } from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {Picker} from '@react-native-picker/picker';
 import fetch from '../../utils/FetchWithTimeout';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class CaixaDetails extends React.Component {
 
@@ -145,7 +146,8 @@ export default class CaixaDetails extends React.Component {
                     <TouchableOpacity onPress={() => this.setState({dataTimePickerVisible: true})}>
                         <Text style={styles.boxDate}>{this.state.data}</Text>
                     </TouchableOpacity>
-                    <DateTimePicker 
+                    <DateTimePickerModal 
+                        mode="date"
                         isVisible={this.state.dataTimePickerVisible}
                         onConfirm={this.dataEscolhida}
                         onCancel={() => this.setState({dataTimePickerVisible: false})}

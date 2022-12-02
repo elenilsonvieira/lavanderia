@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Image, AsyncStorage, TextInput, Linking} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Linking, Button} from 'react-native';
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AuthContext } from '../contexts/AuthContext';
 
-export default class LoginScreen extends Component {
+class LoginScreen extends Component {
 
   state = {
     email: '',
@@ -18,7 +20,8 @@ export default class LoginScreen extends Component {
     }
   }
 
-  login = async () => {
+  localLogin = async () => {
+
     if(this.state.email.trim().length == 0 || this.state.senha.trim().length == 0){
       alert('Preencha o email e senha');
     }else{
@@ -56,14 +59,15 @@ export default class LoginScreen extends Component {
             this.setState({modalVisible: false});
 
             try{
-              this.props.navigation.navigate('Stack' + usuario.papel);
+              // this.props.navigation.navigate('Stack' + usuario.papel);
+              this.context.login(usuario)
             }catch(erro){
               alert('Você não tem permissão para usar o aplicativo!');
 
               await AsyncStorage.removeItem("@SuaLavanderia:usuario");
               await AsyncStorage.removeItem("@SuaLavanderia:ultimoEmail");
 
-              this.props.navigation.navigate('Login');
+              // this.props.navigation.navigate('Login');
             }
         }else{
           var mensagem = 'Erro ao tentar fazer o login! Erro: ' + call.status;
@@ -134,11 +138,13 @@ export default class LoginScreen extends Component {
                 onChangeText={senha => this.setState({senha})}
             />
 
-            <TouchableOpacity 
-              onPress={() => this.login()} 
-              style={styles.button}>
+            <Button
+              title='Login' 
+              onPress={() => this.localLogin()} 
+              style={styles.button}
+              color='green'>
               <Text style={styles.buttonText}>Login</Text>
-            </TouchableOpacity>
+            </Button>
           </View>
 
           <View style={styles.midiasSociais}>
@@ -198,8 +204,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 10,
     padding: 20,
-    backgroundColor: 'green',
+    color: 'green',
     height: 40,
+    width: 100,
   },
   buttonText: {
       fontWeight: 'bold',
@@ -229,3 +236,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+LoginScreen.contextType = AuthContext;
+export default LoginScreen;

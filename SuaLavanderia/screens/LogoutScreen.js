@@ -1,7 +1,9 @@
 import React from 'react';
-import {View, StatusBar, ActivityIndicator, AsyncStorage, StyleSheet, Image} from 'react-native';
+import {View, StatusBar, ActivityIndicator, StyleSheet, Image} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AuthContext } from '../contexts/AuthContext';
 
-export default class LogoutScreen extends React.Component {
+class LogoutScreen extends React.Component {
     static navigationOptions = {
       drawerLabel: 'Sair',
       drawerIcon: ({ tintColor }) => (
@@ -19,7 +21,9 @@ export default class LogoutScreen extends React.Component {
   
     init = async () => {
       await AsyncStorage.removeItem("@SuaLavanderia:usuario");
-      this.props.navigation.navigate('Login');
+      // this.props.navigation.navigate('Login');
+
+      this.context.logout();
     };
   
     render() {
@@ -43,3 +47,6 @@ export default class LogoutScreen extends React.Component {
       height: 24,
     },
   });
+
+LogoutScreen.contextType = AuthContext;
+export default LogoutScreen;

@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, ScrollView, Linking, AsyncStorage, Image } from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, ScrollView, Linking, Image } from 'react-native';
 
 import Usuario from '../../components/Usuario';
 import Lavagem from '../../components/Lavagem';
 import LoadingModal from '../../components/modals/LoadingModal';
 import fetch from '../../utils/FetchWithTimeout';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class LavagensPendentesDetails extends React.Component {
 

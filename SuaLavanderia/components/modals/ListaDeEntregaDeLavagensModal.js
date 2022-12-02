@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, Modal, Picker } from 'react-native';
-import DateTimePicker from 'react-native-modal-datetime-picker';
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, Modal } from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {Picker} from '@react-native-picker/picker';
 
 export default class ListaDeEntregaDeLavagensModal extends React.Component {
 
@@ -60,7 +61,8 @@ export default class ListaDeEntregaDeLavagensModal extends React.Component {
                                 <Text style={styles.boxDate}>{this.state.data}</Text>
                             </TouchableOpacity>
                             
-                            <DateTimePicker 
+                            <DateTimePickerModal 
+                                mode="date"
                                 isVisible={this.state.dataPickerVisible}
                                 onConfirm={this.dataEscolhida}
                                 onCancel={() => this.setState({dataPickerVisible: false})}
@@ -116,7 +118,6 @@ const styles = StyleSheet.create(
             justifyContent: 'center',
             borderRadius: 5,
             margin: 10,
-            padding: 20,
         },
         buttonText: {
             fontWeight: 'bold',

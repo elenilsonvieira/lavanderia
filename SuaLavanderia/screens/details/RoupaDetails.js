@@ -1,8 +1,10 @@
 import React from 'react';
-import {StyleSheet, View, Picker, Image, Text, TextInput, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native';
+import {StyleSheet, View, Image, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import LoadingModal from '../../components/modals/LoadingModal';
 import MultiPicker from '../../components/MultiPicker';
 import fetch from '../../utils/FetchWithTimeout';
+import {Picker} from '@react-native-picker/picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class MovimentacaoDeCaixaDetails extends React.Component {
 

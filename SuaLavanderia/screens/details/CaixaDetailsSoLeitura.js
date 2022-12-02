@@ -4,7 +4,7 @@ import {StyleSheet, View, Text, TouchableOpacity, ScrollView, Linking, Image } f
 import Caixa from '../../components/Caixa';
 import MovimentacaoDeCaixa from '../../components/MovimentacaoDeCaixa';
 import LoadingModal from '../../components/modals/LoadingModal';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import fetch from '../../utils/FetchWithTimeout';
 
 export default class CaixaDetailsSoleitura extends React.Component {

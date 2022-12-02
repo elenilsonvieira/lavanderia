@@ -1,6 +1,15 @@
-import React, {Component} from 'react';
-import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
 
+import 'react-native-gesture-handler'; 
+import React, { useState } from 'react';
+import {StyleSheet, Text, View, Image} from 'react-native';
+// import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation';
 import HomeScreen from "./screens/HomeScreen";
 import HomeScreenCliente from "./screens/HomeScreenCliente";
 import HomeScreenAplicativo from "./screens/HomeScreenAplicativo";
@@ -71,535 +80,1215 @@ import LavagensPendentesDetails from './screens/details/LavagensPendentesDetails
 import BaterPontoScreen from './screens/BaterPontoScreen';
 import TarefaScreen from './screens/TarefaScreen';
 import MetaScreen from './screens/MetaScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { AuthContext } from './contexts/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default class App extends Component {
-  render() {
-    return (
-      <LoginStack />
+const App = () => {
+  const [state, dispatch] = React.useReducer(
+    (prevState, action) => {
+      switch (action.type) {
+        case 'RESTORE_TOKEN':
+          return {
+            ...prevState,
+            isLoading: false,
+            usuario: action.usuario,
+          };
+        case 'SIGN_IN':
+          return {
+            ...prevState,
+            isLoading: false,
+            isSignout: false,
+            usuario: action.usuario,
+          };
+        case 'SIGN_OUT':
+          return {
+            ...prevState,
+            isSignout: true,
+            usuario: null,
+          };
+      }
+    },
+    {
+      isLoading: true,
+      isSignout: false,
+      usuario: null,
+    }
+  );
+
+  React.useEffect(() => {
+    const bootstrapAsync = async () => {
+      var usuario;
+      try{
+        usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
+      }catch(exception){
+      }
+      
+      var resultado = false;
+
+      try{
+        if(usuario){
+          const email = usuario.email;
+          const hashDaSenha = usuario.hashDaSenha;
+
+          var data = new Date();
+      
+          var dia = data.getDate();
+          var mes = data.getMonth() + 1;
+      
+          if(dia < 10){
+              dia = '0' + dia;
+          }
+      
+          if(mes < 10){
+              mes = '0' + mes;
+          }
+
+          var dataString = data.getFullYear() + '' + mes + '' + dia;
+          var md5 = require('md5');
+          var hashDaData = md5(dataString);
+
+          var hash = md5(hashDaSenha + ':' + hashDaData);
+
+          const call = await fetch(`http://painel.sualavanderia.com.br/api/Login.aspx?login=${email}&senha=${hash}`, 
+                { 
+                    method: 'post' 
+                }).then(async function(response){
+                  if(response.status == 200){          
+                    resultado = true;
+                    dispatch({ type: 'RESTORE_TOKEN', usuario: usuario });
+                  }else{
+                    await AsyncStorage.removeItem("@SuaLavanderia:usuario"); 
+                    dispatch({ type: 'RESTORE_TOKEN', usuario: null });
+                  }
+                }
+                ).catch(function(error){
+                  dispatch({ type: 'RESTORE_TOKEN', usuario: null });
+                });
+        }else{
+          dispatch({ type: 'RESTORE_TOKEN', usuario: null });
+        }     
+      }catch(ex){
+        dispatch({ type: 'RESTORE_TOKEN', usuario: null });
+      }
+    };
+
+    bootstrapAsync();
+  }, []);
+
+  const authContext = React.useMemo(
+    () => ({
+      login: async (usuario) => {
+        dispatch({ type: 'SIGN_IN', usuario: usuario });
+      },
+      logout: () => dispatch({ type: 'SIGN_OUT' }),
+    }),
+    []
+  );
+
+  const LoginStack = createNativeStackNavigator();
+
+  function LoginStackFunction()
+  {
+    if(state.isLoading){
+      return <LoadingLoginScreen />
+    }
+
+    var usuario = state.usuario;
+
+    if(usuario){
+      if(usuario.papel == "Administrador"){
+        return(
+          <LoginStack.Navigator initialRouteName="StackAdministrador" screenOptions={{headerTransparent: true, headerShown: false, headerLeft: null, gestureEnabled: false, headerBackVisible:false}}>
+            <LoginStack.Screen name='StackAdministrador' component={StackAdministradorFunction} options={{ title: '' }} />
+          </LoginStack.Navigator>
+        );
+      }else if(usuario.papel == "GerenteGeral"){
+        return(
+          <LoginStack.Navigator initialRouteName="StackGerenteGeral" screenOptions={{headerTransparent: true, headerShown: false, headerLeft: null, gestureEnabled: false, headerBackVisible:false}}>
+            <LoginStack.Screen name='StackGerenteGeral' component={StackGerenteGeralFunction} options={{ title: '' }} />
+          </LoginStack.Navigator>
+        );
+      }else if(usuario.papel == "SubGerenteGeral"){
+        return(
+          <LoginStack.Navigator initialRouteName="StackSubGerenteGeral" screenOptions={{headerTransparent: true, headerShown: false, headerLeft: null, gestureEnabled: false, headerBackVisible:false}}>
+            <LoginStack.Screen name='StackSubGerenteGeral' component={StackSubGerenteGeralFunction} options={{ title: '' }} />
+          </LoginStack.Navigator>
+        );
+      }else if(usuario.papel == "GerenteDeOperacoes"){
+        return(
+          <LoginStack.Navigator initialRouteName="StackGerenteDeOperacoes" screenOptions={{headerTransparent: true, headerShown: false, headerLeft: null, gestureEnabled: false, headerBackVisible:false}}>
+            <LoginStack.Screen name='StackGerenteDeOperacoes' component={StackGerenteDeOperacoesFunction} options={{ title: '' }} />
+          </LoginStack.Navigator>
+        );
+      }else if(usuario.papel == "SupervisorDeOperacoes"){
+        return(
+          <LoginStack.Navigator initialRouteName="StackSupervisorDeOperacoes" screenOptions={{headerTransparent: true, headerShown: false, headerLeft: null, gestureEnabled: false, headerBackVisible:false}}>
+            <LoginStack.Screen name='StackSupervisorDeOperacoes' component={StackSupervisorDeOperacoesFunction} options={{ title: '' }} />
+          </LoginStack.Navigator>
+        );
+      }else if(usuario.papel == "Operacoes"){
+        return(
+          <LoginStack.Navigator initialRouteName="StackOperacoes" screenOptions={{headerTransparent: true, headerShown: false, headerLeft: null, gestureEnabled: false, headerBackVisible:false}}>
+            <LoginStack.Screen name='StackOperacoes' component={StackOperacoesFunction} options={{ title: '' }} />
+          </LoginStack.Navigator>
+        );
+      }else if(usuario.papel == "Atendente"){
+        return(
+          <LoginStack.Navigator initialRouteName="StackAtendente" screenOptions={{headerTransparent: true, headerShown: false, headerLeft: null, gestureEnabled: false, headerBackVisible:false}}>
+            <LoginStack.Screen name='StackAtendente' component={StackAtendenteFunction} options={{ title: '' }} />
+          </LoginStack.Navigator>
+        );
+      }else if(usuario.papel == "Cliente"){
+        return(
+          <LoginStack.Navigator initialRouteName="StackCliente" screenOptions={{headerTransparent: true, headerShown: false, headerLeft: null, gestureEnabled: false, headerBackVisible:false}}>
+            <LoginStack.Screen name='StackCliente' component={StackClienteFunction} options={{ title: '' }} />
+          </LoginStack.Navigator>
+        );
+      }else if(usuario.papel == "Aplicativo"){
+        return(
+          <LoginStack.Navigator initialRouteName="StackAplicativo" screenOptions={{headerTransparent: true, headerShown: false, headerLeft: null, gestureEnabled: false, headerBackVisible:false}}>
+            <LoginStack.Screen name='StackAplicativo' component={StackAplicativoFunction} options={{ title: '' }} />
+          </LoginStack.Navigator>
+        );
+      }
+    }else{
+      return(
+        <LoginStack.Navigator initialRouteName="Login" screenOptions={{headerTransparent: true, headerShown: false, headerLeft: null, gestureEnabled: false, headerBackVisible:false}}>
+          <LoginStack.Screen name='Login' component={LoginScreen} options={{ title: '' }} />
+        </LoginStack.Navigator>
+      );
+    }
+
+    // return(
+    //   <LoginStack.Navigator initialRouteName="LoadingLogin" screenOptions={{headerTransparent: true, headerShown: false, headerLeft: null, gestureEnabled: false, headerBackVisible:false}}>
+    //     <LoginStack.Screen name='StackAdministrador' component={StackAdministradorFunction} options={{ title: '' }} /><LoginStack.Screen name='Login' component={LoginScreen} options={{ title: '' }} />
+    //     <LoginStack.Screen name='LoadingLogin' component={LoadingLoginScreen} options={{ title: '' }} />
+    //     <LoginStack.Screen name='Login' component={LoginScreen} options={{ title: '' }} />
+    //     <LoginStack.Screen name='StackAdministrador' component={StackAdministradorFunction} options={{ title: '' }} />
+    //     <LoginStack.Screen name='StackGerenteGeral' component={StackGerenteGeralFunction} options={{ title: '' }} />
+    //     <LoginStack.Screen name='StackSubGerenteGeral' component={StackSubGerenteGeralFunction} options={{ title: '' }} />
+    //     <LoginStack.Screen name='StackGerenteDeOperacoes' component={StackGerenteDeOperacoesFunction} options={{ title: '' }} />
+    //     <LoginStack.Screen name='StackSupervisorDeOperacoes' component={StackSupervisorDeOperacoesFunction} options={{ title: '' }} />
+    //     <LoginStack.Screen name='StackOperacoes' component={StackOperacoesFunction} options={{ title: '' }} />
+    //     <LoginStack.Screen name='StackAtendente' component={StackAtendenteFunction} options={{ title: '' }} />
+    //     <LoginStack.Screen name='StackCliente' component={StackClienteFunction} options={{ title: '' }} />
+    //     <LoginStack.Screen name='StackAplicativo' component={StackAplicativoFunction} options={{ title: '' }} />
+    //   </LoginStack.Navigator>
+    // );
+  }
+  
+  return (
+    <AuthContext.Provider value={authContext}>
+      <NavigationContainer>
+        <LoginStackFunction />
+      </NavigationContainer>
+    </AuthContext.Provider>
+  );
+};
+
+const DrawerAdministrador = createDrawerNavigator();
+
+function DrawerAdministradorFunction()
+  {
+    return(
+      <DrawerAdministrador.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
+        <DrawerAdministrador.Screen name='Home' component={HomeScreen} options={{ title: 'Início' }} />
+        <DrawerAdministrador.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem' }} />
+        <DrawerAdministrador.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
+        <DrawerAdministrador.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentação de Caixa' }} />
+        <DrawerAdministrador.Screen name='Caixa' component={CaixaScreen} options={{ title: 'Caixa' }} />
+        <DrawerAdministrador.Screen name='Material' component={MaterialScreen} options={{ title: 'Material' }} />
+        <DrawerAdministrador.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações' }} />
+        <DrawerAdministrador.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete' }} />
+        <DrawerAdministrador.Screen name='BuscaEntrega' component={BuscaEntregaScreen} options={{ title: 'Busca e Entrega' }} />
+        <DrawerAdministrador.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega' }} />
+        <DrawerAdministrador.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas' }} />
+        <DrawerAdministrador.Screen name='Usuario' component={UsuarioScreen} options={{ title: 'Usuário' }} />
+        <DrawerAdministrador.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta' }} />
+        <DrawerAdministrador.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa' }} />
+        <DrawerAdministrador.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
+        <DrawerAdministrador.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+      </DrawerAdministrador.Navigator>
     );
   }
-}
 
-const DrawerAdministrador = createDrawerNavigator(
-  {
-    Home: HomeScreen,
-    Lavagem: LavagemScreen,
-    Roupa: RoupaScreen,
-    MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
-    Caixa: CaixaScreen,
-    Material: MaterialScreen,
-    Operacoes: OperacoesCelularScreen,
-    OperacoesTapete: OperacoesTapeteScreen,
-    BuscaEntrega: BuscaEntregaScreen,
-    ListaDeEntrega: ListaDeEntregaScreen,
-    BancoDeHoras: BancoDeHorasScreen,
-    Usuario: UsuarioScreen,
-    Meta: MetaScreen,
-    Tarefa: TarefaScreen,
-    //BaterPonto: BaterPontoScreen,
-    // Tipo: TipoScreen,
-    // Tamanho: TamanhoScreen,
-    // Tecido: TecidoScreen,
-    // Cor: CorScreen,
-    // Marca: MarcaScreen,
-    // Unidade: UnidadeScreen,
-    Sobre: SobreScreen,
-    Logout: LogoutScreen,
-  },{
-    initialRouteName: 'Home',
-    navigationOptions: {
-      headerTransparent: true,
-    },
-  }
-);
+// const DrawerGerenteGeral = createDrawerNavigator(
+//   {
+//     Home: HomeScreen,
+//     Lavagem: LavagemScreen,
+//     Roupa: RoupaScreen,
+//     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
+//     Caixa: CaixaScreen,
+//     Material: MaterialScreen,
+//     Operacoes: OperacoesCelularScreen,
+//     OperacoesTapete: OperacoesTapeteScreen,
+//     BuscaEntrega: BuscaEntregaScreen,
+//     ListaDeEntrega: ListaDeEntregaScreen,
+//     BancoDeHoras: BancoDeHorasScreen,
+//     Usuario: UsuarioScreen,
+//     Meta: MetaScreen,
+//     Tarefa: TarefaScreen,
+//     Sobre: SobreScreen,
+//     Logout: LogoutScreen,
+//   },{
+//     initialRouteName: 'Home',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
 
-const DrawerGerenteGeral = createDrawerNavigator(
-  {
-    Home: HomeScreen,
-    Lavagem: LavagemScreen,
-    Roupa: RoupaScreen,
-    MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
-    Caixa: CaixaScreen,
-    Material: MaterialScreen,
-    Operacoes: OperacoesCelularScreen,
-    OperacoesTapete: OperacoesTapeteScreen,
-    BuscaEntrega: BuscaEntregaScreen,
-    ListaDeEntrega: ListaDeEntregaScreen,
-    BancoDeHoras: BancoDeHorasScreen,
-    Usuario: UsuarioScreen,
-    Meta: MetaScreen,
-    Tarefa: TarefaScreen,
-    Sobre: SobreScreen,
-    Logout: LogoutScreen,
-  },{
-    initialRouteName: 'Home',
-    navigationOptions: {
-      headerTransparent: true,
-    },
-  }
-);
+const DrawerGerenteGeral = createDrawerNavigator();
 
-const DrawerSubGerenteGeral = createDrawerNavigator(
+function DrawerGerenteGeralFunction()
   {
-    Home: HomeScreen,
-    Lavagem: LavagemScreen,
-    Roupa: RoupaScreen,
-    MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
-    Caixa: CaixaScreen,
-    Material: MaterialScreen,
-    Operacoes: OperacoesCelularScreen,
-    OperacoesTapete: OperacoesTapeteScreen,
-    BuscaEntrega: BuscaEntregaScreen,
-    ListaDeEntrega: ListaDeEntregaScreen,
-    BancoDeHoras: BancoDeHorasScreen,
-    Usuario: UsuarioScreen,
-    Meta: MetaScreen,
-    Tarefa: TarefaScreen,
-    Sobre: SobreScreen,
-    Logout: LogoutScreen,
-  },{
-    initialRouteName: 'Home',
-    navigationOptions: {
-      headerTransparent: true,
-    },
+    return(
+      <DrawerGerenteGeral.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
+        <DrawerGerenteGeral.Screen name='Home' component={HomeScreen} options={{ title: 'Início' }} />
+        <DrawerGerenteGeral.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem' }} />
+        <DrawerGerenteGeral.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
+        <DrawerGerenteGeral.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentação de Caixa' }} />
+        <DrawerGerenteGeral.Screen name='Caixa' component={CaixaScreen} options={{ title: 'Caixa' }} />
+        <DrawerGerenteGeral.Screen name='Material' component={MaterialScreen} options={{ title: 'Material' }} />
+        <DrawerGerenteGeral.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações' }} />
+        <DrawerGerenteGeral.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete' }} />
+        <DrawerGerenteGeral.Screen name='BuscaEntrega' component={BuscaEntregaScreen} options={{ title: 'Busca e Entrega' }} />
+        <DrawerGerenteGeral.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega' }} />
+        <DrawerGerenteGeral.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas' }} />
+        <DrawerGerenteGeral.Screen name='Usuario' component={UsuarioScreen} options={{ title: 'Usuário' }} />
+        <DrawerGerenteGeral.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta' }} />
+        <DrawerGerenteGeral.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa' }} />
+        <DrawerGerenteGeral.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
+        <DrawerGerenteGeral.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+      </DrawerGerenteGeral.Navigator>
+    );
   }
-);
 
-const DrawerGerenteDeOperacoes = createDrawerNavigator(
-  {
-    Home: HomeScreen,
-    Lavagem: LavagemScreen,
-    Roupa: RoupaScreen,
-    Material: MaterialScreen,
-    Operacoes: OperacoesCelularScreen,
-    OperacoesTapete: OperacoesTapeteScreen,
-    BancoDeHoras: BancoDeHorasScreen,
-    BaterPonto: BaterPontoScreen,
-    Sobre: SobreScreen,
-    Logout: LogoutScreen,
-  },{
-    initialRouteName: 'Home',
-    navigationOptions: {
-      headerTransparent: true,
-    },
-  }
-);
+// const DrawerSubGerenteGeral = createDrawerNavigator(
+//   {
+//     Home: HomeScreen,
+//     Lavagem: LavagemScreen,
+//     Roupa: RoupaScreen,
+//     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
+//     Caixa: CaixaScreen,
+//     Material: MaterialScreen,
+//     Operacoes: OperacoesCelularScreen,
+//     OperacoesTapete: OperacoesTapeteScreen,
+//     BuscaEntrega: BuscaEntregaScreen,
+//     ListaDeEntrega: ListaDeEntregaScreen,
+//     BancoDeHoras: BancoDeHorasScreen,
+//     Usuario: UsuarioScreen,
+//     Meta: MetaScreen,
+//     Tarefa: TarefaScreen,
+//     Sobre: SobreScreen,
+//     Logout: LogoutScreen,
+//   },{
+//     initialRouteName: 'Home',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
 
-const DrawerSupervisorDeOperacoes = createDrawerNavigator(
-  {
-    Home: HomeScreen,
-    Lavagem: LavagemScreenOperacoes,
-    Operacoes: OperacoesCelularScreen,
-    OperacoesTapete: OperacoesTapeteScreen,
-    Roupa: RoupaScreen,
-    Material: MaterialScreenPapelOperacoes,
-    BancoDeHoras: BancoDeHorasScreen,
-    BaterPonto: BaterPontoScreen,
-    Sobre: SobreScreen,
-    Logout: LogoutScreen,
-  },{
-    initialRouteName: 'Home',
-    navigationOptions: {
-      headerTransparent: true,
-    },
-  }
-);
+const DrawerSubGerenteGeral = createDrawerNavigator();
 
-const DrawerOperacoes = createDrawerNavigator(
+function DrawerSubGerenteGeralFunction()
   {
-    Home: HomeScreen,
-    Lavagem: LavagemScreenOperacoes,
-    Operacoes: OperacoesCelularScreen,
-    Roupa: RoupaScreen,
-    Material: MaterialScreenPapelOperacoes,
-    BancoDeHoras: BancoDeHorasScreen,
-    BaterPonto: BaterPontoScreen,
-    Sobre: SobreScreen,
-    Logout: LogoutScreen,
-  },{
-    initialRouteName: 'Home',
-    navigationOptions: {
-      headerTransparent: true,
-    },
+    return(
+      <DrawerSubGerenteGeral.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
+        <DrawerSubGerenteGeral.Screen name='Home' component={HomeScreen} options={{ title: 'Início' }} />
+        <DrawerSubGerenteGeral.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'v' }} />
+        <DrawerSubGerenteGeral.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
+        <DrawerSubGerenteGeral.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentação de Caixa' }} />
+        <DrawerSubGerenteGeral.Screen name='Caixa' component={CaixaScreen} options={{ title: 'Caixa' }} />
+        <DrawerSubGerenteGeral.Screen name='Material' component={MaterialScreen} options={{ title: 'Material' }} />
+        <DrawerSubGerenteGeral.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações' }} />
+        <DrawerSubGerenteGeral.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete' }} />
+        <DrawerSubGerenteGeral.Screen name='BuscaEntrega' component={BuscaEntregaScreen} options={{ title: 'Busca e Entrega' }} />
+        <DrawerSubGerenteGeral.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega' }} />
+        <DrawerSubGerenteGeral.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas' }} />
+        <DrawerSubGerenteGeral.Screen name='Usuario' component={UsuarioScreen} options={{ title: 'Usuário' }} />
+        <DrawerSubGerenteGeral.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta' }} />
+        <DrawerSubGerenteGeral.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa' }} />
+        <DrawerSubGerenteGeral.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
+        <DrawerSubGerenteGeral.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+      </DrawerSubGerenteGeral.Navigator>
+    );
   }
-);
 
-const DrawerAplicativo = createDrawerNavigator(
-  {
-    Home: HomeScreenAplicativo,
-    Lavagem: LavagemScreenOperacoes,
-    Roupa: RoupaScreen,
-    Sobre: SobreScreen,
-    Logout: LogoutScreen,
-  },{
-    initialRouteName: 'Home',
-    navigationOptions: {
-      headerTransparent: true,
-    },
-  }
-);
+// const DrawerGerenteDeOperacoes = createDrawerNavigator(
+//   {
+//     Home: HomeScreen,
+//     Lavagem: LavagemScreen,
+//     Roupa: RoupaScreen,
+//     Material: MaterialScreen,
+//     Operacoes: OperacoesCelularScreen,
+//     OperacoesTapete: OperacoesTapeteScreen,
+//     BancoDeHoras: BancoDeHorasScreen,
+//     BaterPonto: BaterPontoScreen,
+//     Sobre: SobreScreen,
+//     Logout: LogoutScreen,
+//   },{
+//     initialRouteName: 'Home',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
 
-const DrawerAtendente = createDrawerNavigator(
-  {
-    Home: HomeScreen,
-    Lavagem: LavagemScreen,
-    Roupa: RoupaScreen,
-    MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
-    Caixa: CaixaScreen,
-    BuscaEntrega: BuscaEntregaScreen,
-    ListaDeEntrega: ListaDeEntregaScreen,
-    Usuario: UsuarioScreen,
-    Meta: MetaScreen,
-    Tarefa: TarefaScreen,
-    BaterPonto: BaterPontoScreen,
-    Sobre: SobreScreen,
-    Logout: LogoutScreen,
-  },{
-    initialRouteName: 'Home',
-    navigationOptions: {
-      headerTransparent: true,
-    },
-  }
-);
+const DrawerGerenteDeOperacoes = createDrawerNavigator();
 
-const DrawerCliente = createDrawerNavigator(
+function DrawerGerenteDeOperacoesFunction()
   {
-    Home: HomeScreenCliente,
-    Lavagem: LavagemScreenCliente,
-    Contato: ContatoScreen,
-    Sobre: SobreScreen,
-    Logout: LogoutScreen,
-  },{
-    initialRouteName: 'Home',
-    navigationOptions: {
-      headerTransparent: true,
-    },
+    return(
+      <DrawerGerenteDeOperacoes.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
+        <DrawerGerenteDeOperacoes.Screen name='Home' component={HomeScreen} options={{ title: 'Início' }} />
+        <DrawerGerenteDeOperacoes.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem' }} />
+        <DrawerGerenteDeOperacoes.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
+        <DrawerGerenteDeOperacoes.Screen name='Material' component={MaterialScreen} options={{ title: 'Material' }} />
+        <DrawerGerenteDeOperacoes.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações' }} />
+        <DrawerGerenteDeOperacoes.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete' }} />
+        <DrawerGerenteDeOperacoes.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas' }} />
+        <DrawerGerenteDeOperacoes.Screen name='BaterPonto' component={BaterPontoScreen} options={{ title: 'Bater Ponto' }} />
+        <DrawerGerenteDeOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
+        <DrawerGerenteDeOperacoes.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+      </DrawerGerenteDeOperacoes.Navigator>
+    );
   }
-);
 
-const StackAdministrador = createStackNavigator(
-  {
-    MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
-    CaixaDetails: CaixaDetails,
-    CaixaDetailsSoLeitura: CaixaDetailsSoLeitura,
-    AvaliacaoDetails: AvaliacaoDetails,
-    AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
-    LavagemDetails: LavagemDetails,
-    LavagemDetailsOperacoes: LavagemDetailsOperacoes,
-    LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
-    LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
-    LavagemDetailsEdit: LavagemDetailsEdit,
-    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
-    RoupaDetails: RoupaDetails,
-    OperacaoLavar: OperacaoLavarScreen,
-    OperacaoRecolher: OperacaoRecolherScreen,
-    OperacaoPassar: OperacaoPassarScreen,
-    OperacaoPassadorExtra: OperacaoPassadorExtraScreen,
-    OperacaoEmpacotar: OperacaoEmpacotarScreen,
-    OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
-    OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
-    OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
-    OperacaoLavarTapete: OperacaoLavarTapeteScreen,
-    OperacaoProntoTapete: OperacaoProntoTapeteScreen,
-    OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
-    MaterialDetails: MaterialDetails,
-    RoupasDoCliente: RoupasDoClienteScreen,
-    ListaDeCompras: ListaDeComprasScreen,
-    BancoDeHorasDetails: BancoDeHorasDetails,
-    ListaDeEntregaDetails: ListaDeEntregaDetails,
-    ListaDeEntregaDetailsAtendente: ListaDeEntregaDetailsAtendente,
-    LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
-    OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
-    FechamentoDePontoDetails: FechamentoDePontoDetails,
-    UsuarioDetails: UsuarioDetails,
-    BuscaDetails: BuscaDetails,
-    SelecionarUsuarioDetails: SelecionarUsuarioDetails,
-    LavagensPendentesDetails: LavagensPendentesDetails,
-    Drawer: DrawerAdministrador,
-  },{
-    initialRouteName: 'Drawer',
-    navigationOptions: {
-      headerTransparent: true,
-    },
-  }
-);
+// const DrawerSupervisorDeOperacoes = createDrawerNavigator(
+//   {
+//     Home: HomeScreen,
+//     Lavagem: LavagemScreenOperacoes,
+//     Operacoes: OperacoesCelularScreen,
+//     OperacoesTapete: OperacoesTapeteScreen,
+//     Roupa: RoupaScreen,
+//     Material: MaterialScreenPapelOperacoes,
+//     BancoDeHoras: BancoDeHorasScreen,
+//     BaterPonto: BaterPontoScreen,
+//     Sobre: SobreScreen,
+//     Logout: LogoutScreen,
+//   },{
+//     initialRouteName: 'Home',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
 
-const StackGerenteGeral = createStackNavigator(
-  {
-    MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
-    CaixaDetails: CaixaDetails,
-    CaixaDetailsSoLeitura: CaixaDetailsSoLeitura,
-    AvaliacaoDetails: AvaliacaoDetails,
-    AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
-    LavagemDetails: LavagemDetails,
-    LavagemDetailsOperacoes: LavagemDetailsOperacoes,
-    LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
-    LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
-    LavagemDetailsEdit: LavagemDetailsEdit,
-    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
-    RoupasDoCliente: RoupasDoClienteScreen,
-    RoupaDetails: RoupaDetails,
-    OperacaoLavar: OperacaoLavarScreen,
-    OperacaoRecolher: OperacaoRecolherScreen,
-    OperacaoPassar: OperacaoPassarScreen,
-    OperacaoPassadorExtra: OperacaoPassadorExtraScreen,
-    OperacaoEmpacotar: OperacaoEmpacotarScreen,
-    OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
-    OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
-    OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
-    OperacaoLavarTapete: OperacaoLavarTapeteScreen,
-    OperacaoProntoTapete: OperacaoProntoTapeteScreen,
-    OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
-    MaterialDetails: MaterialDetails,
-    ListaDeCompras: ListaDeComprasScreen,
-    BancoDeHorasDetails: BancoDeHorasDetails,
-    ListaDeEntregaDetails: ListaDeEntregaDetails,
-    ListaDeEntregaDetailsAtendente: ListaDeEntregaDetailsAtendente,
-    LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
-    OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
-    FechamentoDePontoDetails: FechamentoDePontoDetails,
-    UsuarioDetails: UsuarioDetails,
-    BuscaDetails: BuscaDetails,
-    SelecionarUsuarioDetails: SelecionarUsuarioDetails,
-    LavagensPendentesDetails: LavagensPendentesDetails,
-    Drawer: DrawerGerenteGeral,
-  },{
-    initialRouteName: 'Drawer',
-    navigationOptions: {
-      headerTransparent: true,
-    },
-  }
-);
+const DrawerSupervisorDeOperacoes = createDrawerNavigator();
 
-const StackSubGerenteGeral = createStackNavigator(
+function DrawerSupervisorDeOperacoesFunction()
   {
-    MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
-    CaixaDetails: CaixaDetails,
-    CaixaDetailsSoLeitura: CaixaDetailsSoLeitura,
-    AvaliacaoDetails: AvaliacaoDetails,
-    AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
-    LavagemDetails: LavagemDetails,
-    LavagemDetailsOperacoes: LavagemDetailsOperacoes,
-    LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
-    LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
-    LavagemDetailsEdit: LavagemDetailsEdit,
-    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
-    RoupasDoCliente: RoupasDoClienteScreen,
-    RoupaDetails: RoupaDetails,
-    OperacaoLavar: OperacaoLavarScreen,
-    OperacaoRecolher: OperacaoRecolherScreen,
-    OperacaoPassar: OperacaoPassarScreen,
-    OperacaoPassadorExtra: OperacaoPassadorExtraScreen,
-    OperacaoEmpacotar: OperacaoEmpacotarScreen,
-    OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
-    OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
-    OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
-    OperacaoLavarTapete: OperacaoLavarTapeteScreen,
-    OperacaoProntoTapete: OperacaoProntoTapeteScreen,
-    OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
-    OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
-    MaterialDetails: MaterialDetails,
-    ListaDeCompras: ListaDeComprasScreen,
-    BancoDeHorasDetails: BancoDeHorasDetails,
-    ListaDeEntregaDetails: ListaDeEntregaDetails,
-    ListaDeEntregaDetailsAtendente: ListaDeEntregaDetailsAtendente,
-    LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
-    FechamentoDePontoDetails: FechamentoDePontoDetails,
-    UsuarioDetails: UsuarioDetails,
-    BuscaDetails: BuscaDetails,
-    SelecionarUsuarioDetails: SelecionarUsuarioDetails,
-    LavagensPendentesDetails: LavagensPendentesDetails,
-    Drawer: DrawerSubGerenteGeral,
-  },{
-    initialRouteName: 'Drawer',
-    navigationOptions: {
-      headerTransparent: true,
-    },
+    return(
+      <DrawerSupervisorDeOperacoes.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
+        <DrawerSupervisorDeOperacoes.Screen name='Home' component={HomeScreen} options={{ title: 'Início' }} />
+        <DrawerSupervisorDeOperacoes.Screen name='Lavagem' component={LavagemScreenOperacoes} options={{ title: 'Lavagem' }} />
+        <DrawerSupervisorDeOperacoes.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações' }} />
+        <DrawerSupervisorDeOperacoes.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete' }} />
+        <DrawerSupervisorDeOperacoes.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
+        <DrawerSupervisorDeOperacoes.Screen name='Material' component={MaterialScreenPapelOperacoes} options={{ title: 'Material' }} />
+        <DrawerSupervisorDeOperacoes.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas' }} />
+        <DrawerSupervisorDeOperacoes.Screen name='BaterPonto' component={BaterPontoScreen} options={{ title: 'Bater Ponto' }} />
+        <DrawerSupervisorDeOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
+        <DrawerSupervisorDeOperacoes.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+      </DrawerSupervisorDeOperacoes.Navigator>
+    );
   }
-);
 
-const StackGerenteDeOperacoes = createStackNavigator(
-  {
-    LavagemDetails: LavagemDetails,
-    LavagemDetailsOperacoes: LavagemDetailsOperacoes,
-    LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
-    LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
-    LavagemDetailsEdit: LavagemDetailsEdit,
-    AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
-    AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
-    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
-    RoupasDoCliente: RoupasDoClienteScreen,
-    RoupaDetails: RoupaDetails,
-    OperacaoLavar: OperacaoLavarScreen,
-    OperacaoRecolher: OperacaoRecolherScreen,
-    OperacaoPassar: OperacaoPassarScreen,
-    OperacaoPassadorExtra: OperacaoPassadorExtraScreen,
-    OperacaoEmpacotar: OperacaoEmpacotarScreen,
-    OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
-    OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
-    OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
-    OperacaoLavarTapete: OperacaoLavarTapeteScreen,
-    OperacaoProntoTapete: OperacaoProntoTapeteScreen,
-    OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
-    BancoDeHorasDetails: BancoDeHorasDetails,
-    FechamentoDePontoDetails: FechamentoDePontoDetails,
-    ListaDeEntregaDetails: ListaDeEntregaDetails,
-    LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
-    OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
-    Drawer: DrawerGerenteDeOperacoes,
-  },{
-    initialRouteName: 'Drawer',
-    navigationOptions: {
-      headerTransparent: true,
-    },
-  }
-);
+// const DrawerOperacoes = createDrawerNavigator(
+//   {
+//     Home: HomeScreen,
+//     Lavagem: LavagemScreenOperacoes,
+//     Operacoes: OperacoesCelularScreen,
+//     Roupa: RoupaScreen,
+//     Material: MaterialScreenPapelOperacoes,
+//     BancoDeHoras: BancoDeHorasScreen,
+//     BaterPonto: BaterPontoScreen,
+//     Sobre: SobreScreen,
+//     Logout: LogoutScreen,
+//   },{
+//     initialRouteName: 'Home',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
 
-const StackSupervisorDeOperacoes = createStackNavigator(
-  {
-    LavagemDetails: LavagemDetailsPapelOperacoes,
-    LavagemDetailsOperacoes: LavagemDetailsOperacoes,
-    LavagemDetailsEdit: LavagemDetailsEdit,
-    LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
-    LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
-    AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
-    AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
-    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
-    RoupasDoCliente: RoupasDoClienteScreen,
-    RoupaDetails: RoupaDetails,
-    Operacoes: OperacoesCelularScreen,
-    OperacaoLavar: OperacaoLavarScreen,
-    OperacaoRecolher: OperacaoRecolherScreen,
-    OperacaoPassar: OperacaoPassarScreen,
-    OperacaoPassadorExtra: OperacaoPassadorExtraScreen,
-    OperacaoEmpacotar: OperacaoEmpacotarScreen,
-    OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
-    OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
-    OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
-    OperacaoLavarTapete: OperacaoLavarTapeteScreen,
-    OperacaoProntoTapete: OperacaoProntoTapeteScreen,
-    OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
-    ListaDeEntregaDetails: ListaDeEntregaDetails,
-    LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
-    OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
-    BancoDeHorasDetails: BancoDeHorasDetails,
-    FechamentoDePontoDetails: FechamentoDePontoDetails,
-    Drawer: DrawerSupervisorDeOperacoes,
-  },{
-    initialRouteName: 'Drawer',
-    navigationOptions: {
-      headerTransparent: true,
-    },
-  }
-);
+const DrawerOperacoes = createDrawerNavigator();
 
-const StackOperacoes = createStackNavigator(
+function DrawerOperacoesFunction()
   {
-    AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
-    AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
-    BancoDeHorasDetails: BancoDeHorasDetails,
-    FechamentoDePontoDetails: FechamentoDePontoDetails,
-    Drawer: DrawerOperacoes,
-  },{
-    initialRouteName: 'Drawer',
-    navigationOptions: {
-      headerTransparent: true,
-    },
+    return(
+      <DrawerOperacoes.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
+        <DrawerOperacoes.Screen name='Home' component={HomeScreen} options={{ title: 'Início' }} />
+        <DrawerOperacoes.Screen name='Lavagem' component={LavagemScreenOperacoes} options={{ title: 'Lavagem' }} />
+        <DrawerOperacoes.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações' }} />
+        <DrawerOperacoes.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
+        <DrawerOperacoes.Screen name='Material' component={MaterialScreenPapelOperacoes} options={{ title: 'Material' }} />
+        <DrawerOperacoes.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas' }} />
+        <DrawerOperacoes.Screen name='BaterPonto' component={BaterPontoScreen} options={{ title: 'Bater Ponto' }} />
+        <DrawerOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
+        <DrawerOperacoes.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+      </DrawerOperacoes.Navigator>
+    );
   }
-);
 
-const StackAplicativo = createStackNavigator(
-  {
-    LavagemDetails: LavagemDetailsOperacoes,
-    LavagemDetailsOperacoes: LavagemDetailsOperacoes,
-    LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
-    LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
-    AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
-    AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
-    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
-    RoupasDoCliente: RoupasDoClienteScreen,
-    RoupaDetails: RoupaDetails,
-    Operacoes: OperacoesScreen,
-    OperacaoLavar: OperacaoLavarScreen,
-    OperacaoRecolher: OperacaoRecolherScreen,
-    OperacaoPassar: OperacaoPassarScreen,
-    OperacaoPassadorExtra: OperacaoPassadorExtraScreen,
-    OperacaoEmpacotar: OperacaoEmpacotarScreen,
-    OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
-    OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
-    OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
-    OperacaoLavarTapete: OperacaoLavarTapeteScreen,
-    OperacaoProntoTapete: OperacaoProntoTapeteScreen,
-    OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
-    ListaDeEntregaDetails: ListaDeEntregaDetails,
-    LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
-    OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
-    Drawer: DrawerAplicativo,
-  },{
-    initialRouteName: 'Drawer',
-    navigationOptions: {
-      headerTransparent: true,
-    },
-  }
-);
+// const DrawerAplicativo = createDrawerNavigator(
+//   {
+//     Home: HomeScreenAplicativo,
+//     Lavagem: LavagemScreenOperacoes,
+//     Roupa: RoupaScreen,
+//     Sobre: SobreScreen,
+//     Logout: LogoutScreen,
+//   },{
+//     initialRouteName: 'Home',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
 
-const StackAtendente = createStackNavigator(
-  {
-    MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
-    CaixaDetails: CaixaDetails,
-    CaixaDetailsSoLeitura: CaixaDetailsSoLeitura,
-    LavagemDetails: LavagemDetails,
-    LavagemDetailsEdit: LavagemDetailsEdit,
-    AvaliacaoDetails: AvaliacaoDetails,
-    AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
-    RoupaEmLavagemDetails: RoupaEmLavagemDetails,
-    RoupasDoCliente: RoupasDoClienteScreen,
-    RoupaDetails: RoupaDetails,
-    UsuarioDetails: UsuarioDetails,
-    ListaDeEntregaDetailsAtendente: ListaDeEntregaDetailsAtendente,
-    BuscaDetails: BuscaDetails,
-    SelecionarUsuarioDetails: SelecionarUsuarioDetails,
-    LavagensPendentesDetails: LavagensPendentesDetails,
-    Drawer: DrawerAtendente,
-  },{
-    initialRouteName: 'Drawer',
-    navigationOptions: {
-      headerTransparent: true,
-    },
-  }
-);
+const DrawerAplicativo = createDrawerNavigator();
 
-const StackCliente = createStackNavigator(
+function DrawerAplicativoFunction()
   {
-    LavagemDetails: LavagemDetailsCliente,
-    AvaliacaoDetails: AvaliacaoDetails,
-    AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
-    Drawer: DrawerCliente,
-  },{
-    initialRouteName: 'Drawer',
-    navigationOptions: {
-      headerTransparent: true,
-    },
+    return(
+      <DrawerAplicativo.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
+        <DrawerAplicativo.Screen name='Home' component={HomeScreenAplicativo} options={{ title: 'Início' }} />
+        <DrawerAplicativo.Screen name='Lavagem' component={LavagemScreenOperacoes} options={{ title: 'Lavagem' }} />
+        <DrawerAplicativo.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
+        <DrawerAplicativo.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
+        <DrawerAplicativo.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+      </DrawerAplicativo.Navigator>
+    );
   }
-);
 
-const LoginStack = createSwitchNavigator(
+
+// const DrawerAtendente = createDrawerNavigator(
+//   {
+//     Home: HomeScreen,
+//     Lavagem: LavagemScreen,
+//     Roupa: RoupaScreen,
+//     MovimentacaoDeCaixa: MovimentacaoDeCaixaScreen,
+//     Caixa: CaixaScreen,
+//     BuscaEntrega: BuscaEntregaScreen,
+//     ListaDeEntrega: ListaDeEntregaScreen,
+//     Usuario: UsuarioScreen,
+//     Meta: MetaScreen,
+//     Tarefa: TarefaScreen,
+//     BaterPonto: BaterPontoScreen,
+//     Sobre: SobreScreen,
+//     Logout: LogoutScreen,
+//   },{
+//     initialRouteName: 'Home',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
+
+const DrawerAtendente = createDrawerNavigator();
+
+function DrawerAtendenteFunction()
   {
-    LoadingLogin: LoadingLoginScreen, 
-    Login: LoginScreen,
-    StackAdministrador: StackAdministrador,
-    StackGerenteGeral: StackGerenteGeral,
-    StackSubGerenteGeral: StackSubGerenteGeral,
-    StackGerenteDeOperacoes: StackGerenteDeOperacoes,
-    StackSupervisorDeOperacoes: StackSupervisorDeOperacoes,
-    StackOperacoes: StackOperacoes,
-    StackAtendente: StackAtendente,
-    StackCliente: StackCliente,
-    StackAplicativo: StackAplicativo,
-  },{
-    initialRouteName: 'LoadingLogin',
-    navigationOptions: {
-      headerTransparent: true,
-    },
+    return(
+      <DrawerAtendente.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
+        <DrawerAtendente.Screen name='Home' component={HomeScreen} options={{ title: 'Início' }} />
+        <DrawerAtendente.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem' }} />
+        <DrawerAtendente.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
+        <DrawerAtendente.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentacao de Caixa' }} />
+        <DrawerAtendente.Screen name='Caixa' component={CaixaScreen} options={{ title: 'Caixa' }} />
+        <DrawerAtendente.Screen name='BuscaEntrega' component={BuscaEntregaScreen} options={{ title: 'Busca e Entrega' }} />
+        <DrawerAtendente.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega' }} />
+        <DrawerAtendente.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas' }} />
+        <DrawerAtendente.Screen name='Usuario' component={UsuarioScreen} options={{ title: 'Usuário' }} />
+        <DrawerAtendente.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta' }} />
+        <DrawerAtendente.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa' }} />
+        <DrawerAtendente.Screen name='BaterPonto' component={BaterPontoScreen} options={{ title: 'Bater Ponto' }} />
+        <DrawerAtendente.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
+        <DrawerAtendente.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+      </DrawerAtendente.Navigator>
+    );
   }
-);
+
+// const DrawerCliente = createDrawerNavigator(
+//   {
+//     Home: HomeScreenCliente,
+//     Lavagem: LavagemScreenCliente,
+//     Contato: ContatoScreen,
+//     Sobre: SobreScreen,
+//     Logout: LogoutScreen,
+//   },{
+//     initialRouteName: 'Home',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
+
+const DrawerCliente = createDrawerNavigator();
+
+function DrawerClienteFunction()
+  {
+    return(
+      <DrawerCliente.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
+        <DrawerCliente.Screen name='Home' component={HomeScreenCliente} options={{ title: 'Início' }} />
+        <DrawerCliente.Screen name='Lavagem' component={LavagemScreenCliente} options={{ title: 'Lavagem' }} />
+        <DrawerCliente.Screen name='Contato' component={ContatoScreen} options={{ title: 'Contato' }} />
+        <DrawerCliente.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
+        <DrawerCliente.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+      </DrawerCliente.Navigator>
+    );
+  }
+
+  //screenOptions={{headerTransparent: true}}
+const StackAdministrador = createNativeStackNavigator();
+
+function StackAdministradorFunction()
+  {
+    return(
+      <StackAdministrador.Navigator initialRouteName="Drawer">
+        <StackAdministrador.Screen name='Drawer' component={DrawerAdministradorFunction} options={{ title: '', headerTransparent: true }}/>
+        <StackAdministrador.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: 'Movimentação de Caixa' }} />
+        <StackAdministrador.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: 'Caixa' }} />
+        <StackAdministrador.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: 'Caixa' }} />
+        <StackAdministrador.Screen name='AvaliacaoDetails' component={AvaliacaoDetails} options={{ title: 'Avaliação' }} />
+        <StackAdministrador.Screen name='AvaliacaoDetailsSoLeitura' component={AvaliacaoDetailsSoLeitura} options={{ title: 'Avaliação' }} />
+        <StackAdministrador.Screen name='LavagemDetails' component={LavagemDetails} options={{ title: 'Lavagem' }} />
+        <StackAdministrador.Screen name='LavagemDetailsOperacoes' component={LavagemDetailsOperacoes} options={{ title: 'Operações em Lavagem' }} />
+        <StackAdministrador.Screen name='LavagemDetailsOperacaoEmpacotar' component={LavagemDetailsOperacaoEmpacotar} options={{ title: 'Empacotar Lavagem' }} />
+        <StackAdministrador.Screen name='LavagemDetailsOperacaoRecolher' component={LavagemDetailsOperacaoRecolher} options={{ title: 'Recolher Lavagem' }} />
+        <StackAdministrador.Screen name='LavagemDetailsEdit' component={LavagemDetailsEdit} options={{ title: 'Editar Lavagem' }} />
+        <StackAdministrador.Screen name='RoupaEmLavagemDetails' component={RoupaEmLavagemDetails} options={{ title: 'Roupa em Lavagem' }} />
+        <StackAdministrador.Screen name='RoupaDetails' component={RoupaDetails} options={{ title: 'Roupa' }} />
+        <StackAdministrador.Screen name='OperacaoLavar' component={OperacaoLavarScreen} options={{ title: 'Lavar' }} />
+        <StackAdministrador.Screen name='OperacaoRecolher' component={OperacaoRecolherScreen} options={{ title: 'Recolher' }} />
+        <StackAdministrador.Screen name='OperacaoPassar' component={OperacaoPassarScreen} options={{ title: 'Passar' }} />
+        <StackAdministrador.Screen name='OperacaoPassadorExtra' component={OperacaoPassadorExtraScreen} options={{ title: 'Passador Extra' }} />
+        <StackAdministrador.Screen name='OperacaoEmpacotar' component={OperacaoEmpacotarScreen} options={{ title: 'Empacotar' }} />
+        <StackAdministrador.Screen name='OperacaoRetirarMaterial' component={OperacaoRetirarMaterialScreen} options={{ title: 'Retirar Material' }} />
+        <StackAdministrador.Screen name='OperacaoAdicionarMaterial' component={OperacaoAdicionarMaterialScreen} options={{ title: 'Adicionar Material' }} />
+        <StackAdministrador.Screen name='OperacaoListaDeEntrega' component={OperacaoListaDeEntregaScreen} options={{ title: 'Lista de Entrega' }} />
+        <StackAdministrador.Screen name='OperacaoLavarTapete' component={OperacaoLavarTapeteScreen} options={{ title: 'Lavar Tapete' }} />
+        <StackAdministrador.Screen name='OperacaoProntoTapete' component={OperacaoProntoTapeteScreen} options={{ title: 'Tapete Pronto' }} />
+        <StackAdministrador.Screen name='OperacaoEntregarTapete' component={OperacaoEntregarTapeteScreen} options={{ title: 'Entregar Tapete' }} />
+        <StackAdministrador.Screen name='MaterialDetails' component={MaterialDetails} options={{ title: 'Material' }} />
+        <StackAdministrador.Screen name='RoupasDoCliente' component={RoupasDoClienteScreen} options={{ title: 'Roupas do Cliente' }} />
+        <StackAdministrador.Screen name='ListaDeCompras' component={ListaDeComprasScreen} options={{ title: 'Lista de Compras' }} />
+        <StackAdministrador.Screen name='BancoDeHorasDetails' component={BancoDeHorasDetails} options={{ title: 'Banco de Horas' }} />
+        <StackAdministrador.Screen name='ListaDeEntregaDetails' component={ListaDeEntregaDetails} options={{ title: 'Lista de Entrega' }} />
+        <StackAdministrador.Screen name='ListaDeEntregaDetailsAtendente' component={ListaDeEntregaDetailsAtendente} options={{ title: 'Lista de Entrega' }} />
+        <StackAdministrador.Screen name='LavagemParaListaDeEntrega' component={LavagemParaListaDeEntregaScreen} options={{ title: 'Lavagem para Lista de Entrega' }} />
+        <StackAdministrador.Screen name='OperacaoListaDeEntregaDireta' component={OperacaoListaDeEntregaDiretaScreen} options={{ title: 'Lista de Entrega' }} />
+        <StackAdministrador.Screen name='FechamentoDePontoDetails' component={FechamentoDePontoDetails} options={{ title: 'Fechamento de Ponto' }} />
+        <StackAdministrador.Screen name='UsuarioDetails' component={UsuarioDetails} options={{ title: 'Usuário' }} />
+        <StackAdministrador.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: 'Busca' }} />
+        <StackAdministrador.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: 'Selecionar Usuário' }} />
+        <StackAdministrador.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: 'Lavagens Pendentes' }} />
+      </StackAdministrador.Navigator>
+    );
+  }
+
+// const StackGerenteGeral = createStackNavigator(
+//   {
+//     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+//     CaixaDetails: CaixaDetails,
+//     CaixaDetailsSoLeitura: CaixaDetailsSoLeitura,
+//     AvaliacaoDetails: AvaliacaoDetails,
+//     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
+//     LavagemDetails: LavagemDetails,
+//     LavagemDetailsOperacoes: LavagemDetailsOperacoes,
+//     LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
+//     LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
+//     LavagemDetailsEdit: LavagemDetailsEdit,
+//     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+//     RoupasDoCliente: RoupasDoClienteScreen,
+//     RoupaDetails: RoupaDetails,
+//     OperacaoLavar: OperacaoLavarScreen,
+//     OperacaoRecolher: OperacaoRecolherScreen,
+//     OperacaoPassar: OperacaoPassarScreen,
+//     OperacaoPassadorExtra: OperacaoPassadorExtraScreen,
+//     OperacaoEmpacotar: OperacaoEmpacotarScreen,
+//     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
+//     OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
+//     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
+//     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
+//     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
+//     OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
+//     MaterialDetails: MaterialDetails,
+//     ListaDeCompras: ListaDeComprasScreen,
+//     BancoDeHorasDetails: BancoDeHorasDetails,
+//     ListaDeEntregaDetails: ListaDeEntregaDetails,
+//     ListaDeEntregaDetailsAtendente: ListaDeEntregaDetailsAtendente,
+//     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
+//     OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
+//     FechamentoDePontoDetails: FechamentoDePontoDetails,
+//     UsuarioDetails: UsuarioDetails,
+//     BuscaDetails: BuscaDetails,
+//     SelecionarUsuarioDetails: SelecionarUsuarioDetails,
+//     LavagensPendentesDetails: LavagensPendentesDetails,
+//     Drawer: DrawerGerenteGeral,
+//   },{
+//     initialRouteName: 'Drawer',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
+
+const StackGerenteGeral = createNativeStackNavigator();
+
+function StackGerenteGeralFunction()
+  {
+    return(
+      <StackGerenteGeral.Navigator initialRouteName="Drawer" >
+        <StackGerenteGeral.Screen name='Drawer' component={DrawerGerenteGeralFunction} options={{ title: '' }}/>
+        <StackGerenteGeral.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='AvaliacaoDetails' component={AvaliacaoDetails} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='AvaliacaoDetailsSoLeitura' component={AvaliacaoDetailsSoLeitura} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='LavagemDetails' component={LavagemDetails} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='LavagemDetailsOperacoes' component={LavagemDetailsOperacoes} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='LavagemDetailsOperacaoEmpacotar' component={LavagemDetailsOperacaoEmpacotar} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='LavagemDetailsOperacaoRecolher' component={LavagemDetailsOperacaoRecolher} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='LavagemDetailsEdit' component={LavagemDetailsEdit} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='RoupaEmLavagemDetails' component={RoupaEmLavagemDetails} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='RoupaDetails' component={RoupaDetails} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='OperacaoLavar' component={OperacaoLavarScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='OperacaoRecolher' component={OperacaoRecolherScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='OperacaoPassar' component={OperacaoPassarScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='OperacaoPassadorExtra' component={OperacaoPassadorExtraScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='OperacaoEmpacotar' component={OperacaoEmpacotarScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='OperacaoRetirarMaterial' component={OperacaoRetirarMaterialScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='OperacaoAdicionarMaterial' component={OperacaoAdicionarMaterialScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='OperacaoListaDeEntrega' component={OperacaoListaDeEntregaScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='OperacaoLavarTapete' component={OperacaoLavarTapeteScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='OperacaoProntoTapete' component={OperacaoProntoTapeteScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='OperacaoEntregarTapete' component={OperacaoEntregarTapeteScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='MaterialDetails' component={MaterialDetails} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='RoupasDoCliente' component={RoupasDoClienteScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='ListaDeCompras' component={ListaDeComprasScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='BancoDeHorasDetails' component={BancoDeHorasDetails} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='ListaDeEntregaDetails' component={ListaDeEntregaDetails} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='ListaDeEntregaDetailsAtendente' component={ListaDeEntregaDetailsAtendente} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='LavagemParaListaDeEntrega' component={LavagemParaListaDeEntregaScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='OperacaoListaDeEntregaDireta' component={OperacaoListaDeEntregaDiretaScreen} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='FechamentoDePontoDetails' component={FechamentoDePontoDetails} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='UsuarioDetails' component={UsuarioDetails} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
+      </StackGerenteGeral.Navigator>
+    );
+  }
+
+// const StackSubGerenteGeral = createStackNavigator(
+//   {
+//     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+//     CaixaDetails: CaixaDetails,
+//     CaixaDetailsSoLeitura: CaixaDetailsSoLeitura,
+//     AvaliacaoDetails: AvaliacaoDetails,
+//     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
+//     LavagemDetails: LavagemDetails,
+//     LavagemDetailsOperacoes: LavagemDetailsOperacoes,
+//     LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
+//     LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
+//     LavagemDetailsEdit: LavagemDetailsEdit,
+//     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+//     RoupasDoCliente: RoupasDoClienteScreen,
+//     RoupaDetails: RoupaDetails,
+//     OperacaoLavar: OperacaoLavarScreen,
+//     OperacaoRecolher: OperacaoRecolherScreen,
+//     OperacaoPassar: OperacaoPassarScreen,
+//     OperacaoPassadorExtra: OperacaoPassadorExtraScreen,
+//     OperacaoEmpacotar: OperacaoEmpacotarScreen,
+//     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
+//     OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
+//     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
+//     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
+//     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
+//     OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
+//     OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
+//     MaterialDetails: MaterialDetails,
+//     ListaDeCompras: ListaDeComprasScreen,
+//     BancoDeHorasDetails: BancoDeHorasDetails,
+//     ListaDeEntregaDetails: ListaDeEntregaDetails,
+//     ListaDeEntregaDetailsAtendente: ListaDeEntregaDetailsAtendente,
+//     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
+//     FechamentoDePontoDetails: FechamentoDePontoDetails,
+//     UsuarioDetails: UsuarioDetails,
+//     BuscaDetails: BuscaDetails,
+//     SelecionarUsuarioDetails: SelecionarUsuarioDetails,
+//     LavagensPendentesDetails: LavagensPendentesDetails,
+//     Drawer: DrawerSubGerenteGeral,
+//   },{
+//     initialRouteName: 'Drawer',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
+
+const StackSubGerenteGeral = createNativeStackNavigator();
+
+function StackSubGerenteGeralFunction()
+  {
+    return(
+      <StackSubGerenteGeral.Navigator initialRouteName="Drawer" >
+        <StackSubGerenteGeral.Screen name='Drawer' component={DrawerSubGerenteGeralFunction} options={{ title: '' }}/>
+        <StackSubGerenteGeral.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='AvaliacaoDetails' component={AvaliacaoDetails} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='AvaliacaoDetailsSoLeitura' component={AvaliacaoDetailsSoLeitura} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='LavagemDetails' component={LavagemDetails} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='LavagemDetailsOperacoes' component={LavagemDetailsOperacoes} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='LavagemDetailsOperacaoEmpacotar' component={LavagemDetailsOperacaoEmpacotar} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='LavagemDetailsOperacaoRecolher' component={LavagemDetailsOperacaoRecolher} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='LavagemDetailsEdit' component={LavagemDetailsEdit} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='RoupaEmLavagemDetails' component={RoupaEmLavagemDetails} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='RoupaDetails' component={RoupaDetails} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='OperacaoLavar' component={OperacaoLavarScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='OperacaoRecolher' component={OperacaoRecolherScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='OperacaoPassar' component={OperacaoPassarScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='OperacaoPassadorExtra' component={OperacaoPassadorExtraScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='OperacaoEmpacotar' component={OperacaoEmpacotarScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='OperacaoRetirarMaterial' component={OperacaoRetirarMaterialScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='OperacaoAdicionarMaterial' component={OperacaoAdicionarMaterialScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='OperacaoListaDeEntrega' component={OperacaoListaDeEntregaScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='OperacaoLavarTapete' component={OperacaoLavarTapeteScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='OperacaoProntoTapete' component={OperacaoProntoTapeteScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='OperacaoEntregarTapete' component={OperacaoEntregarTapeteScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='MaterialDetails' component={MaterialDetails} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='RoupasDoCliente' component={RoupasDoClienteScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='ListaDeCompras' component={ListaDeComprasScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='BancoDeHorasDetails' component={BancoDeHorasDetails} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='ListaDeEntregaDetails' component={ListaDeEntregaDetails} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='ListaDeEntregaDetailsAtendente' component={ListaDeEntregaDetailsAtendente} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='LavagemParaListaDeEntrega' component={LavagemParaListaDeEntregaScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='OperacaoListaDeEntregaDireta' component={OperacaoListaDeEntregaDiretaScreen} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='FechamentoDePontoDetails' component={FechamentoDePontoDetails} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='UsuarioDetails' component={UsuarioDetails} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
+      </StackSubGerenteGeral.Navigator>
+    );
+  }
+
+// const StackGerenteDeOperacoes = createStackNavigator(
+//   {
+//     LavagemDetails: LavagemDetails,
+//     LavagemDetailsOperacoes: LavagemDetailsOperacoes,
+//     LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
+//     LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
+//     LavagemDetailsEdit: LavagemDetailsEdit,
+//     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
+//     AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
+//     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+//     RoupasDoCliente: RoupasDoClienteScreen,
+//     RoupaDetails: RoupaDetails,
+//     OperacaoLavar: OperacaoLavarScreen,
+//     OperacaoRecolher: OperacaoRecolherScreen,
+//     OperacaoPassar: OperacaoPassarScreen,
+//     OperacaoPassadorExtra: OperacaoPassadorExtraScreen,
+//     OperacaoEmpacotar: OperacaoEmpacotarScreen,
+//     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
+//     OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
+//     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
+//     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
+//     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
+//     OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
+//     BancoDeHorasDetails: BancoDeHorasDetails,
+//     FechamentoDePontoDetails: FechamentoDePontoDetails,
+//     ListaDeEntregaDetails: ListaDeEntregaDetails,
+//     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
+//     OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
+//     Drawer: DrawerGerenteDeOperacoes,
+//   },{
+//     initialRouteName: 'Drawer',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
+
+const StackGerenteDeOperacoes = createNativeStackNavigator();
+
+function StackGerenteDeOperacoesFunction()
+  {
+    return(
+      <StackGerenteDeOperacoes.Navigator initialRouteName="Drawer" >
+        <StackGerenteDeOperacoes.Screen name='Drawer' component={DrawerGerenteDeOperacoesFunction} options={{ title: '' }}/>
+        <StackGerenteDeOperacoes.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='AvaliacaoDetails' component={AvaliacaoDetails} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='AvaliacaoDetailsSoLeitura' component={AvaliacaoDetailsSoLeitura} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='LavagemDetails' component={LavagemDetails} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='LavagemDetailsOperacoes' component={LavagemDetailsOperacoes} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='LavagemDetailsOperacaoEmpacotar' component={LavagemDetailsOperacaoEmpacotar} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='LavagemDetailsOperacaoRecolher' component={LavagemDetailsOperacaoRecolher} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='LavagemDetailsEdit' component={LavagemDetailsEdit} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='RoupaEmLavagemDetails' component={RoupaEmLavagemDetails} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='RoupaDetails' component={RoupaDetails} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='OperacaoLavar' component={OperacaoLavarScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='OperacaoRecolher' component={OperacaoRecolherScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='OperacaoPassar' component={OperacaoPassarScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='OperacaoPassadorExtra' component={OperacaoPassadorExtraScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='OperacaoEmpacotar' component={OperacaoEmpacotarScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='OperacaoRetirarMaterial' component={OperacaoRetirarMaterialScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='OperacaoAdicionarMaterial' component={OperacaoAdicionarMaterialScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='OperacaoListaDeEntrega' component={OperacaoListaDeEntregaScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='OperacaoLavarTapete' component={OperacaoLavarTapeteScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='OperacaoProntoTapete' component={OperacaoProntoTapeteScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='OperacaoEntregarTapete' component={OperacaoEntregarTapeteScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='MaterialDetails' component={MaterialDetails} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='RoupasDoCliente' component={RoupasDoClienteScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='ListaDeCompras' component={ListaDeComprasScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='BancoDeHorasDetails' component={BancoDeHorasDetails} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='ListaDeEntregaDetails' component={ListaDeEntregaDetails} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='ListaDeEntregaDetailsAtendente' component={ListaDeEntregaDetailsAtendente} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='LavagemParaListaDeEntrega' component={LavagemParaListaDeEntregaScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='OperacaoListaDeEntregaDireta' component={OperacaoListaDeEntregaDiretaScreen} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='FechamentoDePontoDetails' component={FechamentoDePontoDetails} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='UsuarioDetails' component={UsuarioDetails} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
+      </StackGerenteDeOperacoes.Navigator>
+    );
+  }
+
+// const StackSupervisorDeOperacoes = createStackNavigator(
+//   {
+//     LavagemDetails: LavagemDetailsPapelOperacoes,
+//     LavagemDetailsOperacoes: LavagemDetailsOperacoes,
+//     LavagemDetailsEdit: LavagemDetailsEdit,
+//     LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
+//     LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
+//     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
+//     AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
+//     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+//     RoupasDoCliente: RoupasDoClienteScreen,
+//     RoupaDetails: RoupaDetails,
+//     Operacoes: OperacoesCelularScreen,
+//     OperacaoLavar: OperacaoLavarScreen,
+//     OperacaoRecolher: OperacaoRecolherScreen,
+//     OperacaoPassar: OperacaoPassarScreen,
+//     OperacaoPassadorExtra: OperacaoPassadorExtraScreen,
+//     OperacaoEmpacotar: OperacaoEmpacotarScreen,
+//     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
+//     OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
+//     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
+//     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
+//     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
+//     OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
+//     ListaDeEntregaDetails: ListaDeEntregaDetails,
+//     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
+//     OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
+//     BancoDeHorasDetails: BancoDeHorasDetails,
+//     FechamentoDePontoDetails: FechamentoDePontoDetails,
+//     Drawer: DrawerSupervisorDeOperacoes,
+//   },{
+//     initialRouteName: 'Drawer',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
+
+const StackSupervisorDeOperacoes = createNativeStackNavigator();
+
+function StackSupervisorDeOperacoesFunction()
+  {
+    return(
+      <StackSupervisorDeOperacoes.Navigator initialRouteName="Drawer" >
+        <StackSupervisorDeOperacoes.Screen name='Drawer' component={DrawerSupervisorDeOperacoesFunction} options={{ title: '' }}/>
+        <StackSupervisorDeOperacoes.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='AvaliacaoDetails' component={AvaliacaoDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='AvaliacaoDetailsSoLeitura' component={AvaliacaoDetailsSoLeitura} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='LavagemDetails' component={LavagemDetailsPapelOperacoes} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='LavagemDetailsOperacoes' component={LavagemDetailsOperacoes} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='LavagemDetailsOperacaoEmpacotar' component={LavagemDetailsOperacaoEmpacotar} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='LavagemDetailsOperacaoRecolher' component={LavagemDetailsOperacaoRecolher} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='LavagemDetailsEdit' component={LavagemDetailsEdit} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='RoupaEmLavagemDetails' component={RoupaEmLavagemDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='RoupaDetails' component={RoupaDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoLavar' component={OperacaoLavarScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoRecolher' component={OperacaoRecolherScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoPassar' component={OperacaoPassarScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoPassadorExtra' component={OperacaoPassadorExtraScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoEmpacotar' component={OperacaoEmpacotarScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoRetirarMaterial' component={OperacaoRetirarMaterialScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoAdicionarMaterial' component={OperacaoAdicionarMaterialScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoListaDeEntrega' component={OperacaoListaDeEntregaScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoLavarTapete' component={OperacaoLavarTapeteScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoProntoTapete' component={OperacaoProntoTapeteScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoEntregarTapete' component={OperacaoEntregarTapeteScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='MaterialDetails' component={MaterialDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='RoupasDoCliente' component={RoupasDoClienteScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='ListaDeCompras' component={ListaDeComprasScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='BancoDeHorasDetails' component={BancoDeHorasDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='ListaDeEntregaDetails' component={ListaDeEntregaDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='ListaDeEntregaDetailsAtendente' component={ListaDeEntregaDetailsAtendente} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='LavagemParaListaDeEntrega' component={LavagemParaListaDeEntregaScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='OperacaoListaDeEntregaDireta' component={OperacaoListaDeEntregaDiretaScreen} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='FechamentoDePontoDetails' component={FechamentoDePontoDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='UsuarioDetails' component={UsuarioDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
+      </StackSupervisorDeOperacoes.Navigator>
+    );
+  }
+
+// const StackOperacoes = createStackNavigator(
+//   {
+//     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
+//     AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
+//     BancoDeHorasDetails: BancoDeHorasDetails,
+//     FechamentoDePontoDetails: FechamentoDePontoDetails,
+//     Drawer: DrawerOperacoes,
+//   },{
+//     initialRouteName: 'Drawer',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
+
+const StackOperacoes = createNativeStackNavigator();
+
+function StackOperacoesFunction()
+  {
+    return(
+      <StackSupervisorDeOperacoes.Navigator initialRouteName="Drawer" >
+        <StackSupervisorDeOperacoes.Screen name='Drawer' component={DrawerOperacoesFunction} options={{ title: '' }}/>
+        <StackSupervisorDeOperacoes.Screen name='AvaliacaoDetails' component={AvaliacaoDetailsSoLeitura} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='AvaliacaoDetailsSoLeitura' component={AvaliacaoDetailsSoLeitura} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='BancoDeHorasDetails' component={BancoDeHorasDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='FechamentoDePontoDetails' component={FechamentoDePontoDetails} options={{ title: '' }} />
+      </StackSupervisorDeOperacoes.Navigator>
+    );
+  }
+
+// const StackAplicativo = createStackNavigator(
+//   {
+//     LavagemDetails: LavagemDetailsOperacoes,
+//     LavagemDetailsOperacoes: LavagemDetailsOperacoes,
+//     LavagemDetailsOperacaoEmpacotar: LavagemDetailsOperacaoEmpacotar,
+//     LavagemDetailsOperacaoRecolher: LavagemDetailsOperacaoRecolher,
+//     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
+//     AvaliacaoDetails: AvaliacaoDetailsSoLeitura,
+//     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+//     RoupasDoCliente: RoupasDoClienteScreen,
+//     RoupaDetails: RoupaDetails,
+//     Operacoes: OperacoesScreen,
+//     OperacaoLavar: OperacaoLavarScreen,
+//     OperacaoRecolher: OperacaoRecolherScreen,
+//     OperacaoPassar: OperacaoPassarScreen,
+//     OperacaoPassadorExtra: OperacaoPassadorExtraScreen,
+//     OperacaoEmpacotar: OperacaoEmpacotarScreen,
+//     OperacaoRetirarMaterial: OperacaoRetirarMaterialScreen,
+//     OperacaoAdicionarMaterial: OperacaoAdicionarMaterialScreen,
+//     OperacaoListaDeEntrega: OperacaoListaDeEntregaScreen,
+//     OperacaoLavarTapete: OperacaoLavarTapeteScreen,
+//     OperacaoProntoTapete: OperacaoProntoTapeteScreen,
+//     OperacaoEntregarTapete: OperacaoEntregarTapeteScreen,
+//     ListaDeEntregaDetails: ListaDeEntregaDetails,
+//     LavagemParaListaDeEntrega: LavagemParaListaDeEntregaScreen,
+//     OperacaoListaDeEntregaDireta: OperacaoListaDeEntregaDiretaScreen,
+//     Drawer: DrawerAplicativo,
+//   },{
+//     initialRouteName: 'Drawer',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
+
+const StackAplicativo = createNativeStackNavigator();
+
+function StackAplicativoFunction()
+  {
+    return(
+      <StackAplicativo.Navigator initialRouteName="Drawer" >
+        <StackAplicativo.Screen name='Drawer' component={DrawerAplicativoFunction} options={{ title: '' }}/>
+        <StackAplicativo.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: '' }} />
+        <StackAplicativo.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: '' }} />
+        <StackAplicativo.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: '' }} />
+        <StackAplicativo.Screen name='AvaliacaoDetails' component={AvaliacaoDetails} options={{ title: '' }} />
+        <StackAplicativo.Screen name='AvaliacaoDetailsSoLeitura' component={AvaliacaoDetailsSoLeitura} options={{ title: '' }} />
+        <StackAplicativo.Screen name='LavagemDetails' component={LavagemDetailsPapelOperacoes} options={{ title: '' }} />
+        <StackAplicativo.Screen name='LavagemDetailsOperacoes' component={LavagemDetailsOperacoes} options={{ title: '' }} />
+        <StackAplicativo.Screen name='LavagemDetailsOperacaoEmpacotar' component={LavagemDetailsOperacaoEmpacotar} options={{ title: '' }} />
+        <StackAplicativo.Screen name='LavagemDetailsOperacaoRecolher' component={LavagemDetailsOperacaoRecolher} options={{ title: '' }} />
+        <StackAplicativo.Screen name='LavagemDetailsEdit' component={LavagemDetailsEdit} options={{ title: '' }} />
+        <StackAplicativo.Screen name='RoupaEmLavagemDetails' component={RoupaEmLavagemDetails} options={{ title: '' }} />
+        <StackAplicativo.Screen name='RoupaDetails' component={RoupaDetails} options={{ title: '' }} />
+        <StackAplicativo.Screen name='OperacaoLavar' component={OperacaoLavarScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='OperacaoRecolher' component={OperacaoRecolherScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='OperacaoPassar' component={OperacaoPassarScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='OperacaoPassadorExtra' component={OperacaoPassadorExtraScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='OperacaoEmpacotar' component={OperacaoEmpacotarScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='OperacaoRetirarMaterial' component={OperacaoRetirarMaterialScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='OperacaoAdicionarMaterial' component={OperacaoAdicionarMaterialScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='OperacaoListaDeEntrega' component={OperacaoListaDeEntregaScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='OperacaoLavarTapete' component={OperacaoLavarTapeteScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='OperacaoProntoTapete' component={OperacaoProntoTapeteScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='OperacaoEntregarTapete' component={OperacaoEntregarTapeteScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='MaterialDetails' component={MaterialDetails} options={{ title: '' }} />
+        <StackAplicativo.Screen name='RoupasDoCliente' component={RoupasDoClienteScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='ListaDeCompras' component={ListaDeComprasScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='BancoDeHorasDetails' component={BancoDeHorasDetails} options={{ title: '' }} />
+        <StackAplicativo.Screen name='ListaDeEntregaDetails' component={ListaDeEntregaDetails} options={{ title: '' }} />
+        <StackAplicativo.Screen name='ListaDeEntregaDetailsAtendente' component={ListaDeEntregaDetailsAtendente} options={{ title: '' }} />
+        <StackAplicativo.Screen name='LavagemParaListaDeEntrega' component={LavagemParaListaDeEntregaScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='OperacaoListaDeEntregaDireta' component={OperacaoListaDeEntregaDiretaScreen} options={{ title: '' }} />
+        <StackAplicativo.Screen name='FechamentoDePontoDetails' component={FechamentoDePontoDetails} options={{ title: '' }} />
+        <StackAplicativo.Screen name='UsuarioDetails' component={UsuarioDetails} options={{ title: '' }} />
+        <StackAplicativo.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: '' }} />
+        <StackAplicativo.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
+        <StackAplicativo.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
+      </StackAplicativo.Navigator>
+    );
+  }
+
+// const StackAtendente = createStackNavigator(
+//   {
+//     MovimentacaoDeCaixaDetails: MovimentacaoDeCaixaDetails,
+//     CaixaDetails: CaixaDetails,
+//     CaixaDetailsSoLeitura: CaixaDetailsSoLeitura,
+//     LavagemDetails: LavagemDetails,
+//     LavagemDetailsEdit: LavagemDetailsEdit,
+//     AvaliacaoDetails: AvaliacaoDetails,
+//     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
+//     RoupaEmLavagemDetails: RoupaEmLavagemDetails,
+//     RoupasDoCliente: RoupasDoClienteScreen,
+//     RoupaDetails: RoupaDetails,
+//     UsuarioDetails: UsuarioDetails,
+//     ListaDeEntregaDetailsAtendente: ListaDeEntregaDetailsAtendente,
+//     BuscaDetails: BuscaDetails,
+//     SelecionarUsuarioDetails: SelecionarUsuarioDetails,
+//     LavagensPendentesDetails: LavagensPendentesDetails,
+//     Drawer: DrawerAtendente,
+//   },{
+//     initialRouteName: 'Drawer',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
+
+const StackAtendente = createNativeStackNavigator();
+
+function StackAtendenteFunction()
+  {
+    return(
+      <StackAtendente.Navigator initialRouteName="Drawer" >
+        <StackAtendente.Screen name='Drawer' component={DrawerAtendenteFunction} options={{ title: '' }}/>
+        <StackAtendente.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: '' }} />
+        <StackAtendente.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: '' }} />
+        <StackAtendente.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: '' }} />
+        <StackAtendente.Screen name='AvaliacaoDetails' component={AvaliacaoDetails} options={{ title: '' }} />
+        <StackAtendente.Screen name='AvaliacaoDetailsSoLeitura' component={AvaliacaoDetailsSoLeitura} options={{ title: '' }} />
+        <StackAtendente.Screen name='LavagemDetails' component={LavagemDetailsPapelOperacoes} options={{ title: '' }} />
+        <StackAtendente.Screen name='LavagemDetailsOperacoes' component={LavagemDetailsOperacoes} options={{ title: '' }} />
+        <StackAtendente.Screen name='LavagemDetailsOperacaoEmpacotar' component={LavagemDetailsOperacaoEmpacotar} options={{ title: '' }} />
+        <StackAtendente.Screen name='LavagemDetailsOperacaoRecolher' component={LavagemDetailsOperacaoRecolher} options={{ title: '' }} />
+        <StackAtendente.Screen name='LavagemDetailsEdit' component={LavagemDetailsEdit} options={{ title: '' }} />
+        <StackAtendente.Screen name='RoupaEmLavagemDetails' component={RoupaEmLavagemDetails} options={{ title: '' }} />
+        <StackAtendente.Screen name='RoupaDetails' component={RoupaDetails} options={{ title: '' }} />
+        <StackAtendente.Screen name='OperacaoLavar' component={OperacaoLavarScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='OperacaoRecolher' component={OperacaoRecolherScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='OperacaoPassar' component={OperacaoPassarScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='OperacaoPassadorExtra' component={OperacaoPassadorExtraScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='OperacaoEmpacotar' component={OperacaoEmpacotarScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='OperacaoRetirarMaterial' component={OperacaoRetirarMaterialScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='OperacaoAdicionarMaterial' component={OperacaoAdicionarMaterialScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='OperacaoListaDeEntrega' component={OperacaoListaDeEntregaScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='OperacaoLavarTapete' component={OperacaoLavarTapeteScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='OperacaoProntoTapete' component={OperacaoProntoTapeteScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='OperacaoEntregarTapete' component={OperacaoEntregarTapeteScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='MaterialDetails' component={MaterialDetails} options={{ title: '' }} />
+        <StackAtendente.Screen name='RoupasDoCliente' component={RoupasDoClienteScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='ListaDeCompras' component={ListaDeComprasScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='BancoDeHorasDetails' component={BancoDeHorasDetails} options={{ title: '' }} />
+        <StackAtendente.Screen name='ListaDeEntregaDetails' component={ListaDeEntregaDetails} options={{ title: '' }} />
+        <StackAtendente.Screen name='ListaDeEntregaDetailsAtendente' component={ListaDeEntregaDetailsAtendente} options={{ title: '' }} />
+        <StackAtendente.Screen name='LavagemParaListaDeEntrega' component={LavagemParaListaDeEntregaScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='OperacaoListaDeEntregaDireta' component={OperacaoListaDeEntregaDiretaScreen} options={{ title: '' }} />
+        <StackAtendente.Screen name='FechamentoDePontoDetails' component={FechamentoDePontoDetails} options={{ title: '' }} />
+        <StackAtendente.Screen name='UsuarioDetails' component={UsuarioDetails} options={{ title: '' }} />
+        <StackAtendente.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: '' }} />
+        <StackAtendente.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
+        <StackAtendente.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
+      </StackAtendente.Navigator>
+    );
+  }
+
+// const StackCliente = createStackNavigator(
+//   {
+//     LavagemDetails: LavagemDetailsCliente,
+//     AvaliacaoDetails: AvaliacaoDetails,
+//     AvaliacaoDetailsSoLeitura: AvaliacaoDetailsSoLeitura,
+//     Drawer: DrawerCliente,
+//   },{
+//     initialRouteName: 'Drawer',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
+
+const StackCliente = createNativeStackNavigator();
+
+function StackClienteFunction()
+  {
+    return(
+      <StackSupervisorDeOperacoes.Navigator initialRouteName="Drawer" >
+        <StackSupervisorDeOperacoes.Screen name='Drawer' component={DrawerClienteFunction} options={{ title: '' }}/>
+        <StackSupervisorDeOperacoes.Screen name='LavagemDetails' component={LavagemDetailsCliente} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='AvaliacaoDetails' component={AvaliacaoDetails} options={{ title: '' }} />
+        <StackSupervisorDeOperacoes.Screen name='AvaliacaoDetailsSoLeitura' component={AvaliacaoDetailsSoLeitura} options={{ title: '' }} />
+      </StackSupervisorDeOperacoes.Navigator>
+    );
+  }
+
+// const LoginStack = createSwitchNavigator(
+//   {
+//     LoadingLogin: LoadingLoginScreen, 
+//     Login: LoginScreen,
+//     StackAdministrador: StackAdministrador,
+//     StackGerenteGeral: StackGerenteGeral,
+//     StackSubGerenteGeral: StackSubGerenteGeral,
+//     StackGerenteDeOperacoes: StackGerenteDeOperacoes,
+//     StackSupervisorDeOperacoes: StackSupervisorDeOperacoes,
+//     StackOperacoes: StackOperacoes,
+//     StackAtendente: StackAtendente,
+//     StackCliente: StackCliente,
+//     StackAplicativo: StackAplicativo,
+//   },{
+//     initialRouteName: 'LoadingLogin',
+//     navigationOptions: {
+//       headerTransparent: true,
+//     },
+//   }
+// );
+
+  const styles = StyleSheet.create({
+    icon: {
+      width: 24,
+      height: 24,
+    },
+  });
+
+export default App;
