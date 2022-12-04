@@ -22,8 +22,8 @@ export default class MaterialDetails extends React.Component {
         this.buscar = this.buscar.bind(this);
     }
 
-    async componentWillMount(){
-        const materialOid = this.props.navigation.getParam('materialOid');
+    async componentDidMount(){
+        const materialOid = this.props.route.params.materialOid;
         const reload = true;//this.props.navigation.getParam('reload');
         this.setState({materialOid});
 
@@ -70,7 +70,7 @@ export default class MaterialDetails extends React.Component {
         this.setState({modalVisible: true});
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMaterial.aspx?oid=${materialOid}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMaterial.aspx?incluirMovimentacoes=true&oid=${materialOid}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

@@ -295,7 +295,12 @@ function DrawerAdministradorFunction()
   {
     return(
       <DrawerAdministrador.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
-        <DrawerAdministrador.Screen name='Home' component={HomeScreen} options={{ title: 'Início' }} />
+        <DrawerAdministrador.Screen name='Home' component={HomeScreen} options={{ title: 'Início', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/home-icon.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerAdministrador.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem' }} />
         <DrawerAdministrador.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
         <DrawerAdministrador.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentação de Caixa' }} />
