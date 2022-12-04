@@ -166,13 +166,14 @@ export default class MaterialScreen extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
-        var usuarioOid = this.props.navigation.getParam('usuarioOid');
-        var usarUsuarioLogado = false;
+        var usuarioOid = usuario.oid;
+        var usarUsuarioLogado = true;
 
-        if(!usuarioOid){
-            usuarioOid = usuario.oid;
-            usarUsuarioLogado = true;
-        }
+        //Corrigir (ta dando undefined)
+        // if(this.props.route.params.usuarioOid){
+        //     usuarioOid = this.props.route.params.usuarioOid;
+        //     usarUsuarioLogado = false;
+        // }
 
         var argumentos = `materialOid=${this.state.materialOid}&usuarioOid=${usuarioOid}&quantidade=${this.state.quantidade}&modo=${this.state.modo}`;
 
