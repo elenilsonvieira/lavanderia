@@ -1,11 +1,12 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TouchableOpacity, Linking } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, TouchableOpacity, Linking } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import MovimentacaoDeCaixa from "../components/MovimentacaoDeCaixa";
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';
 import {Picker} from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Text from '../components/Text';
 
 export default class MovimentacaoDeCaixaScreen extends React.Component {
 

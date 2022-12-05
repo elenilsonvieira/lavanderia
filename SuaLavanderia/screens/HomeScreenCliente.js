@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity, Linking} from 'react-native';
+import {StyleSheet, View, Image, TouchableOpacity, Linking} from 'react-native';
 import { reload } from '../utils/StorageUtils';
 import LoadingModal from '../components/modals/LoadingModal';
+import Text from '../components/Text';
 
 export default class HomeScreenCliente extends Component {
 

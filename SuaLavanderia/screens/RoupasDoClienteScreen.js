@@ -1,9 +1,10 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TouchableOpacity, TextInput } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, TouchableOpacity, TextInput } from 'react-native';
 import Roupa from '../components/Roupa';
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Text from '../components/Text';
 
 export default class RoupasDoClienteScreen extends React.Component {
 

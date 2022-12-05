@@ -1,9 +1,10 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Linking} from 'react-native';
+import {StyleSheet, View, ScrollView, Image, TextInput, TouchableOpacity, Linking} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Usuario from "../../components/Usuario";
 import LoadingModal from '../../components/modals/LoadingModal';
 import fetch from '../../utils/FetchWithTimeout';
+import Text from '../../components/Text';
 
 export default class SelecionarUsuarioDetails extends React.Component {
 

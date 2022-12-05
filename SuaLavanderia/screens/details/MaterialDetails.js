@@ -1,11 +1,12 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TouchableOpacity, Linking } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, TouchableOpacity, Linking } from 'react-native';
 import MovimentacaoDeMaterial from '../../components/MovimentacaoDeMaterial';
 import LoadingModal from '../../components/modals/LoadingModal';
 import Material from '../../components/Material';
 import ConfirmacaoModalMaterial from '../../components/modals/ConfirmacaoModalMaterial';
 import fetch from '../../utils/FetchWithTimeout';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Text from '../../components/Text';
 
 export default class MaterialDetails extends React.Component {
 

@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Text, TouchableOpacity, Image, Linking } from 'react-native';
+import {StyleSheet, View, ScrollView, TouchableOpacity, Image, Linking } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import OperacaoCelular from "../components/OperacaoCelular";
 import LoadingModal from '../components/modals/LoadingModal';
+import Text from '../components/Text';
 
 export default class OperacoesTapeteScreen extends React.Component {
 

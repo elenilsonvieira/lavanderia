@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Text, Modal, ActivityIndicator } from 'react-native'
+import { StyleSheet, View, Modal, ActivityIndicator } from 'react-native'
+import Text from '../Text';
 
 export default class LoadingModal extends React.Component {
 

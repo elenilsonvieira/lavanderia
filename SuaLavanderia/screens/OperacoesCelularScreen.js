@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Text, TouchableOpacity, Image, Linking } from 'react-native';
-
+import {StyleSheet, View, ScrollView, TouchableOpacity, Image, Linking } from 'react-native';
+import Text from '../components/Text';
 import OperacaoCelular from "../components/OperacaoCelular";
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';

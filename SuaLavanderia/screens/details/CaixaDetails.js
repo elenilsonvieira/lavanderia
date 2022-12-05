@@ -1,9 +1,10 @@
 import React from 'react';
-import {StyleSheet, View, Image, Text, TextInput, TouchableOpacity, Linking } from 'react-native';
+import {StyleSheet, View, Image, TextInput, TouchableOpacity, Linking } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {Picker} from '@react-native-picker/picker';
 import fetch from '../../utils/FetchWithTimeout';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Text from '../../components/Text';
 
 export default class CaixaDetails extends React.Component {
 

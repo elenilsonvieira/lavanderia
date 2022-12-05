@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TouchableOpacity, PermissionsAndroid } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import BatidaSimples from '../components/BatidaSimples';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';
-
+import Text from '../components/Text';
 import Geolocation from 'react-native-geolocation-service';
 
 export default class BaterPontoScreen extends React.Component {

@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, Linking, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Image, Linking, TouchableOpacity} from 'react-native';
 import fetch from '../utils/FetchWithTimeout';
+import Text from '../components/Text';
 
 export default class LogoutScreen extends React.Component {
     static navigationOptions = {

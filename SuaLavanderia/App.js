@@ -8,7 +8,8 @@
 
 import 'react-native-gesture-handler'; 
 import React, { useState } from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
+import Text from './components/Text';
 // import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation';
 import HomeScreen from "./screens/HomeScreen";
 import HomeScreenCliente from "./screens/HomeScreenCliente";

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, Modal } from 'react-native';
+import { View, TouchableOpacity, TextInput, StyleSheet, Modal } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {Picker} from '@react-native-picker/picker';
+import Text from '../Text';
 
 export default class ListaDeComprasModal extends React.Component {
 

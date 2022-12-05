@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Linking } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, TextInput, TouchableOpacity, Linking } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Material from "../components/Material";
 import LoadingModal from '../components/modals/LoadingModal';
@@ -7,6 +7,7 @@ import ConfirmacaoModalMaterialComDetalhes from '../components/modals/Confirmaca
 import ListaDeComprasModal from '../components/modals/ListaDeComprasModal';
 import fetch from '../utils/FetchWithTimeout';
 import {Picker} from '@react-native-picker/picker';
+import Text from '../components/Text';
 
 export default class MaterialScreen extends React.Component {
 

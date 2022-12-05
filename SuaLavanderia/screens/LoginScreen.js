@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Linking, Button} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Image, TextInput, Linking, Button} from 'react-native';
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from '../contexts/AuthContext';
+import Text from '../components/Text';
 
 class LoginScreen extends Component {
 

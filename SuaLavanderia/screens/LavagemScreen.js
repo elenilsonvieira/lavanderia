@@ -1,11 +1,12 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity, Linking } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, TextInput, TouchableOpacity, Linking } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Lavagem from "../components/Lavagem";
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';
 import {Picker} from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Text from '../components/Text';
 
 export default class LavagemScreen extends React.Component {
 

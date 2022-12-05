@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, ScrollView, Linking, Image } from 'react-native';
-
+import {StyleSheet, View, TouchableOpacity, ScrollView, Linking, Image } from 'react-native';
+import Text from '../../components/Text';
 import Usuario from '../../components/Usuario';
 import Lavagem from '../../components/Lavagem';
 import LoadingModal from '../../components/modals/LoadingModal';

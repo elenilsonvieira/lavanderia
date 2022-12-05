@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View, TextInput } from 'react-native';
+import {StyleSheet, View, TextInput } from 'react-native';
+import Text from './Text';
 
 export default class Roupa extends React.Component {
 

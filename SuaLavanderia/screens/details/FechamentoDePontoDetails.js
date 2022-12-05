@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TouchableOpacity, Linking } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, TouchableOpacity, Linking } from 'react-native';
 import FechamentoDePonto from '../../components/FechamentoDePonto';
 import Ponto from '../../components/Ponto';
 import LoadingModal from '../../components/modals/LoadingModal';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import fetch from '../../utils/FetchWithTimeout';
+import Text from '../../components/Text';
 
 export default class FechamentoDePontoDetails extends React.Component {
 

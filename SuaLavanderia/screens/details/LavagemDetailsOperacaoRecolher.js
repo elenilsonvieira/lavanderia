@@ -1,10 +1,11 @@
 import React from 'react';
-import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Text, Linking, TextInput } from 'react-native';
+import {TouchableOpacity, Image, StyleSheet, View, ScrollView, Linking, TextInput } from 'react-native';
 import RoupaEmLavagemOperacaoRecolher from '../../components/RoupaEmLavagemOperacaoRecolher';
 import ConfirmacaoModal from '../../components/modals/ConfirmacaoModal';
 import LoadingModal from '../../components/modals/LoadingModal';
 import fetch from '../../utils/FetchWithTimeout';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Text from '../../components/Text';
 
 export default class LavagemDetailsOperacaoRecolher extends React.Component {
 

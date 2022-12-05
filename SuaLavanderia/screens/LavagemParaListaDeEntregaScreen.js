@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, Text, TextInput, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, TextInput, TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import LavagemOperacoes from "../components/LavagemOperacoes";
 import LoadingModal from '../components/modals/LoadingModal';
@@ -7,6 +7,7 @@ import ConfirmacaoModalComInput from '../components/modals/ConfirmacaoModalComIn
 import fetch from '../utils/FetchWithTimeout';
 import {Picker} from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Text from '../components/Text';
 
 export default class LavagemParaListaDeEntregaScreen extends React.Component {
 

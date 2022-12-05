@@ -7,7 +7,8 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {Platform, StyleSheet, View, TouchableOpacity, Image} from 'react-native';
+import Text from '../components/Text';
 
 export default class SobreScreen extends Component {
 

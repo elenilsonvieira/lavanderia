@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, View, Image, Text, TextInput, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, Image, TextInput, TouchableOpacity } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import fetch from '../../utils/FetchWithTimeout';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Text from '../../components/Text';
 
 export default class AvaliacaoDetails extends React.Component {
 
