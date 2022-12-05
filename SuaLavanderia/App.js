@@ -301,21 +301,96 @@ function DrawerAdministradorFunction()
                 style={styles.icon}
               />
            ), }} />
-        <DrawerAdministrador.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem' }} />
-        <DrawerAdministrador.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
-        <DrawerAdministrador.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentação de Caixa' }} />
-        <DrawerAdministrador.Screen name='Caixa' component={CaixaScreen} options={{ title: 'Caixa' }} />
-        <DrawerAdministrador.Screen name='Material' component={MaterialScreen} options={{ title: 'Material' }} />
-        <DrawerAdministrador.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações' }} />
-        <DrawerAdministrador.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete' }} />
-        <DrawerAdministrador.Screen name='BuscaEntrega' component={BuscaEntregaScreen} options={{ title: 'Busca e Entrega' }} />
-        <DrawerAdministrador.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega' }} />
-        <DrawerAdministrador.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas' }} />
-        <DrawerAdministrador.Screen name='Usuario' component={UsuarioScreen} options={{ title: 'Usuário' }} />
-        <DrawerAdministrador.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta' }} />
-        <DrawerAdministrador.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa' }} />
-        <DrawerAdministrador.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
-        <DrawerAdministrador.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+        <DrawerAdministrador.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/lavagem_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAdministrador.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/roupa_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAdministrador.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentação de Caixa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/pagamento_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAdministrador.Screen name='Caixa' component={CaixaScreen} options={{ title: 'Caixa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/caixaFinanceiro_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAdministrador.Screen name='Material' component={MaterialScreen} options={{ title: 'Material', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sabao_64x64.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAdministrador.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/roupa-dobrada_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAdministrador.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/tapete_128x128.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAdministrador.Screen name='BuscaEntrega' component={BuscaEntregaScreen} options={{ title: 'Busca e Entrega', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/SolicitacaoDeBusca_64x64.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAdministrador.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/marca_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAdministrador.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/bater-pontos_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAdministrador.Screen name='Usuario' component={UsuarioScreen} options={{ title: 'Usuário', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/male-icon.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAdministrador.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/meta_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAdministrador.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/tarefa_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAdministrador.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sobre_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAdministrador.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/logout_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
       </DrawerAdministrador.Navigator>
     );
   }
@@ -358,21 +433,96 @@ function DrawerGerenteGeralFunction()
                 style={styles.icon}
               />
            ), }} />
-        <DrawerGerenteGeral.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem' }} />
-        <DrawerGerenteGeral.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
-        <DrawerGerenteGeral.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentação de Caixa' }} />
-        <DrawerGerenteGeral.Screen name='Caixa' component={CaixaScreen} options={{ title: 'Caixa' }} />
-        <DrawerGerenteGeral.Screen name='Material' component={MaterialScreen} options={{ title: 'Material' }} />
-        <DrawerGerenteGeral.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações' }} />
-        <DrawerGerenteGeral.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete' }} />
-        <DrawerGerenteGeral.Screen name='BuscaEntrega' component={BuscaEntregaScreen} options={{ title: 'Busca e Entrega' }} />
-        <DrawerGerenteGeral.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega' }} />
-        <DrawerGerenteGeral.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas' }} />
-        <DrawerGerenteGeral.Screen name='Usuario' component={UsuarioScreen} options={{ title: 'Usuário' }} />
-        <DrawerGerenteGeral.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta' }} />
-        <DrawerGerenteGeral.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa' }} />
-        <DrawerGerenteGeral.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
-        <DrawerGerenteGeral.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+        <DrawerGerenteGeral.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/lavagem_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/roupa_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentação de Caixa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/pagamento_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='Caixa' component={CaixaScreen} options={{ title: 'Caixa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/caixaFinanceiro_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='Material' component={MaterialScreen} options={{ title: 'Material', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sabao_64x64.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/roupa-dobrada_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/tapete_128x128.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='BuscaEntrega' component={BuscaEntregaScreen} options={{ title: 'Busca e Entrega', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/SolicitacaoDeBusca_64x64.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/marca_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/bater-pontos_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='Usuario' component={UsuarioScreen} options={{ title: 'Usuário', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/male-icon.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/meta_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/tarefa_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sobre_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/logout_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
       </DrawerGerenteGeral.Navigator>
     );
   }
@@ -415,21 +565,96 @@ function DrawerSubGerenteGeralFunction()
                 style={styles.icon}
               />
            ), }} />
-        <DrawerSubGerenteGeral.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'v' }} />
-        <DrawerSubGerenteGeral.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
-        <DrawerSubGerenteGeral.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentação de Caixa' }} />
-        <DrawerSubGerenteGeral.Screen name='Caixa' component={CaixaScreen} options={{ title: 'Caixa' }} />
-        <DrawerSubGerenteGeral.Screen name='Material' component={MaterialScreen} options={{ title: 'Material' }} />
-        <DrawerSubGerenteGeral.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações' }} />
-        <DrawerSubGerenteGeral.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete' }} />
-        <DrawerSubGerenteGeral.Screen name='BuscaEntrega' component={BuscaEntregaScreen} options={{ title: 'Busca e Entrega' }} />
-        <DrawerSubGerenteGeral.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega' }} />
-        <DrawerSubGerenteGeral.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas' }} />
-        <DrawerSubGerenteGeral.Screen name='Usuario' component={UsuarioScreen} options={{ title: 'Usuário' }} />
-        <DrawerSubGerenteGeral.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta' }} />
-        <DrawerSubGerenteGeral.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa' }} />
-        <DrawerSubGerenteGeral.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
-        <DrawerSubGerenteGeral.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+        <DrawerSubGerenteGeral.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/lavagem_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSubGerenteGeral.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/roupa_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSubGerenteGeral.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentação de Caixa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/pagamento_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSubGerenteGeral.Screen name='Caixa' component={CaixaScreen} options={{ title: 'Caixa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/caixaFinanceiro_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSubGerenteGeral.Screen name='Material' component={MaterialScreen} options={{ title: 'Material', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sabao_64x64.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSubGerenteGeral.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/roupa-dobrada_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSubGerenteGeral.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/tapete_128x128.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSubGerenteGeral.Screen name='BuscaEntrega' component={BuscaEntregaScreen} options={{ title: 'Busca e Entrega', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/SolicitacaoDeBusca_64x64.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSubGerenteGeral.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/marca_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSubGerenteGeral.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/bater-pontos_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSubGerenteGeral.Screen name='Usuario' component={UsuarioScreen} options={{ title: 'Usuário', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/male-icon.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSubGerenteGeral.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/meta_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSubGerenteGeral.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/tarefa_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSubGerenteGeral.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sobre_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSubGerenteGeral.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/logout_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
       </DrawerSubGerenteGeral.Navigator>
     );
   }
@@ -466,15 +691,60 @@ function DrawerGerenteDeOperacoesFunction()
                 style={styles.icon}
               />
            ), }} />
-        <DrawerGerenteDeOperacoes.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem' }} />
-        <DrawerGerenteDeOperacoes.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
-        <DrawerGerenteDeOperacoes.Screen name='Material' component={MaterialScreen} options={{ title: 'Material' }} />
-        <DrawerGerenteDeOperacoes.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações' }} />
-        <DrawerGerenteDeOperacoes.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete' }} />
-        <DrawerGerenteDeOperacoes.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas' }} />
-        <DrawerGerenteDeOperacoes.Screen name='BaterPonto' component={BaterPontoScreen} options={{ title: 'Bater Ponto' }} />
-        <DrawerGerenteDeOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
-        <DrawerGerenteDeOperacoes.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+        <DrawerGerenteDeOperacoes.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/lavagem_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteDeOperacoes.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/roupa_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteDeOperacoes.Screen name='Material' component={MaterialScreen} options={{ title: 'Material', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sabao_64x64.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteDeOperacoes.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/roupa-dobrada_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteDeOperacoes.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/tapete_128x128.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteDeOperacoes.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/bater-pontos_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteDeOperacoes.Screen name='BaterPonto' component={BaterPontoScreen} options={{ title: 'Bater Ponto', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/dedo_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteDeOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sobre_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteDeOperacoes.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/logout_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
       </DrawerGerenteDeOperacoes.Navigator>
     );
   }
@@ -511,15 +781,60 @@ function DrawerSupervisorDeOperacoesFunction()
                 style={styles.icon}
               />
            ), }} />
-        <DrawerSupervisorDeOperacoes.Screen name='Lavagem' component={LavagemScreenOperacoes} options={{ title: 'Lavagem' }} />
-        <DrawerSupervisorDeOperacoes.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações' }} />
-        <DrawerSupervisorDeOperacoes.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete' }} />
-        <DrawerSupervisorDeOperacoes.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
-        <DrawerSupervisorDeOperacoes.Screen name='Material' component={MaterialScreenPapelOperacoes} options={{ title: 'Material' }} />
-        <DrawerSupervisorDeOperacoes.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas' }} />
-        <DrawerSupervisorDeOperacoes.Screen name='BaterPonto' component={BaterPontoScreen} options={{ title: 'Bater Ponto' }} />
-        <DrawerSupervisorDeOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
-        <DrawerSupervisorDeOperacoes.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+        <DrawerSupervisorDeOperacoes.Screen name='Lavagem' component={LavagemScreenOperacoes} options={{ title: 'Lavagem', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/lavagem_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSupervisorDeOperacoes.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/roupa-dobrada_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSupervisorDeOperacoes.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/tapete_128x128.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSupervisorDeOperacoes.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/roupa_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSupervisorDeOperacoes.Screen name='Material' component={MaterialScreenPapelOperacoes} options={{ title: 'Material', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sabao_64x64.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSupervisorDeOperacoes.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/bater-pontos_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSupervisorDeOperacoes.Screen name='BaterPonto' component={BaterPontoScreen} options={{ title: 'Bater Ponto', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/dedo_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSupervisorDeOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sobre_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerSupervisorDeOperacoes.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/logout_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
       </DrawerSupervisorDeOperacoes.Navigator>
     );
   }
@@ -555,14 +870,54 @@ function DrawerOperacoesFunction()
                 style={styles.icon}
               />
            ), }} />
-        <DrawerOperacoes.Screen name='Lavagem' component={LavagemScreenOperacoes} options={{ title: 'Lavagem' }} />
-        <DrawerOperacoes.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações' }} />
-        <DrawerOperacoes.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
-        <DrawerOperacoes.Screen name='Material' component={MaterialScreenPapelOperacoes} options={{ title: 'Material' }} />
-        <DrawerOperacoes.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas' }} />
-        <DrawerOperacoes.Screen name='BaterPonto' component={BaterPontoScreen} options={{ title: 'Bater Ponto' }} />
-        <DrawerOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
-        <DrawerOperacoes.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+        <DrawerOperacoes.Screen name='Lavagem' component={LavagemScreenOperacoes} options={{ title: 'Lavagem', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/lavagem_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerOperacoes.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/roupa-dobrada_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerOperacoes.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/roupa_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerOperacoes.Screen name='Material' component={MaterialScreenPapelOperacoes} options={{ title: 'Material', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sabao_64x64.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerOperacoes.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/bater-pontos_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerOperacoes.Screen name='BaterPonto' component={BaterPontoScreen} options={{ title: 'Bater Ponto', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/dedo_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sobre_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerOperacoes.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/logout_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
       </DrawerOperacoes.Navigator>
     );
   }
@@ -594,10 +949,30 @@ function DrawerAplicativoFunction()
                 style={styles.icon}
               />
            ), }} />
-        <DrawerAplicativo.Screen name='Lavagem' component={LavagemScreenOperacoes} options={{ title: 'Lavagem' }} />
-        <DrawerAplicativo.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
-        <DrawerAplicativo.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
-        <DrawerAplicativo.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+        <DrawerAplicativo.Screen name='Lavagem' component={LavagemScreenOperacoes} options={{ title: 'Lavagem', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/lavagem_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAplicativo.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/roupa_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAplicativo.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sobre_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAplicativo.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/logout_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
       </DrawerAplicativo.Navigator>
     );
   }
@@ -638,19 +1013,84 @@ function DrawerAtendenteFunction()
                 style={styles.icon}
               />
            ), }} />
-        <DrawerAtendente.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem' }} />
-        <DrawerAtendente.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
-        <DrawerAtendente.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentacao de Caixa' }} />
-        <DrawerAtendente.Screen name='Caixa' component={CaixaScreen} options={{ title: 'Caixa' }} />
-        <DrawerAtendente.Screen name='BuscaEntrega' component={BuscaEntregaScreen} options={{ title: 'Busca e Entrega' }} />
-        <DrawerAtendente.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega' }} />
-        <DrawerAtendente.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas' }} />
-        <DrawerAtendente.Screen name='Usuario' component={UsuarioScreen} options={{ title: 'Usuário' }} />
-        <DrawerAtendente.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta' }} />
-        <DrawerAtendente.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa' }} />
-        <DrawerAtendente.Screen name='BaterPonto' component={BaterPontoScreen} options={{ title: 'Bater Ponto' }} />
-        <DrawerAtendente.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
-        <DrawerAtendente.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+        <DrawerAtendente.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/lavagem_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAtendente.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/roupa_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAtendente.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentacao de Caixa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/pagamento_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAtendente.Screen name='Caixa' component={CaixaScreen} options={{ title: 'Caixa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/caixaFinanceiro_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAtendente.Screen name='BuscaEntrega' component={BuscaEntregaScreen} options={{ title: 'Busca e Entrega', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/SolicitacaoDeBusca_64x64.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAtendente.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/marca_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAtendente.Screen name='BancoDeHoras' component={BancoDeHorasScreen} options={{ title: 'Banco de Horas', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/bater-pontos_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAtendente.Screen name='Usuario' component={UsuarioScreen} options={{ title: 'Usuário', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/male-icon.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAtendente.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/meta_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAtendente.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/tarefa_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAtendente.Screen name='BaterPonto' component={BaterPontoScreen} options={{ title: 'Bater Ponto', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/dedo_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAtendente.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sobre_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerAtendente.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/logout_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
       </DrawerAtendente.Navigator>
     );
   }
@@ -682,10 +1122,30 @@ function DrawerClienteFunction()
                 style={styles.icon}
               />
            ), }} />
-        <DrawerCliente.Screen name='Lavagem' component={LavagemScreenCliente} options={{ title: 'Lavagem' }} />
-        <DrawerCliente.Screen name='Contato' component={ContatoScreen} options={{ title: 'Contato' }} />
-        <DrawerCliente.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
-        <DrawerCliente.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair' }} />
+        <DrawerCliente.Screen name='Lavagem' component={LavagemScreenCliente} options={{ title: 'Lavagem', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/lavagem_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerCliente.Screen name='Contato' component={ContatoScreen} options={{ title: 'Contato', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/atendente_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerCliente.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sobre_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerCliente.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/logout_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
       </DrawerCliente.Navigator>
     );
   }
@@ -698,7 +1158,7 @@ function StackAdministradorFunction()
     return(
       <StackAdministrador.Navigator initialRouteName="Drawer">
         <StackAdministrador.Screen name='Drawer' component={DrawerAdministradorFunction} options={{ title: '', headerTransparent: true }}/>
-        <StackAdministrador.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: 'Movimentação de Caixa' }} />
+        <StackAdministrador.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: 'Movimentação de Caixa'}} />
         <StackAdministrador.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: 'Caixa' }} />
         <StackAdministrador.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: 'Caixa' }} />
         <StackAdministrador.Screen name='AvaliacaoDetails' component={AvaliacaoDetails} options={{ title: 'Avaliação' }} />
