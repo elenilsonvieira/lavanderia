@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import Text from './Text';
 
 export default class Material extends React.Component {
 
@@ -114,15 +115,12 @@ const styles = StyleSheet.create(
         },
         lavagemInfoTitle: {
             fontWeight: 'bold',
-            color: 'black',
         },
         lavagemInfo: {
-            color: 'black',
         },
         lavagemInfoCliente: {
             fontSize: 20,
             fontWeight: 'bold',
-            color: 'black',
         },
         button:{
             alignItems: 'center',
