@@ -138,7 +138,7 @@ android {
         applicationId "com.sualavanderia"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 37
+        versionCode 38
         versionName "22.12.4.1"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
