@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Image, Text, TextInput, TouchableOpacity, Linking } from 'react-native';
+import {StyleSheet, View, Image, Text, TextInput, TouchableOpacity, Linking, ScrollView } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import fetch from '../../utils/FetchWithTimeout';
 import {Picker} from '@react-native-picker/picker';
@@ -20,8 +20,16 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
     };
 
     componentDidMount(){
-        const movimentacao = this.props.route.params.movimentacao;
-        const lavagem = this.props.route.params.lavagem;
+        let movimentacao = null;
+        let lavagem = null;
+        
+        try{
+            movimentacao = this.props.route.params.movimentacao;
+        }catch(error){}
+
+        try {
+            lavagem = this.props.route.params.lavagem;
+        }catch(error){}
 
         if(movimentacao != null){
             const oid = movimentacao.oid;
@@ -172,80 +180,82 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                     </TouchableOpacity>
                 </View>
 
-                <View style={styles.movimentacaoContainer}>
-                    <Text style={styles.infoTitle}>Data: </Text>
-                    <TouchableOpacity onPress={() => this.setState({dataTimePickerVisible: true})}>
-                        <Text style={styles.boxDate}>{this.state.data}</Text>
-                    </TouchableOpacity>
-                    <DateTimePickerModal 
-                        mode="date"
-                        isVisible={this.state.dataTimePickerVisible}
-                        onConfirm={this.dataEscolhida}
-                        onCancel={() => this.setState({dataTimePickerVisible: false})}
-                    />
+                <ScrollView>
+                    <View style={styles.movimentacaoContainer}>
+                        <Text style={styles.infoTitle}>Data: </Text>
+                        <TouchableOpacity onPress={() => this.setState({dataTimePickerVisible: true})}>
+                            <Text style={styles.boxDate}>{this.state.data}</Text>
+                        </TouchableOpacity>
+                        <DateTimePickerModal 
+                            mode="date"
+                            isVisible={this.state.dataTimePickerVisible}
+                            onConfirm={this.dataEscolhida}
+                            onCancel={() => this.setState({dataTimePickerVisible: false})}
+                        />
 
-                    <Text style={styles.infoTitle}>Modo: </Text>
-                    <Picker
-                        style={styles.boxInput}
-                        selectedValue={this.state.modo}
-                        onValueChange={(itemValue, itemIndex) => this.setState({modo: itemValue})}>
-                        <Picker.Item label='Saída' value='Saida' />
-                        <Picker.Item label='Entrada' value='Entrada' />
-                        <Picker.Item label='Transferência' value='Transferencia' />
-                    </Picker>
+                        <Text style={styles.infoTitle}>Modo: </Text>
+                        <Picker
+                            style={styles.boxInput}
+                            selectedValue={this.state.modo}
+                            onValueChange={(itemValue, itemIndex) => this.setState({modo: itemValue})}>
+                            <Picker.Item label='Saída' value='Saida' />
+                            <Picker.Item label='Entrada' value='Entrada' />
+                            <Picker.Item label='Transferência' value='Transferencia' />
+                        </Picker>
 
-                    <Text style={styles.infoTitle}>Valor: </Text>
-                    <TextInput
-                        style={styles.boxInput}
-                        value={this.state.valor}
-                        keyboardType='numeric'
-                        onChangeText={valor => this.setState({valor})}
-                    />
+                        <Text style={styles.infoTitle}>Valor: </Text>
+                        <TextInput
+                            style={styles.boxInput}
+                            value={this.state.valor}
+                            keyboardType='numeric'
+                            onChangeText={valor => this.setState({valor})}
+                        />
 
-                    <Text style={styles.infoTitle}>Capital: </Text>
-                    <Picker
-                        style={styles.boxInput}
-                        selectedValue={this.state.capital}
-                        onValueChange={(itemValue, itemIndex) => this.setState({capital: itemValue})}>
-                        <Picker.Item label='Dinheiro' value='Dinheiro' />
-                        <Picker.Item label='Cheque' value='Cheque' />
-                        <Picker.Item label='Boleto' value='Boleto' />
-                        <Picker.Item label='PagSeguro Débito' value='PagSeguroDebito' />
-                        <Picker.Item label='PagSeguro Crédito' value='PagSeguroCredito' />
-                        <Picker.Item label='Transferência de/para BB' value='TransferenciaBB' />
-                        <Picker.Item label='Transferência de/para Caixa' value='TransferenciaCaixa' />
-                        <Picker.Item label='Pic Pay' value='PicPay' />
-                    </Picker>
+                        <Text style={styles.infoTitle}>Capital: </Text>
+                        <Picker
+                            style={styles.boxInput}
+                            selectedValue={this.state.capital}
+                            onValueChange={(itemValue, itemIndex) => this.setState({capital: itemValue})}>
+                            <Picker.Item label='Dinheiro' value='Dinheiro' />
+                            <Picker.Item label='Cheque' value='Cheque' />
+                            <Picker.Item label='Boleto' value='Boleto' />
+                            <Picker.Item label='PagSeguro Débito' value='PagSeguroDebito' />
+                            <Picker.Item label='PagSeguro Crédito' value='PagSeguroCredito' />
+                            <Picker.Item label='Transferência de/para BB' value='TransferenciaBB' />
+                            <Picker.Item label='Transferência de/para Caixa' value='TransferenciaCaixa' />
+                            <Picker.Item label='Pic Pay' value='PicPay' />
+                        </Picker>
 
-                    <Text style={styles.infoTitle}>Conta de Entrada: </Text>
-                    <Picker
-                        style={styles.boxInput}
-                        selectedValue={this.state.contaDeEntrada}
-                        onValueChange={(itemValue, itemIndex) => this.setState({contaDeEntrada: itemValue})}>
-                        <Picker.Item label='' value='' />
-                        <Picker.Item label='Geral' value='Geral' />
-                        <Picker.Item label='Manaíra' value='Manaíra' />
-                        <Picker.Item label='Bessa' value='Bessa' />
-                    </Picker>
+                        <Text style={styles.infoTitle}>Conta de Entrada: </Text>
+                        <Picker
+                            style={styles.boxInput}
+                            selectedValue={this.state.contaDeEntrada}
+                            onValueChange={(itemValue, itemIndex) => this.setState({contaDeEntrada: itemValue})}>
+                            <Picker.Item label='' value='' />
+                            <Picker.Item label='Geral' value='Geral' />
+                            <Picker.Item label='Manaíra' value='Manaíra' />
+                            <Picker.Item label='Bessa' value='Bessa' />
+                        </Picker>
 
-                    <Text style={styles.infoTitle}>Conta de Saída: </Text>
-                    <Picker
-                        style={styles.boxInput}
-                        selectedValue={this.state.contaDeSaida}
-                        onValueChange={(itemValue, itemIndex) => this.setState({contaDeSaida: itemValue})}>
-                        <Picker.Item label='' value='' />
-                        <Picker.Item label='Geral' value='Geral' />
-                        <Picker.Item label='Manaíra' value='Manaíra' />
-                        <Picker.Item label='Bessa' value='Bessa' />
-                    </Picker>
+                        <Text style={styles.infoTitle}>Conta de Saída: </Text>
+                        <Picker
+                            style={styles.boxInput}
+                            selectedValue={this.state.contaDeSaida}
+                            onValueChange={(itemValue, itemIndex) => this.setState({contaDeSaida: itemValue})}>
+                            <Picker.Item label='' value='' />
+                            <Picker.Item label='Geral' value='Geral' />
+                            <Picker.Item label='Manaíra' value='Manaíra' />
+                            <Picker.Item label='Bessa' value='Bessa' />
+                        </Picker>
 
-                    <Text style={styles.infoTitle}>Observações: </Text>
-                    <TextInput
-                        style={styles.boxInput}
-                        value={this.state.observacoes}
-                        onChangeText={observacoes => this.setState({observacoes})}
-                    />
-                </View>
+                        <Text style={styles.infoTitle}>Observações: </Text>
+                        <TextInput
+                            style={styles.boxInput}
+                            value={this.state.observacoes}
+                            onChangeText={observacoes => this.setState({observacoes})}
+                        />
+                    </View>
+                </ScrollView>
             </View>
         );
     }
@@ -306,6 +316,7 @@ const styles = StyleSheet.create(
             padding: 20,
             margin: 20,
             justifyContent: 'center',
+            height: '100%',
         },
         movimentacaoInfoContainer: {
         },
