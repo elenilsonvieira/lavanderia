@@ -114,12 +114,15 @@ const styles = StyleSheet.create(
         },
         lavagemInfoTitle: {
             fontWeight: 'bold',
+            color: 'black',
         },
         lavagemInfo: {
+            color: 'black',
         },
         lavagemInfoCliente: {
             fontSize: 20,
             fontWeight: 'bold',
+            color: 'black',
         },
         button:{
             alignItems: 'center',

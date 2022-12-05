@@ -304,10 +304,12 @@ const styles = StyleSheet.create(
         infoTitle: {
             fontWeight: 'bold',
             margin: 10,
+            color: 'black',
         },
         viewBotao: {
             flexDirection: 'row',
-            justifyContent: 'flex-end'
+            justifyContent: 'flex-end',
+            color: 'black',
         },
         icon: {
             width: 24,
