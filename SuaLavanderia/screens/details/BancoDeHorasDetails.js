@@ -16,7 +16,7 @@ export default class BancoDeHorasDetails extends React.Component {
     };
 
     async componentWillMount(){
-        const objeto = this.props.navigation.getParam('objeto');
+        const objeto = this.props.route.params.objeto;
         const fechamentos = objeto.fechamentos;
         const pagamentos = objeto.pagamentos;
         

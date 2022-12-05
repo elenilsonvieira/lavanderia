@@ -64,7 +64,7 @@ export default class ListaDeComprasScreen extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        var dataDaCompra = this.props.navigation.getParam("dataDaCompra");
+        var dataDaCompra = this.props.route.params.dataDaCompra;
         var dataDaCompraArray = dataDaCompra.split('/');
         var data = dataDaCompraArray[2] + '-'+ dataDaCompraArray[1] + '-' + dataDaCompraArray[0];
 

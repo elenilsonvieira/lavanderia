@@ -18,7 +18,7 @@ export default class ListaDeEntregaDetails extends React.Component {
     async componentWillMount(){
         this.setState({modalVisible: true});
 
-        const objeto = this.props.navigation.getParam('objeto');
+        const objeto = this.props.route.params.objeto;
         this.setState({objeto, lavagens: objeto.lavagens});
 
         this.setState({modalVisible: false});

@@ -250,7 +250,7 @@ export default class OperacaoLavarTapeteScreen extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
-        var usuarioOid = this.props.navigation.getParam('usuarioOid');
+        var usuarioOid = usuario.oid; //this.props.route.params.('usuarioOid'); corrigir
         var usarUsuarioLogado = false;
 
         if(!usuarioOid){

@@ -20,7 +20,7 @@ export default class LavagemDetailsEdit extends React.Component {
     }
 
     async componentWillMount(){
-        const lavagem = this.props.navigation.getParam('lavagem');
+        const lavagem = this.props.route.params.lavagem;
         var status = lavagem.status;
         var valor = lavagem.valor;
         var quantidadeDePecas = lavagem.quantidadeDePecas;

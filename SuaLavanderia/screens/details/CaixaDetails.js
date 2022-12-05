@@ -19,7 +19,7 @@ export default class CaixaDetails extends React.Component {
     };
 
     componentDidMount(){
-        const objeto = this.props.navigation.getParam('objeto');
+        const objeto = this.props.route.params.objeto;
 
         if(objeto != null){
             const oid = objeto.oid;
@@ -41,7 +41,7 @@ export default class CaixaDetails extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const objeto = this.props.navigation.getParam('objeto');
+        const objeto = this.props.route.params.objeto;
 
         var dataArray = this.state.data.split('/');
         const data = dataArray[2] + '-'+ dataArray[1] + '-' + dataArray[0];

@@ -15,7 +15,7 @@ export default class FechamentoDePontoDetails extends React.Component {
     };
 
     async componentWillMount(){
-        const objeto = this.props.navigation.getParam('objeto');
+        const objeto = this.props.route.params.objeto;
         
         this.setState({objeto});
 

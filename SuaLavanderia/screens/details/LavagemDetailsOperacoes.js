@@ -17,7 +17,7 @@ export default class LavagemDetailsOperacoes extends React.Component {
     };
 
     async componentDidMount(){
-        const lavagem = this.props.navigation.getParam('lavagem');
+        const lavagem = this.props.route.params.lavagem;
         this.setState({lavagem});
         this.buscar();
     }
@@ -52,7 +52,7 @@ export default class LavagemDetailsOperacoes extends React.Component {
     };
 
     openModal = () => {
-        if(this.props.navigation.getParam("inativarModal")){
+        if(this.props.route.params.inativarModal){
             return;
         }
 
@@ -65,7 +65,7 @@ export default class LavagemDetailsOperacoes extends React.Component {
 
     acao = () => {
         this.setState({confirmacaoModalVisible: false});
-        this.props.navigation.getParam("acao")();
+        this.props.route.params.acao();
     };
 
     openVideoInformativo = () => {
@@ -79,7 +79,7 @@ export default class LavagemDetailsOperacoes extends React.Component {
         var oid = this.state.lavagem.oid;
 
         if(!oid){
-            oid = this.props.navigation.getParam('lavagem').oid;
+            oid = this.props.route.params.lavagem.oid;
         }
 
         this.setState({modalVisible: true});
@@ -241,7 +241,7 @@ export default class LavagemDetailsOperacoes extends React.Component {
                     )}
                 </ScrollView>
 
-                <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto={this.props.navigation.getParam("texto")} 
+                <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto={this.props.route.params.texto} 
                     onSim={() => this.acao()} onNao={() => this.closeModal()} />
 
                 <LoadingModal modalVisible={this.state.modalVisible} />

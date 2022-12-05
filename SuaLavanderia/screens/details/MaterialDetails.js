@@ -24,7 +24,7 @@ export default class MaterialDetails extends React.Component {
 
     async componentDidMount(){
         const materialOid = this.props.route.params.materialOid;
-        const reload = true;//this.props.navigation.getParam('reload');
+        const reload = true;//this.props.route.params.('reload');
         this.setState({materialOid});
 
         if(reload){
@@ -84,7 +84,7 @@ export default class MaterialDetails extends React.Component {
                     var movimentacaoResposta = objetoResponse.Movimentacoes[indexRoupa];
                     
                     if(movimentacaoResposta){
-                        const movimentacaoDeMaterial = {
+                        const movimentacaoDeMaterial = { 
                             oid: movimentacaoResposta.Oid,
                             materialOid: movimentacaoResposta.MaterialOid,
                             data: movimentacaoResposta.Data,
@@ -146,7 +146,7 @@ export default class MaterialDetails extends React.Component {
     acao = (quantidade, modo) => {
         this.setState({confirmacaoModalVisible: false});
         this.props.navigation.goBack();
-        this.props.navigation.getParam("acao")(quantidade, modo);
+        this.props.route.params.acao(quantidade, modo);
     };
 
     openVideoInformativo = () => {

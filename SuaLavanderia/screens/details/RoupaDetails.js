@@ -47,10 +47,10 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         var marcasArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:marcas")) || [];
         var coresArray = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:cores")) || [];
 
-        const roupa = this.props.navigation.getParam('roupa');
-        const cliente = this.props.navigation.getParam('cliente');
-        const clienteOid = this.props.navigation.getParam('clienteOid');
-        const lavagemOid = this.props.navigation.getParam('lavagemOid');
+        const roupa = this.props.route.params.roupa;
+        const cliente = this.props.route.params.cliente;
+        const clienteOid = this.props.route.params.clienteOid;
+        const lavagemOid = this.props.route.params.lavagemOid;
 
         var tipo = '';
 
@@ -85,7 +85,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const roupa = this.props.navigation.getParam('roupa');
+        const roupa = this.props.route.params.roupa;
 
         var argumentos = 'clienteOid=' + this.state.clienteOid + '&tipoOid=' + this.state.tipoOid;
 

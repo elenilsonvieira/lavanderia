@@ -17,7 +17,7 @@ export default class AvaliacaoDetails extends React.Component {
     };
 
     componentDidMount(){
-        const lavagem = this.props.navigation.getParam('lavagem');
+        const lavagem = this.props.route.params.lavagem;
 
         if(lavagem.avaliacao != null){
             const data = lavagem.avaliacao.data;
@@ -53,7 +53,7 @@ export default class AvaliacaoDetails extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const lavagem = this.props.navigation.getParam('lavagem');
+        const lavagem = this.props.route.params.lavagem;
 
         var argumentos = 'lavagemOid=' + lavagem.oid + '&notaDoAtendimento=' + this.state.notaDoAtendimento + '&notaDaLavagem=' + this.state.notaDaLavagem + '&notaDaPassagem=' + this.state.notaDaPassagem + '&notaDaEntrega=' + this.state.notaDaEntrega + '&comentarios=' + this.state.comentarios;
 

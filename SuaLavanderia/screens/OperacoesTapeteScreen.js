@@ -22,7 +22,7 @@ export default class OperacoesTapeteScreen extends React.Component {
     };
 
     async componentDidMount(){
-        var usuarioOid = this.props.navigation.getParam("usuarioOid");
+        var usuarioOid = null;//this.props.route.params.("usuarioOid");
 
         if(!usuarioOid){
             usuarioOid = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario")).oid;

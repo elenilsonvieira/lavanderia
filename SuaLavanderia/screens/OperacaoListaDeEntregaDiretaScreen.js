@@ -107,8 +107,8 @@ export default class OperacaoListaDeEntregaDiretaScreen extends React.Component 
         var dataFinalArray = dataFinal.split('/');
         var dataFinalParameter = dataFinalArray[2] + '-'+ dataFinalArray[1] + '-' + dataFinalArray[0];
 
-        var usuarioOid = this.props.navigation.getParam('usuarioOid');
-        const unidadeOid = this.props.navigation.getParam('unidadeOid');
+        var usuarioOid = this.props.route.params.usuarioOid;
+        const unidadeOid = this.props.route.params.unidadeOid;
 
         if(!usuarioOid){
             usuarioOid = usuario.oid;
@@ -243,7 +243,7 @@ export default class OperacaoListaDeEntregaDiretaScreen extends React.Component 
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const lavagemOid = this.props.navigation.getParam('lavagemOid');
+        const lavagemOid = this.props.route.params.lavagemOid;
 
         var argumentos = `lavagemOid=${lavagemOid}&listaOid=${this.state.listaOid}&comentarios=${comentarios}`;
 

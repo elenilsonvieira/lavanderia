@@ -23,7 +23,7 @@ export default class CaixaDetailsSoleitura extends React.Component {
     };
 
     componentDidMount(){
-        const objeto = this.props.navigation.getParam('objeto');
+        const objeto = this.props.route.params.objeto;
 
         if(objeto != null){
             const oid = objeto.oid;
@@ -193,7 +193,7 @@ export default class CaixaDetailsSoleitura extends React.Component {
                 </View>
 
                 <ScrollView>
-                    <Caixa objeto={this.state.objeto ? this.state.objeto : this.props.navigation.getParam('objeto')} />
+                    <Caixa objeto={this.state.objeto ? this.state.objeto : this.props.route.params.objeto} />
 
                     <View style={styles.roupasContainer}>
                         <Text style={styles.roupasTitle}>Movimentações</Text>

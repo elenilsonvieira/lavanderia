@@ -162,7 +162,7 @@ export default class LavagemParaListaDeEntregaScreen extends React.Component {
     };
 
     async componentDidMount(){
-        var objeto = this.props.navigation.getParam("objeto");
+        var objeto = this.props.route.params.objeto;
         this.setState({objeto});
         this.buscar();
     }

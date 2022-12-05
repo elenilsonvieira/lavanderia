@@ -16,7 +16,7 @@ export default class LavagemDetailsCliente extends React.Component {
     }
 
     navegarParaDetalhes(props, roupaEmLavagem){
-        const lavagem = this.props.navigation.getParam('lavagem');
+        const lavagem = this.props.route.params.lavagem;
         const cliente = lavagem.cliente;
         const clienteOid = lavagem.clienteOid;
         const lavagemOid = lavagem.oid;
@@ -29,7 +29,7 @@ export default class LavagemDetailsCliente extends React.Component {
     }
 
     pagar(){
-        const lavagem = this.props.navigation.getParam('lavagem');
+        const lavagem = this.props.route.params.lavagem;
         
         if(lavagem.paga != 'Não/Parcialmente'){
             alert("Essa lavagem já está paga!");
@@ -39,8 +39,8 @@ export default class LavagemDetailsCliente extends React.Component {
     }
 
     async componentWillMount(){
-        const lavagem = this.props.navigation.getParam('lavagem');
-        const reload = true;//this.props.navigation.getParam('reload');
+        const lavagem = this.props.route.params.lavagem;
+        const reload = true;//this.props.route.params.('reload');
         this.setState({lavagem});
 
         if(reload){
@@ -49,7 +49,7 @@ export default class LavagemDetailsCliente extends React.Component {
     }
 
     avaliar(){
-        const lavagem = this.props.navigation.getParam('lavagem');
+        const lavagem = this.props.route.params.lavagem;
         
         if(lavagem.status != 'Entregue'){
             alert("Essa lavagem ainda não foi entregue para poder ser avaliada!");

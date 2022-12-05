@@ -20,8 +20,8 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
     };
 
     componentDidMount(){
-        const movimentacao = this.props.navigation.getParam('movimentacao');
-        const lavagem = this.props.navigation.getParam('lavagem');
+        const movimentacao = this.props.route.params.movimentacao;
+        const lavagem = this.props.route.params.lavagem;
 
         if(movimentacao != null){
             const oid = movimentacao.oid;
@@ -51,8 +51,8 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const movimentacao = this.props.navigation.getParam('movimentacao');
-        const lavagem = this.props.navigation.getParam('lavagem');
+        const movimentacao = this.props.route.params.movimentacao;
+        const lavagem = this.props.route.params.lavagem;
 
         const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : email;
 

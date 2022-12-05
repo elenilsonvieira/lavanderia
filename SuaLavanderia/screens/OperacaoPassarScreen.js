@@ -260,7 +260,7 @@ export default class OperacaoPassarScreen extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
-        var usuarioOid = this.props.navigation.getParam('usuarioOid');
+        var usuarioOid = this.props.route.params.usuarioOid;
         var usarUsuarioLogado = false;
 
         if(!usuarioOid){

@@ -78,7 +78,7 @@ export default class LavagensPendentesDetails extends React.Component {
     buscar = async () => {
         this.setState({modalVisible: true});
 
-        const objeto = this.props.navigation.getParam('objeto');
+        const objeto = this.props.route.params.objeto;
         const oid = objeto.oid;
 
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
@@ -196,7 +196,7 @@ export default class LavagensPendentesDetails extends React.Component {
                 </View>
 
                 <ScrollView>
-                    <Usuario objeto={this.state.objeto ? this.state.objeto : this.props.navigation.getParam('objeto')} />
+                    <Usuario objeto={this.state.objeto ? this.state.objeto : this.props.route.params.objeto} />
 
                     <View style={styles.roupasContainer}>
                         <Text style={styles.roupasTitle}>Total: R$ {this.state.saldoDevedor}</Text>

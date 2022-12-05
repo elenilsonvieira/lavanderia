@@ -17,7 +17,7 @@ export default class AvaliacaoDetailsSoLeitura extends React.Component {
     };
 
     componentDidMount(){
-        const lavagem = this.props.navigation.getParam('lavagem');
+        const lavagem = this.props.route.params.lavagem;
 
         if(lavagem.avaliacao != null){
             const data = lavagem.avaliacao.data;

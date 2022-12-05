@@ -352,7 +352,12 @@ function DrawerGerenteGeralFunction()
   {
     return(
       <DrawerGerenteGeral.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
-        <DrawerGerenteGeral.Screen name='Home' component={HomeScreen} options={{ title: 'Início' }} />
+        <DrawerGerenteGeral.Screen name='Home' component={HomeScreen} options={{ title: 'Início', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/home-icon.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerGerenteGeral.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem' }} />
         <DrawerGerenteGeral.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
         <DrawerGerenteGeral.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentação de Caixa' }} />
@@ -404,7 +409,12 @@ function DrawerSubGerenteGeralFunction()
   {
     return(
       <DrawerSubGerenteGeral.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
-        <DrawerSubGerenteGeral.Screen name='Home' component={HomeScreen} options={{ title: 'Início' }} />
+        <DrawerSubGerenteGeral.Screen name='Home' component={HomeScreen} options={{ title: 'Início', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/home-icon.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerSubGerenteGeral.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'v' }} />
         <DrawerSubGerenteGeral.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
         <DrawerSubGerenteGeral.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentação de Caixa' }} />
@@ -450,7 +460,12 @@ function DrawerGerenteDeOperacoesFunction()
   {
     return(
       <DrawerGerenteDeOperacoes.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
-        <DrawerGerenteDeOperacoes.Screen name='Home' component={HomeScreen} options={{ title: 'Início' }} />
+        <DrawerGerenteDeOperacoes.Screen name='Home' component={HomeScreen} options={{ title: 'Início', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/home-icon.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerGerenteDeOperacoes.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem' }} />
         <DrawerGerenteDeOperacoes.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
         <DrawerGerenteDeOperacoes.Screen name='Material' component={MaterialScreen} options={{ title: 'Material' }} />
@@ -490,7 +505,12 @@ function DrawerSupervisorDeOperacoesFunction()
   {
     return(
       <DrawerSupervisorDeOperacoes.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
-        <DrawerSupervisorDeOperacoes.Screen name='Home' component={HomeScreen} options={{ title: 'Início' }} />
+        <DrawerSupervisorDeOperacoes.Screen name='Home' component={HomeScreen} options={{ title: 'Início', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/home-icon.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerSupervisorDeOperacoes.Screen name='Lavagem' component={LavagemScreenOperacoes} options={{ title: 'Lavagem' }} />
         <DrawerSupervisorDeOperacoes.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações' }} />
         <DrawerSupervisorDeOperacoes.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete' }} />
@@ -529,7 +549,12 @@ function DrawerOperacoesFunction()
   {
     return(
       <DrawerOperacoes.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
-        <DrawerOperacoes.Screen name='Home' component={HomeScreen} options={{ title: 'Início' }} />
+        <DrawerOperacoes.Screen name='Home' component={HomeScreen} options={{ title: 'Início', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/home-icon.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerOperacoes.Screen name='Lavagem' component={LavagemScreenOperacoes} options={{ title: 'Lavagem' }} />
         <DrawerOperacoes.Screen name='Operacoes' component={OperacoesCelularScreen} options={{ title: 'Operações' }} />
         <DrawerOperacoes.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
@@ -563,7 +588,12 @@ function DrawerAplicativoFunction()
   {
     return(
       <DrawerAplicativo.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
-        <DrawerAplicativo.Screen name='Home' component={HomeScreenAplicativo} options={{ title: 'Início' }} />
+        <DrawerAplicativo.Screen name='Home' component={HomeScreenAplicativo} options={{ title: 'Início', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/home-icon.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerAplicativo.Screen name='Lavagem' component={LavagemScreenOperacoes} options={{ title: 'Lavagem' }} />
         <DrawerAplicativo.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
         <DrawerAplicativo.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />
@@ -602,7 +632,12 @@ function DrawerAtendenteFunction()
   {
     return(
       <DrawerAtendente.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
-        <DrawerAtendente.Screen name='Home' component={HomeScreen} options={{ title: 'Início' }} />
+        <DrawerAtendente.Screen name='Home' component={HomeScreen} options={{ title: 'Início', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/home-icon.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerAtendente.Screen name='Lavagem' component={LavagemScreen} options={{ title: 'Lavagem' }} />
         <DrawerAtendente.Screen name='Roupa' component={RoupaScreen} options={{ title: 'Roupa' }} />
         <DrawerAtendente.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentacao de Caixa' }} />
@@ -641,7 +676,12 @@ function DrawerClienteFunction()
   {
     return(
       <DrawerCliente.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
-        <DrawerCliente.Screen name='Home' component={HomeScreenCliente} options={{ title: 'Início' }} />
+        <DrawerCliente.Screen name='Home' component={HomeScreenCliente} options={{ title: 'Início', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/home-icon.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerCliente.Screen name='Lavagem' component={LavagemScreenCliente} options={{ title: 'Lavagem' }} />
         <DrawerCliente.Screen name='Contato' component={ContatoScreen} options={{ title: 'Contato' }} />
         <DrawerCliente.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre' }} />

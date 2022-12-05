@@ -18,7 +18,7 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
     };
 
     async componentDidMount(){
-        const lavagem = this.props.navigation.getParam('lavagem');
+        const lavagem = this.props.route.params.lavagem;
         this.setState({lavagem});
         this.buscar();
     }
@@ -62,7 +62,7 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
 
     acao = () => {
         this.setState({confirmacaoModalVisible: false});
-        this.props.navigation.getParam("acao")();
+        this.props.route.params.acao();
     };
 
     recolher = async (tipoDePacote) => {
@@ -71,7 +71,7 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
-        var usuarioOid = this.props.navigation.getParam('usuarioOid');
+        var usuarioOid = this.props.route.params.usuarioOid;
 
         if(!usuarioOid){
             usuarioOid = usuario.oid;
@@ -145,7 +145,7 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
         var oid = this.state.lavagem.oid;
 
         if(!oid){
-            oid = this.props.navigation.getParam('lavagem').oid;
+            oid = this.props.route.params.lavagem.oid;
         }
 
         this.setState({modalVisible: true});
@@ -392,7 +392,7 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
                 </ScrollView>
 
                 <LoadingModal modalVisible={this.state.modalVisible} />
-                <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto={this.props.navigation.getParam("texto")} 
+                <ConfirmacaoModal visible={this.state.confirmacaoModalVisible} texto={this.props.route.params.texto} 
                     onSim={() => this.acao()} onNao={() => this.closeModal()} />
             </View>
         );

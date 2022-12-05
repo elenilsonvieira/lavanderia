@@ -20,7 +20,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
     };
 
     componentDidMount(){
-        var roupaEmLavagem = this.props.navigation.getParam('roupaEmLavagem');
+        var roupaEmLavagem = this.props.route.params.roupaEmLavagem;
 
         if(roupaEmLavagem != null){
             const quantidade = roupaEmLavagem.quantidade.toString();
@@ -33,9 +33,9 @@ export default class RoupaEmLavagemDetails extends React.Component {
             this.setState({quantidade, soPassar, observacoes, chave, roupa, oid});
         }
 
-        const cliente = this.props.navigation.getParam('cliente');
-        const clienteOid = this.props.navigation.getParam('clienteOid');
-        const lavagemOid = this.props.navigation.getParam('lavagemOid');
+        const cliente = this.props.route.params.cliente;
+        const clienteOid = this.props.route.params.clienteOid;
+        const lavagemOid = this.props.route.params.lavagemOid;
 
         this.setState({lavagemOid, clienteOid, cliente});
     }
@@ -161,7 +161,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
 
     navegarParaRoupasDoCliente(props, roupa){
         const clienteOid = this.state.clienteOid;
-        const cliente = this.props.navigation.getParam('cliente');
+        const cliente = this.props.route.params.cliente;
 
         props.navigation.navigate('RoupasDoCliente', {clienteOid: clienteOid, cliente: cliente, reload: this.reload.bind(this)});
     }

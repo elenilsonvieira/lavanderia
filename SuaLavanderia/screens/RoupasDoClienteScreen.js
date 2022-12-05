@@ -22,9 +22,9 @@ export default class RoupasDoClienteScreen extends React.Component {
     }
 
     async componentWillMount(){
-        const clienteOid = this.props.navigation.getParam('clienteOid');
-        const cliente = this.props.navigation.getParam('cliente');
-        const reload = true;//this.props.navigation.getParam('reload');
+        const clienteOid = this.props.route.params.clienteOid;
+        const cliente = this.props.route.params.cliente;
+        const reload = true;//this.props.route.params.('reload');
         this.setState({clienteOid, cliente});
 
         if(reload){
