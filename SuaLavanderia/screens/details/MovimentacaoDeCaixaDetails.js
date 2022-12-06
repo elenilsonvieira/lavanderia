@@ -60,8 +60,16 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const movimentacao = this.props.route.params.movimentacao;
-        const lavagem = this.props.route.params.lavagem;
+        let movimentacao = null;
+        let lavagem = null;
+        
+        try{
+            movimentacao = this.props.route.params.movimentacao;
+        }catch(error){}
+
+        try {
+            lavagem = this.props.route.params.lavagem;
+        }catch(error){}
 
         const responsavelOid = movimentacao != null ? movimentacao.responsavelOid : email;
 
