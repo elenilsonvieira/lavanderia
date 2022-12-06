@@ -1,6 +1,6 @@
 {
   "name": "SuaLavanderia",
-  "version": "22.12.5.2",
+  "version": "22.12.6.1",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
