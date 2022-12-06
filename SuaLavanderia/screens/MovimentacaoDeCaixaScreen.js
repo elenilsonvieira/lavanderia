@@ -296,7 +296,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
                                     <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
                                 </TouchableOpacity>
 
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('MovimentacaoDeCaixaDetails')} style={styles.button}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('MovimentacaoDeCaixaDetails', {reload: this.buscar.bind(this)})} style={styles.button}>
                                     <Image style={styles.icon} source={require('../images/novo_32x32.png')} />
                                 </TouchableOpacity>
 
@@ -310,7 +310,7 @@ export default class MovimentacaoDeCaixaScreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
-                        <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('MovimentacaoDeCaixaDetails', {movimentacao: objeto})}>
+                        <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('MovimentacaoDeCaixaDetails', {movimentacao: objeto, reload: this.buscar.bind(this)})}>
                             <MovimentacaoDeCaixa key={objeto.oid} movimentacao={objeto} />
                         </TouchableOpacity>
                     )}

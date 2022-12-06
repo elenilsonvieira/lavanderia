@@ -106,10 +106,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             }).then(function(response){
                 alert(movimentacao == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
 
-                if(lavagem != null){
-                    props.navigation.state.params.reload();
-                }
-
+                props.route.params.reload();
                 props.navigation.goBack();
             }
             ).catch(function(error){
