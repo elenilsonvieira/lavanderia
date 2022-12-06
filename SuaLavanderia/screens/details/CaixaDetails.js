@@ -20,7 +20,11 @@ export default class CaixaDetails extends React.Component {
     };
 
     componentDidMount(){
-        const objeto = this.props.route.params.objeto;
+        let objeto = null;
+
+        try{
+            objeto = this.props.route.params.objeto;
+        }catch(error){}
 
         if(objeto != null){
             const oid = objeto.oid;
@@ -42,7 +46,11 @@ export default class CaixaDetails extends React.Component {
         var hash = this.hash(usuario);
         var email = usuario.email;
 
-        const objeto = this.props.route.params.objeto;
+        let objeto = null;
+
+        try{
+            objeto = props.route.params.objeto;
+        }catch(error){}
 
         var dataArray = this.state.data.split('/');
         const data = dataArray[2] + '-'+ dataArray[1] + '-' + dataArray[0];
@@ -59,6 +67,7 @@ export default class CaixaDetails extends React.Component {
             }).then(function(response){
                 alert(objeto == null ? 'Adicionado com sucesso!' : 'Alterado com sucesso!');
 
+                props.route.params.reload();
                 props.navigation.goBack();
             }
             ).catch(function(error){

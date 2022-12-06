@@ -310,7 +310,7 @@ export default class CaixaScreen extends React.Component {
                                     <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
                                 </TouchableOpacity>
 
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('CaixaDetails')} style={styles.button}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('CaixaDetails', {reload: this.buscar.bind(this)})} style={styles.button}>
                                     <Image style={styles.icon} source={require('../images/novo_32x32.png')} />
                                 </TouchableOpacity>
 
