@@ -29,13 +29,13 @@ export default class Equipamento extends React.Component {
                         </View>
 
                         <View style={styles.valorInfoContainer}>
-                            <Text style={styles.valorInfoTitle}>Fim de Uso: </Text>
-                            <Text style={styles.movimentacaoInfo}>{this.props.objeto.fimDeUso}</Text>
+                            <Text style={styles.valorInfoTitle}>Garantia: </Text>
+                            <Text style={styles.movimentacaoInfo}>{this.props.objeto.garantia}</Text>
                         </View>
 
                         <View style={styles.valorInfoContainer}>
-                            <Text style={styles.valorInfoTitle}>Garantia: </Text>
-                            <Text style={styles.movimentacaoInfo}>{this.props.objeto.garantia}</Text>
+                            <Text style={styles.valorInfoTitle}>Fim de Uso: </Text>
+                            <Text style={styles.movimentacaoInfo}>{this.props.objeto.fimDeUso}</Text>
                         </View>
 
                         <View style={styles.valorInfoContainer}>
