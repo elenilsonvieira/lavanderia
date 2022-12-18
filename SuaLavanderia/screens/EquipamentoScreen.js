@@ -87,8 +87,8 @@ export default class EquipamentoScreen extends React.Component {
                 const objetoResponse = response[index];
                 var manutencoes = [];
 
-                for(indexMovimentacao in objetoResponse.Manutencoes){
-                    const movimentacaoEmCaixaResponse = objetoResponse.Manutencoes[indexMovimentacao];
+                for(var i = 0; i < objetoResponse.Manutencoes.length; i++){
+                    const movimentacaoEmCaixaResponse = objetoResponse.Manutencoes[i];
 
                     const manutencao = {
                         oid: movimentacaoEmCaixaResponse.Oid,
