@@ -72,9 +72,13 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
-        var usuarioOid = this.props.route.params.usuarioOid;
+        let usuarioOid = null;
 
-        if(!usuarioOid){
+        try{
+            usuarioOid = this.props.route.params.usuarioOid;
+        }catch(error){}
+
+        if(usuarioOid == null){
             usuarioOid = usuario.oid;
         }
 
@@ -384,7 +388,7 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
                     </View>
                     
                     { this.state.roupas.map(roupaEmLavagem => 
-                        <TouchableOpacity onPress={() => this.selecionarRoupa(roupaEmLavagem)}>
+                        <TouchableOpacity key={roupaEmLavagem.roupa.oid} onPress={() => this.selecionarRoupa(roupaEmLavagem)}>
                             <RoupaEmLavagemOperacaoRecolher key={roupaEmLavagem.roupa.oid} roupaEmLavagem={roupaEmLavagem} 
                                 styleExtra={ this.roupaJaSelecionada(roupaEmLavagem) ? 
                                     { borderWidth: 15, borderColor: 'green'} : {}} />

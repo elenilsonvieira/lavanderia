@@ -8,6 +8,10 @@ import Text from '../components/Text';
 
 export default class EquipamentoScreen extends React.Component {
 
+    state = {
+        objetos: []
+    }
+
     dataToString = (data) => {
         var dia = data.getDate();
         var mes = data.getMonth() + 1;
@@ -77,14 +81,13 @@ export default class EquipamentoScreen extends React.Component {
                 method: 'post' 
             });
             const response = await call.json();
-
             var objetos = [];
 
             for(index in response){
                 const objetoResponse = response[index];
                 var manutencoes = [];
 
-                for(indexMovimentacao in objetoResponse.Movimentacoes){
+                for(indexMovimentacao in objetoResponse.Manutencoes){
                     const movimentacaoEmCaixaResponse = objetoResponse.Manutencoes[indexMovimentacao];
 
                     const manutencao = {
@@ -160,12 +163,6 @@ export default class EquipamentoScreen extends React.Component {
     render(){
         return(
             <View style={styles.container}>
-                <View style={styles.header}>
-                    <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
-                        <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
-                    </TouchableOpacity>
-                </View>
-
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
                         <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('EquipamentoDetails', {objeto: objeto})}>
