@@ -89,7 +89,11 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
-        var usuarioOid = this.props.route.params.usuarioOid;
+        let usuarioOid = null;
+
+        try{
+            usuarioOid = this.props.route.params.usuarioOid;
+        }catch(error){}
 
         if(!usuarioOid){
             usuarioOid = usuario.oid;

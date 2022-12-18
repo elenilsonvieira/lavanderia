@@ -86,6 +86,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { AuthContext } from './contexts/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import EquipamentoScreen from './screens/EquipamentoScreen';
+import EquipamentoDetails from './screens/details/EquipamentoDetails';
 
 const App = () => {
   const [state, dispatch] = React.useReducer(
@@ -368,6 +370,12 @@ function DrawerAdministradorFunction()
                 style={styles.icon}
               />
            ), }} />
+        <DrawerAdministrador.Screen name='Equipamento' component={EquipamentoScreen} options={{ title: 'Equipamento', drawerIcon: ({focused, size}) => (
+          <Image
+            source={require('./images/maquina-de-lavar_64x64.png')}
+            style={styles.icon}
+          />
+        ), }} />
         <DrawerAdministrador.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/meta_32x32.png')}
@@ -500,6 +508,12 @@ function DrawerGerenteGeralFunction()
                 style={styles.icon}
               />
            ), }} />
+        <DrawerAdministrador.Screen name='Equipamento' component={EquipamentoScreen} options={{ title: 'Equipamento', drawerIcon: ({focused, size}) => (
+          <Image
+            source={require('./images/maquina-de-lavar_64x64.png')}
+            style={styles.icon}
+          />
+        ), }} />
         <DrawerGerenteGeral.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/meta_32x32.png')}
@@ -632,6 +646,12 @@ function DrawerSubGerenteGeralFunction()
                 style={styles.icon}
               />
            ), }} />
+        <DrawerAdministrador.Screen name='Equipamento' component={EquipamentoScreen} options={{ title: 'Equipamento', drawerIcon: ({focused, size}) => (
+          <Image
+            source={require('./images/maquina-de-lavar_64x64.png')}
+            style={styles.icon}
+          />
+        ), }} />
         <DrawerSubGerenteGeral.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/meta_32x32.png')}
@@ -1195,6 +1215,7 @@ function StackAdministradorFunction()
         <StackAdministrador.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: 'Busca' }} />
         <StackAdministrador.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: 'Selecionar Usuário' }} />
         <StackAdministrador.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: 'Lavagens Pendentes' }} />
+        <StackAdministrador.Screen name='EquipamentoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Equipamento' }} />
       </StackAdministrador.Navigator>
     );
   }
@@ -1289,6 +1310,7 @@ function StackGerenteGeralFunction()
         <StackGerenteGeral.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: '' }} />
         <StackGerenteGeral.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
         <StackGerenteGeral.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
+        <StackGerenteGeral.Screen name='EquipamentoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Equipamento' }} />
       </StackGerenteGeral.Navigator>
     );
   }
@@ -1383,6 +1405,7 @@ function StackSubGerenteGeralFunction()
         <StackSubGerenteGeral.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: '' }} />
         <StackSubGerenteGeral.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
         <StackSubGerenteGeral.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
+        <StackSubGerenteGeral.Screen name='EquipamentoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Equipamento' }} />
       </StackSubGerenteGeral.Navigator>
     );
   }
