@@ -95,7 +95,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
             usuarioOid = this.props.route.params.usuarioOid;
         }catch(error){}
 
-        if(!usuarioOid){
+        if(usuarioOid == null){
             usuarioOid = usuario.oid;
         }
 
