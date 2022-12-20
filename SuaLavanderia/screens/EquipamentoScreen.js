@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, TouchableOpacity, Linking } from 'react-native';
+import {StyleSheet, View, ScrollView, Image, TouchableOpacity, Linking, TextInput } from 'react-native';
 import Equipamento from "../components/Equipamento";
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';
@@ -9,7 +9,9 @@ import Text from '../components/Text';
 export default class EquipamentoScreen extends React.Component {
 
     state = {
-        objetos: []
+        objetos: [],
+        objetosBackup: [],
+        nome: ''
     }
 
     dataToString = (data) => {
@@ -122,7 +124,7 @@ export default class EquipamentoScreen extends React.Component {
                 objetos = [...objetos, objeto];
             }
 
-            this.setState({objetos});
+            this.setState({objetos, objetosBackup: objetos});
         }catch(erro){
             alert('Erro.' + erro);
         }
@@ -161,9 +163,69 @@ export default class EquipamentoScreen extends React.Component {
         //Linking.openURL("http://sualavanderia.com.br/videos/CaixaScreen.mp4");
     };
 
+    nomeAlterado = async (nome) => {
+        await this.setState(nome);
+        this.filtrar(this.state.nome);
+    };
+
+    filtrar =  (nome) => {        
+        if(nome.trim() !== '') {
+            var objetos = [];
+            var nomeArray = nome.split(' ');
+
+            this.state.objetosBackup.map(objeto => {
+                var criteriaAtendido = true;
+
+                for(var i = 0; i < nomeArray.length; i++){
+                    if(nomeArray[i].trim() !== ''){ 
+                        var esseCriteriaAtendido = false;
+
+                        if(objeto.tombamento && objeto.tombamento.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.tipo && objeto.tipo.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.fabricante && objeto.fabricante.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.fornecedor && objeto.fornecedor.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+                        else if(objeto.observacoes && objeto.observacoes.toLowerCase().includes(nomeArray[i].toLowerCase())){     
+                            esseCriteriaAtendido = true;
+                        }
+
+                        if(!esseCriteriaAtendido){
+                            criteriaAtendido = false;
+                            break;
+                        }
+                    }
+                }
+
+                if(criteriaAtendido){
+                    objetos = [...objetos, objeto];
+                }
+            });
+
+            this.setState({objetos: objetos});
+        }else{
+            this.setState({objetos: this.state.objetosBackup});
+        }
+    };
+
     render(){
         return(
             <View style={styles.container}>
+                <View style={styles.header}>
+                    <TextInput
+                        style={styles.boxInput} 
+                        placeholder='Filtrar'
+                        value={this.state.nome}
+                        onChangeText={nome => this.nomeAlterado({nome})} 
+                    />
+                </View>
+
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
                         <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('EquipamentoDetails', {objeto: objeto})}>
@@ -191,7 +253,7 @@ const styles = StyleSheet.create(
           header:{
             alignItems: 'center',
             justifyContent: 'space-between',
-            height: 80,
+            height: 45,
             backgroundColor: '#FFF',
             flexDirection: 'row',
           },
@@ -204,8 +266,9 @@ const styles = StyleSheet.create(
             height: 40,
             borderRadius: 5,
             alignSelf: 'stretch',
-            width: 250,
+            width: '95%',
             padding: 5,
+            marginLeft: 10
         },
         picker:{
             height: 40,
