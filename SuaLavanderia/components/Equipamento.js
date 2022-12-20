@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import Text from './Text';
 
 export default class Equipamento extends React.Component {
@@ -18,18 +18,21 @@ export default class Equipamento extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={[styles.movimentacaoContainer, estiloDeAlerta]}>
-                    {this.props.showImage && this.props.objeto.linkDaImagem && 
-                        <Image
-                            style={{width: '100%', height: '50%'}}
-                            source={{uri:this.props.objeto.linkDaImagem}}
-                        />
-                    }
-
                     <View style={styles.movimentacaoInfoContainerTitle}>
                         <Text style={styles.movimentacaoInfoTitle}>{this.props.objeto.tombamento}</Text>
                     </View>
 
                     <View style={styles.movimentacaoInfoContainer}>
+                        {
+                            this.props.showImage && this.props.objeto.linkDaImagem && 
+                            <Image
+                                resizeMethod='auto'
+                                resizeMode='center'
+                                style={styles.image}
+                                source={{uri:this.props.objeto.linkDaImagem}}
+                            />
+                        }
+
                         <View style={styles.valorInfoContainer}>
                             <Text style={styles.valorInfoTitle}>Tipo: </Text>
                             <Text style={styles.movimentacaoInfo}>{this.props.objeto.tipo}</Text>
@@ -158,6 +161,10 @@ const styles = StyleSheet.create(
         alertaVerde: { 
             borderWidth: 10, 
             borderColor: 'green'
-        }
+        },
+        image: {
+            width: '100%',
+            height: 200,
+        },
     }
 );
