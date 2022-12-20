@@ -38,7 +38,7 @@ export default class EquipamentoDetails extends React.Component {
                 </View>
 
                 <ScrollView>
-                    <Equipamento objeto={this.state.objeto ? this.state.objeto : this.props.route.params.objeto} />
+                    <Equipamento showImage={true} objeto={this.state.objeto ? this.state.objeto : this.props.route.params.objeto} />
 
                     <View style={styles.roupasContainer}>
                         <Text style={styles.roupasTitle}>Manutenções</Text>

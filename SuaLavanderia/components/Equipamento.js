@@ -5,9 +5,26 @@ import Text from './Text';
 export default class Equipamento extends React.Component {
 
     render(){
+        var estiloDeAlerta = {};
+
+        if(this.props.objeto.ativo && this.props.objeto.garantivaAtiva){
+            estiloDeAlerta = styles.alertaVerde;
+        }else if(this.props.objeto.ativo && !this.props.objeto.garantivaAtiva){
+            estiloDeAlerta = styles.alertaAmarelo;
+        }else if(!this.props.objeto.ativo){
+            estiloDeAlerta = styles.alertaVermelho;
+        }
+
         return(
             <View style={styles.container}>
-                <View style={styles.movimentacaoContainer}>
+                <View style={[styles.movimentacaoContainer, estiloDeAlerta]}>
+                    {this.props.showImage && this.props.objeto.linkDaImagem && 
+                        <Image
+                            style={{width: '100%', height: '50%'}}
+                            source={{uri:this.props.objeto.linkDaImagem}}
+                        />
+                    }
+
                     <View style={styles.movimentacaoInfoContainerTitle}>
                         <Text style={styles.movimentacaoInfoTitle}>{this.props.objeto.tombamento}</Text>
                     </View>
@@ -130,5 +147,17 @@ const styles = StyleSheet.create(
             padding: 10,
             backgroundColor: '#DDD',
         },
+        alertaAmarelo: { 
+            borderWidth: 10, 
+            borderColor: 'yellow'
+        },
+        alertaVermelho: { 
+            borderWidth: 10, 
+            borderColor: 'red'
+        },
+        alertaVerde: { 
+            borderWidth: 10, 
+            borderColor: 'green'
+        }
     }
 );

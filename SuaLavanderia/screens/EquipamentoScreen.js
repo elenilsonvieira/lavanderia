@@ -115,6 +115,7 @@ export default class EquipamentoScreen extends React.Component {
                     observacoes: objetoResponse.Observacoes,
                     ativo: objetoResponse.Ativo,
                     garantivaAtiva: objetoResponse.GarantivaAtiva,
+                    linkDaImagem: objetoResponse.LinkDaImagem,
                     manutencoes: manutencoes,
                 };    
 
@@ -166,7 +167,7 @@ export default class EquipamentoScreen extends React.Component {
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
                         <TouchableOpacity key={objeto.oid} onPress={() => this.props.navigation.navigate('EquipamentoDetails', {objeto: objeto})}>
-                            <Equipamento key={objeto.oid} objeto={objeto} />
+                            <Equipamento showImage={false} key={objeto.oid} objeto={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>
