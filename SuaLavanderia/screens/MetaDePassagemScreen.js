@@ -248,21 +248,21 @@ export default class MetaDePassagemScreen extends React.Component {
                     </View>
                 </View>
 
-                <View style={styles.containerInfo}>
-                    <View style={styles.unidadeContainer}>
-                        <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Peças/Peso: </Text>
-                            <Text style={styles.lavagemInfo}>{this.state.objeto.totalDePecas} ({this.state.objeto.totalDePeso})</Text>
-                        </View>
+                <ScrollView contentContainerStyle={styles.objetoList}>
+                    <View style={styles.containerInfo}>
+                        <View style={styles.unidadeContainer}>
+                            <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Peças/Peso: </Text>
+                                <Text style={styles.lavagemInfo}>{this.state.objeto.totalDePecas} ({this.state.objeto.totalDePeso})</Text>
+                            </View>
 
-                        <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Peças/Peso Passados: </Text>
-                            <Text style={styles.lavagemInfo}>{this.state.objeto.totalDePecasPassado} ({this.state.objeto.totalDePesoPassado})</Text>
+                            <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle}>Peças/Peso Passados: </Text>
+                                <Text style={styles.lavagemInfo}>{this.state.objeto.totalDePecasPassado} ({this.state.objeto.totalDePesoPassado})</Text>
+                            </View>
                         </View>
                     </View>
-                </View>
 
-                <ScrollView contentContainerStyle={styles.objetoList}>
                     {  
                     this.state.objeto.dados.map(objeto => 
                         <DadosDePassagem key={objeto.funcionario} objeto={objeto} />
@@ -281,7 +281,6 @@ const styles = StyleSheet.create(
             backgroundColor: '#333',
           },
           objetoList: {
-              paddingTop: 20,
           },
           header:{
             alignItems: 'center',
@@ -361,7 +360,7 @@ const styles = StyleSheet.create(
             backgroundColor: '#FFF',
             padding: 5,
             paddingLeft: 20,
-            margin: 20,
+            margin: 10,
             justifyContent: 'center',
         },
         lavagemInfoContainer: {

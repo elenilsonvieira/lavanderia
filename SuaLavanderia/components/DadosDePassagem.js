@@ -22,30 +22,26 @@ export default class DadosDePassagem extends React.Component {
                         <Text style={styles.lavagemInfo}>{this.props.objeto.totalDePeso}</Text>
                     </View>
 
-                    <View style={styles.roupasContainer}>
-                        <Text style={styles.roupasTitle}>Passagens</Text>
-                    </View>
-
                     {  
                     this.props.objeto.operacoes.map(operacao => 
-                        <View key={operacao.data + operacao.cliente}>
+                        <View style={styles.lavagemInfoContainerCliente3} key={operacao.data + operacao.cliente}>
                             <View style={styles.lavagemInfoContainerCliente2}>
                                 <Text style={styles.lavagemInfoCliente2}>{operacao.cliente}</Text>
                             </View>
 
                             <View style={styles.lavagemInfoContainer}>
-                                <Text style={styles.lavagemInfoTitle}>Peças: </Text>
-                                <Text style={styles.lavagemInfo}>{operacao.totalDePecas}</Text>
+                                <Text style={styles.lavagemInfoTitle2}>Peças: </Text>
+                                <Text style={styles.lavagemInfo2}>{operacao.totalDePecas}</Text>
                             </View>
 
                             <View style={styles.lavagemInfoContainer}>
-                                <Text style={styles.lavagemInfoTitle}>Peso: </Text>
-                                <Text style={styles.lavagemInfo}>{operacao.totalDePeso}</Text>
+                                <Text style={styles.lavagemInfoTitle2}>Peso: </Text>
+                                <Text style={styles.lavagemInfo2}>{operacao.totalDePeso}</Text>
                             </View>
 
                             <View style={styles.lavagemInfoContainer}>
-                                <Text style={styles.lavagemInfoTitle}>Data: </Text>
-                                <Text style={styles.lavagemInfo}>{operacao.data}</Text>
+                                <Text style={styles.lavagemInfoTitle2}>Data: </Text>
+                                <Text style={styles.lavagemInfo2}>{operacao.data}</Text>
                             </View>
                         </View>
                     )}
@@ -87,8 +83,8 @@ const styles = StyleSheet.create(
         unidadeContainer: {
             borderRadius: 5,
             backgroundColor: '#FFF',
-            padding: 20,
-            margin: 20,
+            padding: 10,
+            margin: 10,
             justifyContent: 'center',
         },
         lavagemInfoContainer: {
@@ -105,16 +101,27 @@ const styles = StyleSheet.create(
             fontWeight: 'bold',
             fontSize: 16,
         },
+        lavagemInfoTitle2: {
+            fontWeight: 'bold',
+            fontSize: 14,
+        },
         lavagemInfo: {
             fontSize: 16,
         },
+        lavagemInfo2: {
+            fontSize: 14,
+        },
         lavagemInfoCliente: {
-            fontSize: 30,
+            fontSize: 22,
             fontWeight: 'bold',
         },
         lavagemInfoCliente2: {
             fontSize: 16,
             fontWeight: 'bold',
+        },
+        lavagemInfoContainerCliente3: {
+            marginTop: 5,
+            backgroundColor: '#F8F8F8',
         },
         button:{
             alignItems: 'center',
@@ -123,6 +130,14 @@ const styles = StyleSheet.create(
             margin: 10,
             padding: 10,
             backgroundColor: '#DDD',
+        },
+        roupasContainer: {
+            alignItems: 'center',
+            backgroundColor: '#F8F8F8',
+            borderRadius: 5, 
+            marginLeft: 20,
+            marginRight: 20,
+            marginTop: 10,
         },
     }
 );
