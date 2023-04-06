@@ -1,9 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, TextInput, TouchableOpacity, Linking } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import LavagemOperacoes from "../components/LavagemOperacoes";
-import LoadingModal from '../components/modals/LoadingModal';
-import ConfirmacaoModalComDetalhes from '../components/modals/ConfirmacaoModalComDetalhes';
+import DadosDePassagem from "../components/DadosDePassagem";
 import fetch from '../utils/FetchWithTimeout';
 import {Picker} from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -257,26 +255,16 @@ export default class MetaDePassagemScreen extends React.Component {
                     </View>
                 </View>
 
-                <View style={styles.container}>
+                <View style={styles.containerInfo}>
                     <View style={styles.unidadeContainer}>
                         <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Peças: </Text>
-                            <Text style={styles.lavagemInfo}>{this.state.objeto.totalDePecas}</Text>
+                            <Text style={styles.lavagemInfoTitle}>Peças/Peso: </Text>
+                            <Text style={styles.lavagemInfo}>{this.state.objeto.totalDePecas} ({this.state.objeto.totalDePeso})</Text>
                         </View>
 
                         <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Peças Passadas: </Text>
-                            <Text style={styles.lavagemInfo}>{this.state.objeto.totalDePecasPassado}</Text>
-                        </View>
-
-                        <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Total de Peso: </Text>
-                            <Text style={styles.lavagemInfo}>{this.state.objeto.totalDePeso}</Text>
-                        </View>
-
-                        <View style={styles.lavagemInfoContainer}>
-                            <Text style={styles.lavagemInfoTitle}>Peso Passado: </Text>
-                            <Text style={styles.lavagemInfo}>{this.state.objeto.totalDePesoPassado}</Text>
+                            <Text style={styles.lavagemInfoTitle}>Peças/Peso Passados: </Text>
+                            <Text style={styles.lavagemInfo}>{this.state.objeto.totalDePecasPassado} ({this.state.objeto.totalDePesoPassado})</Text>
                         </View>
                     </View>
                 </View>
@@ -284,7 +272,7 @@ export default class MetaDePassagemScreen extends React.Component {
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {  
                     this.state.objeto.dados.map(dado => 
-                        <LavagemOperacoes key={dado.funcionario} objeto={objeto} />
+                        <DadosDePassagem key={dado.funcionario} objeto={objeto} />
                     )}
                 </ScrollView>
             </View>
@@ -370,6 +358,25 @@ const styles = StyleSheet.create(
         roupasTitle: {
             fontSize: 18,
             fontWeight: 'bold',
+        },
+        containerInfo: {
+            flex: 1,
+            backgroundColor: '#333',
+        },
+        unidadeContainer: {
+            borderRadius: 5,
+            backgroundColor: '#FFF',
+            padding: 5,
+            paddingLeft: 20,
+            margin: 20,
+            justifyContent: 'center',
+        },
+        lavagemInfoContainer: {
+            flexDirection: 'row',
+        },
+        lavagemInfoTitle: {
+            fontWeight: 'bold',
+            fontSize: 16,
         },
     }
 );
