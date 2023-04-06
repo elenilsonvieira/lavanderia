@@ -119,13 +119,10 @@ export default class MetaDePassagemScreen extends React.Component {
                 const objetoResponse = response[index];
                 var dados = [];
 
-                for(indexDado in objetoResponse.Dados){
-                    const dadoResponse = objetoResponse.Dados[indexDado];
+                for(let dadoResponse of objetoResponse.Dados){
 
                     var operacoes = [];
-                    for(indexOperacao in dadoResponse.Operacoes){
-                        const operacoesResponse = dadoResponse.Operacoes[indexOperacao];
-
+                    for(let operacoesResponse of dadoResponse.Operacoes){
                         const operacaoDePassagem = {
                             cliente: operacoesResponse.Cliente,
                             totalDePecas: operacoesResponse.TotalDePecas,
@@ -247,10 +244,6 @@ export default class MetaDePassagemScreen extends React.Component {
                             <TouchableOpacity onPress={this.buscar} style={styles.button}>
                                 <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
                             </TouchableOpacity>
-
-                            <TouchableOpacity onPress={this.openVideoInformativo} style={styles.button}>
-                                <Image style={styles.icon} source={require('../images/pergunta_32x32.png')} />
-                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
@@ -271,8 +264,8 @@ export default class MetaDePassagemScreen extends React.Component {
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {  
-                    this.state.objeto.dados.map(dado => 
-                        <DadosDePassagem key={dado.funcionario} objeto={objeto} />
+                    this.state.objeto.dados.map(objeto => 
+                        <DadosDePassagem key={objeto.funcionario} objeto={objeto} />
                     )}
                 </ScrollView>
             </View>

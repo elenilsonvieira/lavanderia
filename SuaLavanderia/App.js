@@ -773,6 +773,12 @@ function DrawerGerenteDeOperacoesFunction()
                 style={styles.icon}
               />
            ), }} />
+        <DrawerGerenteDeOperacoes.Screen name='MetaDePassagem' component={MetaDePassagemScreen} options={{ title: 'Meta de Passagem', drawerIcon: ({focused, size}) => (
+          <Image
+            source={require('./images/ferro-de-passar_64x64.png')}
+            style={styles.icon}
+          />
+        ), }} />
         <DrawerGerenteDeOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/sobre_32x32.png')}
@@ -863,6 +869,12 @@ function DrawerSupervisorDeOperacoesFunction()
                 style={styles.icon}
               />
            ), }} />
+        <DrawerSupervisorDeOperacoes.Screen name='MetaDePassagem' component={MetaDePassagemScreen} options={{ title: 'Meta de Passagem', drawerIcon: ({focused, size}) => (
+          <Image
+            source={require('./images/ferro-de-passar_64x64.png')}
+            style={styles.icon}
+          />
+        ), }} />
         <DrawerSupervisorDeOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/sobre_32x32.png')}
@@ -946,6 +958,12 @@ function DrawerOperacoesFunction()
                 style={styles.icon}
               />
            ), }} />
+        <DrawerOperacoes.Screen name='MetaDePassagem' component={MetaDePassagemScreen} options={{ title: 'Meta de Passagem', drawerIcon: ({focused, size}) => (
+          <Image
+            source={require('./images/ferro-de-passar_64x64.png')}
+            style={styles.icon}
+          />
+        ), }} />
         <DrawerOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/sobre_32x32.png')}
