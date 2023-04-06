@@ -30,6 +30,11 @@ export default class DadosDePassagem extends React.Component {
                             </View>
 
                             <View style={styles.lavagemInfoContainer}>
+                                <Text style={styles.lavagemInfoTitle2}>Data para Entrega: </Text>
+                                <Text style={styles.lavagemInfo2}>{operacao.dataParaEntrega}</Text>
+                            </View>
+
+                            <View style={styles.lavagemInfoContainer}>
                                 <Text style={styles.lavagemInfoTitle2}>Peças: </Text>
                                 <Text style={styles.lavagemInfo2}>{operacao.totalDePecas}</Text>
                             </View>
@@ -40,7 +45,7 @@ export default class DadosDePassagem extends React.Component {
                             </View>
 
                             <View style={styles.lavagemInfoContainer}>
-                                <Text style={styles.lavagemInfoTitle2}>Data: </Text>
+                                <Text style={styles.lavagemInfoTitle2}>Começou a passar: </Text>
                                 <Text style={styles.lavagemInfo2}>{operacao.data}</Text>
                             </View>
                         </View>
@@ -99,14 +104,14 @@ const styles = StyleSheet.create(
         },
         lavagemInfoTitle: {
             fontWeight: 'bold',
-            fontSize: 16,
+            fontSize: 15,
         },
         lavagemInfoTitle2: {
             fontWeight: 'bold',
             fontSize: 14,
         },
         lavagemInfo: {
-            fontSize: 16,
+            fontSize: 15,
         },
         lavagemInfo2: {
             fontSize: 14,

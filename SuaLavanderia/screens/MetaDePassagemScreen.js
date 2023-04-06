@@ -128,6 +128,7 @@ export default class MetaDePassagemScreen extends React.Component {
                             totalDePecas: operacoesResponse.TotalDePecas,
                             totalDePeso: operacoesResponse.TotalDePeso,
                             data: operacoesResponse.Data,
+                            dataParaEntrega: operacoesResponse.DataParaEntrega,
                         }
 
                         operacoes = [...operacoes, operacaoDePassagem];
