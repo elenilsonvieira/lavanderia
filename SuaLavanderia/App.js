@@ -88,6 +88,7 @@ import { AuthContext } from './contexts/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import EquipamentoScreen from './screens/EquipamentoScreen';
 import EquipamentoDetails from './screens/details/EquipamentoDetails';
+import MetaDePassagemScreen from './screens/MetaDePassagemScreen';
 
 const App = () => {
   const [state, dispatch] = React.useReducer(
@@ -376,6 +377,12 @@ function DrawerAdministradorFunction()
             style={styles.icon}
           />
         ), }} />
+        <DrawerAdministrador.Screen name='MetaDePassagem' component={MetaDePassagemScreen} options={{ title: 'Meta de Passagem', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/ferro-de-passar_64x64.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerAdministrador.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/meta_32x32.png')}
@@ -514,6 +521,12 @@ function DrawerGerenteGeralFunction()
             style={styles.icon}
           />
         ), }} />
+        <DrawerGerenteGeral.Screen name='MetaDePassagem' component={MetaDePassagemScreen} options={{ title: 'Meta de Passagem', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/ferro-de-passar_64x64.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerGerenteGeral.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/meta_32x32.png')}
@@ -652,6 +665,12 @@ function DrawerSubGerenteGeralFunction()
             style={styles.icon}
           />
         ), }} />
+        <DrawerSubGerenteGeral.Screen name='MetaDePassagem' component={MetaDePassagemScreen} options={{ title: 'Meta de Passagem', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/ferro-de-passar_64x64.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerSubGerenteGeral.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/meta_32x32.png')}
