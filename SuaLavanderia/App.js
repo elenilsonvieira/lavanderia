@@ -1201,12 +1201,6 @@ function DrawerEntregadorFunction()
             style={styles.icon}
           />
         ), }} />
-        <DrawerEntregador.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta', drawerIcon: ({focused, size}) => (
-              <Image
-                source={require('./images/meta_32x32.png')}
-                style={styles.icon}
-              />
-           ), }} />
         <DrawerEntregador.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/tarefa_32x32.png')}
