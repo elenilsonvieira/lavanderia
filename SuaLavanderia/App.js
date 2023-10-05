@@ -257,6 +257,18 @@ const App = () => {
             <LoginStack.Screen name='StackAplicativo' component={StackAplicativoFunction} options={{ title: '' }} />
           </LoginStack.Navigator>
         );
+      }else if(usuario.papel == "Entregador"){
+        return(
+          <LoginStack.Navigator initialRouteName="StackEntregador" screenOptions={{headerTransparent: true, headerShown: false, headerLeft: null, gestureEnabled: false, headerBackVisible:false}}>
+            <LoginStack.Screen name='StackEntregador' component={StackEntregadorFunction} options={{ title: '' }} />
+          </LoginStack.Navigator>
+        );
+      }else {
+        return(
+          <LoginStack.Navigator initialRouteName="Login" screenOptions={{headerTransparent: true, headerShown: false, headerLeft: null, gestureEnabled: false, headerBackVisible:false}}>
+            <LoginStack.Screen name='Login' component={LoginScreen} options={{ title: '' }} />
+          </LoginStack.Navigator>
+        );
       }
     }else{
       return(
@@ -1153,6 +1165,76 @@ function DrawerAtendenteFunction()
     );
   }
 
+  const DrawerEntregador = createDrawerNavigator();
+
+function DrawerEntregadorFunction()
+  {
+    return(
+      <DrawerEntregador.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#F5FCFF'}}}>
+        <DrawerEntregador.Screen name='Home' component={HomeScreen} options={{ title: 'Início', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/home-icon.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerEntregador.Screen name='BuscaEntrega' component={BuscaEntregaScreen} options={{ title: 'Busca e Entrega', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/SolicitacaoDeBusca_64x64.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerEntregador.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/marca_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerEntregador.Screen name='OperacoesTapete' component={OperacoesTapeteScreen} options={{ title: 'Operações com Tapete', drawerIcon: ({focused, size}) => (
+          <Image
+            source={require('./images/tapete_128x128.png')}
+            style={styles.icon}
+          />
+        ), }} />
+        <DrawerEntregador.Screen name='Material' component={MaterialScreen} options={{ title: 'Material', drawerIcon: ({focused, size}) => (
+          <Image
+            source={require('./images/sabao_64x64.png')}
+            style={styles.icon}
+          />
+        ), }} />
+        <DrawerEntregador.Screen name='Meta' component={MetaScreen} options={{ title: 'Meta', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/meta_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerEntregador.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/tarefa_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerEntregador.Screen name='BaterPonto' component={BaterPontoScreen} options={{ title: 'Bater Ponto', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/dedo_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerEntregador.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/sobre_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerEntregador.Screen name='Logout' component={LogoutScreen} options={{ title: 'Sair', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/logout_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+      </DrawerEntregador.Navigator>
+    );
+  }
+
 // const DrawerCliente = createDrawerNavigator(
 //   {
 //     Home: HomeScreenCliente,
@@ -1798,6 +1880,53 @@ function StackAtendenteFunction()
         <StackAtendente.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
         <StackAtendente.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
       </StackAtendente.Navigator>
+    );
+  }
+
+  const StackEntregador = createNativeStackNavigator();
+
+function StackEntregadorFunction()
+  {
+    return(
+      <StackEntregador.Navigator initialRouteName="Drawer" >
+        <StackEntregador.Screen name='Drawer' component={DrawerEntregadorFunction} options={{ title: '', headerTransparent: true }}/>
+        <StackEntregador.Screen name='MovimentacaoDeCaixaDetails' component={MovimentacaoDeCaixaDetails} options={{ title: '' }} />
+        <StackEntregador.Screen name='CaixaDetails' component={CaixaDetails} options={{ title: '' }} />
+        <StackEntregador.Screen name='CaixaDetailsSoLeitura' component={CaixaDetailsSoLeitura} options={{ title: '' }} />
+        <StackEntregador.Screen name='AvaliacaoDetails' component={AvaliacaoDetails} options={{ title: '' }} />
+        <StackEntregador.Screen name='AvaliacaoDetailsSoLeitura' component={AvaliacaoDetailsSoLeitura} options={{ title: '' }} />
+        <StackEntregador.Screen name='LavagemDetails' component={LavagemDetailsPapelOperacoes} options={{ title: '' }} />
+        <StackEntregador.Screen name='LavagemDetailsOperacoes' component={LavagemDetailsOperacoes} options={{ title: '' }} />
+        <StackEntregador.Screen name='LavagemDetailsOperacaoEmpacotar' component={LavagemDetailsOperacaoEmpacotar} options={{ title: '' }} />
+        <StackEntregador.Screen name='LavagemDetailsOperacaoRecolher' component={LavagemDetailsOperacaoRecolher} options={{ title: '' }} />
+        <StackEntregador.Screen name='LavagemDetailsEdit' component={LavagemDetailsEdit} options={{ title: '' }} />
+        <StackEntregador.Screen name='RoupaEmLavagemDetails' component={RoupaEmLavagemDetails} options={{ title: '' }} />
+        <StackEntregador.Screen name='RoupaDetails' component={RoupaDetails} options={{ title: '' }} />
+        <StackEntregador.Screen name='OperacaoLavar' component={OperacaoLavarScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='OperacaoRecolher' component={OperacaoRecolherScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='OperacaoPassar' component={OperacaoPassarScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='OperacaoPassadorExtra' component={OperacaoPassadorExtraScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='OperacaoEmpacotar' component={OperacaoEmpacotarScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='OperacaoRetirarMaterial' component={OperacaoRetirarMaterialScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='OperacaoAdicionarMaterial' component={OperacaoAdicionarMaterialScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='OperacaoListaDeEntrega' component={OperacaoListaDeEntregaScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='OperacaoLavarTapete' component={OperacaoLavarTapeteScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='OperacaoProntoTapete' component={OperacaoProntoTapeteScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='OperacaoEntregarTapete' component={OperacaoEntregarTapeteScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='MaterialDetails' component={MaterialDetails} options={{ title: '' }} />
+        <StackEntregador.Screen name='RoupasDoCliente' component={RoupasDoClienteScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='ListaDeCompras' component={ListaDeComprasScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='BancoDeHorasDetails' component={BancoDeHorasDetails} options={{ title: '' }} />
+        <StackEntregador.Screen name='ListaDeEntregaDetails' component={ListaDeEntregaDetails} options={{ title: '' }} />
+        <StackEntregador.Screen name='ListaDeEntregaDetailsAtendente' component={ListaDeEntregaDetailsAtendente} options={{ title: '' }} />
+        <StackEntregador.Screen name='LavagemParaListaDeEntrega' component={LavagemParaListaDeEntregaScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='OperacaoListaDeEntregaDireta' component={OperacaoListaDeEntregaDiretaScreen} options={{ title: '' }} />
+        <StackEntregador.Screen name='FechamentoDePontoDetails' component={FechamentoDePontoDetails} options={{ title: '' }} />
+        <StackEntregador.Screen name='UsuarioDetails' component={UsuarioDetails} options={{ title: '' }} />
+        <StackEntregador.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: '' }} />
+        <StackEntregador.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
+        <StackEntregador.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
+      </StackEntregador.Navigator>
     );
   }
 
