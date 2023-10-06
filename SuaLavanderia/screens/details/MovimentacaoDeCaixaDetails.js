@@ -241,6 +241,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                             <Picker.Item label='Geral' value='Geral' />
                             <Picker.Item label='Manaíra' value='Manaíra' />
                             <Picker.Item label='Bessa' value='Bessa' />
+                            <Picker.Item label='Entregador' value='Entregador' />
                         </Picker>
 
                         <Text style={styles.infoTitle}>Conta de Saída: </Text>
@@ -252,6 +253,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
                             <Picker.Item label='Geral' value='Geral' />
                             <Picker.Item label='Manaíra' value='Manaíra' />
                             <Picker.Item label='Bessa' value='Bessa' />
+                            <Picker.Item label='Entregador' value='Entregador' />
                         </Picker>
 
                         <Text style={styles.infoTitle}>Observações: </Text>

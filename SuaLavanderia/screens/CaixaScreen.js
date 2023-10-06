@@ -301,6 +301,7 @@ export default class CaixaScreen extends React.Component {
                                     <Picker.Item label='Geral' value='Geral' />
                                     <Picker.Item label='Manaíra' value='Manaíra' />
                                     <Picker.Item label='Bessa' value='Bessa' />
+                                    <Picker.Item label='Entregador' value='Entregador' />
                                     <Picker.Item label='Tudo' value='' />
                                 </Picker>
                             </View>

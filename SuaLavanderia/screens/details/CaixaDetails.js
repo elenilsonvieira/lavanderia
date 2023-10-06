@@ -171,6 +171,7 @@ export default class CaixaDetails extends React.Component {
                         <Picker.Item label='Geral' value='Geral' />
                         <Picker.Item label='Bessa' value='Bessa' />
                         <Picker.Item label='Manaíra' value='Manaíra' />
+                        <Picker.Item label='Entregador' value='Entregador' />
                     </Picker>
                 </View>
             </View>

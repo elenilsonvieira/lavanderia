@@ -1195,6 +1195,18 @@ function DrawerEntregadorFunction()
             style={styles.icon}
           />
         ), }} />
+        <DrawerEntregador.Screen name='MovimentacaoDeCaixa' component={MovimentacaoDeCaixaScreen} options={{ title: 'Movimentacao de Caixa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/pagamento_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerEntregador.Screen name='Caixa' component={CaixaScreen} options={{ title: 'Caixa', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/caixaFinanceiro_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerEntregador.Screen name='Material' component={MaterialScreen} options={{ title: 'Material', drawerIcon: ({focused, size}) => (
           <Image
             source={require('./images/sabao_64x64.png')}
