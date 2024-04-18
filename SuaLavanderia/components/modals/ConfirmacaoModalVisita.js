@@ -5,6 +5,10 @@ import Text from '../Text';
 
 export default class ConfirmacaoModalVisita extends React.Component {
 
+    state = {
+        comentario: '',
+    };
+
     render(){
         return(
             <Modal visible={this.props.visible} animationType="fade" transparent={true} onRequestClose={() => {}} >
@@ -17,7 +21,7 @@ export default class ConfirmacaoModalVisita extends React.Component {
 
                         <View style={styles.buttonContainer}>
                             <TouchableOpacity 
-                                onPress={this.props.onSim} 
+                                onPress={() => this.props.onSim(this.state.comentario)} 
                                 style={[styles.button, styles.buttonAdd]}>
                                 <Text style={styles.buttonText}>Sim</Text>
                             </TouchableOpacity>
@@ -25,6 +29,16 @@ export default class ConfirmacaoModalVisita extends React.Component {
                             <TouchableOpacity onPress={this.props.onNao} style={[styles.button, styles.buttonCancel]}>
                                 <Text style={styles.buttonText}>Não</Text>
                             </TouchableOpacity>
+                        </View>
+
+                        <View style={styles.infoContainer}>
+                                <TextInput
+                                    style={styles.boxInput}
+                                    autoFocus
+                                    placeholder={this.props.inputText}
+                                    value={this.state.comentario}
+                                    onChangeText={comentario => this.setState({comentario})}
+                                />
                         </View>
 
                         <View style={styles.buttonContainer}>
@@ -107,6 +121,14 @@ const styles = StyleSheet.create(
             width: 100,
             borderRadius: 15,
             padding: 5,
+        },
+        boxInput:{
+            backgroundColor: "#DDD",
+            alignSelf: "stretch",
+            height: 40,
+            margin: 5,
+            borderRadius: 5,
+            width: '100%',
         },
     }
 );

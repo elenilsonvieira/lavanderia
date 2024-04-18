@@ -261,13 +261,13 @@ export default class VisitaScreen extends React.Component {
         this.props.navigation.navigate('BuscaDetails', {reload: this.buscar.bind(this)});
     };
 
-    acao = async () => {
+    acao = async (comentarios) => {
         this.setState({confirmacaoModalVisible: false, modalVisible: true});
 
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
-        var argumentos = `oid=${this.state.objeto.oid}&atendida=true`;
+        var argumentos = `oid=${this.state.objeto.oid}&atendida=true&comentario=${comentarios}`;
 
         try {
             const call = await fetch(`http://painel.sualavanderia.com.br/api/AtualizarVisita.aspx?${argumentos}&login=${email}&senha=${hash}`,
@@ -339,7 +339,7 @@ export default class VisitaScreen extends React.Component {
                 <LoadingModal modalVisible={this.state.modalVisible} />
 
                 <ConfirmacaoModalVisita visible={this.state.confirmacaoModalVisible} texto="Confirmar Atendida?" 
-                    onSim={this.acao} onNao={this.closeModal}
+                    onSim={this.acao} onNao={this.closeModal} inputText="Comentários"
                     onWaze={this.navegarParaWaze} onLigar={this.navegarParaLigar}  />
             </View>
         );
