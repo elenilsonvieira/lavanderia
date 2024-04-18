@@ -89,6 +89,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import EquipamentoScreen from './screens/EquipamentoScreen';
 import EquipamentoDetails from './screens/details/EquipamentoDetails';
 import MetaDePassagemScreen from './screens/MetaDePassagemScreen';
+import VisitaScreen from './screens/VisitaScreen';
 
 const App = () => {
   const [state, dispatch] = React.useReducer(
@@ -365,6 +366,12 @@ function DrawerAdministradorFunction()
                 style={styles.icon}
               />
            ), }} />
+        <DrawerAdministrador.Screen name='Visita' component={VisitaScreen} options={{ title: 'Visita', drawerIcon: ({focused, size}) => (
+          <Image
+            source={require('./images/Visita_64x64.png')}
+            style={styles.icon}
+          />
+        ), }} />
         <DrawerAdministrador.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/marca_32x32.png')}
@@ -509,6 +516,12 @@ function DrawerGerenteGeralFunction()
                 style={styles.icon}
               />
            ), }} />
+        <DrawerAdministrador.Screen name='Visita' component={VisitaScreen} options={{ title: 'Visita', drawerIcon: ({focused, size}) => (
+          <Image
+            source={require('./images/Visita_64x64.png')}
+            style={styles.icon}
+          />
+        ), }} />
         <DrawerGerenteGeral.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/marca_32x32.png')}
@@ -653,6 +666,12 @@ function DrawerSubGerenteGeralFunction()
                 style={styles.icon}
               />
            ), }} />
+        <DrawerAdministrador.Screen name='Visita' component={VisitaScreen} options={{ title: 'Visita', drawerIcon: ({focused, size}) => (
+          <Image
+            source={require('./images/Visita_64x64.png')}
+            style={styles.icon}
+          />
+        ), }} />
         <DrawerSubGerenteGeral.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/marca_32x32.png')}
@@ -1113,6 +1132,12 @@ function DrawerAtendenteFunction()
                 style={styles.icon}
               />
            ), }} />
+        <DrawerAdministrador.Screen name='Visita' component={VisitaScreen} options={{ title: 'Visita', drawerIcon: ({focused, size}) => (
+          <Image
+            source={require('./images/Visita_64x64.png')}
+            style={styles.icon}
+          />
+        ), }} />
         <DrawerAtendente.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/marca_32x32.png')}
@@ -1183,6 +1208,12 @@ function DrawerEntregadorFunction()
                 style={styles.icon}
               />
            ), }} />
+        <DrawerAdministrador.Screen name='Visita' component={VisitaScreen} options={{ title: 'Visita', drawerIcon: ({focused, size}) => (
+          <Image
+            source={require('./images/Visita_64x64.png')}
+            style={styles.icon}
+          />
+        ), }} />
         <DrawerEntregador.Screen name='ListaDeEntrega' component={ListaDeEntregaScreen} options={{ title: 'Lista de Entrega', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/marca_32x32.png')}
