@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, TextInput, TouchableOpacity, Linking } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import BuscaEntrega from "../components/BuscaEntrega";
+import Visita from "../components/Visita";
 import LoadingModal from '../components/modals/LoadingModal';
 import fetch from '../utils/FetchWithTimeout';
 import ConfirmacaoModalVisita from '../components/modals/ConfirmacaoModalVisita';
@@ -79,6 +79,7 @@ export default class VisitaScreen extends React.Component {
 
         var hoje = new Date();
         var diasAtras = new Date(new Date().getTime() - 1 * 24*60*60*1000);
+        var diasAFrente = new Date(new Date().getTime() + 3 * 24*60*60*1000);
 
         var dataInicial = this.state.dataInicial;
         var dataFinal = this.state.dataFinal;
@@ -100,17 +101,17 @@ export default class VisitaScreen extends React.Component {
         }
 
         if(dataFinal == ''){
-            var mes = hoje.getMonth() + 1;
+            var mes = diasAFrente.getMonth() + 1;
             if(mes < 10){
                 mes = '0' + mes;
             }
 
-            var dia = hoje.getDate();
+            var dia = diasAFrente.getDate();
             if(dia < 10){
                 dia = '0' + dia;
             }
 
-            dataFinal = dia + '/' + mes + '/' + hoje.getFullYear();
+            dataFinal = dia + '/' + mes + '/' + diasAFrente.getFullYear();
 
             this.setState({dataInicial, dataFinal});
         }
@@ -344,19 +345,12 @@ export default class VisitaScreen extends React.Component {
                             <Image style={styles.icon} source={require('../images/pesquisar_32x32.png')} />
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.viewHeaderSegundaLinha}>
-                        <View style={styles.viewBotao}>
-                            <TouchableOpacity onPress={this.navegarParaNovo} style={styles.button}>
-                                <Image style={styles.icon} source={require('../images/novo_32x32.png')} />
-                            </TouchableOpacity>
-                        </View>                            
-                    </View>
                 </View>
 
                 <ScrollView contentContainerStyle={styles.objetoList}>
                     {this.state.objetos.map(objeto => 
                         <TouchableOpacity key={objeto.oid} onPress={() => this.openModal(objeto)}>
-                            <BuscaEntrega key={objeto.oid} objeto={objeto} />
+                            <Visita key={objeto.oid} objeto={objeto} />
                         </TouchableOpacity>
                     )}
                 </ScrollView>

@@ -35,7 +35,7 @@ export default class Visita extends React.Component {
 
                     <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Data e Hora: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.objeto.dataHora}</Text>
+                        <Text style={styles.lavagemInfo}>{this.props.objeto.dataHoraString}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
@@ -44,13 +44,8 @@ export default class Visita extends React.Component {
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
-                        <Text style={styles.lavagemInfoTitle}>Saldo Devedor: </Text>
-                        <Text style={styles.lavagemInfo}>R$ {this.props.objeto.lavagem != null ? this.props.objeto.lavagem.saldoDevedor : ''}</Text>
-                    </View>
-
-                    <View style={styles.lavagemInfoContainer}>
                         <Text style={styles.lavagemInfoTitle}>Instruções: </Text>
-                        <Text style={styles.lavagemInfo}>{this.props.objeto.intrucoes}</Text>
+                        <Text style={styles.lavagemInfo}>{this.props.objeto.instrucoes}</Text>
                     </View>
 
                     <View style={styles.lavagemInfoContainer}>
