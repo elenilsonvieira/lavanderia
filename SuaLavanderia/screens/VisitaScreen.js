@@ -25,6 +25,7 @@ export default class VisitaScreen extends React.Component {
         objetos: [],
         dataInicial: '',
         dataFinal: '',
+        comentario: '',
         objeto: {},
         modalVisible: false,
         confirmacaoModalVisible: false,
@@ -266,39 +267,19 @@ export default class VisitaScreen extends React.Component {
         var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));
         var hash = this.hash(usuario);
         var email = usuario.email;
+        var argumentos = `oid=${this.state.objeto.oid}&atendida=true`;
 
-        if(this.state.objeto.lavagem){
+        try {
+            const call = await fetch(`http://painel.sualavanderia.com.br/api/AtualizarVisita.aspx?${argumentos}&login=${email}&senha=${hash}`,
+                {
+                    method: 'post'
+                });
 
-            var argumentos = `oid=${this.state.objeto.lavagem.oid}&status=5`;
-
-            try {
-                const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`,
-                    {
-                        method: 'post'
-                    });
-
-                if (call.status != 200) {
-                    alert('Erro.' + call.statusText);
-                }
-            } catch (erro) {
-                alert('Erro.' + erro);
+            if (call.status != 200) {
+                alert('Erro.' + call.statusText);
             }
-
-        }else{
-            var argumentos = `oid=${this.state.objeto.oid}&atendida=true`;
-
-            try {
-                const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarSolicitacaoDeBusca.aspx?${argumentos}&login=${email}&senha=${hash}`,
-                    {
-                        method: 'post'
-                    });
-
-                if (call.status != 200) {
-                    alert('Erro.' + call.statusText);
-                }
-            } catch (erro) {
-                alert('Erro.' + erro);
-            }
+        } catch (erro) {
+            alert('Erro.' + erro);
         }
 
         this.setState({modalVisible: false});
