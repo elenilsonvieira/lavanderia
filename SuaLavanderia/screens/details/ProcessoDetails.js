@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Image, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import {StyleSheet, View, Image, TextInput, TouchableOpacity, ScrollView, Alert, Linking } from 'react-native';
 import LoadingModal from '../../components/modals/LoadingModal';
 import MultiPicker from '../../components/MultiPicker';
 import fetch from '../../utils/FetchWithTimeout';
@@ -56,7 +56,7 @@ export default class ProcessoDetails extends React.Component {
         if(link){
             Linking.openURL(link);
         }else{
-            Alert('Não há nenhum link disponível no processo!');
+            alert('Não há nenhum link disponível no processo!');
         }
     };
 
@@ -64,7 +64,7 @@ export default class ProcessoDetails extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.infoTitle}>Roupa</Text>
+                    <Text style={styles.infoTitle}>Link</Text>
 
                     <TouchableOpacity onPress={() => this.openLink(this.state.objeto.link)} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/documento_32x32.png')} />
