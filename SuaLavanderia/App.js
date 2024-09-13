@@ -90,6 +90,7 @@ import EquipamentoScreen from './screens/EquipamentoScreen';
 import EquipamentoDetails from './screens/details/EquipamentoDetails';
 import MetaDePassagemScreen from './screens/MetaDePassagemScreen';
 import VisitaScreen from './screens/VisitaScreen';
+import ProcessoScreen from './screens/ProcessoScreen';
 
 const App = () => {
   const [state, dispatch] = React.useReducer(
@@ -414,6 +415,12 @@ function DrawerAdministradorFunction()
                 style={styles.icon}
               />
            ), }} />
+        <DrawerAdministrador.Screen name='Processo' component={ProcessoScreen} options={{ title: 'Processo', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/documento_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerAdministrador.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/sobre_32x32.png')}
@@ -561,6 +568,12 @@ function DrawerGerenteGeralFunction()
         <DrawerGerenteGeral.Screen name='Tarefa' component={TarefaScreen} options={{ title: 'Tarefa', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/tarefa_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerGerenteGeral.Screen name='Processo' component={ProcessoScreen} options={{ title: 'Processo', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/documento_32x32.png')}
                 style={styles.icon}
               />
            ), }} />
@@ -714,6 +727,12 @@ function DrawerSubGerenteGeralFunction()
                 style={styles.icon}
               />
            ), }} />
+        <DrawerSubGerenteGeral.Screen name='Processo' component={ProcessoScreen} options={{ title: 'Processo', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/documento_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerSubGerenteGeral.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/sobre_32x32.png')}
@@ -810,6 +829,12 @@ function DrawerGerenteDeOperacoesFunction()
             style={styles.icon}
           />
         ), }} />
+        <DrawerGerenteDeOperacoes.Screen name='Processo' component={ProcessoScreen} options={{ title: 'Processo', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/documento_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerGerenteDeOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/sobre_32x32.png')}
@@ -906,6 +931,12 @@ function DrawerSupervisorDeOperacoesFunction()
             style={styles.icon}
           />
         ), }} />
+        <DrawerSupervisorDeOperacoes.Screen name='Processo' component={ProcessoScreen} options={{ title: 'Processo', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/documento_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerSupervisorDeOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/sobre_32x32.png')}
@@ -995,6 +1026,12 @@ function DrawerOperacoesFunction()
             style={styles.icon}
           />
         ), }} />
+        <DrawerOperacoes.Screen name='Processo' component={ProcessoScreen} options={{ title: 'Processo', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/documento_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerOperacoes.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/sobre_32x32.png')}
@@ -1174,6 +1211,12 @@ function DrawerAtendenteFunction()
                 style={styles.icon}
               />
            ), }} />
+        <DrawerAtendente.Screen name='Processo' component={ProcessoScreen} options={{ title: 'Processo', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/documento_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
         <DrawerAtendente.Screen name='Sobre' component={SobreScreen} options={{ title: 'Sobre', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/sobre_32x32.png')}
@@ -1253,6 +1296,12 @@ function DrawerEntregadorFunction()
         <DrawerEntregador.Screen name='BaterPonto' component={BaterPontoScreen} options={{ title: 'Bater Ponto', drawerIcon: ({focused, size}) => (
               <Image
                 source={require('./images/dedo_32x32.png')}
+                style={styles.icon}
+              />
+           ), }} />
+        <DrawerEntregador.Screen name='Processo' component={ProcessoScreen} options={{ title: 'Processo', drawerIcon: ({focused, size}) => (
+              <Image
+                source={require('./images/documento_32x32.png')}
                 style={styles.icon}
               />
            ), }} />
@@ -1372,6 +1421,7 @@ function StackAdministradorFunction()
         <StackAdministrador.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: 'Selecionar Usuário' }} />
         <StackAdministrador.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: 'Lavagens Pendentes' }} />
         <StackAdministrador.Screen name='EquipamentoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Equipamento' }} />
+        <StackAdministrador.Screen name='ProcessoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Processo' }} />
       </StackAdministrador.Navigator>
     );
   }
@@ -1467,6 +1517,7 @@ function StackGerenteGeralFunction()
         <StackGerenteGeral.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
         <StackGerenteGeral.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
         <StackGerenteGeral.Screen name='EquipamentoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Equipamento' }} />
+        <StackGerenteGeral.Screen name='ProcessoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Processo' }} />
       </StackGerenteGeral.Navigator>
     );
   }
@@ -1562,6 +1613,7 @@ function StackSubGerenteGeralFunction()
         <StackSubGerenteGeral.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
         <StackSubGerenteGeral.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
         <StackSubGerenteGeral.Screen name='EquipamentoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Equipamento' }} />
+        <StackSubGerenteGeral.Screen name='ProcessoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Processo' }} />
       </StackSubGerenteGeral.Navigator>
     );
   }
@@ -1646,6 +1698,7 @@ function StackGerenteDeOperacoesFunction()
         <StackGerenteDeOperacoes.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: '' }} />
         <StackGerenteDeOperacoes.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
         <StackGerenteDeOperacoes.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
+        <StackGerenteDeOperacoes.Screen name='ProcessoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Processo' }} />
       </StackGerenteDeOperacoes.Navigator>
     );
   }
@@ -1731,6 +1784,7 @@ function StackSupervisorDeOperacoesFunction()
         <StackSupervisorDeOperacoes.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: 'Busca' }} />
         <StackSupervisorDeOperacoes.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: 'Selecionar Usuário' }} />
         <StackSupervisorDeOperacoes.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: 'Lavagens Pendentes' }} />
+        <StackSupervisorDeOperacoes.Screen name='ProcessoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Processo' }} />
       </StackSupervisorDeOperacoes.Navigator>
     );
   }
