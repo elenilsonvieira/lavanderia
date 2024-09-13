@@ -174,38 +174,6 @@ export default class ProcessoScreen extends React.Component {
         //Linking.openURL("http://sualavanderia.com.br/videos/CaixaScreen.mp4");
     };
 
-    marcarComoConcluida = async () => {
-        var usuario = JSON.parse(await AsyncStorage.getItem("@SuaLavanderia:usuario"));//this.getUser();
-        var hash = this.hash(usuario);
-        var email = usuario.email;
-
-        this.setState({confirmacaoModalVisible: false, modalVisible: true});
-
-        try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/AtualizarTarefa.aspx?oid=${this.state.objeto.oid}&concluida=true&login=${email}&senha=${hash}`, 
-                { 
-                    method: 'post' 
-                });
-
-            alert('Tarefa concluída com sucesso!');
-
-            this.buscar();
-
-            this.setState({modalVisible: false});
-        }catch (erro){
-            this.setState({modalVisible: false});
-            alert('Erro atualizando tarefa: ' + erro);
-        }
-    }
-
-    openModal = (objeto) => {
-        this.setState({confirmacaoModalVisible: true, objeto});
-    };
-    
-    closeModal = () => {
-        this.setState({confirmacaoModalVisible: false});
-    };
-
     render(){
         return(
             <View style={styles.container}>

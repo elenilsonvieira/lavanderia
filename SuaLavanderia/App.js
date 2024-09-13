@@ -91,6 +91,7 @@ import EquipamentoDetails from './screens/details/EquipamentoDetails';
 import MetaDePassagemScreen from './screens/MetaDePassagemScreen';
 import VisitaScreen from './screens/VisitaScreen';
 import ProcessoScreen from './screens/ProcessoScreen';
+import ProcessoDetails from './screens/details/ProcessoDetails';
 
 const App = () => {
   const [state, dispatch] = React.useReducer(
@@ -1421,7 +1422,7 @@ function StackAdministradorFunction()
         <StackAdministrador.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: 'Selecionar Usuário' }} />
         <StackAdministrador.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: 'Lavagens Pendentes' }} />
         <StackAdministrador.Screen name='EquipamentoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Equipamento' }} />
-        <StackAdministrador.Screen name='ProcessoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Processo' }} />
+        <StackAdministrador.Screen name='ProcessoDetails' component={ProcessoDetails} options={{ title: 'Detalhes do Processo' }} />
       </StackAdministrador.Navigator>
     );
   }
@@ -1517,7 +1518,7 @@ function StackGerenteGeralFunction()
         <StackGerenteGeral.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
         <StackGerenteGeral.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
         <StackGerenteGeral.Screen name='EquipamentoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Equipamento' }} />
-        <StackGerenteGeral.Screen name='ProcessoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Processo' }} />
+        <StackGerenteGeral.Screen name='ProcessoDetails' component={ProcessoDetails} options={{ title: 'Detalhes do Processo' }} />
       </StackGerenteGeral.Navigator>
     );
   }
@@ -1613,7 +1614,7 @@ function StackSubGerenteGeralFunction()
         <StackSubGerenteGeral.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
         <StackSubGerenteGeral.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
         <StackSubGerenteGeral.Screen name='EquipamentoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Equipamento' }} />
-        <StackSubGerenteGeral.Screen name='ProcessoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Processo' }} />
+        <StackSubGerenteGeral.Screen name='ProcessoDetails' component={ProcessoDetails} options={{ title: 'Detalhes do Processo' }} />
       </StackSubGerenteGeral.Navigator>
     );
   }
@@ -1698,7 +1699,7 @@ function StackGerenteDeOperacoesFunction()
         <StackGerenteDeOperacoes.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: '' }} />
         <StackGerenteDeOperacoes.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: '' }} />
         <StackGerenteDeOperacoes.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: '' }} />
-        <StackGerenteDeOperacoes.Screen name='ProcessoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Processo' }} />
+        <StackGerenteDeOperacoes.Screen name='ProcessoDetails' component={ProcessoDetails} options={{ title: 'Detalhes do Processo' }} />
       </StackGerenteDeOperacoes.Navigator>
     );
   }
@@ -1784,7 +1785,7 @@ function StackSupervisorDeOperacoesFunction()
         <StackSupervisorDeOperacoes.Screen name='BuscaDetails' component={BuscaDetails} options={{ title: 'Busca' }} />
         <StackSupervisorDeOperacoes.Screen name='SelecionarUsuarioDetails' component={SelecionarUsuarioDetails} options={{ title: 'Selecionar Usuário' }} />
         <StackSupervisorDeOperacoes.Screen name='LavagensPendentesDetails' component={LavagensPendentesDetails} options={{ title: 'Lavagens Pendentes' }} />
-        <StackSupervisorDeOperacoes.Screen name='ProcessoDetails' component={EquipamentoDetails} options={{ title: 'Detalhes do Processo' }} />
+        <StackSupervisorDeOperacoes.Screen name='ProcessoDetails' component={ProcessoDetails} options={{ title: 'Detalhes do Processo' }} />
       </StackSupervisorDeOperacoes.Navigator>
     );
   }

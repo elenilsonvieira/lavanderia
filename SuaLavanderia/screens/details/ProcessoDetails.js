@@ -6,6 +6,7 @@ import fetch from '../../utils/FetchWithTimeout';
 import {Picker} from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Text from '../../components/Text';
+import Processo from '../../components/Processo';
 
 export default class ProcessoDetails extends React.Component {
 
@@ -65,20 +66,16 @@ export default class ProcessoDetails extends React.Component {
                 <View style={styles.header}>
                     <Text style={styles.infoTitle}>Roupa</Text>
 
-                    <TouchableOpacity onPress={() => this.salvar(this.state.objeto.link)} style={styles.button}>
+                    <TouchableOpacity onPress={() => this.openLink(this.state.objeto.link)} style={styles.button}>
                         <Image style={styles.icon} source={require('../../images/documento_32x32.png')} />
                     </TouchableOpacity>
                 </View>
 
                 <ScrollView>
+                    <Processo  objeto={this.state.objeto ? this.state.objeto : this.props.route.params.objeto} />
+
                     <View style={styles.objetoContainer}>
-                        <Text style={styles.valorInfoTitle}>{this.state.objeto.nome}</Text>
-
-                        <Text style={styles.valorInfoTitleCliente}>Categoria: {this.state.objeto.categoria}</Text>
-
-                        <Text style={styles.valorInfoTitleCliente}>Periodicidade: {this.state.objeto.periodicidade}</Text>
-
-                        <Text style={styles.valorInfoTitleCliente}>Descricao: {this.state.objeto.descricao}</Text>
+                        <Text style={styles.movimentacaoInfo}>Descricao: {this.state.objeto.descricao}</Text>
                     </View>
                 </ScrollView>
 
