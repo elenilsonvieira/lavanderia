@@ -1,15 +1,17 @@
 {
   "name": "SuaLavanderia",
-  "version": "24.4.18.1",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint ."
+    "test": "jest"
   },
   "dependencies": {
+    "react": "18.3.1",
+    "react-native": "0.75.3",
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-community/datetimepicker": "^6.7.1",
     "@react-native-picker/picker": "^2.4.8",
@@ -17,31 +19,33 @@
     "@react-navigation/native": "^6.0.16",
     "@react-navigation/native-stack": "^6.9.4",
     "md5": "^2.3.0",
-    "react": "18.1.0",
-    "react-native": "0.70.0",
     "react-native-geolocation-service": "^5.3.1",
     "react-native-gesture-handler": "^2.8.0",
     "react-native-modal-datetime-picker": "^14.0.0",
-    "react-native-reanimated": "^2.13.0",
+    "react-native-reanimated": "^3.7.0",
     "react-native-safe-area-context": "^4.4.1",
     "react-native-screens": "^3.18.2",
     "react-native-sectioned-multi-select": "^0.9.1",
     "react-native-vector-icons": "^9.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@babel/runtime": "^7.12.5",
-    "@react-native-community/eslint-config": "^2.0.0",
-    "babel-jest": "^26.6.3",
-    "eslint": "^7.32.0",
-    "jest": "^26.6.3",
-    "metro-react-native-babel-preset": "0.72.3",
-    "react-test-renderer": "18.1.0"
+    "@babel/core": "^7.20.0",
+    "@babel/preset-env": "^7.20.0",
+    "@babel/runtime": "^7.20.0",
+    "@react-native/babel-preset": "0.75.3",
+    "@react-native/eslint-config": "0.75.3",
+    "@react-native/metro-config": "0.75.3",
+    "@react-native/typescript-config": "0.75.3",
+    "@types/react": "^18.2.6",
+    "@types/react-test-renderer": "^18.0.0",
+    "babel-jest": "^29.6.3",
+    "eslint": "^8.19.0",
+    "jest": "^29.6.3",
+    "prettier": "2.8.8",
+    "react-test-renderer": "18.3.1",
+    "typescript": "5.0.4"
   },
-  "jest": {
-    "preset": "react-native"
-  },
-  "resolutions": {
-    "react-native-safe-area-view": "1.1.0"
+  "engines": {
+    "node": ">=18"
   }
 }

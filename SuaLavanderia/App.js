@@ -93,6 +93,8 @@ import VisitaScreen from './screens/VisitaScreen';
 import ProcessoScreen from './screens/ProcessoScreen';
 import ProcessoDetails from './screens/details/ProcessoDetails';
 
+console.ignoredYellowBox = ["Warning: Each", "Warning: Failed"];
+
 const App = () => {
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
