@@ -69,7 +69,7 @@ export default class BaterPontoScreen extends React.Component {
         this.setState({modalVisible: true});
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarPonto2.aspx?login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarPonto2.aspx?login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -125,7 +125,7 @@ export default class BaterPontoScreen extends React.Component {
         this.setState({modalVisible: true});
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BaterPonto.aspx?latitude=${this.state.latitude}&longitude=${this.state.longitude}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BaterPonto.aspx?latitude=${this.state.latitude}&longitude=${this.state.longitude}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

@@ -108,7 +108,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         var argumentos = `roupaEmLavagemOid=${roupaEmLavagemOids}&usuarioOid=${usuarioOid}&tipoDePacote=${tipoDePacote}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/EmpacotarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/EmpacotarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -173,7 +173,7 @@ export default class LavagemDetailsOperacaoEmpacotar extends React.Component {
         this.setState({modalVisible: true});
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

@@ -61,7 +61,7 @@ export default class CaixaDetails extends React.Component {
             argumentos += '&oid=' + objeto.oid;
         }
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+        const call = await fetch(`https://painel.sualavanderia.com.br/api/AdicionarCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             }).then(function(response){

@@ -67,7 +67,7 @@ export default class OperacaoAdicionarMaterialScreen extends React.Component {
         var argumentos = `ativo=true`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMaterial.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarMaterial.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -158,7 +158,7 @@ export default class OperacaoAdicionarMaterialScreen extends React.Component {
         var argumentos = `materialOid=${this.state.materialOid}&usuarioOid=${usuarioOid}&quantidade=${this.state.quantidade}&modo=entrada`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeMaterial.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeMaterial.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

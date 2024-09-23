@@ -66,7 +66,7 @@ export default class BancoDeHorasDetails extends React.Component {
         var argumentos = `oid=${oid}&incluirFechamentosEPagamentos=true`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarBancoDeHoras.aspx?oid=${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarBancoDeHoras.aspx?oid=${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

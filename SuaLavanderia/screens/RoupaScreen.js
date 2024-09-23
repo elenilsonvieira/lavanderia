@@ -98,7 +98,7 @@ export default class RoupaScreen extends React.Component {
         var email = usuario.email;
 
         try{
-            const roupaCall = await fetch(`http://painel.sualavanderia.com.br/api/BuscarRoupa.aspx?oid=${this.state.chave}&login=${email}&senha=${hash}`, 
+            const roupaCall = await fetch(`https://painel.sualavanderia.com.br/api/BuscarRoupa.aspx?oid=${this.state.chave}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

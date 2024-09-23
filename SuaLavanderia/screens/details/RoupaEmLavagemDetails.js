@@ -92,7 +92,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
             argumentos += `&oid=${this.state.oid}`;
         }
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarRoupaEmLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+        const call = await fetch(`https://painel.sualavanderia.com.br/api/AdicionarRoupaEmLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             }).then(function(response){
@@ -125,7 +125,7 @@ export default class RoupaEmLavagemDetails extends React.Component {
         var email = usuario.email;
 
         try{
-            const roupaCall = await fetch(`http://painel.sualavanderia.com.br/api/BuscarRoupa.aspx?oid=${this.state.chave}&login=${email}&senha=${hash}`, 
+            const roupaCall = await fetch(`https://painel.sualavanderia.com.br/api/BuscarRoupa.aspx?oid=${this.state.chave}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

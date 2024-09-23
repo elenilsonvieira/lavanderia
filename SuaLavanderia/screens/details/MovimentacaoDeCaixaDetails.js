@@ -100,7 +100,7 @@ export default class MovimentacaoDeCaixaDetails extends React.Component {
             argumentos += '&lavagemOid=' + lavagem.oid;
         }
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+        const call = await fetch(`https://painel.sualavanderia.com.br/api/AdicionarMovimentacaoDeCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             }).then(function(response){

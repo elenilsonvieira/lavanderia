@@ -72,7 +72,7 @@ export default class ListaDeComprasScreen extends React.Component {
         var argumentos = `data=${data}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarListaDeCompras.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarListaDeCompras.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

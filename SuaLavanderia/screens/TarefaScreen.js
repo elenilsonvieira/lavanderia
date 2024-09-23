@@ -142,7 +142,7 @@ export default class TarefaScreen extends React.Component {
         var argumentos = `dataInicial=${dataInicial}&dataFinal=${dataFinal}&concluida=false`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarTarefa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarTarefa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             });
@@ -233,7 +233,7 @@ export default class TarefaScreen extends React.Component {
         this.setState({confirmacaoModalVisible: false, modalVisible: true});
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/AtualizarTarefa.aspx?oid=${this.state.objeto.oid}&concluida=true&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/AtualizarTarefa.aspx?oid=${this.state.objeto.oid}&concluida=true&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

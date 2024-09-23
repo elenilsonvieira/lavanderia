@@ -126,7 +126,7 @@ export default class VisitaScreen extends React.Component {
         var argumentos = `dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarVisita.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarVisita.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -270,7 +270,7 @@ export default class VisitaScreen extends React.Component {
         var argumentos = `oid=${this.state.objeto.oid}&atendida=true&comentario=${comentarios}`;
 
         try {
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/AtualizarVisita.aspx?${argumentos}&login=${email}&senha=${hash}`,
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/AtualizarVisita.aspx?${argumentos}&login=${email}&senha=${hash}`,
                 {
                     method: 'post'
                 });

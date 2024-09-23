@@ -91,7 +91,7 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
         var argumentos = `roupaEmLavagemOid=${roupaEmLavagemOids}&usuarioOid=${usuarioOid}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/RecolherRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/RecolherRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -156,7 +156,7 @@ export default class LavagemDetailsOperacaoRecolher extends React.Component {
         this.setState({modalVisible: true});
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

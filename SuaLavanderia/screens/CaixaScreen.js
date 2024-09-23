@@ -120,7 +120,7 @@ export default class CaixaScreen extends React.Component {
         }
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarCaixa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             });

@@ -70,7 +70,7 @@ export default class TecidoScreen extends React.Component {
         var email = usuario.email;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarTecido.aspx?login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarTecido.aspx?login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

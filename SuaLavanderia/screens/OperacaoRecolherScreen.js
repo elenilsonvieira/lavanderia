@@ -115,7 +115,7 @@ export default class OperacaoRecolherScreen extends React.Component {
         var argumentos = `status=1;2&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&usarDataPreferivelParaEntrega=true&recolhidaDoVaral=false&operacoes=true&soPassar=false&incluirRoupas=false`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -273,7 +273,7 @@ export default class OperacaoRecolherScreen extends React.Component {
         var argumentos = `lavagemOid=${this.state.lavagem.oid}&usuarioOid=${usuarioOid}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/RecolherRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/RecolherRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

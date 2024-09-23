@@ -115,7 +115,7 @@ export default class OperacaoPassarScreen extends React.Component {
         var argumentos = `status=1&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&usarDataPreferivelParaEntrega=true&recolhidaOuParcialmenteRecolhidaDoVaral=true&operacoes=true&incluirRoupas=false`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -272,7 +272,7 @@ export default class OperacaoPassarScreen extends React.Component {
         var argumentos = `lavagemOid=${this.state.lavagem.oid}&usuarioOid=${usuarioOid}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/PassarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/PassarRoupa.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

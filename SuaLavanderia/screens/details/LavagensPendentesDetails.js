@@ -88,7 +88,7 @@ export default class LavagensPendentesDetails extends React.Component {
         var argumentos = `clienteOid=${oid}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagensPendentes.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarLavagensPendentes.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

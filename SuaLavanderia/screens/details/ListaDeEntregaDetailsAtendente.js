@@ -69,7 +69,7 @@ export default class ListaDeEntregaDetailsAtendente extends React.Component {
         this.setState({modalVisible: true});
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarListaDeEntregaDeLavagens.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarListaDeEntregaDeLavagens.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -162,7 +162,7 @@ export default class ListaDeEntregaDetailsAtendente extends React.Component {
             var argumentos = `oid=${this.state.objeto.oid}`;
 
             try{
-                const call = await fetch(`http://painel.sualavanderia.com.br/api/AtualizarListaDeEntregaDeLavagens.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+                const call = await fetch(`https://painel.sualavanderia.com.br/api/AtualizarListaDeEntregaDeLavagens.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                     { 
                         method: 'post' 
                     });

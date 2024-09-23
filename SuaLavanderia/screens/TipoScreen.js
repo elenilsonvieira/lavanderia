@@ -70,7 +70,7 @@ export default class TipoScreen extends React.Component {
         var email = usuario.email;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarTipo.aspx?login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarTipo.aspx?login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

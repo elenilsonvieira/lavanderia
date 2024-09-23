@@ -94,7 +94,7 @@ export default class LavagemDetailsCliente extends React.Component {
         var email = usuario.email;
         var oid = this.state.lavagem.oid;
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
+        const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?oid=${oid}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             });

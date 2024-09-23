@@ -77,7 +77,7 @@ export default class BancoDeHorasScreen extends React.Component {
         var argumentos = `temContratoDeTrabalho=true&incluirFechamentosEPagamentos=false`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarBancoDeHoras.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarBancoDeHoras.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

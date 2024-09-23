@@ -37,7 +37,7 @@ export async function reloadCor(){
     const chaveObjetos = "@SuaLavanderia:cores";
     const chaveQuantidade = "@SuaLavanderia:quantidadeDeCores";
 
-    const callQuantidade = await fetch(`http://painel.sualavanderia.com.br/api/QuantidadeDeElementos.aspx?objeto=3&login=${email}&senha=${hash}`, 
+    const callQuantidade = await fetch(`https://painel.sualavanderia.com.br/api/QuantidadeDeElementos.aspx?objeto=3&login=${email}&senha=${hash}`, 
         { 
             method: 'post' 
         });
@@ -46,7 +46,7 @@ export async function reloadCor(){
     const quantidadeSalva = await AsyncStorage.getItem(chaveQuantidade);
 
     if(!quantidadeSalva || responseQuantidade != quantidadeSalva){
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarCor.aspx?login=${email}&senha=${hash}`, 
+        const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarCor.aspx?login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             });
@@ -79,7 +79,7 @@ export async function reloadTipo(){
     const chaveObjetos = "@SuaLavanderia:tipos";
     const chaveQuantidade = "@SuaLavanderia:quantidadeDeTipos";
 
-    const callQuantidade = await fetch(`http://painel.sualavanderia.com.br/api/QuantidadeDeElementos.aspx?objeto=1&login=${email}&senha=${hash}`, 
+    const callQuantidade = await fetch(`https://painel.sualavanderia.com.br/api/QuantidadeDeElementos.aspx?objeto=1&login=${email}&senha=${hash}`, 
         { 
             method: 'post' 
         });
@@ -88,7 +88,7 @@ export async function reloadTipo(){
     const quantidadeSalva = await AsyncStorage.getItem(chaveQuantidade);
 
     if(!quantidadeSalva || responseQuantidade != quantidadeSalva){
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarTipo.aspx?login=${email}&senha=${hash}`, 
+        const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarTipo.aspx?login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             });
@@ -122,7 +122,7 @@ export async function reloadTecido(){
     const chaveObjetos = "@SuaLavanderia:tecidos";
     const chaveQuantidade = "@SuaLavanderia:quantidadeDeTecidos";
 
-    const callQuantidade = await fetch(`http://painel.sualavanderia.com.br/api/QuantidadeDeElementos.aspx?objeto=0&login=${email}&senha=${hash}`, 
+    const callQuantidade = await fetch(`https://painel.sualavanderia.com.br/api/QuantidadeDeElementos.aspx?objeto=0&login=${email}&senha=${hash}`, 
         { 
             method: 'post' 
         });
@@ -131,7 +131,7 @@ export async function reloadTecido(){
     const quantidadeSalva = await AsyncStorage.getItem(chaveQuantidade);
 
     if(!quantidadeSalva || responseQuantidade != quantidadeSalva){
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarTecido.aspx?login=${email}&senha=${hash}`, 
+        const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarTecido.aspx?login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             });
@@ -164,7 +164,7 @@ export async function reloadMarca(){
     const chaveObjetos = "@SuaLavanderia:marcas";
     const chaveQuantidade = "@SuaLavanderia:quantidadeDeMarcas";
 
-    const callQuantidade = await fetch(`http://painel.sualavanderia.com.br/api/QuantidadeDeElementos.aspx?objeto=2&login=${email}&senha=${hash}`, 
+    const callQuantidade = await fetch(`https://painel.sualavanderia.com.br/api/QuantidadeDeElementos.aspx?objeto=2&login=${email}&senha=${hash}`, 
         { 
             method: 'post' 
         });
@@ -173,7 +173,7 @@ export async function reloadMarca(){
     const quantidadeSalva = await AsyncStorage.getItem(chaveQuantidade);
 
     if(!quantidadeSalva || responseQuantidade != quantidadeSalva){
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMarca.aspx?login=${email}&senha=${hash}`, 
+        const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarMarca.aspx?login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             });
@@ -206,7 +206,7 @@ export async function reloadTamanho(){
     const chaveObjetos = "@SuaLavanderia:tamanhos";
     const chaveQuantidade = "@SuaLavanderia:quantidadeDeTamanhos";
 
-    const callQuantidade = await fetch(`http://painel.sualavanderia.com.br/api/QuantidadeDeElementos.aspx?objeto=4&login=${email}&senha=${hash}`, 
+    const callQuantidade = await fetch(`https://painel.sualavanderia.com.br/api/QuantidadeDeElementos.aspx?objeto=4&login=${email}&senha=${hash}`, 
         { 
             method: 'post' 
         });
@@ -215,7 +215,7 @@ export async function reloadTamanho(){
     const quantidadeSalva = await AsyncStorage.getItem(chaveQuantidade);
 
     if(!quantidadeSalva || responseQuantidade != quantidadeSalva){
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarTamanho.aspx?login=${email}&senha=${hash}`, 
+        const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarTamanho.aspx?login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             });

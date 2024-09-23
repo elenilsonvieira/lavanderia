@@ -78,7 +78,7 @@ export default class EquipamentoScreen extends React.Component {
         var argumentos = `ativo=true`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarEquipamento.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarEquipamento.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             });

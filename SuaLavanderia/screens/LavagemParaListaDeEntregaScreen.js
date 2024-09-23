@@ -118,7 +118,7 @@ export default class LavagemParaListaDeEntregaScreen extends React.Component {
         var argumentos = `dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&unidadeOid=${unidadeOid}&incluirRoupas=false`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagemParaListaDeEntrega.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarLavagemParaListaDeEntrega.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -230,7 +230,7 @@ export default class LavagemParaListaDeEntregaScreen extends React.Component {
         var argumentos = `lavagemOid=${this.state.lavagemOid}&listaOid=${this.state.objeto.oid}&comentarios=${comentarios}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarLavagemEmListaDeEntrega.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/AdicionarLavagemEmListaDeEntrega.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

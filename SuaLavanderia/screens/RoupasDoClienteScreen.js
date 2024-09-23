@@ -70,7 +70,7 @@ export default class RoupasDoClienteScreen extends React.Component {
         var email = usuario.email;
         var clienteOid = this.state.clienteOid;
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarRoupa.aspx?clienteOid=${clienteOid}&login=${email}&senha=${hash}`, 
+        const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarRoupa.aspx?clienteOid=${clienteOid}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             });

@@ -113,7 +113,7 @@ export default class OperacaoProntoTapeteScreen extends React.Component {
         var argumentos = `status=1&dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&contemTapete=true`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -262,7 +262,7 @@ export default class OperacaoProntoTapeteScreen extends React.Component {
         var argumentos = `oid=${this.state.lavagemOid}&usuarioOid=${usuarioOid}&status=4`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/AdicionarLavagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

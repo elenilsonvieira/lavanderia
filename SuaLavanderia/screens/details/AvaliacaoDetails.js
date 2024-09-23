@@ -58,7 +58,7 @@ export default class AvaliacaoDetails extends React.Component {
 
         var argumentos = 'lavagemOid=' + lavagem.oid + '&notaDoAtendimento=' + this.state.notaDoAtendimento + '&notaDaLavagem=' + this.state.notaDaLavagem + '&notaDaPassagem=' + this.state.notaDaPassagem + '&notaDaEntrega=' + this.state.notaDaEntrega + '&comentarios=' + this.state.comentarios;
 
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarAvaliacao.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+        const call = await fetch(`https://painel.sualavanderia.com.br/api/AdicionarAvaliacao.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             }).then(function(response){

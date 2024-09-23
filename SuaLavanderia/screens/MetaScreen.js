@@ -139,7 +139,7 @@ export default class MetaScreen extends React.Component {
         var argumentos = `dataInicial=${dataInicial}&dataFinal=${dataFinal}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMeta.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarMeta.aspx?${argumentos}&login=${email}&senha=${hash}`, 
             { 
                 method: 'post' 
             });

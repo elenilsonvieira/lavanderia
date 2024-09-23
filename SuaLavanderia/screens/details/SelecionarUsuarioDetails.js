@@ -65,7 +65,7 @@ export default class SelecionarUsuarioDetails extends React.Component {
             var argumentos = `papeis=${this.state.papel}&nome=${this.state.nome}`;
 
             try{
-                const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarUsuario.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+                const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarUsuario.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                     { 
                         method: 'post' 
                     });

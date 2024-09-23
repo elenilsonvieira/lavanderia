@@ -122,7 +122,7 @@ export default class ListaDeEntregaScreen extends React.Component {
         var argumentos = `dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}&incluirLavagens=false`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarListaDeEntregaDeLavagens.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarListaDeEntregaDeLavagens.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });
@@ -263,7 +263,7 @@ export default class ListaDeEntregaScreen extends React.Component {
         var argumentos = `unidade=${unidade}&data=${data}&usuarioOid=${usuarioOid}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/AdicionarListaDeEntregaDeLavagens.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/AdicionarListaDeEntregaDeLavagens.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

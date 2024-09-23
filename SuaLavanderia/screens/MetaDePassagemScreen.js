@@ -109,7 +109,7 @@ export default class MetaDePassagemScreen extends React.Component {
         var argumentos = `dataInicial=${dataInicialParameter}&dataFinal=${dataFinalParameter}`;
 
         try{
-            const call = await fetch(`http://painel.sualavanderia.com.br/api/BuscarMetaDePassagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
+            const call = await fetch(`https://painel.sualavanderia.com.br/api/BuscarMetaDePassagem.aspx?${argumentos}&login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 });

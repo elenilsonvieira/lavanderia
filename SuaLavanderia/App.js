@@ -161,7 +161,7 @@ const App = () => {
 
           var hash = md5(hashDaSenha + ':' + hashDaData);
 
-          const call = await fetch(`http://painel.sualavanderia.com.br/api/Login.aspx?login=${email}&senha=${hash}`, 
+          const call = await fetch(`https://painel.sualavanderia.com.br/api/Login.aspx?login=${email}&senha=${hash}`, 
                 { 
                     method: 'post' 
                 }).then(async function(response){

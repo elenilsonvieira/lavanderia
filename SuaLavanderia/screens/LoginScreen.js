@@ -38,7 +38,7 @@ class LoginScreen extends Component {
       var email = this.state.email;
 
       try{
-        const call = await fetch(`http://painel.sualavanderia.com.br/api/Login.aspx?login=${email}&senha=${hash}`, 
+        const call = await fetch(`https://painel.sualavanderia.com.br/api/Login.aspx?login=${email}&senha=${hash}`, 
               { 
                   method: 'post' 
               });
