@@ -110,6 +110,7 @@ class LoginScreen extends Component {
       case 2: Linking.openURL("https://instagram.com/sualavanderia") ; break;
       case 3: Linking.openURL("https://facebook.com/sualavanderia.com.br") ; break;
       case 4: Linking.openURL("https://www.sualavanderia.com.br") ; break;
+      case 5: Linking.openURL("https://www.sualavanderia.com.br/politica-de-privacidade.html") ; break;
     }
   };
 
@@ -159,7 +160,14 @@ class LoginScreen extends Component {
             <TouchableOpacity onPress={() => this.open(2)}>
               <View style={styles.infoContainer}>
                   <Image source={require('../images/instagram_64x64.png')} style={styles.redesSociaisLogo} />
-                  <Text style={styles.info}>  Instagram   </Text>
+                  <Text style={styles.info}>Instagram</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => this.open(5)}>
+              <View style={styles.infoContainer}>
+                  <Image source={require('../images/politica-de-privacidade_32x32.png')} style={styles.redesSociaisLogo} />
+                  <Text style={styles.info}>Política de Privacidade</Text>
               </View>
             </TouchableOpacity>
           </View>
