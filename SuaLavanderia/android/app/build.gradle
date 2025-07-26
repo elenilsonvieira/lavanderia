@@ -82,8 +82,8 @@ android {
         applicationId "com.sualavanderia"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 55
-        versionName "24.9.30.1"
+        versionCode 56
+        versionName "25.7.26.1"
     }
     signingConfigs {
         debug {
